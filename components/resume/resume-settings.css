@@ -1,0 +1,5 @@
+/* Resume-specific print settings */
+@page {
+    size: A4;
+    margin: 0.20in 0.10in;
+}

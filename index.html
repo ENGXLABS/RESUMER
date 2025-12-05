@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+
+    <!-- Google Fonts - Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+    <link rel="stylesheet" href="settings.css">
+    <link rel="stylesheet" href="components/resume/resume.css">
+    <link rel="stylesheet" href="components/resume/resume-settings.css">
+    <link rel="stylesheet" href="components/cover-letter/cover-letter.css">
+    <link rel="stylesheet" href="components/ats-checker/ats-checker.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+    <!-- Navigation Tabs -->
+    <div id="nav-tabs">
+        <button class="nav-tab active" onclick="switchTab('resume')">Resume Generator</button>
+        <button class="nav-tab" onclick="switchTab('cover-letter')">Cover Letter Generator</button>
+        <button class="nav-tab" onclick="switchTab('ats-checker')">ATS Score Checker</button>
+    </div>
+
+    <!-- Resume Generator Tab -->
+    <div id="resume-tab" class="tab-content active">
+        <!-- Control Panel -->
+        <div id="control-panel">
+            <button id="toggle-mode" onclick="toggleMode()">Switch to Edit Mode</button>
+            <button id="save-button" onclick="saveResume()" style="display:none;">Save Changes</button>
+            <input type="text" id="company-name" placeholder="Company Name (for filename)" />
+            <button id="download-button" onclick="downloadMarkdown()">Download Markdown</button>
+            <button id="print-button" onclick="window.print()">Print to PDF</button>
+            <div class="zoom-controls">
+                <button onclick="zoomOut('resume')" title="Zoom Out"><span class="iconify"
+                        data-icon="mdi:magnify-minus"></span></button>
+                <span id="zoom-level-resume">100%</span>
+                <button onclick="zoomIn('resume')" title="Zoom In"><span class="iconify"
+                        data-icon="mdi:magnify-plus"></span></button>
+                <button onclick="resetZoom('resume')" title="Reset Zoom"><span class="iconify"
+                        data-icon="mdi:magnify"></span></button>
+            </div>
+        </div>
+
+        <!-- Editor Container -->
+        <div id="editor-container" style="display:none;">
+            <textarea id="markdown-editor" placeholder="Enter your resume in Markdown format..."></textarea>
+            <div class="editor-help">
+                <p><strong>Tip:</strong> Use Markdown syntax - # for headings, ** for bold, * for italic, - for bullet
+                    points</p>
+            </div>
+        </div>
+
+        <!-- Preview Container -->
+        <div id="preview-container">
+            <div id="resume-content"
+                style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; background: #e0e0e0; padding: 20px;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Cover Letter Generator Tab -->
+    <div id="cover-letter-tab" class="tab-content">
+        <!-- Control Panel -->
+        <div id="cover-letter-control-panel">
+            <button id="toggle-cover-mode" onclick="toggleCoverLetterMode()">Switch to Edit Mode</button>
+            <button id="save-cover-button" onclick="saveCoverLetter()" style="display:none;">Save Changes</button>
+            <input type="text" id="cover-company-name" placeholder="Company Name (for filename)" />
+            <button id="download-cover-button" onclick="downloadCoverLetter()">Download Markdown</button>
+            <button id="print-cover-button" onclick="window.print()">Print to PDF</button>
+            <div class="zoom-controls">
+                <button onclick="zoomOut('cover-letter')" title="Zoom Out"><span class="iconify"
+                        data-icon="mdi:magnify-minus"></span></button>
+                <span id="zoom-level-cover-letter">100%</span>
+                <button onclick="zoomIn('cover-letter')" title="Zoom In"><span class="iconify"
+                        data-icon="mdi:magnify-plus"></span></button>
+                <button onclick="resetZoom('cover-letter')" title="Reset Zoom"><span class="iconify"
+                        data-icon="mdi:magnify"></span></button>
+            </div>
+        </div>
+
+        <!-- Editor Container -->
+        <div id="cover-editor-container" style="display:none;">
+            <textarea id="cover-markdown-editor" placeholder="Enter your cover letter in Markdown format..."></textarea>
+            <div class="editor-help">
+                <p><strong>Tip:</strong> Customize the template with company name, job title, and specific details</p>
+            </div>
+        </div>
+
+        <!-- Preview Container -->
+        <div id="cover-preview-container">
+            <div id="cover-letter-content"></div>
+        </div>
+    </div>
+
+    <!-- ATS Score Checker Tab -->
+    <div id="ats-checker-tab" class="tab-content">
+        <div class="ats-container">
+            <div class="ats-input-section">
+                <div class="input-group full-width">
+                    <h3><span class="iconify" data-icon="mdi:file-document-outline"></span> Job Description</h3>
+                    <textarea id="jd-input"
+                        placeholder="Paste the job description here to analyze against your resume..."></textarea>
+                    <p class="input-helper">
+                        <span class="iconify" data-icon="mdi:information-outline"></span>
+                        We'll automatically use your current resume from the Resume Generator tab
+                    </p>
+                </div>
+
+                <div class="ats-actions">
+                    <button id="analyze-btn" onclick="analyzeATS()">
+                        <span class="iconify" data-icon="mdi:chart-box-outline"></span> Analyze ATS Score
+                    </button>
+                    <button id="download-json-btn" onclick="downloadJSONReport()" style="display:none;">
+                        <span class="iconify" data-icon="mdi:file-download-outline"></span> Download JSON Report
+                    </button>
+                    <button id="ai-enhance-btn" onclick="enhanceWithAI()" style="display:none;">
+                        <span class="iconify" data-icon="mdi:robot-outline"></span> Enhance with AI
+                    </button>
+                    <button id="clear-btn" onclick="clearATS()">
+                        <span class="iconify" data-icon="mdi:refresh"></span> Clear
+                    </button>
+                </div>
+            </div>
+
+            <div id="ats-results" style="display:none;">
+                <div class="results-header">
+                    <h2>ATS Analysis Report</h2>
+                </div>
+
+                <div class="score-section">
+                    <div class="score-circle">
+                        <span id="ats-score">0</span>
+                        <span class="score-label">/100</span>
+                    </div>
+                    <div class="score-breakdown">
+                        <h3>Score Breakdown</h3>
+                        <div id="score-details"></div>
+                    </div>
+                </div>
+
+                <div class="keywords-section">
+                    <div class="keywords-column">
+                        <h3>✅ Matched Keywords (<span id="matched-count">0</span>)</h3>
+                        <div id="matched-keywords" class="keyword-list"></div>
+                    </div>
+
+                    <div class="keywords-column">
+                        <h3>❌ Missing Keywords (<span id="missing-count">0</span>)</h3>
+                        <div id="missing-keywords" class="keyword-list"></div>
+                    </div>
+                </div>
+
+                <div class="recommendations-section">
+                    <h3>💡 Recommendations</h3>
+                    <div id="recommendations"></div>
+                </div>
+
+                <div id="ai-results" style="display:none;">
+                    <h3>🤖 AI-Enhanced Analysis</h3>
+                    <div id="ai-analysis"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentMode = 'preview'; // 'preview' or 'edit'
+        let markdownContent = '';
+
+        // Load resume and cover letter on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadResume();
+            loadCoverLetter();
+        });
+
+        function loadResume() {
+            fetch('components/resume/resume.md')
+                .then(response => response.text())
+                .then(text => {
+                    markdownContent = text;
+                    updatePreview();
+                    document.getElementById('markdown-editor').value = text;
+                })
+                .catch(error => {
+                    console.error('Error loading resume.md:', error);
+                    document.getElementById('resume-content').innerHTML = '<p>Error loading resume content.</p>';
+                });
+        }
+
+        function toggleMode() {
+            const toggleBtn = document.getElementById('toggle-mode');
+            const saveBtn = document.getElementById('save-button');
+            const editorContainer = document.getElementById('editor-container');
+            const previewContainer = document.getElementById('preview-container');
+
+            if (currentMode === 'preview') {
+                // Switch to edit mode
+                currentMode = 'edit';
+                toggleBtn.textContent = 'Switch to Preview Mode';
+                saveBtn.style.display = 'inline-block';
+                editorContainer.style.display = 'block';
+                previewContainer.style.display = 'none';
+            } else {
+                // Switch to preview mode
+                currentMode = 'preview';
+                toggleBtn.textContent = 'Switch to Edit Mode';
+                saveBtn.style.display = 'none';
+                editorContainer.style.display = 'none';
+                previewContainer.style.display = 'block';
+
+                // Update preview with current editor content
+                markdownContent = document.getElementById('markdown-editor').value;
+                updatePreview();
+            }
+        }
+
+        function updatePreview() {
+            const content = marked.parse(markdownContent);
+            const resumeContent = document.getElementById('resume-content');
+
+            // Parse markdown into structured elements
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = content;
+
+            // Count lines and paginate based on line capacity
+            const pages = paginateByLines(wrapper);
+
+            // Render pages
+            resumeContent.innerHTML = '';
+            pages.forEach((pageElements, index) => {
+                const pageDiv = document.createElement('div');
+                pageDiv.className = 'resume-page';
+                pageElements.forEach(el => pageDiv.appendChild(el));
+
+                // Add page number
+                const pageNum = document.createElement('div');
+                pageNum.className = 'page-number';
+                pageNum.textContent = `Page ${index + 1}`;
+                pageDiv.appendChild(pageNum);
+
+                resumeContent.appendChild(pageDiv);
+            });
+        }
+
+        function paginateByLines(container) {
+            const children = Array.from(container.children);
+            const pages = [];
+            let currentPage = [];
+            let currentLineCount = 0;
+
+            // A4 page with actual measurements:
+            // Page height: 11.69in - 0.8in padding (0.4in top + 0.4in bottom) = 10.89in usable
+            // Font: 11pt with line-height 1.5 = 16.5pt per line
+            // Adjusted character width to 100 to better estimate actual line wrapping
+            const maxLinesPerPage = 63;
+
+            console.log(`Max lines per page: ${maxLinesPerPage}`);
+
+            for (let element of children) {
+                const lines = estimateElementLines(element);
+
+                console.log(`Element ${element.tagName}: ~${lines} lines, current: ${currentLineCount}`);
+
+                // If adding this would exceed page limit, start new page
+                if (currentLineCount + lines > maxLinesPerPage && currentPage.length > 0) {
+                    console.log(`Page break at ${currentLineCount} lines`);
+                    pages.push(currentPage);
+                    currentPage = [element.cloneNode(true)];
+                    currentLineCount = lines;
+                } else {
+                    currentPage.push(element.cloneNode(true));
+                    currentLineCount += lines;
+                }
+            }
+
+            if (currentPage.length > 0) {
+                pages.push(currentPage);
+            }
+
+            console.log(`Created ${pages.length} pages`);
+            return pages;
+        }
+
+        function estimateElementLines(element) {
+            const tag = element.tagName;
+            const text = element.textContent || '';
+            const charWidth = 100; // Increased - more characters fit per line with actual page width
+
+            // Headers take specific space
+            if (tag === 'H1') return 2;
+            if (tag === 'H2') return 1.5;
+            if (tag === 'H3') return 1;
+            if (tag === 'H4') return 1;
+
+            // Paragraphs and lists
+            if (tag === 'P') {
+                const lines = Math.ceil(text.length / charWidth);
+                return lines > 0 ? lines : 0.5;
+            }
+
+            // Lists - count each bullet
+            if (tag === 'UL' || tag === 'OL') {
+                const items = element.querySelectorAll('li');
+                let totalLines = 0;
+                items.forEach(li => {
+                    const itemText = li.textContent || '';
+                    const itemLines = Math.ceil(itemText.length / 100); // Use same charWidth
+                    totalLines += Math.max(itemLines, 1);
+                });
+                return totalLines;
+            }
+
+            // Horizontal rule
+            if (tag === 'HR') return 0.5;
+
+            // Default
+            return 0.5;
+        }
+
+        function groupRelatedElements(container) {
+            const children = Array.from(container.children);
+            const groups = [];
+            let currentGroup = { elements: [], height: 0 };
+            let inJobSection = false;
+
+            for (let i = 0; i < children.length; i++) {
+                const element = children[i];
+                const tag = element.tagName;
+
+                // Detect job section start (H3 or H4)
+                if (tag === 'H3' || (tag === 'H4' && !inJobSection)) {
+                    // If we have accumulated content, save it as a group
+                    if (currentGroup.elements.length > 0) {
+                        groups.push(currentGroup);
+                    }
+                    // Start new job section group
+                    currentGroup = { elements: [element], height: element.offsetHeight };
+                    inJobSection = true;
+                }
+                // Major section header (H2) - ends job section
+                else if (tag === 'H2') {
+                    if (currentGroup.elements.length > 0) {
+                        groups.push(currentGroup);
+                    }
+                    currentGroup = { elements: [element], height: element.offsetHeight };
+                    inJobSection = false;
+                }
+                // Content within a job section - keep adding to current group
+                else {
+                    currentGroup.elements.push(element);
+                    currentGroup.height += element.offsetHeight;
+                }
+            }
+
+            // Add final group
+            if (currentGroup.elements.length > 0) {
+                groups.push(currentGroup);
+            }
+
+            console.log(`Created ${groups.length} groups:`, groups.map(g => ({
+                elements: g.elements.length,
+                height: g.height,
+                firstTag: g.elements[0]?.tagName
+            })));
+
+            return groups;
+        }
+
+        function paginateGroups(groups) {
+            // A4 page: 11.69in height - 0.8in total padding = 10.89in usable
+            // Convert to pixels at 96 DPI
+            const maxPageHeight = 10.89 * 96; // ~1045px
+            const pages = [];
+            let currentPage = [];
+            let currentHeight = 0;
+
+            console.log(`Total groups to paginate: ${groups.length}`);
+            console.log(`Max page height: ${maxPageHeight}px`);
+
+            for (let group of groups) {
+                console.log(`Group: ${group.elements[0]?.tagName}, Height: ${group.height}px, Current: ${currentHeight}px`);
+
+                // If this single group is larger than a page, split it
+                if (group.height > maxPageHeight) {
+                    console.log(`Group too large (${group.height}px), splitting...`);
+
+                    // Finish current page if it has content
+                    if (currentPage.length > 0) {
+                        pages.push(currentPage);
+                        currentPage = [];
+                        currentHeight = 0;
+                    }
+
+                    // Split large group into multiple sub-groups
+                    let subGroup = { elements: [], height: 0 };
+                    for (let element of group.elements) {
+                        const elHeight = element.offsetHeight;
+
+                        if (subGroup.height + elHeight > maxPageHeight && subGroup.elements.length > 0) {
+                            pages.push([subGroup]);
+                            subGroup = { elements: [element], height: elHeight };
+                        } else {
+                            subGroup.elements.push(element);
+                            subGroup.height += elHeight;
+                        }
+                    }
+
+                    if (subGroup.elements.length > 0) {
+                        currentPage = [subGroup];
+                        currentHeight = subGroup.height;
+                    }
+                }
+                // If adding this group exceeds page height
+                else if (currentHeight + group.height > maxPageHeight && currentPage.length > 0) {
+                    console.log(`Starting new page. Previous page had ${currentPage.length} groups, ${currentHeight}px`);
+                    pages.push(currentPage);
+                    currentPage = [group];
+                    currentHeight = group.height;
+                }
+                // Add to current page
+                else {
+                    currentPage.push(group);
+                    currentHeight += group.height;
+                }
+            }
+
+            // Add last page if it has content
+            if (currentPage.length > 0) {
+                pages.push(currentPage);
+            }
+
+            console.log(`Total pages created: ${pages.length}`);
+
+            return pages.length > 0 ? pages : [[{ elements: [], height: 0 }]];
+        }
+
+        function saveResume() {
+            markdownContent = document.getElementById('markdown-editor').value;
+
+            // Save to localStorage
+            localStorage.setItem('resumeContent', markdownContent);
+
+            // Show confirmation
+            const saveBtn = document.getElementById('save-button');
+            const originalText = saveBtn.textContent;
+            saveBtn.textContent = 'Saved!';
+            saveBtn.style.backgroundColor = '#4CAF50';
+
+            setTimeout(() => {
+                saveBtn.textContent = originalText;
+                saveBtn.style.backgroundColor = '';
+            }, 2000);
+
+            updatePreview();
+        }
+
+        function downloadMarkdown() {
+            const content = currentMode === 'edit'
+                ? document.getElementById('markdown-editor').value
+                : markdownContent;
+
+            // Get company name and generate filename
+            const companyName = document.getElementById('company-name').value.trim();
+            let filename = 'Resume_Sivasankaramalan_G';
+            if (companyName) {
+                // Clean company name: remove special chars, replace spaces with underscores
+                const cleanCompanyName = companyName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+                filename += `_${cleanCompanyName}`;
+            }
+            filename += '.md';
+
+            const blob = new Blob([content], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Update document title for Print to PDF
+        window.addEventListener('beforeprint', function () {
+            const companyName = document.getElementById('company-name').value.trim();
+            if (companyName) {
+                const cleanCompanyName = companyName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+                document.title = `Resume_Sivasankaramalan_G_${cleanCompanyName}`;
+            } else {
+                document.title = 'Resume_Sivasankaramalan_G';
+            }
+        });
+
+        // Auto-save to localStorage every 30 seconds when in edit mode
+        setInterval(() => {
+            if (currentMode === 'edit') {
+                const content = document.getElementById('markdown-editor').value;
+                localStorage.setItem('resumeContentDraft', content);
+            }
+        }, 30000);
+
+        // Check for draft on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const draft = localStorage.getItem('resumeContentDraft');
+            if (draft && confirm('Found an auto-saved draft. Would you like to restore it?')) {
+                markdownContent = draft;
+                document.getElementById('markdown-editor').value = draft;
+                updatePreview();
+                localStorage.removeItem('resumeContentDraft');
+            }
+        });
+
+        // Update document title for Print to PDF
+        window.addEventListener('beforeprint', function () {
+            const companyName = document.getElementById('company-name').value.trim();
+            if (companyName) {
+                const cleanCompanyName = companyName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+                document.title = `Resume_Sivasankaramalan_G_${cleanCompanyName}`;
+            } else {
+                document.title = 'Resume_Sivasankaramalan_G';
+            }
+        });
+
+        // Tab Switching Function
+        function switchTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(tab => tab.classList.remove('active'));
+
+            // Remove active class from all nav tabs
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach(tab => tab.classList.remove('active'));
+
+            // Show selected tab content
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+
+            // Add active class to clicked nav tab
+            event.target.classList.add('active');
+        }
+
+        // Update document title for Cover Letter Print to PDF
+        window.addEventListener('beforeprint', function () {
+            const activeTab = document.querySelector('.tab-content.active');
+            if (activeTab && activeTab.id === 'cover-letter-tab') {
+                const companyName = document.getElementById('cover-company-name').value.trim();
+                if (companyName) {
+                    const cleanCompanyName = companyName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+                    document.title = `Cover_Letter_Sivasankaramalan_G_${cleanCompanyName}`;
+                } else {
+                    document.title = 'Cover_Letter_Sivasankaramalan_G';
+                }
+            }
+        });
+
+        // Cover Letter Functions
+        function loadCoverLetter() {
+            fetch('components/cover-letter/cover-letter.md')
+                .then(response => response.text())
+                .then(text => {
+                    markdownContent = text;
+                    document.getElementById('cover-letter-content').innerHTML = marked.parse(text);
+                    document.getElementById('cover-markdown-editor').value = text;
+                })
+                .catch(error => {
+                    console.error('Error loading cover-letter.md:', error);
+                    document.getElementById('cover-letter-content').innerHTML = '<p>Error loading cover letter content.</p>';
+                });
+        }
+
+        function toggleCoverLetterMode() {
+            const toggleBtn = document.getElementById('toggle-cover-mode');
+            const saveBtn = document.getElementById('save-cover-button');
+            const editorContainer = document.getElementById('cover-editor-container');
+            const previewContainer = document.getElementById('cover-preview-container');
+
+            if (currentMode === 'preview') {
+                currentMode = 'edit';
+                toggleBtn.textContent = 'Switch to Preview Mode';
+                saveBtn.style.display = 'inline-block';
+                editorContainer.style.display = 'block';
+                previewContainer.style.display = 'none';
+            } else {
+                currentMode = 'preview';
+                toggleBtn.textContent = 'Switch to Edit Mode';
+                saveBtn.style.display = 'none';
+                editorContainer.style.display = 'none';
+                previewContainer.style.display = 'block';
+                updateCoverPreview();
+            }
+        }
+
+        function updateCoverPreview() {
+            const editor = document.getElementById('cover-markdown-editor');
+            const preview = document.getElementById('cover-letter-content');
+            preview.innerHTML = marked.parse(editor.value);
+        }
+
+        function saveCoverLetter() {
+            const editor = document.getElementById('cover-markdown-editor');
+            markdownContent = editor.value;
+            localStorage.setItem('coverLetterContent', markdownContent);
+            alert('Cover letter saved to browser storage!');
+        }
+
+        function downloadCoverLetter() {
+            const editor = document.getElementById('cover-markdown-editor');
+            const companyInput = document.getElementById('cover-company-name');
+            const companyName = companyInput.value.trim() || 'Company';
+            const filename = `Cover_Letter_Sivasankaramalan_G_${companyName.replace(/\s+/g, '_')}.md`;
+
+            const blob = new Blob([editor.value], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // ATS Checker Functions
+        const stopWords = new Set([
+            'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from', 'as', 'is', 'was', 'are', 'were', 'been', 'be', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'should', 'could', 'may', 'might', 'must', 'can', 'this', 'that', 'these', 'those', 'i', 'you', 'he', 'she', 'it', 'we', 'they', 'what', 'which', 'who', 'when', 'where', 'why', 'how'
+        ]);
+
+        const keywordPatterns = [
+            // Languages & Technologies
+            /\b(java|j2ee|python|javascript|typescript|c\+\+|c#|ruby|go|rust|scala|kotlin|swift|sql|nosql)\b/gi,
+            // Testing Frameworks
+            /\b(selenium|webdriver|grid|appium|rest assured|junit|testng|cucumber|pytest|robot framework|cypress|playwright|karate|soapui|postman|protractor|wdio|coded ui|testcomplete)\b/gi,
+            // CI/CD & DevOps
+            /\b(jenkins|github actions|gitlab ci|azure devops|ci\/cd|continuous integration|continuous delivery|continuous testing|pipeline|bamboo|travis)\b/gi,
+            // Cloud & Infrastructure
+            /\b(azure|aws|gcp|kubernetes|docker|containerization|cloud-native|saas|paas|multi-regional)\b/gi,
+            // API & Integration
+            /\b(rest|rest api|restful|api testing|soap|graphql|microservices|integration testing|contract testing|api validation)\b/gi,
+            // Testing Types
+            /\b(automation|test automation|qa|quality assurance|regression testing|performance testing|load testing|compatibility testing|data validation|functional testing|end-to-end|e2e)\b/gi,
+            // Tools & Platforms
+            /\b(jira|confluence|git|github|gitlab|bitbucket|jmeter|blazemeter|grafana|kibana|elasticsearch|maven|gradle|npm)\b/gi,
+            // Methodologies
+            /\b(agile|scrum|test strategy|qa strategy|test coverage|quality standards|coding standards|best practices)\b/gi,
+            // Leadership & Skills
+            /\b(lead|mentor|mentoring|technical guidance|team leadership|qa initiatives|automation strategy|framework design|devops collaboration)\b/gi,
+            // Architecture & Patterns
+            /\b(multi-tier|distributed systems|front-end|back-end|full-stack|scalable|enterprise)\b/gi,
+            // Databases
+            /\b(postgresql|mongodb|mysql|sql server|database|data validation|oracle)\b/gi
+        ];
+
+        function extractKeywords(text) {
+            const normalizedText = text.toLowerCase();
+            const allKeywords = new Set();
+            const keywordFrequency = {};
+            const keywordImportance = {}; // NEW: 0-1 importance scores
+
+            // Extract using patterns
+            keywordPatterns.forEach(pattern => {
+                const matches = text.match(pattern) || [];
+                matches.forEach(match => {
+                    const normalized = match.toLowerCase().trim();
+                    if (normalized.length > 1) {
+                        allKeywords.add(normalized);
+                        keywordFrequency[normalized] = (keywordFrequency[normalized] || 0) + 1;
+                    }
+                });
+            });
+
+            // Extract important phrases (2-3 word combinations)
+            const phrases = [
+                'test automation', 'qa strategy', 'automation framework', 'ci/cd pipeline',
+                'quality assurance', 'rest api', 'api testing', 'performance testing',
+                'regression testing', 'integration testing', 'data validation', 'test coverage',
+                'coding standards', 'best practices', 'technical guidance', 'team leadership',
+                'automation strategy', 'qa initiatives', 'test strategy', 'cloud native',
+                'devops collaboration', 'continuous testing', 'build verification', 'quality standards',
+                'api contract testing', 'microservices', 'kubernetes', 'docker', 'azure devops'
+            ];
+
+            phrases.forEach(phrase => {
+                if (normalizedText.includes(phrase)) {
+                    allKeywords.add(phrase);
+                    keywordFrequency[phrase] = (normalizedText.match(new RegExp(phrase, 'gi')) || []).length;
+                }
+            });
+
+            // Calculate importance scores (0-1 scale)
+            allKeywords.forEach(keyword => {
+                const freq = keywordFrequency[keyword] || 1;
+
+                // 1. Repetition Score (40% weight)
+                let repetitionScore;
+                if (freq === 1) repetitionScore = 0.3;
+                else if (freq === 2) repetitionScore = 0.6;
+                else repetitionScore = 1.0;
+
+                // 2. Placement Score (35% weight) - basic estimation from position in text
+                const firstIndex = normalizedText.indexOf(keyword);
+                const textLength = normalizedText.length;
+                let placementScore;
+                if (firstIndex < textLength * 0.15) placementScore = 1.0; // In title/top section
+                else if (firstIndex < textLength * 0.4) placementScore = 0.8; // In required skills
+                else if (firstIndex < textLength * 0.7) placementScore = 0.5; // In preferred/nice-to-have
+                else placementScore = 0.3; // In responsibilities/bottom
+
+                // 3. Rarity Score (25% weight)
+                const commonWords = ['testing', 'qa', 'test', 'quality', 'experience', 'work', 'agile', 'team'];
+                const specificTools = ['selenium', 'junit', 'rest assured', 'jenkins', 'docker', 'kubernetes', 'testng', 'postman', 'azure devops'];
+                const rareTerms = ['api contract testing', 'quality as code', 'shift-left testing', 'chaos engineering', 'contract testing'];
+
+                let rarityScore;
+                if (rareTerms.includes(keyword)) rarityScore = 1.0;
+                else if (specificTools.includes(keyword)) rarityScore = 0.7;
+                else if (commonWords.includes(keyword)) rarityScore = 0.3;
+                else rarityScore = 0.5; // Default for other terms
+
+                // Final importance score formula
+                keywordImportance[keyword] = (repetitionScore * 0.4) + (placementScore * 0.35) + (rarityScore * 0.25);
+            });
+
+            // Sort by importance then frequency
+            const sortedKeywords = Array.from(allKeywords)
+                .sort((a, b) => {
+                    const importanceDiff = (keywordImportance[b] || 0) - (keywordImportance[a] || 0);
+                    if (Math.abs(importanceDiff) > 0.05) return importanceDiff;
+                    return (keywordFrequency[b] || 0) - (keywordFrequency[a] || 0);
+                });
+
+            return {
+                keywords: sortedKeywords,
+                frequency: keywordFrequency,
+                importance: keywordImportance, // NEW: importance scores
+                technical: sortedKeywords
+            };
+        }
+
+        function calculateATSScore(jdKeywords, resumeKeywords, resumeFullText) {
+            const resumeSet = new Set(resumeKeywords.keywords.map(k => k.toLowerCase()));
+            const resumeTextLower = resumeFullText.toLowerCase();
+
+            // Parse resume sections for context analysis
+            const sections = parseResumeSections(resumeFullText);
+
+            // Track matches with detailed metadata
+            const matchedDetails = [];
+            const missing = [];
+
+            jdKeywords.keywords.forEach(keyword => {
+                const keywordLower = keyword.toLowerCase();
+                const importance = jdKeywords.importance[keywordLower] || 0.5;
+
+                let matchType = null; // 'exact', 'synonym', 'partial', or null
+                let matchScore = 0;
+                let placements = [];
+
+                // Level 1: Exact match in extracted keywords
+                if (resumeSet.has(keywordLower)) {
+                    matchType = 'exact';
+                    matchScore = 1.0;
+                }
+                // Level 2: Direct match in full resume text (case-insensitive)
+                else if (resumeTextLower.includes(keywordLower)) {
+                    matchType = 'exact';
+                    matchScore = 1.0;
+                }
+                // Level 3: Synonym match with all variations
+                else {
+                    const variations = getKeywordVariations(keywordLower);
+                    for (const variation of variations) {
+                        if (resumeTextLower.includes(variation.toLowerCase())) {
+                            matchType = 'synonym';
+                            matchScore = 0.9;
+                            break;
+                        }
+                    }
+                }
+
+                // Level 4: Partial match - more lenient
+                if (!matchType) {
+                    // Check if resume contains ANY word from the keyword
+                    const keywordParts = keywordLower.split(/[\s\-\/]+/); // Split on space, dash, slash
+                    let partialMatches = 0;
+
+                    for (const part of keywordParts) {
+                        if (part.length > 2 && resumeTextLower.includes(part)) {
+                            partialMatches++;
+                        }
+                    }
+
+                    // If most parts match, consider it a partial match
+                    if (partialMatches >= keywordParts.length * 0.5 && partialMatches > 0) {
+                        matchType = 'partial';
+                        matchScore = 0.6 + (partialMatches / keywordParts.length) * 0.3; // 0.6-0.9 based on completeness
+                    }
+
+                    // Also check substring matching for single keywords
+                    if (!matchType && keywordLower.length > 4) {
+                        const found = resumeKeywords.keywords.find(rk => {
+                            const rkLower = rk.toLowerCase();
+                            return rkLower.includes(keywordLower) ||
+                                keywordLower.includes(rkLower) ||
+                                rkLower.includes(keywordLower.substring(0, keywordLower.length - 1));
+                        });
+                        if (found) {
+                            matchType = 'partial';
+                            matchScore = 0.7;
+                        }
+                    }
+                }
+
+                if (matchType) {
+                    // Determine placements (where keyword appears)
+                    placements = getKeywordPlacements(keywordLower, sections);
+
+                    // More lenient frequency counting
+                    let frequency = 0;
+                    const keywordParts = keywordLower.split(/[\s\-\/]+/);
+                    keywordParts.forEach(part => {
+                        if (part.length > 2) {
+                            const partMatches = (resumeTextLower.match(new RegExp(part, 'gi')) || []).length;
+                            frequency = Math.max(frequency, partMatches);
+                        }
+                    });
+
+                    matchedDetails.push({
+                        keyword,
+                        importance,
+                        matchType,
+                        matchScore,
+                        placements,
+                        frequency: Math.max(1, frequency)
+                    });
+                } else {
+                    missing.push({
+                        keyword,
+                        importance
+                    });
+                }
+            });
+
+            // Component 1: Skill Match Rate (40% weight)
+            const totalImportance = jdKeywords.keywords.reduce((sum, kw) =>
+                sum + (jdKeywords.importance[kw.toLowerCase()] || 0.5), 0);
+            const matchedImportance = matchedDetails.reduce((sum, m) =>
+                sum + (m.importance * m.matchScore), 0);
+            const skillMatchRate = totalImportance > 0 ? (matchedImportance / totalImportance) * 100 : 0;
+
+            // Component 2: Keyword Frequency (20% weight)
+            const avgJDFreq = jdKeywords.keywords.length > 0
+                ? Object.values(jdKeywords.frequency).reduce((a, b) => a + b, 0) / jdKeywords.keywords.length
+                : 1;
+            const avgResumeFreq = matchedDetails.length > 0
+                ? matchedDetails.reduce((sum, m) => sum + Math.min(m.frequency, 3), 0) / matchedDetails.length
+                : 0;
+            const frequencyScore = Math.min(100, (avgResumeFreq / Math.max(avgJDFreq, 1)) * 100);
+
+            // Component 3: Context Match (30% weight) - with weak placement detection
+            let contextScore = 0;
+            const weakPlacements = [];
+            matchedDetails.forEach(m => {
+                let placementWeight = 0;
+                if (m.placements.includes('experience')) placementWeight = 1.0;
+                else if (m.placements.includes('summary') || m.placements.includes('projects')) placementWeight = 0.7;
+                else if (m.placements.includes('skills')) {
+                    placementWeight = 0.3;
+                    // Flag as weak placement if ONLY in skills
+                    if (m.placements.length === 1) {
+                        weakPlacements.push(m.keyword);
+                    }
+                }
+                contextScore += placementWeight * m.importance;
+            });
+            contextScore = totalImportance > 0 ? (contextScore / totalImportance) * 100 : 0;
+
+            // Component 4: Seniority Alignment (10% weight)
+            const seniorityScore = calculateSeniorityAlignment(resumeFullText, jdKeywords.keywords.join(' '));
+
+            // Calculate base score
+            const baseScore = (skillMatchRate * 0.4) + (frequencyScore * 0.2) + (contextScore * 0.3) + (seniorityScore * 0.1);
+
+            // Importance boost (critical keywords matched)
+            const criticalMatched = matchedDetails.filter(m => m.importance >= 0.75).length;
+            const highMatched = matchedDetails.filter(m => m.importance >= 0.5 && m.importance < 0.75).length;
+            const importanceBoost = Math.min(20, (criticalMatched * 3) + (highMatched * 1));
+
+            // Weak placement penalty
+            const weakPlacementPenalty = Math.min(10, weakPlacements.length * 2);
+
+            // Final score
+            const finalScore = Math.min(100, Math.max(0, Math.round(baseScore + importanceBoost - weakPlacementPenalty)));
+
+            return {
+                score: finalScore,
+                components: {
+                    skillMatchRate: Math.round(skillMatchRate * 0.4),
+                    frequencyScore: Math.round(frequencyScore * 0.2),
+                    contextScore: Math.round(contextScore * 0.3),
+                    seniorityScore: Math.round(seniorityScore * 0.1)
+                },
+                importanceBoost,
+                weakPlacementPenalty,
+                matched: matchedDetails.map(m => m.keyword),
+                matchedDetails,
+                missing: missing.map(m => m.keyword),
+                missingDetails: missing,
+                weakPlacements,
+                totalJDKeywords: jdKeywords.keywords.length,
+                totalMatched: matchedDetails.length,
+                totalMissing: missing.length
+            };
+        }
+
+        function parseResumeSections(resumeText) {
+            const textLower = resumeText.toLowerCase();
+            const sections = {
+                summary: '',
+                skills: '',
+                experience: '',
+                projects: '',
+                certifications: ''
+            };
+
+            // Simple section detection based on common headers
+            const summaryMatch = textLower.match(/(?:professional summary|summary|profile)([\s\S]*?)(?=\n#|technical skills|core competencies|experience|$)/i);
+            if (summaryMatch) sections.summary = summaryMatch[1];
+
+            const skillsMatch = textLower.match(/(?:technical skills|core competencies|skills)([\s\S]*?)(?=\n#|experience|projects|$)/i);
+            if (skillsMatch) sections.skills = skillsMatch[1];
+
+            const experienceMatch = textLower.match(/(?:professional experience|experience|work history)([\s\S]*?)(?=\n#|projects|education|$)/i);
+            if (experienceMatch) sections.experience = experienceMatch[1];
+
+            const projectsMatch = textLower.match(/(?:projects|key projects)([\s\S]*?)(?=\n#|education|certifications|$)/i);
+            if (projectsMatch) sections.projects = projectsMatch[1];
+
+            return sections;
+        }
+
+        function getKeywordPlacements(keyword, sections) {
+            const placements = [];
+            if (sections.summary.includes(keyword)) placements.push('summary');
+            if (sections.skills.includes(keyword)) placements.push('skills');
+            if (sections.experience.includes(keyword)) placements.push('experience');
+            if (sections.projects.includes(keyword)) placements.push('projects');
+            if (sections.certifications.includes(keyword)) placements.push('certifications');
+            return placements;
+        }
+
+        function calculateSeniorityAlignment(resumeText, jdText) {
+            // Simple seniority detection
+            const resumeYears = extractYearsOfExperience(resumeText);
+            const jdYears = extractYearsOfExperience(jdText);
+
+            const resumeLevel = getSeniorityLevel(resumeYears, resumeText);
+            const jdLevel = getSeniorityLevel(jdYears, jdText);
+
+            const levelDiff = Math.abs(resumeLevel - jdLevel);
+
+            if (levelDiff === 0) return 100;
+            if (levelDiff === 1) return 70;
+            return 40;
+        }
+
+        function extractYearsOfExperience(text) {
+            const yearMatches = text.match(/(\d+)\+?\s*years?/i);
+            return yearMatches ? parseInt(yearMatches[1]) : 5; // Default to 5 if not found
+        }
+
+        function getSeniorityLevel(years, text) {
+            const textLower = text.toLowerCase();
+            if (textLower.includes('lead') || textLower.includes('principal') || textLower.includes('architect') || years >= 10) return 4;
+            if (textLower.includes('senior') || years >= 6) return 3;
+            if (textLower.includes('mid') || years >= 3) return 2;
+            return 1; // Junior
+        }
+
+        function getKeywordVariations(keyword) {
+            const variations = [keyword];
+
+            // Complete synonym mapping table from ATS Checker Instructions
+            const variationMap = {
+                'rest api': ['rest', 'restful', 'rest apis', 'rest-api', 'restful api', 'restful apis'],
+                'rest': ['rest api', 'restful', 'rest apis', 'rest-api'],
+                'restful': ['rest api', 'rest', 'rest apis'],
+                'java': ['j2ee', 'java/j2ee', 'core java', 'java se', 'java ee'],
+                'j2ee': ['java', 'java/j2ee', 'core java'],
+                'selenium': ['selenium webdriver', 'webdriver', 'selenium wd'],
+                'webdriver': ['selenium webdriver', 'selenium', 'web driver'],
+                'rest assured': ['restassured', 'rest-assured', 'restassured framework'],
+                'restassured': ['rest assured', 'rest-assured'],
+                'ci/cd': ['ci cd', 'cicd', 'continuous integration', 'continuous delivery', 'continuous deployment', 'ci/cd pipeline'],
+                'cicd': ['ci/cd', 'ci cd', 'continuous integration'],
+                'continuous integration': ['ci/cd', 'ci cd', 'cicd'],
+                'continuous delivery': ['ci/cd', 'ci cd', 'continuous deployment'],
+                'frontend': ['front-end', 'front end', 'fe', 'client-side'],
+                'front-end': ['frontend', 'front end', 'fe'],
+                'front end': ['frontend', 'front-end', 'fe'],
+                'backend': ['back-end', 'back end', 'be', 'server-side'],
+                'back-end': ['backend', 'back end', 'be'],
+                'back end': ['backend', 'back-end', 'be'],
+                'kubernetes': ['k8s', 'kube', 'k8'],
+                'k8s': ['kubernetes', 'kube'],
+                'testng': ['test ng', 'testing framework testng'],
+                'test ng': ['testng'],
+                'junit': ['j unit', 'junit4', 'junit5'],
+                'j unit': ['junit'],
+                'api testing': ['api test', 'api automation', 'api test automation'],
+                'api test': ['api testing', 'api automation'],
+                'test automation': ['automated testing', 'test automation framework', 'automation testing'],
+                'automated testing': ['test automation', 'automation testing'],
+                'microservices': ['micro services', 'micro-services', 'microservice architecture'],
+                'micro services': ['microservices', 'micro-services'],
+                'docker': ['docker container', 'containerization', 'dockerized'],
+                'containerization': ['docker', 'docker container'],
+                'jenkins': ['jenkins ci', 'jenkins ci/cd', 'jenkins pipeline'],
+                'azure devops': ['azure devops services', 'ado', 'azure pipelines'],
+                'ado': ['azure devops', 'azure devops services'],
+                'github actions': ['github action', 'gh actions'],
+                'postman': ['postman api', 'postman testing'],
+                'sql': ['structured query language', 'sql server', 'mysql', 'postgresql'],
+                'nosql': ['no sql', 'nosql database', 'mongodb', 'cassandra'],
+                'agile': ['agile methodology', 'agile scrum', 'scrum'],
+                'scrum': ['agile', 'agile scrum', 'agile methodology'],
+                'jira': ['atlassian jira', 'jira software'],
+                'git': ['github', 'gitlab', 'version control', 'git version control'],
+                'github': ['git', 'version control'],
+                'api': ['application programming interface', 'web api', 'rest api', 'graphql'],
+                'qa': ['quality assurance', 'software quality assurance', 'sqa'],
+                'quality assurance': ['qa', 'sqa', 'software quality assurance'],
+                'manual testing': ['manual qa', 'manual test', 'exploratory testing'],
+                'regression testing': ['regression test', 'regression suite'],
+                'smoke testing': ['smoke test', 'sanity testing', 'sanity test'],
+                'sanity testing': ['smoke testing', 'smoke test', 'sanity test']
+            };
+
+            if (variationMap[keyword]) {
+                variations.push(...variationMap[keyword]);
+            }
+
+            return variations;
+        }
+
+        function analyzeATS() {
+            const jdText = document.getElementById('jd-input').value.trim();
+
+            if (!jdText) {
+                alert('Please paste the Job Description to analyze');
+                return;
+            }
+
+            // Get resume content from Resume Generator tab
+            const resumeText = markdownContent || document.getElementById('markdown-editor').value;
+
+            if (!resumeText) {
+                alert('No resume content found. Please go to Resume Generator tab and load/create your resume first.');
+                return;
+            }
+
+            console.log('=== ATS Analysis Start ===');
+            console.log('JD Text Length:', jdText.length);
+            console.log('Resume Text Length:', resumeText.length);
+
+            // Extract keywords
+            const jdKeywords = extractKeywords(jdText);
+            const resumeKeywords = extractKeywords(resumeText);
+
+            console.log('JD Keywords Count:', jdKeywords.keywords.length);
+            console.log('Top 10 JD Keywords:', jdKeywords.keywords.slice(0, 10));
+            console.log('Top 10 JD Importance:', jdKeywords.keywords.slice(0, 10).map(k => `${k}: ${(jdKeywords.importance[k.toLowerCase()] || 0).toFixed(2)}`));
+            console.log('Resume Keywords Count:', resumeKeywords.keywords.length);
+
+            // Calculate score
+            const results = calculateATSScore(jdKeywords, resumeKeywords, resumeText);
+
+            console.log('=== Scoring Results ===');
+            console.log('Final Score:', results.score);
+            console.log('Components:', results.components);
+            console.log('Matched:', results.totalMatched, '/', results.totalJDKeywords);
+            console.log('Missing:', results.totalMissing);
+            console.log('Weak Placements:', results.weakPlacements.length);
+            console.log('Importance Boost:', results.importanceBoost);
+            console.log('Weak Penalty:', results.weakPlacementPenalty);
+            console.log('=== Top Missing Keywords ===');
+            console.log(results.missingDetails.slice(0, 10).map(m => `${m.keyword} (${m.importance.toFixed(2)})`));
+            console.log('=========================');
+
+            // Store for JSON export
+            window.lastATSResults = {
+                results,
+                jdKeywords,
+                resumeKeywords,
+                jdText,
+                resumeText
+            };
+
+            // Display results
+            displayResults(results);
+
+            // Show action buttons
+            document.getElementById('download-json-btn').style.display = 'inline-flex';
+            document.getElementById('ai-enhance-btn').style.display = 'inline-flex';
+        }
+
+        function displayResults(results) {
+            // Show results section
+            document.getElementById('ats-results').style.display = 'block';
+            document.getElementById('ats-results').scrollIntoView({ behavior: 'smooth' });
+
+            // Display score with color coding
+            const scoreElement = document.getElementById('ats-score');
+            scoreElement.textContent = results.score;
+            if (results.score >= 95) {
+                scoreElement.className = 'score-high';
+            } else if (results.score >= 80) {
+                scoreElement.className = 'score-high';
+            } else if (results.score >= 60) {
+                scoreElement.className = 'score-medium';
+            } else {
+                scoreElement.className = 'score-low';
+            }
+
+            // Enhanced 4-component score breakdown
+            document.getElementById('score-details').innerHTML = `
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Skill Match Rate (40%):</span>
+                    <span class="breakdown-value">${results.components.skillMatchRate}/40</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Keyword Frequency (20%):</span>
+                    <span class="breakdown-value">${results.components.frequencyScore}/20</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Context Match (30%):</span>
+                    <span class="breakdown-value">${results.components.contextScore}/30</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Seniority Alignment (10%):</span>
+                    <span class="breakdown-value">${results.components.seniorityScore}/10</span>
+                </div>
+                <div class="breakdown-item" style="border-top: 1px solid #e0e0e0; margin-top: 8px; padding-top: 8px;">
+                    <span class="breakdown-label">Importance Boost:</span>
+                    <span class="breakdown-value" style="color: #28a745;">+${results.importanceBoost}</span>
+                </div>
+                ${results.weakPlacementPenalty > 0 ? `
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Weak Placement Penalty:</span>
+                    <span class="breakdown-value" style="color: #dc3545;">-${results.weakPlacementPenalty}</span>
+                </div>
+                ` : ''}
+                <div class="breakdown-item" style="font-weight: 600; border-top: 2px solid #333; margin-top: 8px; padding-top: 8px;">
+                    <span class="breakdown-label">Total JD Keywords:</span>
+                    <span class="breakdown-value">${results.totalJDKeywords}</span>
+                </div>
+            `;
+
+            // Matched keywords with match type indicators
+            document.getElementById('matched-count').textContent = results.totalMatched;
+            const matchedHTML = results.matchedDetails.map(m => {
+                let badge = '';
+                if (m.matchType === 'exact') badge = '';
+                else if (m.matchType === 'synonym') badge = ' ≈';
+                else if (m.matchType === 'partial') badge = ' ~';
+                return `<span class="keyword matched" title="Match: ${m.matchType}, Placements: ${m.placements.join(', ')}">${m.keyword}${badge}</span>`;
+            }).join('');
+            document.getElementById('matched-keywords').innerHTML = matchedHTML;
+
+            // Missing keywords sorted by importance
+            document.getElementById('missing-count').textContent = results.totalMissing;
+            const missingHTML = results.missingDetails
+                .sort((a, b) => b.importance - a.importance)
+                .slice(0, 20)
+                .map(m => {
+                    let badgeClass = 'keyword missing';
+                    if (m.importance >= 0.75) badgeClass += ' high-impact';
+                    else if (m.importance >= 0.5) badgeClass += ' medium-impact';
+                    return `<span class="${badgeClass}" title="Importance: ${m.importance.toFixed(2)}">${m.keyword}</span>`;
+                })
+                .join('');
+            document.getElementById('missing-keywords').innerHTML = missingHTML;
+
+            // Weak placements section (NEW)
+            if (results.weakPlacements && results.weakPlacements.length > 0) {
+                const weakHTML = `
+                    <div class="weak-placements-section" style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 16px; margin: 20px 0; border-radius: 6px;">
+                        <h4 style="margin: 0 0 12px 0; color: #856404;">
+                            <span class="iconify" data-icon="mdi:alert"></span> 
+                            Weak Placements Detected (${results.weakPlacements.length})
+                        </h4>
+                        <p style="margin: 0 0 12px 0; font-size: 14px;">These keywords appear ONLY in your Skills section. Add them to Experience bullets with context for stronger ATS impact.</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            ${results.weakPlacements.map(kw => `<span class="keyword" style="background: #ffeaa7; border-color: #fdcb6e;">${kw}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+                // Insert after missing keywords section
+                const missingSection = document.querySelector('.keywords-section:nth-of-type(2)');
+                if (missingSection && !document.querySelector('.weak-placements-section')) {
+                    missingSection.insertAdjacentHTML('afterend', weakHTML);
+                }
+            }
+
+            // Generate and display auto-patch recommendations
+            const resumeText = markdownContent || document.getElementById('markdown-editor').value;
+            const autoPatchRecs = generateAutoPatchRecommendations(
+                results.missingDetails || [],
+                results.weakPlacements || [],
+                resumeText
+            );
+
+            if (autoPatchRecs.length > 0) {
+                const autoPatchHTML = `
+                    <div class="auto-patch-section" style="background: #e3f2fd; border-left: 4px solid #2196f3; padding: 20px; margin: 20px 0; border-radius: 6px;">
+                        <h4 style="margin: 0 0 16px 0; color: #1565c0;">
+                            <span class="iconify" data-icon="mdi:auto-fix"></span> 
+                            Auto-Patch Recommendations (${autoPatchRecs.length})
+                        </h4>
+                        <p style="margin: 0 0 16px 0; font-size: 14px;">Apply these exact sentence insertions to reach 95% ATS score:</p>
+                        <div class="auto-patch-list">
+                            ${autoPatchRecs.map((rec, idx) => `
+                                <div class="patch-item" style="background: white; padding: 16px; margin-bottom: 12px; border-radius: 6px; border: 1px solid #bbdefb;">
+                                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                                        <strong style="color: #1565c0;">#${idx + 1} ${rec.section}</strong>
+                                        <span style="background: #4caf50; color: white; padding: 2px 8px; border-radius: 12px; font-size: 12px;">+${rec.projectedImpact} points</span>
+                                    </div>
+                                    <div style="background: #f5f5f5; padding: 12px; margin: 8px 0; border-radius: 4px; font-family: 'Monaco', 'Courier New', monospace; font-size: 13px; line-height: 1.6;">
+                                        ${rec.sentence.replace(/\*\*(.*?)\*\*/g, '<strong style="background: #ffeb3b; padding: 2px 4px;">$1</strong>')}
+                                    </div>
+                                    <div style="font-size: 13px; color: #666; margin-top: 8px;">
+                                        <em>Rationale:</em> ${rec.rationale}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <p style="margin: 16px 0 0 0; font-size: 13px; color: #555;">
+                            <strong>Projected Score After Fixes:</strong> ${Math.min(100, results.score + autoPatchRecs.reduce((sum, r) => sum + r.projectedImpact, 0))}/100
+                            ${(results.score + autoPatchRecs.reduce((sum, r) => sum + r.projectedImpact, 0)) >= 95 ? '✅ Target achieved!' : ''}
+                        </p>
+                    </div>
+                `;
+                // Insert before recommendations section
+                const recsSection = document.querySelector('.recommendations-section');
+                if (recsSection && !document.querySelector('.auto-patch-section')) {
+                    recsSection.insertAdjacentHTML('beforebegin', autoPatchHTML);
+                }
+            }
+
+            // General recommendations
+            const recommendations = generateRecommendations(results);
+            document.getElementById('recommendations').innerHTML = recommendations;
+        }
+
+        function generateAutoPatchRecommendations(missingDetails, weakPlacements, resumeText) {
+            const recommendations = [];
+
+            // Sort missing keywords by importance (high impact first)
+            const sortedMissing = missingDetails.sort((a, b) => b.importance - a.importance);
+
+            // Priority 1: Handle weak placements FIRST (highest impact - already in resume but wrong placement)
+            weakPlacements.slice(0, 5).forEach(keyword => {
+                recommendations.push({
+                    section: 'Experience - Most Recent Role',
+                    keyword: keyword,
+                    importance: 'High',
+                    sentence: `Developed test automation using **${keyword}** for continuous integration, reducing deployment time 40%`,
+                    rationale: `CRITICAL: Move from weak placement (Skills only) to experience context - 70% impact boost`,
+                    projectedImpact: 6
+                });
+            });
+
+            // Priority 2: High-impact missing keywords (0.75-1.0)
+            const highImpact = sortedMissing.filter(m => m.importance >= 0.75);
+
+            // Top 3 critical go to Summary for early ATS detection
+            highImpact.slice(0, 3).forEach((m, idx) => {
+                const keyword = m.keyword;
+                const importance = m.importance.toFixed(2);
+
+                recommendations.push({
+                    section: 'Professional Summary',
+                    keyword: keyword,
+                    importance: importance,
+                    sentence: idx === 0
+                        ? `10+ years delivering quality solutions with **${keyword}** expertise across enterprise environments`
+                        : `...specializing in **${keyword}** and test automation frameworks...`,
+                    rationale: `Critical keyword (${importance}) - ATS scans summary first, high weight`,
+                    projectedImpact: 10
+                });
+            });
+
+            // Next 5 critical go to Experience with context
+            highImpact.slice(3, 8).forEach(m => {
+                const keyword = m.keyword;
+                const importance = m.importance.toFixed(2);
+
+                // Generate contextual sentence based on keyword type
+                let sentence;
+                if (keyword.includes('test') || keyword.includes('qa') || keyword.includes('quality')) {
+                    sentence = `Led **${keyword}** initiatives that improved release quality 35% through automated validation`;
+                } else if (keyword.includes('cloud') || keyword.includes('azure') || keyword.includes('aws')) {
+                    sentence = `Architected test infrastructure on **${keyword}** platform for scalable CI/CD pipelines`;
+                } else if (keyword.includes('api') || keyword.includes('rest') || keyword.includes('microservice')) {
+                    sentence = `Designed comprehensive **${keyword}** testing framework covering contract and integration scenarios`;
+                } else {
+                    sentence = `Implemented **${keyword}** solutions that enhanced automation coverage and deployment efficiency`;
+                }
+
+                recommendations.push({
+                    section: 'Experience - Most Recent Role',
+                    keyword: keyword,
+                    importance: importance,
+                    sentence: sentence,
+                    rationale: `Critical keyword (${importance}) needs strong contextual placement with metrics`,
+                    projectedImpact: 7
+                });
+            });
+
+            // Priority 3: Medium-impact missing keywords (0.5-0.74)
+            const mediumImpact = sortedMissing.filter(m => m.importance >= 0.5 && m.importance < 0.75);
+
+            // First 3 medium go to Experience (better than Skills-only)
+            mediumImpact.slice(0, 3).forEach(m => {
+                recommendations.push({
+                    section: 'Experience - Most Recent Role',
+                    keyword: m.keyword,
+                    importance: m.importance.toFixed(2),
+                    sentence: `Utilized **${m.keyword}** for automated testing and quality validation across releases`,
+                    rationale: `Medium-impact keyword (${m.importance.toFixed(2)}) - add to experience for context`,
+                    projectedImpact: 5
+                });
+            });
+
+            // Next 3 medium can go to Skills (if capacity)
+            mediumImpact.slice(3, 6).forEach(m => {
+                recommendations.push({
+                    section: 'Technical Skills',
+                    keyword: m.keyword,
+                    importance: m.importance.toFixed(2),
+                    sentence: `Add "**${m.keyword}**" to relevant skills category (Tools, Frameworks, or Methodologies)`,
+                    rationale: `Medium-impact keyword (${m.importance.toFixed(2)}) - skills section quick add`,
+                    projectedImpact: 3
+                });
+            });
+
+            // Limit to top 15 recommendations for readability
+            return recommendations.slice(0, 15);
+        }
+
+        function generateRecommendations(results) {
+            let html = '<ul class="recommendations-list">';
+
+            if (results.score >= 95) {
+                html += '<li class="rec-good">🎉 Excellent! Your resume achieves 95%+ ATS compatibility!</li>';
+            } else if (results.score >= 80) {
+                html += '<li class="rec-good">✅ Strong keyword alignment! Minor improvements can reach 95% target.</li>';
+            } else if (results.score >= 60) {
+                html += '<li class="rec-medium">⚠️ Moderate alignment. Follow auto-patch recommendations below.</li>';
+            } else {
+                html += '<li class="rec-bad">❌ Significant optimization needed. Apply all critical recommendations.</li>';
+            }
+
+            // Weak placements warning
+            if (results.weakPlacements && results.weakPlacements.length > 0) {
+                html += `<li class="rec-warning">⚠️ <strong>Weak Placements Detected:</strong> ${results.weakPlacements.length} keyword(s) appear only in Skills section. Move to experience bullets with context.</li>`;
+            }
+
+            // Component-specific recommendations
+            if (results.components) {
+                if (results.components.contextScore < 20) {
+                    html += '<li>🎯 <strong>Context Match Low:</strong> Add keywords to Experience bullets, not just Skills section</li>';
+                }
+                if (results.components.frequencyScore < 15) {
+                    html += '<li>📊 <strong>Keyword Frequency Low:</strong> Use critical keywords 2-3 times throughout resume</li>';
+                }
+            }
+
+            if (results.totalMissing > 0) {
+                const criticalMissing = results.missingDetails.filter(m => m.importance >= 0.75).length;
+                if (criticalMissing > 0) {
+                    html += `<li class="rec-bad">🚨 <strong>${criticalMissing} Critical Keywords Missing:</strong> See auto-patch recommendations below</li>`;
+                }
+            }
+
+            html += '<li>💡 Click "Enhance with AI" for detailed optimization suggestions</li>';
+            html += '</ul>';
+
+            return html;
+        }
+
+        function downloadJSONReport() {
+            if (!window.lastATSResults) {
+                alert('No ATS results to download. Please run analysis first.');
+                return;
+            }
+
+            const { results, jdKeywords, resumeKeywords } = window.lastATSResults;
+            const resumeText = markdownContent || document.getElementById('markdown-editor').value;
+
+            // Generate auto-patch recommendations
+            const autoPatchRecs = generateAutoPatchRecommendations(
+                results.missingDetails || [],
+                results.weakPlacements || [],
+                resumeText
+            );
+
+            // Build JSON report matching instruction spec
+            const jsonReport = {
+                ats_score: {
+                    current: results.score,
+                    components: {
+                        skill_match_rate: results.components.skillMatchRate,
+                        keyword_frequency: results.components.frequencyScore,
+                        context_match: results.components.contextScore,
+                        seniority_alignment: results.components.seniorityScore
+                    },
+                    importance_boost: results.importanceBoost,
+                    weak_placement_penalty: results.weakPlacementPenalty,
+                    final_score: results.score,
+                    projected_score_after_fixes: Math.min(100, results.score + autoPatchRecs.reduce((sum, r) => sum + r.projectedImpact, 0)),
+                    target_achieved: (results.score + autoPatchRecs.reduce((sum, r) => sum + r.projectedImpact, 0)) >= 95
+                },
+                keywords_extracted: {
+                    total: jdKeywords.keywords.length,
+                    by_category: {
+                        all_keywords: jdKeywords.keywords.slice(0, 30)
+                    },
+                    by_importance: {
+                        high_impact: jdKeywords.keywords
+                            .filter(kw => (jdKeywords.importance[kw.toLowerCase()] || 0) >= 0.75)
+                            .map(kw => ({
+                                keyword: kw,
+                                importance: jdKeywords.importance[kw.toLowerCase()],
+                                mentions_in_jd: jdKeywords.frequency[kw.toLowerCase()] || 1
+                            })),
+                        medium_impact: jdKeywords.keywords
+                            .filter(kw => {
+                                const imp = jdKeywords.importance[kw.toLowerCase()] || 0;
+                                return imp >= 0.5 && imp < 0.75;
+                            })
+                            .map(kw => ({
+                                keyword: kw,
+                                importance: jdKeywords.importance[kw.toLowerCase()],
+                                mentions_in_jd: jdKeywords.frequency[kw.toLowerCase()] || 1
+                            })),
+                        low_impact: jdKeywords.keywords
+                            .filter(kw => (jdKeywords.importance[kw.toLowerCase()] || 0) < 0.5)
+                            .slice(0, 10)
+                            .map(kw => ({
+                                keyword: kw,
+                                importance: jdKeywords.importance[kw.toLowerCase()],
+                                mentions_in_jd: jdKeywords.frequency[kw.toLowerCase()] || 1
+                            }))
+                    }
+                },
+                keywords_matched: {
+                    exact_matches: results.matchedDetails
+                        .filter(m => m.matchType === 'exact')
+                        .map(m => ({
+                            keyword: m.keyword,
+                            count: m.frequency,
+                            placements: m.placements
+                        })),
+                    partial_matches: results.matchedDetails
+                        .filter(m => m.matchType !== 'exact')
+                        .map(m => ({
+                            keyword: m.keyword,
+                            matched_as: m.matchType,
+                            count: m.frequency,
+                            placements: m.placements
+                        })),
+                    match_count: results.totalMatched,
+                    match_percentage: ((results.totalMatched / results.totalJDKeywords) * 100).toFixed(1)
+                },
+                keywords_missing: {
+                    critical_missing: results.missingDetails
+                        .filter(m => m.importance >= 0.75)
+                        .map(m => ({
+                            keyword: m.keyword,
+                            importance: m.importance,
+                            category: 'critical'
+                        })),
+                    medium_missing: results.missingDetails
+                        .filter(m => m.importance >= 0.5 && m.importance < 0.75)
+                        .map(m => ({
+                            keyword: m.keyword,
+                            importance: m.importance,
+                            category: 'medium'
+                        })),
+                    count: results.totalMissing
+                },
+                weak_placements: results.weakPlacements.map(kw => ({
+                    keyword: kw,
+                    current_placement: 'Skills section only',
+                    issue: 'No contextual usage in Experience',
+                    impact: 'Reduced by 70%',
+                    fix_needed: 'Add to experience bullet with project context'
+                })),
+                auto_patch_recommendations: autoPatchRecs.map((rec, idx) => ({
+                    priority: idx + 1,
+                    keyword: rec.keyword,
+                    importance: rec.importance,
+                    section: rec.section,
+                    exact_sentence: rec.sentence,
+                    rationale: rec.rationale,
+                    projected_impact: rec.projectedImpact,
+                    insertion_after: 'See section guidance'
+                })),
+                recommendations_summary: {
+                    total_fixes: autoPatchRecs.length,
+                    estimated_time: '15-20 minutes',
+                    priority_actions: autoPatchRecs.slice(0, 3).map(r => `${r.section}: ${r.keyword}`)
+                },
+                timestamp: new Date().toISOString(),
+                version: '2.0.0'
+            };
+
+            // Download JSON file
+            const blob = new Blob([JSON.stringify(jsonReport, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `ATS_Report_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function clearATS() {
+            document.getElementById('jd-input').value = '';
+            document.getElementById('ats-results').style.display = 'none';
+            document.getElementById('download-json-btn').style.display = 'none';
+            document.getElementById('ai-enhance-btn').style.display = 'none';
+            document.getElementById('ai-results').style.display = 'none';
+        }
+
+        function enhanceWithAI() {
+            alert('AI Enhancement feature coming soon!\n\nThis will use GitHub Models API to provide:\n- Detailed keyword analysis\n- Contextual optimization suggestions\n- Before/after comparisons\n- Natural language improvements');
+        }
+
+        // Zoom functionality - browser level
+        let currentZoomLevel = 100;
+
+        function zoomIn(tab) {
+            if (currentZoomLevel < 200) {
+                currentZoomLevel += 10;
+                applyBrowserZoom();
+            }
+        }
+
+        function zoomOut(tab) {
+            if (currentZoomLevel > 50) {
+                currentZoomLevel -= 10;
+                applyBrowserZoom();
+            }
+        }
+
+        function resetZoom(tab) {
+            currentZoomLevel = 100;
+            applyBrowserZoom();
+        }
+
+        function applyBrowserZoom() {
+            document.body.style.zoom = currentZoomLevel + '%';
+
+            // Update all zoom level displays
+            const displays = ['zoom-level-resume', 'zoom-level-cover-letter'];
+            displays.forEach(id => {
+                const display = document.getElementById(id);
+                if (display) {
+                    display.textContent = `${currentZoomLevel}%`;
+                }
+            });
+        }
+
+        // Reset zoom before printing to ensure proper PDF output
+        window.addEventListener('beforeprint', function () {
+            document.body.style.zoom = '100%';
+        });
+
+        // Restore zoom after printing
+        window.addEventListener('afterprint', function () {
+            document.body.style.zoom = currentZoomLevel + '%';
+        });
+    </script>
+</body>
+
+</html>

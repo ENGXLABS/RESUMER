@@ -1,0 +1,206 @@
+/* You can poke around this CSS if you want to customize your formatting / styling further */
+/* You can even import custom fonts! */
+
+@import url('https://www.resume.lol/fonts/cm/fonts.css');
+
+/* Page settings for print */
+@page {
+    size: A4;
+    margin: 0.2in 0.1in;
+}
+
+/* meta */
+body {
+    font-family: "Computer Modern Serif", serif;
+    font-size: 11pt;
+    font-weight: 500;
+}
+
+/* Page break visualization for screen */
+@media screen {
+    #resume-content {
+        background: #e0e0e0;
+        padding: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .resume-page {
+        width: 8.27in;
+        min-height: 11.69in;
+        padding: 0.4in 0.3in;
+        margin: 0;
+        background: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        position: relative;
+        flex-shrink: 0;
+    }
+
+    .page-number {
+        position: absolute;
+        bottom: 0.3in;
+        right: 0.5in;
+        font-size: 9pt;
+        color: #666;
+    }
+}
+
+p {
+    text-align: justify;
+}
+
+.spacer {
+    margin: 0px auto;
+}
+
+/* styling content */
+h1,
+h2,
+h3,
+h4,
+p,
+a,
+li {
+    color: black;
+}
+
+h2 {
+    padding: 0;
+    margin-bottom: 5pt;
+    margin-top: 5pt;
+}
+
+h3,
+h4 {
+    margin: 0;
+    margin-left: 0.15in;
+}
+
+h1 {
+    color: black;
+    text-align: center;
+    font-size: 26pt;
+    margin: 0;
+    padding: 0;
+    margin-top: -0.1in;
+}
+
+/* Print styles */
+@media print {
+    body {
+        max-width: 100%;
+    }
+
+    #resume-content {
+        background: white !important;
+    }
+
+    .resume-page {
+        width: 100%;
+        min-height: auto;
+        max-height: none;
+        padding: 0;
+        box-shadow: none;
+    }
+
+    .page-number {
+        display: none;
+    }
+
+    h1 {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+}
+
+h2 {
+    border-bottom: 1px solid #000000;
+    text-transform: uppercase;
+    font-size: 11pt;
+    font-weight: normal;
+}
+
+h2::first-letter {
+    font-size: 14pt;
+}
+
+h3 {
+    display: flex;
+    font-size: 11pt;
+    padding: 0;
+    justify-content: space-between;
+
+}
+
+.indent {
+    margin-left: 0.15in;
+}
+
+.tech-stack {
+    font-style: normal;
+    font-weight: normal;
+}
+
+h4 {
+    display: flex;
+    font-size: 11pt;
+    font-weight: normal;
+    font-style: italic;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    justify-content: space-between;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: black;
+    text-underline-offset: 4px;
+}
+
+ul {
+    margin: 0;
+    margin-left: 0.3in;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 11pt;
+    page-break-before: avoid;
+}
+
+ul>li {
+    margin: 0;
+}
+
+
+/* header info content */
+.headerInfo>ul {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin: 0px auto 0pt !important;
+    margin-top: -1pt;
+    padding: 0;
+}
+
+.headerInfo>ul>li {
+    display: inline;
+    white-space: pre;
+    list-style-type: none;
+}
+
+.headerInfo>ul>li:not(:last-child) {
+    margin-right: 8px;
+}
+
+.headerInfo>ul>li:not(:last-child):after {
+    content: "|";
+    margin-left: 8px;
+}

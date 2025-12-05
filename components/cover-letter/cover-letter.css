@@ -1,0 +1,118 @@
+/* Cover Letter specific print settings */
+@page {
+    size: letter;
+    margin: 0.5in;
+}
+
+/* General page styling */
+#cover-letter-content {
+    font-family: "Outfit", sans-serif;
+    font-optical-sizing: auto;
+    line-height: 1.5;
+    color: #1c1c1c;
+    padding: 30px 40px 100px 40px !important;
+    background: white;
+    min-height: 10in;
+    box-sizing: border-box;
+    position: relative;
+    page-break-after: avoid;
+    page-break-inside: avoid;
+}
+
+/* Gradient Header */
+#cover-letter-content .gradient-header {
+    background: linear-gradient(90deg, #5db3ff, #ff9bbf, #ffd1a9);
+    padding: 20px 18px;
+    border-radius: 8px;
+    text-align: left;
+    color: white;
+    margin-bottom: 24px;
+}
+
+#cover-letter-content .gradient-header h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
+    color: white;
+}
+
+#cover-letter-content .contact-line {
+    margin-top: 8px;
+}
+
+#cover-letter-content .contact-line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#cover-letter-content .contact-line a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#cover-letter-content .contact-line a .iconify {
+    font-size: 16px;
+}
+
+/* Body Content */
+#cover-letter-content > p,
+#cover-letter-content .section {
+    margin-bottom: 16px;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+#cover-letter-content hr {
+    display: none;
+}
+
+#cover-letter-content strong {
+    font-weight: 600;
+}
+
+/* Footer Bar */
+#cover-letter-content .footer-bar {
+    background: linear-gradient(90deg, #5db3ff, #ff9bbf, #ffd1a9);
+    padding: 18px;
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    position: absolute;
+    bottom: 0.20in;
+    left: 50px;
+    right: 50px;
+}
+
+#cover-letter-content .footer-bar a {
+    color: white;
+    margin: 0 12px;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#cover-letter-content .footer-bar a .iconify {
+    font-size: 16px;
+}
+
+@media print {
+    #cover-letter-content {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    @page {
+        size: letter;
+        margin: 0.5in;
+    }
+}

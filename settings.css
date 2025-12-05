@@ -1,0 +1,347 @@
+/* Web UI Styles - Navigation, Tabs, and Control Panel */
+
+/* Navigation Tabs */
+#nav-tabs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #1a252f;
+    padding: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 1001;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+}
+
+.nav-tab {
+    padding: 18px 40px;
+    background-color: transparent;
+    color: #95a5a6;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.nav-tab:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #ecf0f1;
+}
+
+.nav-tab.active {
+    color: #3498db;
+    border-bottom-color: #3498db;
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-placeholder {
+    text-align: center;
+    padding: 100px 20px;
+    color: #7f8c8d;
+    margin-top: 59px;
+}
+
+.tab-placeholder h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.tab-placeholder p {
+    font-size: 18px;
+}
+
+/* Control Panel Styles */
+#control-panel,
+#cover-letter-control-panel {
+    position: fixed;
+    top: 59px;
+    left: 0;
+    right: 0;
+    background: #2c3e50;
+    padding: 15px 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 999;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+#resume-tab.active #control-panel,
+#cover-letter-tab.active #cover-letter-control-panel {
+    display: flex;
+}
+
+.tab-content:not(.active) #control-panel,
+.tab-content:not(.active) #cover-letter-control-panel {
+    display: none;
+}
+
+#control-panel button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+#company-name,
+#cover-company-name {
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 200px;
+    transition: border-color 0.3s ease;
+}
+
+#company-name:focus,
+#cover-company-name:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+#company-name::placeholder,
+#cover-company-name::placeholder {
+    color: #999;
+}
+
+#control-panel button:hover,
+#cover-letter-control-panel button:hover {
+    background-color: #2980b9;
+}
+
+#toggle-mode,
+#toggle-cover-mode {
+    background-color: #e74c3c;
+}
+
+/* Zoom Controls */
+.zoom-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: auto;
+}
+
+.zoom-controls button {
+    padding: 8px 12px !important;
+    background-color: #34495e !important;
+    min-width: auto !important;
+}
+
+.zoom-controls button:hover {
+    background-color: #2c3e50 !important;
+}
+
+.zoom-controls span:not(.iconify) {
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    min-width: 45px;
+    text-align: center;
+}
+
+.zoom-controls .iconify {
+    font-size: 18px;
+}
+
+#control-panel button:hover {
+    background-color: #2980b9;
+}
+
+#toggle-mode {
+    background-color: #e74c3c;
+}
+
+#toggle-mode:hover {
+    background-color: #c0392b;
+}
+
+#save-button {
+    background-color: #27ae60;
+}
+
+#save-button:hover {
+    background-color: #229954;
+}
+
+#download-button {
+    background-color: #f39c12;
+}
+
+#download-button:hover {
+    background-color: #d68910;
+}
+
+/* Editor Container Styles */
+#editor-container,
+#cover-editor-container {
+    margin-top: 140px;
+    padding: 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#markdown-editor,
+#cover-markdown-editor {
+    width: 100%;
+    min-height: 600px;
+    padding: 20px;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+#markdown-editor:focus,
+#cover-markdown-editor:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.editor-help {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-left: 4px solid #3498db;
+    border-radius: 3px;
+}
+
+.editor-help p {
+    margin: 0;
+    font-size: 13px;
+    color: #555;
+}
+
+/* Preview Container Styles */
+#preview-container {
+    margin-top: 140px;
+    max-width: none;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+#cover-preview-container {
+    margin-top: 140px;
+    max-width: 8.5in;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+#cover-letter-content {
+    background-color: white;
+    padding: 40px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-height: 11in;
+}
+
+#resume-content {
+    /* Styles handled in resume.css for pagination */
+}
+
+/* Print Styles */
+@media print {
+    #nav-tabs {
+        display: none !important;
+    }
+
+    #control-panel,
+    #cover-letter-control-panel {
+        display: none !important;
+    }
+
+    #preview-container,
+    #cover-preview-container {
+        margin-top: 0 !important;
+        padding: 0 !important;
+        background-color: white !important;
+    }
+
+    #cover-letter-content {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+    
+    #resume-content {
+        margin-top: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    body {
+        max-width: 100%;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    h1:first-child {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #nav-tabs {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .nav-tab {
+        padding: 15px;
+        text-align: center;
+    }
+
+    #control-panel {
+        padding: 10px;
+        top: 150px;
+    }
+    
+    #control-panel button {
+        font-size: 12px;
+        padding: 8px 15px;
+    }
+    
+    #editor-container,
+    #preview-container {
+        margin-top: 230px;
+        padding: 10px;
+    }
+}
