@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume Builder</title>
-
     <!-- Google Fonts - Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,38 +15,65 @@
     <link rel="stylesheet" href="settings.css">
     <link rel="stylesheet" href="components/resume/resume.css">
     <link rel="stylesheet" href="components/resume/resume-settings.css">
+    <link rel="stylesheet" href="components/resume-tpm/resume-tpm.css">
     <link rel="stylesheet" href="components/cover-letter/cover-letter.css">
     <link rel="stylesheet" href="components/ats-checker/ats-checker.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
 <body>
-    <!-- Navigation Tabs -->
-    <div id="nav-tabs">
-        <button class="nav-tab active" onclick="switchTab('resume')">Resume Generator</button>
-        <button class="nav-tab" onclick="switchTab('cover-letter')">Cover Letter Generator</button>
-        <button class="nav-tab" onclick="switchTab('ats-checker')">ATS Score Checker</button>
+    <!-- Single Row Header -->
+    <div id="compact-header">
+        <!-- Left: Control Actions -->
+        <div class="control-actions">
+            <button id="toggle-mode" onclick="toggleMode()">Switch to Edit Mode</button>
+            <button id="save-button" onclick="saveResume()" style="display:none;">Save Changes</button>
+            <input type="text" id="company-name" placeholder="Company Name" />
+            <button id="download-button" onclick="downloadMarkdown()">Download</button>
+            <button id="print-button" onclick="window.print()">Print</button>
+        </div>
+        
+        <!-- Center: Navigation Dropdown -->
+        <div class="nav-dropdown">
+            <button class="nav-dropdown-btn" id="current-tab-btn" onclick="toggleDropdown(event)">
+                <span class="iconify" data-icon="mdi:file-document-edit"></span>
+                <span id="current-tab-text">Resume Generator</span>
+                <span class="iconify" data-icon="mdi:chevron-down"></span>
+            </button>
+            <div class="nav-dropdown-content" id="nav-dropdown-menu">
+                <a href="#" onclick="switchTab('resume'); closeDropdown(); return false;">
+                    <span class="iconify" data-icon="mdi:file-document-edit"></span> Resume Generator
+                </a>
+                <a href="#" onclick="switchTab('cover-letter'); closeDropdown(); return false;">
+                    <span class="iconify" data-icon="mdi:email-edit"></span> Cover Letter Generator
+                </a>
+                <a href="#" onclick="switchTab('ats-checker'); closeDropdown(); return false;">
+                    <span class="iconify" data-icon="mdi:chart-box"></span> ATS Score Checker
+                </a>
+            </div>
+        </div>
+        
+        <!-- Right: Resume Type Selector + Zoom -->
+        <div class="header-right-controls">
+            <div id="resume-type-selector" style="display: flex; align-items: center; gap: 8px;">
+                <button id="qe-resume-btn" class="resume-type-btn-compact active" onclick="switchResumeType('qe')" title="Quality Engineering">
+                    <span class="iconify" data-icon="mdi:test-tube"></span> QE
+                </button>
+                <button id="tpm-resume-btn" class="resume-type-btn-compact" onclick="switchResumeType('tpm')" title="Technical Product Manager">
+                    <span class="iconify" data-icon="mdi:chart-timeline-variant"></span> TPM
+                </button>
+            </div>
+            <div class="zoom-controls">
+                <button onclick="zoomOut('resume')" title="Zoom Out"><span class="iconify" data-icon="mdi:magnify-minus"></span></button>
+                <span id="zoom-level-resume">100%</span>
+                <button onclick="zoomIn('resume')" title="Zoom In"><span class="iconify" data-icon="mdi:magnify-plus"></span></button>
+                <button onclick="resetZoom('resume')" title="Reset Zoom"><span class="iconify" data-icon="mdi:magnify"></span></button>
+            </div>
+        </div>
     </div>
 
     <!-- Resume Generator Tab -->
     <div id="resume-tab" class="tab-content active">
-        <!-- Control Panel -->
-        <div id="control-panel">
-            <button id="toggle-mode" onclick="toggleMode()">Switch to Edit Mode</button>
-            <button id="save-button" onclick="saveResume()" style="display:none;">Save Changes</button>
-            <input type="text" id="company-name" placeholder="Company Name (for filename)" />
-            <button id="download-button" onclick="downloadMarkdown()">Download Markdown</button>
-            <button id="print-button" onclick="window.print()">Print to PDF</button>
-            <div class="zoom-controls">
-                <button onclick="zoomOut('resume')" title="Zoom Out"><span class="iconify"
-                        data-icon="mdi:magnify-minus"></span></button>
-                <span id="zoom-level-resume">100%</span>
-                <button onclick="zoomIn('resume')" title="Zoom In"><span class="iconify"
-                        data-icon="mdi:magnify-plus"></span></button>
-                <button onclick="resetZoom('resume')" title="Reset Zoom"><span class="iconify"
-                        data-icon="mdi:magnify"></span></button>
-            </div>
-        </div>
 
         <!-- Editor Container -->
         <div id="editor-container" style="display:none;">
@@ -69,24 +94,6 @@
 
     <!-- Cover Letter Generator Tab -->
     <div id="cover-letter-tab" class="tab-content">
-        <!-- Control Panel -->
-        <div id="cover-letter-control-panel">
-            <button id="toggle-cover-mode" onclick="toggleCoverLetterMode()">Switch to Edit Mode</button>
-            <button id="save-cover-button" onclick="saveCoverLetter()" style="display:none;">Save Changes</button>
-            <input type="text" id="cover-company-name" placeholder="Company Name (for filename)" />
-            <button id="download-cover-button" onclick="downloadCoverLetter()">Download Markdown</button>
-            <button id="print-cover-button" onclick="window.print()">Print to PDF</button>
-            <div class="zoom-controls">
-                <button onclick="zoomOut('cover-letter')" title="Zoom Out"><span class="iconify"
-                        data-icon="mdi:magnify-minus"></span></button>
-                <span id="zoom-level-cover-letter">100%</span>
-                <button onclick="zoomIn('cover-letter')" title="Zoom In"><span class="iconify"
-                        data-icon="mdi:magnify-plus"></span></button>
-                <button onclick="resetZoom('cover-letter')" title="Reset Zoom"><span class="iconify"
-                        data-icon="mdi:magnify"></span></button>
-            </div>
-        </div>
-
         <!-- Editor Container -->
         <div id="cover-editor-container" style="display:none;">
             <textarea id="cover-markdown-editor" placeholder="Enter your cover letter in Markdown format..."></textarea>
@@ -175,6 +182,7 @@
     <script>
         let currentMode = 'preview'; // 'preview' or 'edit'
         let markdownContent = '';
+        let currentResumeType = 'qe'; // 'qe' or 'tpm'
 
         // Load resume and cover letter on page load
         window.addEventListener('DOMContentLoaded', () => {
@@ -182,8 +190,29 @@
             loadCoverLetter();
         });
 
+        function switchResumeType(type) {
+            currentResumeType = type;
+            
+            // Update button styles
+            document.getElementById('qe-resume-btn').classList.remove('active');
+            document.getElementById('tpm-resume-btn').classList.remove('active');
+            
+            if (type === 'qe') {
+                document.getElementById('qe-resume-btn').classList.add('active');
+            } else {
+                document.getElementById('tpm-resume-btn').classList.add('active');
+            }
+            
+            // Load the selected resume type
+            loadResume();
+        }
+
         function loadResume() {
-            fetch('components/resume/resume.md')
+            const resumePath = currentResumeType === 'qe' 
+                ? 'components/resume/resume.md' 
+                : 'components/resume-tpm/resume-tpm.md';
+                
+            fetch(resumePath)
                 .then(response => response.text())
                 .then(text => {
                     markdownContent = text;
@@ -191,12 +220,19 @@
                     document.getElementById('markdown-editor').value = text;
                 })
                 .catch(error => {
-                    console.error('Error loading resume.md:', error);
+                    console.error('Error loading resume:', error);
                     document.getElementById('resume-content').innerHTML = '<p>Error loading resume content.</p>';
                 });
         }
 
         function toggleMode() {
+            const activeTab = document.querySelector('.tab-content.active');
+            
+            if (activeTab.id === 'cover-letter-tab') {
+                toggleCoverLetterMode();
+                return;
+            }
+            
             const toggleBtn = document.getElementById('toggle-mode');
             const saveBtn = document.getElementById('save-button');
             const editorContainer = document.getElementById('editor-container');
@@ -444,6 +480,13 @@
         }
 
         function saveResume() {
+            const activeTab = document.querySelector('.tab-content.active');
+            
+            if (activeTab.id === 'cover-letter-tab') {
+                saveCoverLetter();
+                return;
+            }
+            
             markdownContent = document.getElementById('markdown-editor').value;
 
             // Save to localStorage
@@ -464,13 +507,21 @@
         }
 
         function downloadMarkdown() {
+            const activeTab = document.querySelector('.tab-content.active');
+            
+            if (activeTab.id === 'cover-letter-tab') {
+                downloadCoverLetter();
+                return;
+            }
+            
             const content = currentMode === 'edit'
                 ? document.getElementById('markdown-editor').value
                 : markdownContent;
 
             // Get company name and generate filename
             const companyName = document.getElementById('company-name').value.trim();
-            let filename = 'Resume_Sivasankaramalan_G';
+            const resumeTypeLabel = currentResumeType === 'qe' ? 'QE' : 'TPM';
+            let filename = `Resume_Sivasankaramalan_G_${resumeTypeLabel}`;
             if (companyName) {
                 // Clean company name: remove special chars, replace spaces with underscores
                 const cleanCompanyName = companyName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
@@ -536,22 +587,50 @@
             const tabContents = document.querySelectorAll('.tab-content');
             tabContents.forEach(tab => tab.classList.remove('active'));
 
-            // Remove active class from all nav tabs
-            const navTabs = document.querySelectorAll('.nav-tab');
-            navTabs.forEach(tab => tab.classList.remove('active'));
-
             // Show selected tab content
             document.getElementById(`${tabName}-tab`).classList.add('active');
 
-            // Add active class to clicked nav tab
-            event.target.classList.add('active');
+            // Update dropdown button text
+            const currentTabText = document.getElementById('current-tab-text');
+            const resumeTypeSelector = document.getElementById('resume-type-selector');
+            
+            if (tabName === 'resume') {
+                currentTabText.textContent = 'Resume Generator';
+                resumeTypeSelector.style.display = 'flex';
+            } else if (tabName === 'cover-letter') {
+                currentTabText.textContent = 'Cover Letter Generator';
+                resumeTypeSelector.style.display = 'none';
+            } else if (tabName === 'ats-checker') {
+                currentTabText.textContent = 'ATS Score Checker';
+                resumeTypeSelector.style.display = 'none';
+            }
         }
 
-        // Update document title for Cover Letter Print to PDF
+        // Dropdown Menu Functions
+        function toggleDropdown(event) {
+            event.stopPropagation();
+            const dropdown = document.getElementById('nav-dropdown-menu');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function closeDropdown() {
+            document.getElementById('nav-dropdown-menu').style.display = 'none';
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.querySelector('.nav-dropdown');
+            if (dropdown && !dropdown.contains(event.target)) {
+                closeDropdown();
+            }
+        });
+
+        // Update document title for Print to PDF
         window.addEventListener('beforeprint', function () {
             const activeTab = document.querySelector('.tab-content.active');
+            const companyName = document.getElementById('company-name').value.trim();
+            
             if (activeTab && activeTab.id === 'cover-letter-tab') {
-                const companyName = document.getElementById('cover-company-name').value.trim();
                 if (companyName) {
                     const cleanCompanyName = companyName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
                     document.title = `Cover_Letter_Sivasankaramalan_G_${cleanCompanyName}`;
@@ -612,12 +691,14 @@
         }
 
         function downloadCoverLetter() {
-            const editor = document.getElementById('cover-markdown-editor');
-            const companyInput = document.getElementById('cover-company-name');
-            const companyName = companyInput.value.trim() || 'Company';
+            const content = coverLetterMode === 'edit'
+                ? document.getElementById('cover-markdown-editor').value
+                : coverLetterContent;
+            
+            const companyName = document.getElementById('company-name').value.trim() || 'Company';
             const filename = `Cover_Letter_Sivasankaramalan_G_${companyName.replace(/\s+/g, '_')}.md`;
 
-            const blob = new Blob([editor.value], { type: 'text/markdown' });
+            const blob = new Blob([content], { type: 'text/markdown' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;

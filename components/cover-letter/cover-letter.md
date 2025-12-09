@@ -8,20 +8,22 @@
 
 ---
 
-December 6, 2025
+December 9, 2025
 
-**CUJU**  
-Senior Automation QA Engineer Position
+**Yuno**  
+QA Manager Position
 
-Dear Hiring Team,
+Dear Hiring Manager,
 
-I am excited to apply for the Senior Automation QA Engineer role at CUJU. With 11 years of experience designing and implementing automated tests for backend systems and mobile applications, I am confident I can help ensure every release delivers a smooth and delightful experience to users while supporting your mission to reinvent talent scouting in football through modern AI technology.
+I'm applying for the QA Manager role at Yuno. With 11 years experience including 6+ years leading global QA teams across fintech platforms, I bring proven expertise in defining QA strategies, driving test automation initiatives, and building high-quality payment systems for fast-paced, high-growth companies. Your mission to build payment infrastructure enabling global market participation resonates deeply with my commitment to quality excellence in fintech.
 
-In my current role as Lead QA Engineer at EPAM, I design, implement, and maintain automated API tests using Playwright and TypeScript for distributed backend systems, covering business logic, service integrations, and critical workflows with well structured test architecture. I build automated test suites for REST APIs and GraphQL endpoints, correlate test failures with application logs and metrics using tools like Grafana and Kibana, and integrate tests into CI/CD pipelines using GitHub Actions and GitLab CI to provide fast reliable feedback. I also support mobile testing teams in building and maintaining mobile UI automation for iOS and Android platforms using Appium and Java, helping identify valuable user flows for automation while keeping regression suites maintainable and stable. I work closely with Backend, Mobile, Product, and QA teams to translate business requirements into automated test scenarios, participate actively in sprint planning and retrospectives, and continuously refine automation strategy, tooling, and processes bringing a strong quality mindset.
+At EPAM, I lead and mentor global QA teams defining QA strategies and standards across organizations, designing testing frameworks using Selenium and Java fully integrated with CI/CD pipelines (Jenkins, GitHub Actions) that increased stability by 45% and reduced defects by 40%. I collaborate with Engineering, Product, and DevOps teams ensuring quality across the full development lifecycle while monitoring quality metrics through DataDog and Grafana ensuring transparency and continuous improvement. At Navi and OkCredit, I led fintech QA automating 120+ critical payment workflows for platforms serving 1M+ users, implementing API contract testing and performance validation ensuring zero critical production issues.
 
-I am drawn to CUJU because of your vision to create fair opportunities for young football talent worldwide through transparent data driven scouting. I would welcome the opportunity to contribute to building the number one global scouting platform, ensuring high quality and reliability in every release while helping evolve your QA and testing culture through shift left practices, quality gates, and continuous improvement.
+What excites me about Yuno is your rapid global expansion and the opportunity to shape quality strategy for payment orchestration at scale. I bring the leadership skills you're seeking to mentor QA engineers fostering growth and collaboration, manage test planning for regression, integration, performance, and security testing cycles, and communicate technical matters clearly to both technical and non-technical stakeholders. I've coached 30+ engineers promoting a culture of excellence, accountability, and continuous improvement in Agile environments while balancing speed and quality.
 
-Best regards,  
+I'd welcome the opportunity to discuss how my fintech QA leadership can support Yuno's payment infrastructure vision.
+
+Sincerely,  
 **Sivasankaramalan Gunasekarasivam**
 
 <div class="footer-bar">

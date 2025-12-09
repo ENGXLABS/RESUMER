@@ -1,5 +1,21 @@
 # Cover Letter Generation Rules - Master Spec
 
+## ⚠️ STOP: PRE-FLIGHT CHECK
+
+**Before writing ANY cover letter, confirm:**
+
+- [ ] I have READ this ENTIRE instruction file
+- [ ] I have READ the master-content.md file
+- [ ] I understand: hyphens ONLY for ranges/compound words, NOT sentence breaks
+- [ ] I understand: use commas or periods for sentence breaks
+- [ ] I will verify EVERY metric against master content
+- [ ] Cover letter will fit on ONE PAGE (250-300 words max)
+- [ ] I will self-audit before submitting
+
+**If you cannot check all boxes, STOP and read the instructions first.**
+
+---
+
 ## CRITICAL PUNCTUATION RULE
 
 **NEVER use EM dashes (—) or EN dashes (–) in any output.**
@@ -30,6 +46,44 @@
 3. Extract exact achievements and metrics
 4. Use only verified information in generation
 5. Never make up companies, dates, or numbers
+
+---
+
+## CRITICAL SKILLS AND LANGUAGE PRIORITIZATION RULE
+
+**ALWAYS prioritize Siva's core strengths over JD requirements when there are multiple options.**
+
+### Programming Languages Priority:
+- **Primary Languages:** Java, Kotlin (Siva's core proficiency)
+- **Secondary Languages:** Python, JavaScript, TypeScript (basic knowledge only)
+- **Rule:** Even if JD requires Python/JS/TS, DO NOT overemphasize them
+- **Rule:** Always mention Java/Kotlin first, others only if JD mandatory
+
+### Test Automation Tools Priority:
+- **Core Strength:** Selenium WebDriver (emphasize this first)
+- **Strong Skills:** Playwright, Appium, REST Assured, Cypress
+- **Rule:** When JD says "Selenium OR Playwright OR Cypress", focus on Selenium
+- **Rule:** Don't list all options, emphasize the strongest match
+
+---
+
+## CRITICAL HUMAN TONE AND NATURAL WRITING RULE
+
+**Write naturally like a human, not like a robot listing skills.**
+
+### Writing Guidelines:
+1. **Connect ideas naturally** using flow words: "while", "through", "by"
+2. **Show cause and effect** clearly
+3. **Avoid disconnected statements** jammed together
+4. **Write as you speak** naturally
+
+### BAD Example:
+❌ "Expert in Playwright, Selenium, Cypress building frameworks increasing coverage"
+(Too many tools, no natural flow)
+
+### GOOD Example:
+✅ "I build test automation using Selenium that scaled coverage from 60% to 95%"
+(Natural, connected, core strength emphasized)
 
 ---
 
@@ -192,18 +246,36 @@ The output must include:
 
 ## 7. Self-Audit Before Returning
 
-Copilot must check:
-- ✅ **CRITICAL: Content fits on ONE PAGE when exported to PDF (not 2 pages)**
-- ✅ Paragraph 1 is under 3 lines
-- ✅ Paragraph 2 includes a metric
-- ✅ Paragraph 3 mentions a real company-specific detail
-- ✅ Paragraph 4 is 1-2 lines max
-- ✅ Total length under 300 words
-- ✅ Tone sounds human
-- ✅ No clichés
-- ✅ No robotic phrasing
-- ✅ No errors
+**MANDATORY QUALITY CHECKLIST - Verify ALL items:**
+
+### Punctuation & Formatting
+- [ ] **ZERO hyphens used as sentence breaks** (must use commas/periods)
+- [ ] Hyphens ONLY for ranges (5 to 10, not 5-10) or compound words
+- [ ] Percent symbol (%) used, not spelled out
+- [ ] No EM dashes (—) or EN dashes (–) anywhere
+- [ ] Content fits on ONE PAGE (250-300 words)
+
+### Content Verification
+- [ ] All metrics verified against master-content.md
+- [ ] No fabricated companies or achievements
+- [ ] Exact company names and dates from master content
+
+### Structure & Tone
+- [ ] Paragraph 1: Under 3 lines, no clichés
+- [ ] Paragraph 2: Includes verified metric, 2-3 strengths
+- [ ] Paragraph 3: Real company-specific detail
+- [ ] Paragraph 4: 1-2 lines max
+- [ ] Tone sounds human, direct, confident (Siva's voice)
+- [ ] No robotic phrasing or textbook language
+
+### Forbidden Phrases Check
+- [ ] NO "excited to apply"
+- [ ] NO "perfect fit"
+- [ ] NO "it would be an honor"
+- [ ] NO "I believe I would be"
+
+**If ANY checkbox fails, fix it before submitting.**
 
 ---
 
-**Last Updated:** November 30, 2025
+**Last Updated:** December 6, 2025

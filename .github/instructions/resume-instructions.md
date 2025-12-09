@@ -1,5 +1,20 @@
 # MASTER RESUME GENERATION AND ATS EVALUATION INSTRUCTIONS
 
+## ⚠️ STOP: PRE-FLIGHT CHECK
+
+**Before starting ANY resume work, confirm:**
+
+- [ ] I have READ this ENTIRE instruction file
+- [ ] I have READ the master-content.md file
+- [ ] I understand ALL punctuation rules (no EM/EN dashes)
+- [ ] I understand ALL formatting rules (Core Skills = 6-8 buckets, Technical Skills = comma list)
+- [ ] I will verify EVERY metric against master content
+- [ ] I will self-audit before submitting
+
+**If you cannot check all boxes, STOP and read the instructions first.**
+
+---
+
 ## CRITICAL PUNCTUATION RULE
 
 **NEVER use EM dashes (—) or EN dashes (–) in any output.**
@@ -30,6 +45,78 @@
 3. Extract exact achievements and metrics
 4. Use only verified information in generation
 5. Never make up companies, dates, or numbers
+
+---
+
+## CRITICAL SKILLS AND LANGUAGE PRIORITIZATION RULE
+
+**ALWAYS prioritize Siva's core strengths over JD requirements when there are multiple options.**
+
+### Programming Languages Priority:
+- **Primary Languages:** Java, Kotlin (Siva's core proficiency)
+- **Secondary Languages:** Python, JavaScript, TypeScript (basic knowledge only)
+- **Rule:** Even if JD requires Python/JS/TS, DO NOT overemphasize them
+- **Rule:** Always lead with Java/Kotlin, mention others only if JD mandatory
+- **Example:** If JD says "Python or Java", choose Java as primary
+
+### Test Automation Tools Priority (When JD uses "or"):
+- **Core Strength:** Selenium WebDriver (choose this first)
+- **Strong Skills:** Playwright, Appium, REST Assured, Cypress
+- **Rule:** When JD says "Selenium OR Playwright OR Cypress", emphasize Selenium
+- **Rule:** Don't list all options, choose the one matching Siva's strength
+- **Example:** JD requires "Playwright or Selenium" → Use Selenium as primary tool
+
+### Selection Guidelines:
+1. Read JD carefully for "or" statements (e.g., "Tool A or Tool B or Tool C")
+2. When multiple options given, select ONE that matches Siva's verified core strength
+3. Do not list all requested tools, choose the strongest match
+4. Prioritize depth in core skills over breadth in secondary skills
+
+---
+
+## CRITICAL HUMAN TONE AND NATURAL WRITING RULE
+
+**NEVER write robotic, disconnected bullet points. Write like a human, naturally connecting ideas.**
+
+### BAD Example (Robotic, Disconnected):
+❌ "Expert in UI and API test automation using Playwright, Selenium, REST Assured, and Karate API, building automation frameworks that increased test coverage from 60% to 95% and reduced defects by 40%"
+
+**Problems:**
+- Two disconnected statements jammed together
+- No natural flow between ideas
+- Reads like a list, not a sentence
+- Too many tools listed (should choose core strength)
+
+### GOOD Example (Human, Connected):
+✅ "Built UI and API test automation frameworks using Selenium and REST Assured that scaled test coverage from 60% to 95% while reducing defects by 40%"
+
+**Why Better:**
+- Natural connection between action and result
+- Flows like human speech
+- Focuses on core tools (Selenium, REST Assured)
+- Clear cause and effect relationship
+
+### Writing Guidelines:
+1. **Connect ideas naturally** using words like: "while", "through", "by", "ensuring", "resulting in"
+2. **Show cause and effect** clearly in each bullet
+3. **Use active voice** with strong action verbs
+4. **Avoid listing multiple disconnected actions** in one bullet
+5. **Write as you would speak** to a colleague explaining your work
+6. **Each bullet should tell a mini-story** with beginning, action, and result
+
+### Connection Words to Use:
+- "while" (simultaneous actions/results)
+- "through" (method leading to result)
+- "by" (means of achieving result)
+- "ensuring" (guarantee/outcome)
+- "resulting in" (clear outcome)
+- "leading to" (consequence)
+- "which enabled" (enabling result)
+
+### Bullet Structure Examples:
+✅ "Led QA team **while** building Selenium automation frameworks **that** increased coverage by 45%"
+✅ "Developed API tests using REST Assured **reducing** regression time by 40% **through** smart test selection"
+✅ "Created test strategy **ensuring** zero production defects **by** implementing shift-left practices"
 
 ---
 
@@ -698,4 +785,43 @@ Look for and emphasize:
 
 ---
 
-**Last Updated:** December 5, 2025
+## MANDATORY QUALITY CHECKLIST - Final Verification
+
+**Before submitting ANY resume, verify ALL items:**
+
+### Critical Rules
+- [ ] Read ENTIRE instruction file before starting
+- [ ] Read master-content.md and verified all facts
+- [ ] ZERO EM dashes (—) or EN dashes (–) used
+- [ ] Only regular hyphens (-) used correctly
+- [ ] Percent symbol (%) used, not spelled out
+
+### Structure Compliance
+- [ ] Professional Summary: EXACTLY 4 bullets following the pattern
+- [ ] Core Skills: 6-8 thematic buckets in comma format (NOT bullet points with prose)
+- [ ] Technical Skills: Plain comma-separated list (NOT categorized sections)
+- [ ] Experience bullets: 5-7 for recent roles, 3-5 for older roles
+- [ ] Each bullet has: action verb + metric + JD keyword
+
+### Content Verification
+- [ ] All companies, dates, metrics verified against master-content.md
+- [ ] No fabricated experiences or achievements
+- [ ] All numbers and percentages exist in master content
+- [ ] JD keywords naturally woven in (not stuffed)
+
+### Forbidden Items
+- [ ] NO "Responsible for", "Worked on", "Assisted with", "Helped to"
+- [ ] NO multi-column layouts, tables, or icons
+- [ ] NO unverified metrics or made-up achievements
+
+### Tone & Quality
+- [ ] Sounds human and natural (Siva's voice)
+- [ ] No robotic or AI-generated phrasing
+- [ ] Direct, confident, no fluff
+- [ ] Each bullet tells a clear story
+
+**If ANY checkbox fails, fix it immediately.**
+
+---
+
+**Last Updated:** December 6, 2025
