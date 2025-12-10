@@ -10,18 +10,18 @@
 
 December 10, 2025
 
-**Munich Re**  
-IT Test Manager - Alternative Assets
+**Slalom Build**  
+Senior Principal - Quality Engineering
 
 Dear Hiring Manager,
 
-I'm applying for the IT Test Manager role in Investment & Asset Management Technology. With 11 years managing test strategy and automation across fintech platforms, I define test plans, build automation solutions, and ensure quality while meeting regulatory requirements.
+I'm applying for the Senior Principal Quality Engineering role at Slalom Build. With 11 years defining holistic quality approaches for complex projects and leading quality capability, I bring the technical depth and consulting skills to shape quality strategy across diverse client engagements.
 
-I reduced defects by 40% while achieving 95% automation coverage at EPAM. At Navi, I managed test execution for 120+ critical workflows covering functional, regression, API, and performance testing. I build test automation using Selenium and REST Assured integrated with CI/CD pipelines. I also design test data management solutions and coordinate test environments and resources. My Professional Scrum Master certification reflects my hands-on Agile experience working with cross-functional teams.
+I architect test automation solutions using Playwright, Selenium, REST Assured across React, native mobile, Node, TypeScript, and Java stacks. At EPAM, I reduced defects by 40% while achieving 95% coverage by influencing complex architectures and establishing trusted test patterns. I mentor 30+ engineers, conduct technical interviews, support career development, and align talent to projects. My consulting experience includes partnering with client stakeholders, participating in Discovery and Delivery, and adapting quality approaches to business needs.
 
-What draws me to Munich Re is your focus on systematic testing for investment management systems. I work analytically, stay customer-oriented when collaborating with technical and business teams, and remain self-organized under tight delivery timelines. While my German needs work, I communicate clearly in English and have worked successfully across global teams.
+What resonates with me is your commitment to modern quality approaches in high-velocity software teams. I balance technical leadership with people leadership, contribute as thought leader on quality engineering, and support business development as subject matter expert. I thrive in collaborative environments where quality ownership sits with the whole team.
 
-Happy to discuss how my test management experience aligns with your Alternative Assets systems.
+Happy to discuss how I can contribute to your quality engineering capability and client success.
 
 Sincerely,  
 **Sivasankaramalan Gunasekarasivam**

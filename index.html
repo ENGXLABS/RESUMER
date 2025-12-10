@@ -33,24 +33,22 @@
             <button id="print-button" onclick="window.print()">Print</button>
         </div>
         
-        <!-- Center: Navigation Dropdown -->
-        <div class="nav-dropdown">
-            <button class="nav-dropdown-btn" id="current-tab-btn" onclick="toggleDropdown(event)">
-                <span class="iconify" data-icon="mdi:file-document-edit"></span>
-                <span id="current-tab-text">Resume Generator</span>
-                <span class="iconify" data-icon="mdi:chevron-down"></span>
+        <!-- Center: Inline Navigation -->
+        <div class="inline-nav">
+            <button class="nav-tab-btn active" onclick="switchTab('resume'); return false;" title="Resume Generator">
+                <span class="iconify" data-icon="mdi:file-document"></span>
+                <span class="nav-label">Resume</span>
             </button>
-            <div class="nav-dropdown-content" id="nav-dropdown-menu">
-                <a href="#" onclick="switchTab('resume'); closeDropdown(); return false;">
-                    <span class="iconify" data-icon="mdi:file-document-edit"></span> Resume Generator
-                </a>
-                <a href="#" onclick="switchTab('cover-letter'); closeDropdown(); return false;">
-                    <span class="iconify" data-icon="mdi:email-edit"></span> Cover Letter Generator
-                </a>
-                <a href="#" onclick="switchTab('ats-checker'); closeDropdown(); return false;">
-                    <span class="iconify" data-icon="mdi:chart-box"></span> ATS Score Checker
-                </a>
-            </div>
+            <span class="nav-separator">|</span>
+            <button class="nav-tab-btn" onclick="switchTab('cover-letter'); return false;" title="Cover Letter Generator">
+                <span class="iconify" data-icon="mdi:email"></span>
+                <span class="nav-label">Cover Letter</span>
+            </button>
+            <span class="nav-separator">|</span>
+            <button class="nav-tab-btn" onclick="switchTab('ats-checker'); return false;" title="ATS Score Checker">
+                <span class="iconify" data-icon="mdi:chart-box"></span>
+                <span class="nav-label">ATS Score</span>
+            </button>
         </div>
         
         <!-- Right: Resume Type Selector + Zoom -->
@@ -613,40 +611,28 @@
             // Show selected tab content
             document.getElementById(`${tabName}-tab`).classList.add('active');
 
-            // Update dropdown button text
-            const currentTabText = document.getElementById('current-tab-text');
-            const resumeTypeSelector = document.getElementById('resume-type-selector');
+            // Update active state on navigation buttons
+            const navButtons = document.querySelectorAll('.nav-tab-btn');
+            navButtons.forEach(btn => btn.classList.remove('active'));
             
+            // Find and activate the correct button
+            navButtons.forEach(btn => {
+                const onclick = btn.getAttribute('onclick');
+                if (onclick && onclick.includes(`'${tabName}'`)) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Show/hide resume type selector
+            const resumeTypeSelector = document.getElementById('resume-type-selector');
             if (tabName === 'resume') {
-                currentTabText.textContent = 'Resume Generator';
                 resumeTypeSelector.style.display = 'flex';
-            } else if (tabName === 'cover-letter') {
-                currentTabText.textContent = 'Cover Letter Generator';
-                resumeTypeSelector.style.display = 'none';
-            } else if (tabName === 'ats-checker') {
-                currentTabText.textContent = 'ATS Score Checker';
+            } else {
                 resumeTypeSelector.style.display = 'none';
             }
         }
 
-        // Dropdown Menu Functions
-        function toggleDropdown(event) {
-            event.stopPropagation();
-            const dropdown = document.getElementById('nav-dropdown-menu');
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        }
 
-        function closeDropdown() {
-            document.getElementById('nav-dropdown-menu').style.display = 'none';
-        }
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(event) {
-            const dropdown = document.querySelector('.nav-dropdown');
-            if (dropdown && !dropdown.contains(event.target)) {
-                closeDropdown();
-            }
-        });
 
         // Update document title for Print to PDF
         window.addEventListener('beforeprint', function () {
