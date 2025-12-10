@@ -44,7 +44,7 @@
     
     #cover-letter-content {
         margin: 0 !important;
-        padding: 2.0in 0.5in 2.0in 0.5in !important;
+        padding: 2.0in 0.5in 0.25in !important;
         background: white !important;
         min-height: 11in !important;
         position: relative !important;
@@ -63,10 +63,11 @@
     .footer-bar {
         page-break-before: avoid !important;
         position: absolute !important;
-        bottom: 0.4in !important;
+        bottom: 0.6in !important;
         left: 0.5in !important;
         right: 0.5in !important;
         margin: 0 !important;
+        padding: 18px !important;
     }
     
     #cover-letter-content > p:first-of-type,
