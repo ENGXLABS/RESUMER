@@ -11,96 +11,83 @@
 
 ## Professional Summary
 
-- QA Manager with 11 years experience including 6+ years leading global QA teams across fintech and SaaS platforms, defining QA strategies and driving test automation initiatives for high-growth companies serving 1M+ users
-- Built automation frameworks using Selenium, Java, and REST Assured that scaled coverage from 60% to 95% while reducing defects by 40%, integrating testing with CI/CD pipelines using Jenkins and GitHub Actions
-- Expert in fintech quality assurance including API contract testing, performance testing using JMeter, and payment system validation, collaborating with Engineering, Product, and DevOps teams across full development lifecycle
-- Proven leader mentoring 30+ QA engineers fostering growth and best practices, monitoring quality metrics ensuring transparency, and promoting culture of excellence and continuous improvement in Agile environments
+- QA Engineer with 11 years extensive experience in manual and automated testing across web, mobile, and multi-device platforms including OTT (iOS, Android, FireTV, AppleTV), driving quality excellence for consumer experiences serving millions of users across diverse touch points and partner integrations
+- Strong proficiency in Java in professional setting building automated testing frameworks, with extensive experience in manual and automated testing for hardware and software using Selenium, Appium, REST Assured, and leveraging AI tools (GitHub Copilot, Cursor, Claude) to accelerate test development achieving 95% coverage while reducing defects by 40%
+- Proven track record defining test strategies and quality metrics, advocating for quality with cross-functional teams, and explaining QA methodology and tools to both technical and non-technical audiences while making technical risk trade-off decisions ensuring final user experience meets quality standards
 
 ## Core Skills
 
-- **QA Leadership & Team Management:** Leading and mentoring global QA teams (manual and automation), fostering growth and collaboration, defining QA strategies and standards across organizations in fast-paced, high-growth environments
-- **Test Automation & Frameworks:** Designing, maintaining, and evolving testing frameworks using Selenium, Appium, and Cypress, ensuring full integration with CI/CD pipelines (Jenkins, GitHub Actions, GitLab CI) for continuous testing
-- **Quality Strategy & Processes:** Implementing QA strategies, standards, and processes across development lifecycle, monitoring and reporting quality metrics, driving initiatives to increase efficiency and reliability of test coverage
-- **Test Planning & Execution:** Managing test planning, execution, and reporting for regression, integration, performance, and security testing cycles, ensuring proper documentation of test plans, cases, defects, and incidents
-- **Fintech & Payment Systems:** Experience in fintech quality assurance including payment orchestration testing, API validation, transaction processing, and financial data integrity across distributed systems
-- **Cross-Functional Collaboration:** Collaborating with Engineering, Product, and DevOps teams, communicating technical matters clearly to stakeholders, identifying risks proactively, and providing solutions balancing speed and quality
+- **Quality Advocacy & Cross-Functional Collaboration:** Advocating for quality within cross-functional departments, influencing engineers, product managers, and designers in quality best practices, making technical and risk trade-off decisions to ensure user experience quality standards
+- **Test Strategy & Quality Metrics:** Defining test strategies and quality metrics aligned with product goals, coordinating testing efforts across teams, and driving automation initiatives ensuring delivery of quality features across platforms
+- **Automation & AI-Driven Testing:** Driving automation efforts using Selenium, Appium, REST Assured, Playwright leveraging AI tools (GitHub Copilot, Cursor, Claude) to write automated tests achieving 92% coverage, integrating with CI/CD pipelines (Jenkins, GitHub Actions)
+- **Multi-Device & Platform Testing:** Manual and automated testing across mobile apps (iOS, Android), TVs, smart speakers, cars, and partner integrations, validating hardware and software quality for 50+ device configurations
+- **Programming & Technical Skills:** Professional experience in Java, JavaScript, Python writing automated tests and testing frameworks, working knowledge of SQL for database testing and validation
+- **QA Methodology & Communication:** Explaining QA methodology and tools to technical and non-technical audiences, collaborative and tenacious mindset, actively participating in evolving QA processes
 
 ## Technical Skills
 
-Java, Selenium, Appium, JMeter, Cypress, REST Assured, Cucumber, TestNG, JUnit, Jenkins, GitHub Actions, GitLab CI, CI/CD Pipelines, Docker, Kubernetes, API Testing (REST, GraphQL), Postman, Swagger, Performance Testing, DataDog, Grafana, Prometheus, SQL, PostgreSQL, MongoDB, Agile/Scrum, Git, JIRA, Confluence
+**Programming Languages:** Java, JavaScript, Python, Kotlin | **AI Tools:** GitHub Copilot, Cursor, Claude (AI-assisted test development) | **Test Automation:** Selenium WebDriver, Appium, REST Assured, Playwright, Cypress, Cucumber, TestNG, JUnit | **Platform Testing:** iOS, Android, FireTV, AppleTV, Smart TVs, Multi-device Testing, Cross-platform Testing | **Test Management:** JIRA, TestRail, Confluence | **CI/CD Tools:** Jenkins, GitHub Actions, GitLab CI, Docker | **API Testing:** REST API, GraphQL, Postman, Swagger | **Databases:** SQL, PostgreSQL, MySQL, MongoDB | **Performance Testing:** JMeter, k6 | **Monitoring:** Grafana, Kibana, DataDog | **Methodologies:** Agile/Scrum, TDD, BDD | **Tools:** Git, Charles Proxy
+
 ## Experience
 
-### Lead QA Engineer (Domain Lead) <span class="spacer"></span><span class="normal">Oct 2023 - Present</span>
+### Lead QA Engineer (Domain Lead - QE) <span class="spacer"></span><span class="normal">Oct 2023 - Present</span>
 
-#### EPAM Systems <span class="spacer"></span> India
+#### EPAM Systems <span class="spacer"></span> Remote
 
-- Lead and mentor global QA team fostering growth, collaboration, and best practices, defining and implementing QA strategies and standards across organization ensuring quality excellence for distributed systems projects
-- Design, maintain, and evolve testing frameworks using Selenium, Java, and REST Assured ensuring full integration with CI/CD pipelines (Jenkins, GitHub Actions), increasing automation stability by **45%** and reducing defects by **40%**
-- Collaborate with Engineering, Product, and DevOps teams ensuring quality across full development lifecycle, managing test planning, execution, and reporting for regression, integration, and performance testing cycles
-- Monitor and report quality metrics ensuring transparency and continuous improvement, driving test automation initiatives to increase efficiency, reliability, and scalability of test coverage across multiple squads
-- Identify risks proactively, escalate critical issues, and provide solutions balancing speed and quality while ensuring proper documentation of test plans, cases, defects, and incidents using JIRA and Confluence
-- Communicate technical matters clearly to both technical and non-technical stakeholders, promoting culture of excellence, accountability, and continuous improvement in QA practices across organization  
+- Work directly with strategic product bets ensuring final user experience meets quality standards, advocating for quality within cross-functional department influencing engineers, product managers, and designers in quality best practices reducing late cycle defects by **40%**
+- Define test strategies and quality metrics coordinating testing efforts across multiple squads, driving automation efforts leveraging AI tools (GitHub Copilot, Cursor) to accelerate framework development using Playwright and REST Assured increasing automation stability by **45%**
+- Make technical and risk trade-off decisions related to QA work, establishing quality gates and coverage standards across distributed systems while advising on tooling and methods for CI/CD integration (Jenkins, GitHub Actions)
+- Collaborate with cross-functional teams including Engineering, Product, and Design in Agile/Scrum environment, actively participating and evolving QA processes ensuring timely delivery of quality features
+- Lead QA engineers fostering collaborative and tenacious mindset while remaining curious and flexible, establishing domain wide testing standards and reusable automation libraries
 
 ### Senior SDET <span class="spacer"></span><span class="normal">Apr 2022 - Oct 2023</span>
 
 #### Navi Technologies <span class="spacer"></span> Bangalore, India
 
-- Defined and executed QA strategy for fintech payment systems in fast-paced, high-growth environment, automating **120+ critical workflows** including payment processing, transaction validation, and financial data integrity reducing regression time by **40%**
-- Built automation frameworks using Selenium, Java, and REST Assured fully integrated with CI/CD pipelines (Jenkins, GitHub Actions), implementing reusable test architecture ensuring reliability and scalability across microservices
-- Designed performance testing strategy using JMeter validating system behavior under peak load for high-scale fintech operations, monitoring quality metrics through Grafana and DataDog dashboards ensuring transparency
-- Solved systemic quality issues identifying flaky integration paths and inconsistent API error handling, influencing long-term architectural improvements and establishing quality gates for microservices deployment
-- Conducted extensive API contract testing using REST Assured ensuring backward compatibility while performing SQL database testing across PostgreSQL and MongoDB validating data consistency across distributed systems
-- Operated independently in complex technical environments collaborating with engineering teams to influence processes and cross-team delivery while managing stakeholder communication
+- Advocated for quality within cross-functional teams for large-scale platform serving **10M+ users**, influencing engineers and product managers on quality best practices while defining test strategies for **120+ critical workflows** reducing regression time by **40%**
+- Drove automation efforts writing automated tests using Java, JavaScript, and Python with professional experience building frameworks using REST Assured and Selenium, leveraging AI tools to accelerate test development ensuring quality standards
+- Made technical risk trade-off decisions coordinating testing efforts across teams, establishing API contract testing and quality gates while conducting performance testing using JMeter validating system scalability
+- Collaborated with Product Management and Engineering teams in Agile/Scrum environment, participating in sprint planning and actively contributing to evolving QA processes while tracking quality metrics using DataDog, Grafana, Kibana
 
-### Associate Tech Lead (Quality and Automation) <span class="spacer"></span><span class="normal">Apr 2020 - Apr 2022</span>
+### Associate Tech Lead (Quality & Automation) <span class="spacer"></span><span class="normal">Apr 2020 - Apr 2022</span>
 
 #### OkCredit <span class="spacer"></span> Bangalore, India
 
-- Led and mentored QA team of 5+ engineers fostering collaboration and best practices, defining QA strategy for fintech platform serving **1M+ users** that increased automation coverage from **60% to 95%** ensuring zero critical production issues
-- Designed and maintained testing frameworks using Selenium, Java, and REST Assured with full CI/CD integration (Jenkins, GitHub Actions), establishing quality metrics dashboard providing transparency into test coverage and release readiness
-- Collaborated with Engineering and Product teams ensuring quality across full development lifecycle, managing test planning and execution for regression, integration, and performance testing across web, Android, and iOS platforms
-- Drove test automation initiatives implementing API contract testing using REST Assured and async flow monitoring, increasing efficiency and reliability of test coverage across distributed fintech systems
-- Managed test documentation for test plans, cases, defects, and incidents using JIRA, communicating quality metrics clearly to stakeholders while improving release cycle time by **50%** through continuous improvement practices
-- Identified risks proactively and provided solutions balancing speed and quality, promoting culture of excellence and accountability while working in Agile/Scrum environment
+- Led and managed QA team of 5+ engineers providing mentorship, coaching, and performance feedback, fostering growth and collaboration in fast-paced high-growth B2B fintech company serving **1M+ users**
+- Defined test plans and automation strategies increasing automation coverage from **60% to 95%** through strategic prioritization, building comprehensive Java-based frameworks supporting web, Android, and iOS platforms with CI/CD integration (Jenkins, GitHub Actions) reducing manual effort by **70%**
+- Designed, reviewed, and approved test cases, test results, and defect reports for functional, regression, integration, and API testing ensuring quality standards and comprehensive coverage across distributed systems
+- Established quality metrics dashboard tracking test progress and release readiness, participating in Agile/Scrum teams collaborating with Engineering and Product stakeholders while improving release cycle time by **50%**
 
 ### Senior Software Engineer (Quality OTT and Cross Device) <span class="spacer"></span><span class="normal">Nov 2019 - Apr 2020</span>
 
 #### Rakuten Viki <span class="spacer"></span> Singapore
 
-- Developed test strategies for multi-device OTT platform covering iOS, Android, FireTV, and AppleTV, creating test plans and test cases for **50+ device configurations** validating video playback and cross-device behaviors
-- Built automation frameworks using Selenium and Appium with hands-on implementation reducing video playback defects by **35%** through systematic testing and technical debugging using Charles Proxy
-- Designed and executed functional, regression, and integration test cases while conducting API testing for backend services ensuring quality across distributed systems in Agile environment
-- Collaborated with international development teams managing project timelines and presenting test results to stakeholders demonstrating strong communication and problem-solving abilities
+- Conducted manual and automated testing for multi-device OTT platform covering **50+ device configurations** including iOS, Android, FireTV, and AppleTV validating hardware and software quality for video playback and cross-device behaviors reducing defects by **35%**
+- Built automation frameworks using Selenium and Appium with professional Java and JavaScript experience, collaborating with cross-functional teams in Agile environment ensuring quality across distributed systems
 
 ### Software Engineer <span class="spacer"></span><span class="normal">Jun 2017 - Oct 2019</span>
 
 #### Altisource <span class="spacer"></span> Bangalore, India
 
-- Built UI test automation framework using Java and Selenium WebDriver achieving **92%** test coverage through Page Object Model design pattern and data-driven approaches
-- Designed test cases while performing functional, regression, and integration testing demonstrating solid foundation in software testing methodologies
-- Worked in Agile teams collaborating with development teams while integrating automated tests into CI/CD pipelines (Jenkins, Git) optimizing execution time by **50%**
+- Built UI test automation framework using Java and Selenium WebDriver achieving **92%** test coverage through Page Object Model design pattern with CI/CD integration (Jenkins) optimizing execution time by **50%**
+- Designed test cases performing functional, regression, and integration testing in Agile teams collaborating with development teams
 
 ### Software Test Engineer <span class="spacer"></span><span class="normal">May 2015 - May 2017</span>
 
 #### AB Innovative <span class="spacer"></span> Bangalore, India
 
-- Developed automated test cases using Selenium and Java, reducing manual effort by **60%** and improving coverage from **30% to 80%**  
+- Developed automated test cases using Selenium and Java reducing manual effort by **60%** and improving coverage from **30% to 80%**  
 
 ## Key Achievements
 
-- Led and mentored global QA teams managing manual and automation projects, coaching **30+ engineers** fostering growth, collaboration, and best practices across organizations in fast-paced, high-growth fintech environments
-- Defined and implemented QA strategies increasing automation coverage from **60% to 95%** and improving stability by **45%** while reducing defects by **40%** through test automation initiatives and CI/CD integration
-- Designed, maintained, and evolved testing frameworks using Selenium, Appium, and JMeter with full CI/CD pipeline integration (Jenkins, GitHub Actions, GitLab CI) ensuring continuous testing and quality excellence
-- Managed test planning, execution, and reporting for fintech payment systems automating **120+ critical workflows** serving **1M+ users** reducing regression time by **40%** through efficient test strategies
-- Monitored and reported quality metrics using DataDog and Grafana ensuring transparency and continuous improvement, driving initiatives to increase efficiency, reliability, and scalability of test coverage
-- Collaborated with Engineering, Product, and DevOps teams improving release cycle time by **50%** while achieving zero critical production issues through proactive risk identification and stakeholder communication
+- Led and mentored **30+ engineers** across organizations providing coaching and performance feedback, driving automation strategies that increased coverage from **60% to 95%** and improved system stability by **45%** while reducing defects by **40%**
+- Defined and tracked quality metrics monitoring test progress, coverage, and product quality, continuously improving testing processes, standards, and best practices elevating QA capability across organizations
 
 ## Certifications
 
-- **[Professional Scrum Master](https://www.credly.com/badges/580fdd5f-9284-42e1-98c2-702aedfefe87/linked_in_profile)** - Scrum.org
-- **[Microsoft Certified: GitHub Copilot](https://learn.microsoft.com/api/credentials/share/en-us/sivasankaramalan/9F2B9433CE3C091C?sharingId)** - Microsoft
-- **[Enterprise Chaos Engineering Certification](https://www.credly.com/badges/580fdd5f-9284-42e1-98c2-702aedfefe87/linked_in_profile)**
-- **[Agile Project Management](https://www.coursera.org/account/accomplishments/verify/5KZFTRN4ZY3R)** - Google
+- **[Professional Scrum Master](https://www.credly.com/badges/580fdd5f-9284-42e1-98c2-702aedfefe87/linked_in_profile)** - Scrum.org (Agile methodologies, Scrum framework, team facilitation)
+- **[Microsoft Certified: GitHub Copilot](https://learn.microsoft.com/api/credentials/share/en-us/sivasankaramalan/9F2B9433CE3C091C?sharingId)** - Microsoft (AI-assisted development, GitHub Copilot best practices)
+- **[Enterprise Chaos Engineering Certification](https://www.credly.com/badges/580fdd5f-9284-42e1-98c2-702aedfefe87/linked_in_profile)** - (Distributed systems resilience, failure testing, chaos experiments)
 
 ## Education
 

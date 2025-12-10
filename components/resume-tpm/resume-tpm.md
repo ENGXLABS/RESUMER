@@ -1,16 +1,20 @@
-# SIVA
+# SIVASANKARAMALAN GUNASEKARASIVAM
 
-Singapore (Open to Remote) | +65 9750 7535 | sivasankaramalan@gmail.com | [linkedin.com/in/Sivasankaramalan](https://linkedin.com/in/Sivasankaramalan)
++919003999957 | ssmalan94@gmail.com | [linkedin.com/in/Sivasankaramalan](https://linkedin.com/in/Sivasankaramalan)
+
+## Professional Summary
+
+Technical delivery leader with 10+ years driving Software programs across fintech and payment ecosystems. Expert in managing technical integration lifecycle, translating business requirements into technical specifications, and coordinating cross-functional teams to ensure predictable release outcomes. Proven track record reducing integration defects by 40%, improving system stability to 95%, and accelerating delivery cycles by 50% through systematic validation and stakeholder coordination.
 
 ## Technical Skills
 
-**Integration & APIs** | REST APIs, Webhooks, JSON/XML, Postman, API Design, Data Flow Mapping
+**Integration & APIs** | REST APIs, Webhooks, JSON/XML, Postman, API Design, Data Flow Mapping, Sequence Diagrams, System Compatibility Analysis, Technical Specification Writing, Code/Script Interpretation
 
 **Project Management** | Agile, Scrum, JIRA, Confluence, Stakeholder Management, Risk Management, UAT Planning
 
-**Technical Tools** | Grafana, Kibana, DataDog, CI/CD, Jenkins, GitHub Actions
+**Technical Tools** | Grafana, Kibana, DataDog, OpenSearch, LogicMonitor, CI/CD, Jenkins, GitHub Actions
 
-**Domain** | Fintech, Payment Systems, Cross-Border Payments, B2B SaaS, Digital Banking
+**Domain** | Fintech, Payment Systems, Cross-Border Payments, High Volume Transaction Systems, B2B SaaS, Digital Banking
 
 ## Experience
 
@@ -20,14 +24,16 @@ Singapore (Open to Remote) | +65 9750 7535 | sivasankaramalan@gmail.com | [linke
 
 - Partnered with product and engineering teams to convert requirements into technical specifications and acceptance criteria, enabling **120+ workflows** for fintech payment platform
 - Led API integration validation using Postman and monitoring tools, reducing integration defects by **40%** while improving system stability from **60% to 95%**
+- Collaborated with client engineering teams during integration reviews and troubleshooting, driving expectation management and guiding teams through integration readiness and UAT
 - Coordinated stakeholders across Singapore, India, and US time zones, achieving **50%** reduction in release cycle time through sprint planning and UAT orchestration
+- Developed technical documentation including data flow diagrams, sequence diagrams, and integration guides to facilitate cross-team understanding and alignment
 
 ### Senior SDET and Delivery Enabler | Navi Technologies <span class="spacer"></span>Apr 2022 - Oct 2023
 
-*API validation for fintech products serving 1M+ users* <span class="spacer"></span> Bangalore, India
+*Mobile Web and API validation for fintech products serving 10M+ users* <span class="spacer"></span>Bangalore
 
-- Led API validation for digital lending platform with high-volume transactions, ensuring zero-downtime deployments and establishing quality gates
-- Acted as technical liaison across product, engineering, and **15+ payment partners** to ensure clarity on API contracts and integration workflows
+- Led API validation for digital lending platform with high-volume transactions across high volume network infrastructure, ensuring zero-downtime deployments and establishing quality gates
+- Acted as technical liaison across product, engineering, and **15+ payment partners** to ensure clarity on API contracts, webhook configurations, and integration workflows
 - Debugged production issues using monitoring tools, reducing MTTR by **60%** through systematic troubleshooting approach
 
 ### Associate Tech Lead | OkCredit <span class="spacer"></span>Mar 2020 - Apr 2022
@@ -46,7 +52,7 @@ Singapore (Open to Remote) | +65 9750 7535 | sivasankaramalan@gmail.com | [linke
 
 ### Software Engineer | Altisource <span class="spacer"></span>Jul 2015 - Nov 2019
 
-*Proptech platform delivery and coordination* <span class="spacer"></span> Bangalore, India
+*Proptech platform delivery and coordination* <span class="spacer"></span> 
 
 - Managed UAT coordination and stakeholder sign-offs for property valuation and vendor management modules
 - Facilitated sprint planning and retrospectives, improving delivery predictability by **35%**
@@ -57,6 +63,6 @@ Singapore (Open to Remote) | +65 9750 7535 | sivasankaramalan@gmail.com | [linke
 
 ## Education
 
-**Indian Institute of Technology Madras** - Executive MBA, Product Management & Innovation<span class="spacer"></span>2024
+**Indian Institute of Technology Madras** - Executive MBA, Product Management & Innovation<span class="spacer"></span>
 
-**Anna University** - Bachelor of Engineering, Mechanical Engineering<span class="spacer"></span>2014
+**Anna University** - Bachelor of Engineering, Mechanical Engineering<span class="spacer"></span>

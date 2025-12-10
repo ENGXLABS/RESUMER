@@ -7,14 +7,14 @@
     left: 0;
     right: 0;
     background: #1a252f;
-    padding: 10px 20px;
+    padding: 6px 15px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     z-index: 1001;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 15px;
-    height: 60px;
+    gap: 12px;
+    height: 48px;
 }
 
 /* Navigation Dropdown */
@@ -27,17 +27,17 @@
 .nav-dropdown-btn {
     background-color: #2c3e50;
     color: #ecf0f1;
-    padding: 8px 16px;
-    font-size: 14px;
+    padding: 6px 14px;
+    font-size: 13px;
     font-weight: 600;
     border: 2px solid #34495e;
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     transition: all 0.3s ease;
-    min-width: 200px;
+    min-width: 180px;
     justify-content: space-between;
     white-space: nowrap;
 }
@@ -114,7 +114,7 @@
 .header-right-controls {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     justify-content: flex-end;
 }
 
@@ -122,17 +122,17 @@
 #resume-type-selector {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .resume-type-btn-compact {
-    padding: 8px 16px;
+    padding: 6px 12px;
     background-color: #2c3e50;
     color: #95a5a6;
     border: 2px solid #2c3e50;
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     transition: all 0.3s ease;
     display: inline-flex;
@@ -162,18 +162,18 @@
 /* Control Actions in Header */
 .control-actions {
     display: flex;
-    gap: 8px;
+    gap: 6px;
     align-items: center;
     justify-content: flex-start;
 }
 
 .control-actions button,
 .control-actions input {
-    padding: 8px 16px;
+    padding: 6px 12px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     transition: all 0.3s ease;
     background-color: #3498db;
@@ -185,7 +185,7 @@
     background-color: white;
     color: #2c3e50;
     cursor: text;
-    width: 180px;
+    width: 150px;
 }
 
 .control-actions button:hover {
@@ -197,7 +197,7 @@
 #control-panel,
 #cover-letter-control-panel {
     position: fixed;
-    top: 60px; /* Adjusted for single row header */
+    top: 48px; /* Adjusted for compact header */
     left: 0;
     right: 0;
     background: #2c3e50;
@@ -238,23 +238,26 @@
 
 #company-name,
 #cover-company-name {
-    padding: 10px 15px;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-    width: 200px;
+    padding: 6px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    font-size: 12px;
+    width: 140px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: white;
     transition: border-color 0.3s ease;
 }
 
 #company-name:focus,
 #cover-company-name:focus {
     outline: none;
-    border-color: #3498db;
+    border-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.08);
 }
 
 #company-name::placeholder,
 #cover-company-name::placeholder {
-    color: #999;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 #control-panel button:hover,
@@ -301,19 +304,30 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 6px 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 3px 8px;
     border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .zoom-controls button {
-    padding: 6px 10px !important;
-    background-color: #34495e !important;
+    padding: 5px 8px !important;
+    background-color: transparent !important;
     min-width: auto !important;
+    border-radius: 4px !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    transition: all 0.2s ease !important;
 }
 
 .zoom-controls button:hover {
-    background-color: #2c3e50 !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    transform: translateY(-1px);
+}
+
+.zoom-controls button:active {
+    transform: translateY(0);
+    background-color: rgba(255, 255, 255, 0.15) !important;
 }
 
 .zoom-controls span:not(.iconify) {
@@ -322,10 +336,12 @@
     font-weight: 600;
     min-width: 40px;
     text-align: center;
+    padding: 0 4px;
 }
 
 .zoom-controls .iconify {
-    font-size: 18px;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 #control-panel button:hover {
@@ -358,7 +374,7 @@
 
 /* Editor Container Styles */
 #editor-container {
-    margin-top: 80px; /* Adjusted for single row header */
+    margin-top: 48px; /* No gap - matches header height exactly */
     padding: 20px;
     max-width: 1200px;
     margin-left: auto;
@@ -366,7 +382,7 @@
 }
 
 #cover-editor-container {
-    margin-top: 140px;
+    margin-top: 123px;
     padding: 20px;
     max-width: 1200px;
     margin-left: auto;
@@ -409,12 +425,12 @@
 
 /* Preview Container Styles */
 #preview-container {
-    margin-top: 80px; /* Adjusted for single row header */
+    margin-top: 48px; /* No gap - matches header height exactly */
     max-width: none;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding: 20px;
+    padding: 0;
     background-color: #f5f5f5;
 }
 
@@ -508,7 +524,7 @@
     
     #editor-container,
     #preview-container {
-        margin-top: 230px;
+        margin-top: 213px;
         padding: 10px;
     }
 }

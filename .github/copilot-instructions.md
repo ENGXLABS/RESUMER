@@ -1,16 +1,39 @@
 # Resume Builder - Copilot Instructions (Router)
 
+## 🚨 ABSOLUTE RULE: NO CONTENT GENERATION WITHOUT READING INSTRUCTIONS
+
+**GitHub Copilot: You are FORBIDDEN from generating any resume or cover letter content until you have:**
+
+1. **FIRST:** Used `read_file` tool to read the COMPLETE instruction file (resume-instructions.md OR cover-letter-instructions.md)
+2. **SECOND:** Used `read_file` tool to read the COMPLETE master content file (.github/resume-master-content.md)
+3. **ONLY THEN:** Generate content following ALL rules from the instruction file
+
+**This is NON-NEGOTIABLE. NO EXCEPTIONS. NO SHORTCUTS.**
+
+---
+
 ## ⚠️ MANDATORY WORKFLOW - READ THIS FIRST
 
 **STOP! Before doing ANY work, you MUST follow this workflow:**
 
-1. ✅ **Read the specific instruction file FIRST** (resume-instructions.md, cover-letter-instructions.md, or ats-checker-instructions.md)
-2. ✅ **Read the master content file** (.github/resume-master-content.md) to verify all facts
-3. ✅ **Complete the work** following ALL rules from the instruction file
-4. ✅ **Self-audit** against the quality checklist before submitting
-5. ✅ **Verify** no rules were violated (punctuation, tone, format, content verification)
+1. ✅ **Read the COMPLETE instruction file FIRST using read_file tool** (resume-instructions.md, cover-letter-instructions.md, or ats-checker-instructions.md) - Read ALL lines, not just first 100
+2. ✅ **Read the COMPLETE master content file using read_file tool** (.github/resume-master-content.md) to verify all facts - Read ALL lines
+3. ✅ **Explicitly state in your response:** "✅ Read [filename] (X lines)" to prove you read it
+4. ✅ **Complete the work** following ALL rules from the instruction file
+5. ✅ **Self-audit** against the quality checklist BEFORE submitting
+6. ✅ **Explicitly state:** "✅ Self-audit completed: [list specific checks performed]"
+7. ✅ **Verify** no rules were violated (punctuation, tone, format, content verification)
 
-**If you skip these steps, you WILL produce incorrect output.**
+**If you skip ANY of these steps, you WILL produce incorrect output.**
+
+**Proof of Compliance:** Every response generating resume/cover letter content MUST start with:
+```
+✅ Read resume-instructions.md (828 lines)
+✅ Read master-content.md (605 lines)
+✅ Self-audit completed: [checklist items verified]
+```
+
+**If this proof is missing, the output is INVALID.**
 
 ---
 
@@ -105,5 +128,32 @@ When the user provides a job description (JD) with these specific commands:
 
 ---
 
-**Last Updated:** November 30, 2025
+## 🔒 ENFORCEMENT MECHANISM
+
+**For User: How to Verify Copilot is Following Rules**
+
+If Copilot generates resume/cover letter content, check the response for:
+1. ✅ "Read [instruction-file-name] (X lines)" - proves file was read
+2. ✅ "Read master-content.md (605 lines)" - proves content verification
+3. ✅ "Self-audit completed: [checklist]" - proves quality check
+
+**If ANY of these are missing, the output is INVALID.**
+
+Ask Copilot: "Did you read the complete instruction file before generating this?"
+
+**For Copilot: Self-Enforcement**
+
+BEFORE generating ANY resume/cover letter content:
+1. Use `read_file` tool on complete instruction file (read ALL lines, not just first 100)
+2. Use `read_file` tool on master-content.md (read ALL lines)
+3. State explicitly: "✅ Read [filename] (X lines)"
+4. Generate content following rules
+5. Self-audit against checklist
+6. State explicitly: "✅ Self-audit completed: [specific checks]"
+
+**NO CONTENT GENERATION WITHOUT READING FILES FIRST.**
+
+---
+
+**Last Updated:** December 10, 2025
 

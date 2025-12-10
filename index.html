@@ -186,12 +186,32 @@
 
         // Load resume and cover letter on page load
         window.addEventListener('DOMContentLoaded', () => {
+            // Restore previous tab and resume type from sessionStorage
+            const savedTab = sessionStorage.getItem('currentTab');
+            const savedResumeType = sessionStorage.getItem('currentResumeType');
+            
+            // Restore resume type if saved
+            if (savedResumeType && (savedResumeType === 'qe' || savedResumeType === 'tpm')) {
+                currentResumeType = savedResumeType;
+                document.getElementById('qe-resume-btn').classList.remove('active');
+                document.getElementById('tpm-resume-btn').classList.remove('active');
+                document.getElementById(`${savedResumeType}-resume-btn`).classList.add('active');
+            }
+            
+            // Restore tab if saved
+            if (savedTab && (savedTab === 'resume' || savedTab === 'cover-letter' || savedTab === 'ats-checker')) {
+                switchTab(savedTab);
+            }
+            
             loadResume();
             loadCoverLetter();
         });
 
         function switchResumeType(type) {
             currentResumeType = type;
+            
+            // Save to sessionStorage
+            sessionStorage.setItem('currentResumeType', type);
             
             // Update button styles
             document.getElementById('qe-resume-btn').classList.remove('active');
@@ -583,6 +603,9 @@
 
         // Tab Switching Function
         function switchTab(tabName) {
+            // Save to sessionStorage
+            sessionStorage.setItem('currentTab', tabName);
+            
             // Hide all tab contents
             const tabContents = document.querySelectorAll('.tab-content');
             tabContents.forEach(tab => tab.classList.remove('active'));

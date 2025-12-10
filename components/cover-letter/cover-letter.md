@@ -8,20 +8,20 @@
 
 ---
 
-December 9, 2025
+December 10, 2025
 
-**Yuno**  
-QA Manager Position
+**Munich Re**  
+IT Test Manager - Alternative Assets
 
 Dear Hiring Manager,
 
-I'm applying for the QA Manager role at Yuno. With 11 years experience including 6+ years leading global QA teams across fintech platforms, I bring proven expertise in defining QA strategies, driving test automation initiatives, and building high-quality payment systems for fast-paced, high-growth companies. Your mission to build payment infrastructure enabling global market participation resonates deeply with my commitment to quality excellence in fintech.
+I'm applying for the IT Test Manager role in Investment & Asset Management Technology. With 11 years managing test strategy and automation across fintech platforms, I define test plans, build automation solutions, and ensure quality while meeting regulatory requirements.
 
-At EPAM, I lead and mentor global QA teams defining QA strategies and standards across organizations, designing testing frameworks using Selenium and Java fully integrated with CI/CD pipelines (Jenkins, GitHub Actions) that increased stability by 45% and reduced defects by 40%. I collaborate with Engineering, Product, and DevOps teams ensuring quality across the full development lifecycle while monitoring quality metrics through DataDog and Grafana ensuring transparency and continuous improvement. At Navi and OkCredit, I led fintech QA automating 120+ critical payment workflows for platforms serving 1M+ users, implementing API contract testing and performance validation ensuring zero critical production issues.
+I reduced defects by 40% while achieving 95% automation coverage at EPAM. At Navi, I managed test execution for 120+ critical workflows covering functional, regression, API, and performance testing. I build test automation using Selenium and REST Assured integrated with CI/CD pipelines. I also design test data management solutions and coordinate test environments and resources. My Professional Scrum Master certification reflects my hands-on Agile experience working with cross-functional teams.
 
-What excites me about Yuno is your rapid global expansion and the opportunity to shape quality strategy for payment orchestration at scale. I bring the leadership skills you're seeking to mentor QA engineers fostering growth and collaboration, manage test planning for regression, integration, performance, and security testing cycles, and communicate technical matters clearly to both technical and non-technical stakeholders. I've coached 30+ engineers promoting a culture of excellence, accountability, and continuous improvement in Agile environments while balancing speed and quality.
+What draws me to Munich Re is your focus on systematic testing for investment management systems. I work analytically, stay customer-oriented when collaborating with technical and business teams, and remain self-organized under tight delivery timelines. While my German needs work, I communicate clearly in English and have worked successfully across global teams.
 
-I'd welcome the opportunity to discuss how my fintech QA leadership can support Yuno's payment infrastructure vision.
+Happy to discuss how my test management experience aligns with your Alternative Assets systems.
 
 Sincerely,  
 **Sivasankaramalan Gunasekarasivam**
