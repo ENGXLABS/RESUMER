@@ -281,28 +281,13 @@
             const content = marked.parse(markdownContent);
             const resumeContent = document.getElementById('resume-content');
 
-            // Parse markdown into structured elements
-            const wrapper = document.createElement('div');
-            wrapper.innerHTML = content;
+            // Render as single continuous page - let browser handle print pagination
+            const pageDiv = document.createElement('div');
+            pageDiv.className = 'resume-page';
+            pageDiv.innerHTML = content;
 
-            // Count lines and paginate based on line capacity
-            const pages = paginateByLines(wrapper);
-
-            // Render pages
             resumeContent.innerHTML = '';
-            pages.forEach((pageElements, index) => {
-                const pageDiv = document.createElement('div');
-                pageDiv.className = 'resume-page';
-                pageElements.forEach(el => pageDiv.appendChild(el));
-
-                // Add page number
-                const pageNum = document.createElement('div');
-                pageNum.className = 'page-number';
-                pageNum.textContent = `Page ${index + 1}`;
-                pageDiv.appendChild(pageNum);
-
-                resumeContent.appendChild(pageDiv);
-            });
+            resumeContent.appendChild(pageDiv);
         }
 
         function paginateByLines(container) {

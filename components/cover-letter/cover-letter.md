@@ -8,20 +8,20 @@
 
 ---
 
-December 10, 2025
+December 11, 2025
 
-**Slalom Build**  
-Senior Principal - Quality Engineering
+**Munich Re**  
+IT Test Manager - Investment & Asset Management
 
 Dear Hiring Manager,
 
-I'm applying for the Senior Principal Quality Engineering role at Slalom Build. With 11 years defining holistic quality approaches for complex projects and leading quality capability, I bring the technical depth and consulting skills to shape quality strategy across diverse client engagements.
+I'm applying for the IT Test Manager role in the Investment & Asset Management Tower. With 11 years defining test strategies and executing functional and non-functional tests across fintech and SaaS platforms, I bring the analytical skills and test management expertise to ensure quality for core asset and investment management applications.
 
-I architect test automation solutions using Playwright, Selenium, REST Assured across React, native mobile, Node, TypeScript, and Java stacks. At EPAM, I reduced defects by 40% while achieving 95% coverage by influencing complex architectures and establishing trusted test patterns. I mentor 30+ engineers, conduct technical interviews, support career development, and align talent to projects. My consulting experience includes partnering with client stakeholders, participating in Discovery and Delivery, and adapting quality approaches to business needs.
+I design and implement test automation solutions using Selenium, REST Assured, and Appium while managing test environments, test resources, and test data frameworks. At EPAM, I reduced defects by 40% by defining comprehensive test strategies and ensuring solutions meet business needs. At Navi Technologies, I developed test plans for fintech systems, executing 120+ test cases and reducing regression time by 40%. I hold Professional Scrum Master certification and have strong experience with Agile methodologies and solution development life cycles.
 
-What resonates with me is your commitment to modern quality approaches in high-velocity software teams. I balance technical leadership with people leadership, contribute as thought leader on quality engineering, and support business development as subject matter expert. I thrive in collaborative environments where quality ownership sits with the whole team.
+What resonates is the focus on ensuring availability, reliability, and seamless transition to steady-state operations. I bring exceptional attention to detail, strong customer orientation, and proven ability to analyze requirements and formulate effective test conditions. My fintech domain knowledge and systematic approach to test execution align well with regulatory requirements and business needs.
 
-Happy to discuss how I can contribute to your quality engineering capability and client success.
+Happy to discuss how I can contribute to quality assurance for your alternative assets applications.
 
 Sincerely,  
 **Sivasankaramalan Gunasekarasivam**
