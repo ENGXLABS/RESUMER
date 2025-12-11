@@ -8,20 +8,20 @@
 
 ---
 
-December 10, 2025
+December 11, 2025
 
-**Slalom Build**  
-Senior Principal - Quality Engineering
+**Bragi GmbH**  
+Lead QA Engineer
 
 Dear Hiring Manager,
 
-I'm applying for the Senior Principal Quality Engineering role at Slalom Build. With 11 years defining holistic quality approaches for complex projects and leading quality capability, I bring the technical depth and consulting skills to shape quality strategy across diverse client engagements.
+I'm applying for the Lead QA Engineer role at Bragi. With 11 years defining QA roadmaps, leading system validation for distributed systems and firmware integration, and mentoring QA engineers, I bring the technical domain ownership to ensure quality for your AI-powered hearables platform.
 
-I architect test automation solutions using Playwright, Selenium, REST Assured across React, native mobile, Node, TypeScript, and Java stacks. At EPAM, I reduced defects by 40% while achieving 95% coverage by influencing complex architectures and establishing trusted test patterns. I mentor 30+ engineers, conduct technical interviews, support career development, and align talent to projects. My consulting experience includes partnering with client stakeholders, participating in Discovery and Delivery, and adapting quality approaches to business needs.
+I own technical domains for validation at EPAM, where I reduced defects by 40% by establishing common methodologies and documentation standards across teams while improving automation stability by 45% through Appium and REST Assured frameworks integrated into CI/CD. I've led multi-device behavior validation across 50+ device configurations at Rakuten Viki, reducing defects by 35% through systematic hardware-software integration testing. At Navi, I designed automation workflows covering 120+ critical scenarios using  Appium, Selenium and Playwrightwhile mentoring team members on testing best practices.
 
-What resonates with me is your commitment to modern quality approaches in high-velocity software teams. I balance technical leadership with people leadership, contribute as thought leader on quality engineering, and support business development as subject matter expert. I thrive in collaborative environments where quality ownership sits with the whole team.
+What resonates is the focus on technical domain ownership, validation plans for firmware and system software, and mentoring both QA engineers and embedded tech leads. I bring manual and automation proficiency with Selenium and Appium, strong experience with multi-device matrix testing across hardware platforms, and systematic approach to API testing with Postman. My IoT validation experience across OTT platforms and distributed systems aligns well with your wearable technology innovation.
 
-Happy to discuss how I can contribute to your quality engineering capability and client success.
+Happy to discuss how I can contribute to quality leadership for your hearables ecosystem.
 
 Sincerely,  
 **Sivasankaramalan Gunasekarasivam**
