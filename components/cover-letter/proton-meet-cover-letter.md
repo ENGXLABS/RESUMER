@@ -1,14 +1,11 @@
-<div class="gradient-header">
-    <h1>Sivasankaramalan Gunasekarasivam</h1>
-    <div class="contact-line">
-        <a href="mailto:ssmalan94@gmail.com"><span class="iconify" data-icon="mdi:email"></span>ssmalan94@gmail.com</a>
-        <a href="https://linkedin.com/in/Sivasankaramalan"><span class="iconify" data-icon="mdi:linkedin"></span>linkedin.com/in/Sivasankaramalan</a>
-    </div>
-</div>
+**December 29, 2025**
 
-**Date:** December 29, 2025
+**Sivasankaramalan Gunasekarasivam**  
+ssmalan94@gmail.com  
+linkedin.com/in/Sivasankaramalan  
 
-**Proton Meet Hiring Team**
+**Proton Meet Hiring Team**  
+Proton Technologies
 
 Dear Proton Meet Team,
 
@@ -22,9 +19,3 @@ I'd be happy to discuss how my fullstack testing expertise and experience with d
 
 Best regards,  
 Sivasankaramalan Gunasekarasivam
-
-<div class="footer-bar">
-    <a href="https://github.com/Sivasankaramalan"><span class="iconify" data-icon="mdi:github"></span>GitHub</a>
-    <a href="https://sivasankaramalan.is-a.dev/"><span class="iconify" data-icon="mdi:web"></span>Portfolio</a>
-    <a href="https://linkedin.com/in/Sivasankaramalan"><span class="iconify" data-icon="mdi:linkedin"></span>LinkedIn</a>
-</div>

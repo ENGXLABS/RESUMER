@@ -1,0 +1,37 @@
+# Global Rules for Resume & Cover Letter Generation
+
+These rules apply to ALL resume, cover letter, and ATS checking tasks.
+
+## 🚨 ABSOLUTE CRITICAL RULES
+
+1.  **NO CONTENT GENERATION WITHOUT READING INSTRUCTIONS**
+    - You MUST read the specific instruction file in `.github/instructions/` for the task at hand.
+    - You MUST read `.github/resume-master-content.md` before generating content.
+
+2.  **PUNCTUATION & FORMATTING**
+    - **NEVER use EM dashes (—) or EN dashes (–)**. Use regular hyphens (-) only.
+    - **Use percent symbol (%)** for percentages (e.g., "40%").
+    - **No tables or multi-column layouts**. Use single-column Markdown.
+
+3.  **CONTENT VERIFICATION**
+    - **Verify EVERY metric and achievement** against `.github/resume-master-content.md`.
+    - **NEVER fabricate** experience, companies, or numbers.
+    - If it's not in the master content, do not include it.
+
+4.  **TONE & STYLE**
+    - **Human Tone**: Write naturally. Avoid robotic lists or disconnected clauses.
+    - **No Clichés**: Avoid "passionate", "thrilled to apply", "perfect fit", "hardworking".
+    - **Active Voice**: Start bullets with strong action verbs (Led, Built, Designed).
+
+## Workflow Triggers
+
+- **"CV for JD"** -> Use `.agent/workflows/generate-resume.md`
+- **"CV and Cover"** -> Use `.agent/workflows/generate-resume.md` then `.agent/workflows/generate-cover-letter.md`
+- **"ATS Score"** -> Use `.agent/workflows/check-ats-score.md`
+
+## File Locations
+
+- **Resume Instructions**: `.github/instructions/resume-instructions.md`
+- **Cover Letter Instructions**: `.github/instructions/cover-letter-instructions.md`
+- **ATS Instructions**: `.github/instructions/ats-checker-instructions.md`
+- **Master Content**: `.github/resume-master-content.md`
