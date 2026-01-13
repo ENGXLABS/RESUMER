@@ -3,10 +3,12 @@
 
 @import url('https://www.resume.lol/fonts/cm/fonts.css');
 
-/* Page settings for print */
+/* ---------- Improved print / page-break rules ---------- */
+
+/* Page sizing */
 @page {
-    size: A4;
-    margin: 0.25in 0.15in;
+  size: A4;
+  margin: 0.25in 0.15in;
 }
 
 /* meta */
@@ -16,39 +18,43 @@ body {
     font-weight: 500;
 }
 
-/* Print-specific styles */
+/* ===== Print rules - natural flow with margins on all pages ===== */
 @media print {
-    * {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-    
-    body {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-    
-    html {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-    
-    #resume-content {
-        margin: 0 !important;
-        padding: 0 !important;
-        background: white !important;
-    }
-    
-    .resume-page {
-        margin: 0 !important;
-        padding: 0.25in 0.15in !important;
-        box-shadow: none !important;
-        page-break-after: always;
-    }
-    
-    .resume-page:last-child {
-        page-break-after: auto;
-    }
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  
+  html { 
+    margin: 0 !important; 
+    padding: 0 !important; 
+    background: white !important; 
+  }
+  
+  body {
+    margin: 0.25in 0.15in !important; /* Body margins work on all pages */
+    padding: 0 !important;
+    background: white !important;
+  }
+  
+  #resume-content { 
+    margin: 0 !important; 
+    padding: 0 !important; 
+    background: white !important; 
+  }
+
+  .resume-page {
+    width: 100%;
+    padding: 0 !important; /* Remove padding, use body margins instead */
+    box-shadow: none !important;
+    min-height: auto;
+    max-height: none;
+  }
+
+  ul, ol {
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  h1 { margin-top: 0 !important; padding-top: 0 !important; }
+  .page-number { display: none; }
 }
 
 /* Page break visualization for screen */
@@ -64,9 +70,8 @@ body {
 
     .resume-page {
         width: 8.30in;
-        min-height: 12.00in;
         padding: 0.2in 0.1in;
-        margin: 0.25in 0.15in;;
+        margin: 0.25in 0.15in;
         background: white;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         box-sizing: border-box;
@@ -102,19 +107,6 @@ li {
     color: black;
 }
 
-h2 {
-    padding: 0;
-    margin: 0;
-    margin-bottom: 2pt;
-    margin-top: 3pt;
-}
-
-h3,
-h4 {
-    margin: 0;
-    margin-left: 0.15in;
-}
-
 h1 {
     color: black;
     text-align: center;
@@ -122,34 +114,6 @@ h1 {
     margin: 0;
     padding: 0;
     margin-top: -0.1in;
-}
-
-/* Print styles */
-@media print {
-    body {
-        max-width: 100%;
-    }
-
-    #resume-content {
-        background: white !important;
-    }
-
-    .resume-page {
-        width: 100%;
-        min-height: auto;
-        max-height: none;
-        padding: 0;
-        box-shadow: none;
-    }
-
-    .page-number {
-        display: none;
-    }
-
-    h1 {
-        margin-top: 0 !important;
-        padding-top: 0 !important;
-    }
 }
 
 h2 {
@@ -165,6 +129,12 @@ h2 {
 
 h2::first-letter {
     font-size: 14pt;
+}
+
+h3,
+h4 {
+    margin: 0;
+    margin-left: 0.15in;
 }
 
 h3 {
@@ -244,3 +214,15 @@ ul>li {
     content: "|";
     margin-left: 8px;
 }
+
+/* ---------- Optional: only use for SHORT jobs that should never split ---------- */
+/* Uncomment and add class="experience-entry" to specific short job sections if needed */
+/*
+@media print {
+  .experience-entry {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+  }
+}
+*/
