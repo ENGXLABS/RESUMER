@@ -103,7 +103,8 @@ When the user provides a job description (JD) with these specific commands:
   3. Analyze the job description requirements
   4. Tailor resume focusing on relevant skills, experience, and achievements
   5. Follow ALL formatting and punctuation rules from instruction file
-  6. Self-audit against quality checklist before submitting
+  6. **CRITICAL PAGE STRUCTURE:** First page must cover 80-90% of JD requirements and contain ONLY: Professional Summary, Core Skills, Technical Skills, and EPAM experience. Second page starts with Navi Technologies (Senior SDET Apr 2022 - Oct 2023)
+  7. Self-audit against quality checklist before submitting
 
 ### **"CV and Cover for JD"** or **"CV and Cover"**
 - **Action:** Generate both tailored resume AND cover letter for the provided job description

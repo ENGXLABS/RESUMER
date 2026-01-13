@@ -281,13 +281,14 @@
             const content = marked.parse(markdownContent);
             const resumeContent = document.getElementById('resume-content');
 
-            // Render as single continuous page - let browser handle print pagination
-            const pageDiv = document.createElement('div');
-            pageDiv.className = 'resume-page';
-            pageDiv.innerHTML = content;
+            // Simple single-page rendering - let CSS handle page breaks
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = content;
+            wrapper.className = 'resume-page';
 
+            // Clear and add content
             resumeContent.innerHTML = '';
-            resumeContent.appendChild(pageDiv);
+            resumeContent.appendChild(wrapper);
         }
 
         function paginateByLines(container) {
@@ -369,38 +370,57 @@
             const children = Array.from(container.children);
             const groups = [];
             let currentGroup = { elements: [], height: 0 };
-            let inJobSection = false;
 
             for (let i = 0; i < children.length; i++) {
                 const element = children[i];
                 const tag = element.tagName;
+                const elHeight = element.offsetHeight;
 
-                // Detect job section start (H3 or H4)
-                if (tag === 'H3' || (tag === 'H4' && !inJobSection)) {
-                    // If we have accumulated content, save it as a group
+                // H2 (section headers) - standalone group
+                if (tag === 'H2') {
                     if (currentGroup.elements.length > 0) {
                         groups.push(currentGroup);
+                        currentGroup = { elements: [], height: 0 };
                     }
-                    // Start new job section group
-                    currentGroup = { elements: [element], height: element.offsetHeight };
-                    inJobSection = true;
+                    groups.push({ elements: [element], height: elHeight });
                 }
-                // Major section header (H2) - ends job section
-                else if (tag === 'H2') {
+                // H3 (job title) - keep with next element (H4 or first content)
+                else if (tag === 'H3') {
                     if (currentGroup.elements.length > 0) {
                         groups.push(currentGroup);
+                        currentGroup = { elements: [], height: 0 };
                     }
-                    currentGroup = { elements: [element], height: element.offsetHeight };
-                    inJobSection = false;
-                }
-                // Content within a job section - keep adding to current group
-                else {
                     currentGroup.elements.push(element);
-                    currentGroup.height += element.offsetHeight;
+                    currentGroup.height += elHeight;
+                    
+                    // Look ahead - include H4 if it follows
+                    if (i + 1 < children.length && children[i + 1].tagName === 'H4') {
+                        i++;
+                        currentGroup.elements.push(children[i]);
+                        currentGroup.height += children[i].offsetHeight;
+                    }
+                    
+                    // Include first content element to prevent orphaned headers
+                    if (i + 1 < children.length) {
+                        i++;
+                        currentGroup.elements.push(children[i]);
+                        currentGroup.height += children[i].offsetHeight;
+                    }
+                    
+                    groups.push(currentGroup);
+                    currentGroup = { elements: [], height: 0 };
+                }
+                // All other elements - individual groups for flexible breaking
+                else {
+                    if (currentGroup.elements.length > 0) {
+                        groups.push(currentGroup);
+                        currentGroup = { elements: [], height: 0 };
+                    }
+                    groups.push({ elements: [element], height: elHeight });
                 }
             }
 
-            // Add final group
+            // Add final group if exists
             if (currentGroup.elements.length > 0) {
                 groups.push(currentGroup);
             }
@@ -428,9 +448,53 @@
             for (let group of groups) {
                 console.log(`Group: ${group.elements[0]?.tagName}, Height: ${group.height}px, Current: ${currentHeight}px`);
 
-                // If this single group is larger than a page, split it
-                if (group.height > maxPageHeight) {
-                    console.log(`Group too large (${group.height}px), splitting...`);
+                // If adding this group exceeds page height, try to fit what we can
+                if (currentHeight + group.height > maxPageHeight && currentPage.length > 0) {
+                    const remainingHeight = maxPageHeight - currentHeight;
+                    
+                    // If group has multiple elements, try to split it
+                    if (group.elements.length > 1 && remainingHeight > 100) {
+                        console.log(`Splitting group across pages. Remaining height: ${remainingHeight}px`);
+                        
+                        let partialGroup = { elements: [], height: 0 };
+                        let nextPageGroup = { elements: [], height: 0 };
+                        let fillingCurrentPage = true;
+                        
+                        for (let element of group.elements) {
+                            const elHeight = element.offsetHeight;
+                            
+                            if (fillingCurrentPage && currentHeight + partialGroup.height + elHeight <= maxPageHeight) {
+                                partialGroup.elements.push(element);
+                                partialGroup.height += elHeight;
+                            } else {
+                                fillingCurrentPage = false;
+                                nextPageGroup.elements.push(element);
+                                nextPageGroup.height += elHeight;
+                            }
+                        }
+                        
+                        // Add partial group to current page if it has elements
+                        if (partialGroup.elements.length > 0) {
+                            currentPage.push(partialGroup);
+                            currentHeight += partialGroup.height;
+                        }
+                        
+                        // Start new page with remaining elements
+                        console.log(`Starting new page. Previous page: ${currentHeight}px`);
+                        pages.push(currentPage);
+                        currentPage = nextPageGroup.elements.length > 0 ? [nextPageGroup] : [];
+                        currentHeight = nextPageGroup.height;
+                    } else {
+                        // Group is too small to split or won't fit - move entire group to next page
+                        console.log(`Moving entire group to new page`);
+                        pages.push(currentPage);
+                        currentPage = [group];
+                        currentHeight = group.height;
+                    }
+                }
+                // If this single group is larger than a page, force split it
+                else if (group.height > maxPageHeight) {
+                    console.log(`Group too large (${group.height}px), force splitting...`);
 
                     // Finish current page if it has content
                     if (currentPage.length > 0) {
@@ -457,13 +521,6 @@
                         currentPage = [subGroup];
                         currentHeight = subGroup.height;
                     }
-                }
-                // If adding this group exceeds page height
-                else if (currentHeight + group.height > maxPageHeight && currentPage.length > 0) {
-                    console.log(`Starting new page. Previous page had ${currentPage.length} groups, ${currentHeight}px`);
-                    pages.push(currentPage);
-                    currentPage = [group];
-                    currentHeight = group.height;
                 }
                 // Add to current page
                 else {
