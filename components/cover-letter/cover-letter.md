@@ -6,22 +6,25 @@
     </div>
 </div>
 
-**Date:** December 29, 2025
+**Date:** February 1, 2026
 
-**Proton Meet Hiring Team**
+**Paradex Engineering Team**
 
-Dear Proton Meet Team,
+Dear Paradex Team,
 
-Your mission to make privacy the default while building tools that empower secure communications aligns with how I approach quality engineering - building strong foundations that protect user trust. The Fullstack Automation QA Engineer role combines my expertise in comprehensive testing across UI, API, database, and security layers with my experience in distributed teams and privacy-focused applications.
+Your SDET role requires someone who can architect scalable automation frameworks from scratch while validating high-frequency trading systems and complex financial logic across distributed infrastructure. I've spent 11 years building exactly these systems for fintech platforms handling millions of transactions.
 
-I bring 11 years specializing in fullstack test automation using Playwright, Selenium, and REST Assured, conducting the exact testing types mentioned in your JD - unit testing, integration testing, system testing, and acceptance testing. At EPAM, I built automation frameworks that reduced defect leakage by 40% while working closely with developers to identify issues early in development. My experience includes performance testing using k6 and Gatling, security vulnerability assessment, and CI/CD integration using GitHub Actions and Jenkins, ensuring smooth deployments across distributed systems.
+I architect scalable E2E automation frameworks from scratch using Modern tools and technologies for fintech platforms handling high-frequency transactions. At EPAM Systems, I built testing systems validating complex financial logic across distributed microservices, developed performance tools simulating high-concurrency environments, and owned CI/CD integration establishing green-build culture. At Navi Technologies, I validated multi-asset transaction flows, liquidation logic, and cross-margin calculations while ensuring state consistency across asynchronous systems. I've built REST and WebSocket API testing under high-load conditions, performance tested payment engines processing millions of transactions, and created internal debugging tools that developers actually use.
 
-I appreciate Proton's commitment to privacy, security, and building products that protect millions of users. Having worked on fintech systems where security and data protection are critical, I understand the importance of rigorous testing that goes beyond functionality to validate privacy controls and security boundaries. Your emphasis on hiring exceptional talent and maintaining startup agility while serving 100M+ users resonates with my experience scaling quality practices in fast-growing organizations.
+I work directly with backend and frontend engineers influencing system design for testability. I've reduced production defects by 40% across fintech platforms supporting 10M+ users through sophisticated validation of payment processing, lending systems, and cross-border transactions. I understand distributed systems, microservices dependencies, and asynchronous state consistency because I've been in the trenches validating them.
 
-I'd be happy to discuss how my fullstack testing expertise and experience with distributed teams can contribute to ensuring Meet's calls remain truly private and secure.
+I'm ready to contribute to Paradex's mission of building the most robust decentralized trading platform. Happy to discuss how my framework architecture experience and distributed systems expertise align with your team's goals.
 
 Best regards,  
 Sivasankaramalan Gunasekarasivam
+
+<br>
+<br>
 
 <div class="footer-bar">
     <a href="https://github.com/Sivasankaramalan"><span class="iconify" data-icon="mdi:github"></span>GitHub</a>

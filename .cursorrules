@@ -35,3 +35,26 @@ These rules apply to ALL resume, cover letter, and ATS checking tasks.
 - **Cover Letter Instructions**: `.github/instructions/cover-letter-instructions.md`
 - **ATS Instructions**: `.github/instructions/ats-checker-instructions.md`
 - **Master Content**: `.github/resume-master-content.md`
+
+---
+
+## For Antigravity Agents
+
+**CRITICAL: When user requests CV, resume, or cover letter generation, ALWAYS:**
+
+1. **First, read** `.github/antigravity-agent-instructions.md` (complete workflow guide)
+2. **Then, read** the specific instruction file:
+   - Resume: `.github/instructions/resume-instructions.md` (828 lines)
+   - Cover Letter: `.github/instructions/cover-letter-instructions.md` (282 lines)
+3. **Then, read** `.github/resume-master-content.md` (ALL lines for fact verification)
+4. **Then, read** `.github/resume-role-templates.md` (identify which structure matches the JD)
+5. **Follow** the mandatory workflow exactly as specified
+6. **Provide** proof of compliance (state what you read + self-audit results)
+
+**Trigger Phrases:**
+- "CV for JD" → Generate resume
+- "CV and Cover" → Generate resume + cover letter
+- "Cover letter" → Generate cover letter only
+- "ATS score" → Run ATS analysis
+
+**See `.github/antigravity-agent-instructions.md` for complete details.**
