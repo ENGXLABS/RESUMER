@@ -11,86 +11,96 @@
 
 ## Professional Summary
 
-- Staff Level Quality Engineer with 11 years owning end-to-end testing strategy, quality governance, and cross-domain quality practices across distributed systems, data pipelines, and microservices platforms
-- Proven expertise designing comprehensive quality approaches for backend services and frontend experiences, ensuring functional correctness, data integrity, performance, and security compliance through quality gates and shift-left practices
-- Reduced late cycle defects by 40% and improved automation stability by 45% through proactive risk identification, quality tooling adoption, and sustainable test frameworks embedded in CI/CD
-- Strong cross-team collaborator experienced in influencing engineering and product teams on testability, leading quality best practices across multiple squads, and delivering early continuous quality feedback
-- Proven track record of delivering quality strategy and governance frameworks that align with business objectives and regulatory requirements
+- Software Test Manager with 11 years leading end-to-end QA activities, quality assurance, and team development across distributed systems, microservices platforms, and complex enterprise projects while driving defect management and progress tracking
+- Proven expertise managing and coaching QA teams through Agile and SAFe frameworks, leading test strategy design, automation transformation, and continuous improvement initiatives that increased automation coverage from 60% to 95%
+- Strong technical skills in SQL, Python, Java automation development building scalable test frameworks using Selenium, Playwright, REST Assured integrated into CI/CD pipelines (JIRA, Xray, Confluence, Jenkins, GitHub Actions)
+- Excellent stakeholder communication abilities translating technical quality insights into business-friendly language while setting priorities, managing multiple projects, and delivering against deadlines
 
 ## Core Skills
 
-Quality Strategy & Testing Leadership, End-to-End Test Strategy Design, Data Pipeline & Integration Testing, Cross-Domain Quality Governance, Quality Gates & Release Management, Risk Assessment & Mitigation, Test Automation & Tooling Adoption, Backend & Frontend Testing, Performance & Security Testing, Stakeholder Collaboration, Proactive Quality Engineering, Team Mentoring & Best Practices
+Test Management & Team Leadership, End-to-End QA Strategy & Execution, Agile & SAFe Quality Practices, Test Automation & Framework Development, Defect Management & Progress Tracking, Stakeholder Communication & Risk Analysis, SQL & Python Expertise, JIRA, Xray & Confluence
 
 ## Technical Skills
 
-Programming Languages: Java, Kotlin, Python, JavaScript, TypeScript | Test Automation: REST Assured, Selenium WebDriver, Playwright, Appium, Cypress, Karate | Backend Testing: API Testing, Microservices Testing, Data Integrity Validation, Integration Testing, Contract Testing | Frontend Testing: Web UI Automation, Mobile Testing (iOS, Android), E2E Testing | Data & Performance: SQL, PostgreSQL, MongoDB, k6, JMeter, Gatling, Load Testing | Quality Engineering: Quality Gates, Test Strategy Design, Risk-Based Testing, Shift-Left Practices, Automation Strategy | CI/CD & DevOps: Jenkins, GitHub Actions, Docker, Kubernetes, GoCD, CI/CD Quality Integration | Observability & Debugging: Grafana, Kibana, Elasticsearch, Prometheus, Charles Proxy, Distributed Tracing | Cloud Platforms: AWS, GCP, Azure, Cloud-Native Testing | Tools: JIRA, Confluence, TestRail, Git, Postman, Swagger
+**Test Automation:** Selenium WebDriver, Playwright, Cypress, Appium, REST Assured, pytest
 
-## Experience
+**Languages:** Java, Kotlin, Python, SQL, JavaScript, TypeScript
+
+**QA Tools & Platforms:** JIRA, Xray, Confluence, TestRail, Zephyr, HP ALM/QC
+
+**CI/CD & DevOps:** GitHub Actions, Jenkins, Azure DevOps, Git, Docker, Kubernetes
+
+**Database:** SQL (MySQL, PostgreSQL, Oracle), Database Testing, Data Validation
+
+**Performance & Observability:** k6, JMeter, Gatling, Grafana, Kibana, Elasticsearch
+
+**Practices:** Agile Testing, SAFe Quality Practices, TDD, BDD, Shift-Left Testing, Risk-Based Testing
+
+**Cloud Platforms:** AWS, Azure, Google Cloud
+
+## Professional Experience
 
 ### Lead QA Engineer (Domain Lead - QE) <span class="spacer"></span><span class="normal">Oct 2023 - Present</span>
 
 #### EPAM Systems <span class="spacer"></span> India
 
-- Owned domain-level testing strategy for cloud-native distributed systems and data pipelines, influencing architecture for testability, defining quality gates, and driving proactive risk assessment across multiple squads to ensure functional correctness and data integrity
-- Embedded shift-left practices through API contract testing, testable design reviews, and early quality involvement, reducing late cycle defects by 40% and establishing sustainable quality practices adopted across engineering teams
-- Designed comprehensive test approaches covering backend services (API, microservices, event-driven flows) and frontend experiences (web, mobile), validating performance, data consistency, crash recovery, and multi-device behavior through systematic test planning
-- Built centralized test orchestration framework and automation tooling that increased automation stability by 45%, reduced flakiness, and enabled quality-as-code practices embedded in CI/CD pipelines for continuous testing
-- Led cross-domain quality alignment through weekly collaboration sessions, proactively identifying systemic risks (breaking API changes, unstable data sync paths, integration failures) and driving early quality feedback to engineering and product teams
-- Mentored SDETs and engineers on quality best practices, debugging techniques, architecture awareness, and modern testing standards, elevating quality maturity and engineering capabilities across the organization
+- Owned domain-level end-to-end QA strategy across cloud-native distributed systems defining quality gates, defect management processes, risk assessment frameworks, and progress tracking for multiple product squads
+- Led and coached QA team on advanced testing techniques, automation best practices, Agile methodologies, and quality-first mindset driving continuous improvement and professional development initiatives
+- Drove quality assurance activities for projects and change requests establishing systematic testing approaches, defect triage processes, and quality metrics dashboards reducing late cycle defects by 40%
+- Communicated risks, limitations, and quality insights to stakeholders in clear business-friendly language enabling informed decision-making on project priorities and release readiness
+- Built Python and Java automation frameworks increasing automation stability by 45% through robust test design, reusable modules, and comprehensive assertion libraries
+- Established centralized test orchestration using JIRA workflows and CI/CD pipelines (GitHub Actions, Jenkins) ensuring automated regression and quality gates on every deployment
+- Applied strong SQL skills for database testing, data validation, and complex query verification across microservices and data pipelines
 
 ### Senior SDET <span class="spacer"></span><span class="normal">Apr 2022 - Oct 2023</span>
 
 #### Navi Technologies <span class="spacer"></span> Bangalore, India
 
-- Functioned as quality partner for fintech backend platform, designing end-to-end testing strategies focused on data integrity, functional correctness, and microservice reliability across async flows, caching layers, and event-driven components
-- Automated 120+ critical workflows covering data pipelines, transaction processing, and payment flows, reducing regression time by 40% through intelligent test selection and reusable test frameworks
-- Established quality gates for microservices deployment ensuring API contract adherence, backward compatibility, and data validation, preventing production incidents through early defect detection and systematic testing
-- Collaborated with product and engineering leadership to prioritize testing efforts by business impact and failure cost, proactively identifying systemic quality issues (flaky integration paths, inconsistent error handling) and driving architectural improvements
-- Built comprehensive test coverage for high-risk payment and financial data flows, validating data integrity, security compliance, and performance under load using REST Assured, SQL validation, and performance testing tools
+- Designed and implemented end-to-end QA strategy for fintech backend systems covering 120+ critical workflows across async flows, event-driven architectures, and microservices reducing regression time by 40%
+- Managed defect lifecycle and quality assurance processes using JIRA tracking bugs from identification through resolution while maintaining quality metrics and progress reporting
+- Built reusable Python and Java automation frameworks for API testing, data integrity validation, and microservices contract testing using REST Assured and pytest
+- Set priorities and managed multiple testing workstreams simultaneously coordinating with cross-functional teams to meet aggressive delivery deadlines
+- Developed SQL expertise for database validation, data migration verification, and backend system testing ensuring data consistency and integrity
+- Partnered with Engineering Managers to establish quality ownership models, testing prioritization strategies, and architectural improvements for long-term reliability
 
 ### Associate Tech Lead (Quality & Automation) <span class="spacer"></span><span class="normal">Apr 2020 - Apr 2022</span>
 
 #### OkCredit <span class="spacer"></span> Bangalore, India
 
-- Owned quality strategy for high-scale SaaS product serving 1M+ users, establishing release criteria, quality metrics dashboards, and cross-functional quality ownership across web, Android, and iOS platforms
-- Increased automation coverage from 60% to 95% through strategic prioritization, modular test architecture, and scalable automation frameworks supporting backend APIs and frontend experiences
-- Introduced data pipeline testing practices including API contract checks, async flow monitoring, and sync path validation for distributed backend components, ensuring data consistency across multiple regions
-- Led quality onboarding and mentoring for engineering teams, improving quality mindset, automation best practices, and test design standards that reduced manual regression effort by 70%
-- Improved release cycle time by 50% through quality gates, automated regression suites in CI/CD, and proactive quality feedback to product and engineering stakeholders
+- Led QA team for high-scale SaaS product serving 1M+ users establishing comprehensive test strategy, defect management workflows, and release readiness criteria across web, Android, and iOS platforms
+- Managed and coached 5-person QA team on automation best practices, test design patterns, technical skills development, and quality mindset while leading recruitment and onboarding initiatives
+- Drove automation transformation increasing coverage from 60% to 95% through strategic Python and Selenium framework development, test prioritization, and scalable architecture design
+- Created and maintained test artifacts using Confluence documentation, JIRA test case management, and automated reporting ensuring traceability and knowledge sharing
+- Applied SQL skills for test data preparation, database validation, and data-driven testing across distributed systems
+- Adapted testing approaches to Agile frameworks implementing sprint-based testing, continuous feedback loops, and integrated quality practices
 
 ### Senior Software Engineer (Quality - OTT & Cross Device) <span class="spacer"></span><span class="normal">Nov 2019 - Apr 2020</span>
 
 #### Rakuten Viki <span class="spacer"></span> Singapore
 
-- Led cross-platform quality for OTT streaming applications (iOS, Android, FireTV, AppleTV), designing test strategies covering video playback, offline states, multi-device sync, and network-dependent behaviors across 50+ device configurations
-- Validated frontend user experiences and backend API integrations through systematic testing of content synchronization, video quality adaptation, buffering behavior, and playback performance under varying network conditions
-- Drove deep technical debugging using Charles Proxy, distributed tracing, and device instrumentation to analyze API responses, media streaming protocols, and cross-device data consistency
-- Achieved major regression stability improvements through comprehensive device matrix testing, establishing testing standards and quality practices adopted by global QA teams across time zones
+- Led quality for multi-device OTT apps (iOS, Android, FireTV, AppleTV) establishing device matrix testing strategy covering 50+ configurations for video playback and sync validation
+- Drove systematic defect management and progress tracking for streaming quality issues ensuring timely resolution and cross-team coordination
+- Communicated quality status, risks, and release readiness to stakeholders providing clear insights on platform-specific challenges and mitigation strategies
+- Aligned global QA teams across time zones on testing standards, defect management practices, and quality metrics achieving major regression stability improvements
 
 ### Software Engineer <span class="spacer"></span><span class="normal">Jun 2017 - Oct 2019</span>
 
 #### Altisource <span class="spacer"></span> Bangalore, India
 
-- Built automation pipelines with 92% coverage for web and mobile applications, integrating automated tests into CI/CD for continuous quality validation and improving early defect detection rate by 40%
-- Enhanced functional correctness and data integrity through stronger assertions, data validations, and stability checks across regression, smoke, and integration test suites
-- Optimized test execution time by 50% through parallel execution, intelligent test selection, and improved test reporting with detailed logs and failure analysis
-
-### Software Test Engineer <span class="spacer"></span><span class="normal">May 2015 - May 2017</span>
-
-#### AB Innovative <span class="spacer"></span> Bangalore, India
-
-- Automated legacy B2B workflows reducing manual testing effort by 60%, migrating 200+ manual test cases to automated scripts using Selenium and Java
-- Improved test coverage from 30% to 80% through structured test case management, defect tracking processes, and reusable test libraries for common business workflows
+- Built automation pipelines with 92% coverage for web and mobile workflows using Selenium, Appium, and Python implementing CI/CD integration for automated test execution
+- Managed defect tracking and quality metrics using JIRA providing visibility into testing progress, bug trends, and quality KPIs to stakeholders
+- Enhanced defect detection through comprehensive test design, stronger SQL-based data validations, and systematic assertion strategies reducing defect leakage by 40%
+- Optimized test execution through parallel testing, intelligent test selection, and improved reporting with detailed failure analysis
 
 ## Key Achievements
 
-- Reduced late cycle defects by 40% through shift-left quality practices and proactive risk identification
-- Increased automation stability by 45% through sustainable test frameworks and quality tooling adoption
-- Improved automation coverage from 60% to 95% for high-scale SaaS product serving 1M+ users
-- Automated 120+ critical workflows reducing regression time by 40% across fintech data pipelines
-- Built automation pipelines with 92% coverage integrated into CI/CD for continuous testing
-- Established quality gates and testing standards adopted across multiple engineering teams
-- Mentored 30+ engineers on quality best practices, testability, and sustainable quality approaches
+- Successfully led QA teams and managed multiple testing workstreams across 11 years
+- Reduced late cycle defects by 40% through systematic QA practices and automation
+- Increased automation stability by 45% through robust framework design
+- Improved automation coverage from 60% to 95% across multi-platform products
+- Automated 120+ critical workflows reducing regression time by 40%
+- Coached 30+ engineers on Python, SQL, automation, and testing practices
+- Supported 1M+ users with zero critical production issues
 
 ## Certifications
 

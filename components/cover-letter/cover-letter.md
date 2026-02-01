@@ -8,19 +8,17 @@
 
 **Date:** February 1, 2026
 
-**REA Group**
+**SIX Group**
 
 Dear Hiring Manager,
 
-I'm applying for the Staff Quality Analyst role at REA Group. My 11 years owning end-to-end testing strategy for distributed systems, data pipelines, and cross-domain platforms align well with what you need for the Subscriptions & Branding modernisation initiative.
+I'm applying for the Software Test Manager role at SIX Group. Your focus on quality engineering, modern testing practices, and leading high-performing teams matches how I've approached QA leadership for the past 11 years. I've managed teams through QA transformation while staying hands-on with the tools and practices that deliver quality.
 
-I've designed comprehensive testing approaches for complex backend services and frontend experiences, covering functional correctness, data integrity, and performance. At EPAM, I reduced late cycle defects by 40% through shift-left practices, testable design influence, and proactive risk identification across multiple squads. At Navi, I automated 120+ critical fintech workflows covering async flows, data sync, and event pipelines, reducing regression time by 40% through quality gates and systematic testing. I work closely with engineering and product teams to provide early quality feedback, drive automation adoption, and establish sustainable practices that improve cycle time without compromising quality.
+I've led end-to-end QA activities across complex projects managing defect lifecycles, quality assurance, and team development. At EPAM, I reduced late cycle defects by 40% while coaching QA teams on Agile practices and automation. At OkCredit, I increased coverage from 60% to 95% while leading a 5-person QA team through framework development and continuous improvement. I work extensively with JIRA, Xray, Confluence, Python, SQL, and have adapted testing approaches to both Agile and SAFe frameworks. I communicate quality insights to stakeholders in business-friendly language while managing priorities and deadlines across multiple projects.
 
-I like how REA approaches quality as part of delivery, not an afterthought. The focus on multi-squad collaboration, quality gates, and continuous feedback matches how I operate. Working on transformational re-platforming projects that fix customer pain points through solid quality engineering is exactly the kind of impact I want to drive.
+What stands out about SIX Group is your commitment to continuous learning, flexible work models, and agile working methods. I value the opportunity to strengthen product quality, optimize test processes, and empower teams through best-in-class QA practices.
 
-Happy to discuss how I approach end-to-end testing strategy, risk mitigation, and cross-team quality leadership for complex platform initiatives.
-
-Thanks for considering my application.
+Thanks for considering my application. Happy to discuss how I approach test management, team leadership, and quality engineering.
 
 Best regards,  
 Sivasankaramalan Gunasekarasivam

@@ -41,6 +41,7 @@
 **Master Content File Location:** `.github/resume-master-content.md`
 
 **Workflow Before Generating:**
+
 1. Read the master content file first
 2. Identify relevant work experiences for the JD
 3. Extract exact achievements and metrics
@@ -53,13 +54,15 @@
 
 **ALWAYS prioritize Siva's core strengths over JD requirements when there are multiple options.**
 
-### Programming Languages Priority:
+### Programming Languages Priority
+
 - **Primary Languages:** Java, Kotlin (Siva's core proficiency)
 - **Secondary Languages:** Python, JavaScript, TypeScript (basic knowledge only)
 - **Rule:** Even if JD requires Python/JS/TS, DO NOT overemphasize them
 - **Rule:** Always mention Java/Kotlin first, others only if JD mandatory
 
-### Test Automation Tools Priority:
+### Test Automation Tools Priority
+
 - **Core Strength:** Selenium WebDriver (emphasize this first)
 - **Strong Skills:** Playwright, Appium, REST Assured, Cypress
 - **Rule:** When JD says "Selenium OR Playwright OR Cypress", focus on Selenium
@@ -71,17 +74,20 @@
 
 **Write naturally like a human, not like a robot listing skills.**
 
-### Writing Guidelines:
+### Writing Guidelines
+
 1. **Connect ideas naturally** using flow words: "while", "through", "by"
 2. **Show cause and effect** clearly
 3. **Avoid disconnected statements** jammed together
 4. **Write as you speak** naturally
 
-### BAD Example:
+### BAD Example
+
 ❌ "Expert in Playwright, Selenium, Cypress building frameworks increasing coverage"
 (Too many tools, no natural flow)
 
-### GOOD Example:
+### GOOD Example
+
 ✅ "I build test automation using Selenium that scaled coverage from 60% to 95%"
 (Natural, connected, core strength emphasized)
 
@@ -90,6 +96,7 @@
 ## 1. Overall Philosophy
 
 The cover letter must be:
+
 - **Simple, clean, and human**
 - **Direct and confident** (Siva's style)
 - **Tailored** to the specific job and company
@@ -119,11 +126,28 @@ The cover letter must be:
   - Hiring manager name if available
 - Single spaced
 - Double space between paragraphs
-- **Max length: 250-300 words**
+- **Max length: 240-280 words** (strict limit to prevent page overflow)
 - Use short paragraphs (2-4 sentences each)
 - **CRITICAL: MUST fit on ONE PAGE ONLY (8.5" x 11" letter size)**
-- **If PDF export creates 2 pages, content is TOO LONG - remove sentences**
+- **NO empty second page allowed - if PDF creates extra page, content is TOO LONG**
 - **One page limit is NON-NEGOTIABLE**
+
+### Preventing Empty Second Pages
+
+**Common causes of page overflow:**
+
+- ❌ Too many words (over 280 words)
+- ❌ Too many `<br>` tags or line breaks
+- ❌ Excessive spacing between sections
+- ❌ Long paragraphs that don't fit
+
+**Rules to prevent overflow:**
+
+- ✅ Keep total word count at 240-280 words MAX
+- ✅ Use exactly 2 line breaks (`<br><br>`) before footer, never more
+- ✅ Each paragraph should be 2-4 LINES when rendered (not sentences)
+- ✅ If content pushes to second page, remove entire sentences (not just words)
+- ✅ Test mentally: 4 paragraphs + header + footer = must fit on one page
 
 ---
 
@@ -136,6 +160,7 @@ The cover letter must follow this **exact four-paragraph format**:
 **Purpose:** Grab attention quickly.
 
 **Rules:**
+
 - Mention the job title and company clearly
 - Keep it crisp (1-2 lines of interest)
 - Briefly state why you're a strong fit
@@ -152,6 +177,7 @@ The cover letter must follow this **exact four-paragraph format**:
 **Purpose:** Show relevance to the JD.
 
 **Rules:**
+
 - Highlight **2-3 key strengths** that directly match the JD
 - Use short, clean sentences
 - Mention **quantifiable improvements** (regression speed, stability, automation coverage, cycle time)
@@ -165,6 +191,7 @@ The cover letter must follow this **exact four-paragraph format**:
 **Purpose:** Show genuine interest.
 
 **Rules:**
+
 - Mention **specific things** about the company
 - Sound real, not scripted
 - Use phrases that match your voice
@@ -181,6 +208,7 @@ The cover letter must follow this **exact four-paragraph format**:
 **Purpose:** Close confidently.
 
 **Rules:**
+
 - Keep it short
 - Reaffirm interest
 - Offer to discuss, don't beg for interview
@@ -195,6 +223,7 @@ The cover letter must follow this **exact four-paragraph format**:
 ## 4. Tone Rules
 
 **Write like Siva:**
+
 - Direct, clean sentences
 - No inflated language
 - No thesaurus words
@@ -207,6 +236,7 @@ The cover letter must follow this **exact four-paragraph format**:
 - Use % symbol for percentages, not spelled out
 
 **Absolutely avoid phrases like:**
+
 - "I am thrilled to…"
 - "I believe I would be a perfect fit…"
 - "I am writing to express my interest…"
@@ -219,6 +249,7 @@ The cover letter must follow this **exact four-paragraph format**:
 ## 5. Tailoring to the Job Description
 
 Copilot must:
+
 - Extract **top 5 responsibilities**
 - Extract **required skills**
 - Mention **2-3 directly relevant strengths**
@@ -231,6 +262,7 @@ Copilot must:
 ## 6. Final Output Requirements
 
 The output must include:
+
 - Full letter formatting
 - Date
 - Applicant info
@@ -249,18 +281,23 @@ The output must include:
 **MANDATORY QUALITY CHECKLIST - Verify ALL items:**
 
 ### Punctuation & Formatting
+
 - [ ] **ZERO hyphens used as sentence breaks** (must use commas/periods)
 - [ ] Hyphens ONLY for ranges (5 to 10, not 5-10) or compound words
 - [ ] Percent symbol (%) used, not spelled out
 - [ ] No EM dashes (—) or EN dashes (–) anywhere
-- [ ] Content fits on ONE PAGE (250-300 words)
+- [ ] Content fits on ONE PAGE (240-280 words, NO empty second page)
+- [ ] Exactly 2 `<br>` tags before footer (not 3 or more)
+- [ ] When previewed/printed, creates exactly 1 page (no overflow)
 
 ### Content Verification
+
 - [ ] All metrics verified against master-content.md
 - [ ] No fabricated companies or achievements
 - [ ] Exact company names and dates from master content
 
 ### Structure & Tone
+
 - [ ] Paragraph 1: Under 3 lines, no clichés
 - [ ] Paragraph 2: Includes verified metric, 2-3 strengths
 - [ ] Paragraph 3: Real company-specific detail
@@ -269,6 +306,7 @@ The output must include:
 - [ ] No robotic phrasing or textbook language
 
 ### Forbidden Phrases Check
+
 - [ ] NO "excited to apply"
 - [ ] NO "perfect fit"
 - [ ] NO "it would be an honor"
