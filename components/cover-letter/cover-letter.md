@@ -8,17 +8,19 @@
 
 **Date:** February 1, 2026
 
-**Paradex Engineering Team**
+**REA Group**
 
-Dear Paradex Team,
+Dear Hiring Manager,
 
-Your SDET role requires someone who can architect scalable automation frameworks from scratch while validating high-frequency trading systems and complex financial logic across distributed infrastructure. I've spent 11 years building exactly these systems for fintech platforms handling millions of transactions.
+I'm applying for the Staff Quality Analyst role at REA Group. My 11 years owning end-to-end testing strategy for distributed systems, data pipelines, and cross-domain platforms align well with what you need for the Subscriptions & Branding modernisation initiative.
 
-I architect scalable E2E automation frameworks from scratch using Modern tools and technologies for fintech platforms handling high-frequency transactions. At EPAM Systems, I built testing systems validating complex financial logic across distributed microservices, developed performance tools simulating high-concurrency environments, and owned CI/CD integration establishing green-build culture. At Navi Technologies, I validated multi-asset transaction flows, liquidation logic, and cross-margin calculations while ensuring state consistency across asynchronous systems. I've built REST and WebSocket API testing under high-load conditions, performance tested payment engines processing millions of transactions, and created internal debugging tools that developers actually use.
+I've designed comprehensive testing approaches for complex backend services and frontend experiences, covering functional correctness, data integrity, and performance. At EPAM, I reduced late cycle defects by 40% through shift-left practices, testable design influence, and proactive risk identification across multiple squads. At Navi, I automated 120+ critical fintech workflows covering async flows, data sync, and event pipelines, reducing regression time by 40% through quality gates and systematic testing. I work closely with engineering and product teams to provide early quality feedback, drive automation adoption, and establish sustainable practices that improve cycle time without compromising quality.
 
-I work directly with backend and frontend engineers influencing system design for testability. I've reduced production defects by 40% across fintech platforms supporting 10M+ users through sophisticated validation of payment processing, lending systems, and cross-border transactions. I understand distributed systems, microservices dependencies, and asynchronous state consistency because I've been in the trenches validating them.
+I like how REA approaches quality as part of delivery, not an afterthought. The focus on multi-squad collaboration, quality gates, and continuous feedback matches how I operate. Working on transformational re-platforming projects that fix customer pain points through solid quality engineering is exactly the kind of impact I want to drive.
 
-I'm ready to contribute to Paradex's mission of building the most robust decentralized trading platform. Happy to discuss how my framework architecture experience and distributed systems expertise align with your team's goals.
+Happy to discuss how I approach end-to-end testing strategy, risk mitigation, and cross-team quality leadership for complex platform initiatives.
+
+Thanks for considering my application.
 
 Best regards,  
 Sivasankaramalan Gunasekarasivam

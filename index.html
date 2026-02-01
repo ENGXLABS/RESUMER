@@ -12,6 +12,9 @@
     <!-- Iconify -->
     <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
     <link rel="stylesheet" href="settings.css">
     <link rel="stylesheet" href="components/resume/resume.css">
     <link rel="stylesheet" href="components/resume/resume-settings.css">
@@ -32,7 +35,7 @@
             <button id="download-button" onclick="downloadMarkdown()">Download</button>
             <button id="print-button" onclick="window.print()">Print</button>
         </div>
-        
+
         <!-- Center: Inline Navigation -->
         <div class="inline-nav">
             <button class="nav-tab-btn active" onclick="switchTab('resume'); return false;" title="Resume Generator">
@@ -40,7 +43,8 @@
                 <span class="nav-label">Resume</span>
             </button>
             <span class="nav-separator">|</span>
-            <button class="nav-tab-btn" onclick="switchTab('cover-letter'); return false;" title="Cover Letter Generator">
+            <button class="nav-tab-btn" onclick="switchTab('cover-letter'); return false;"
+                title="Cover Letter Generator">
                 <span class="iconify" data-icon="mdi:email"></span>
                 <span class="nav-label">Cover Letter</span>
             </button>
@@ -50,22 +54,27 @@
                 <span class="nav-label">ATS Score</span>
             </button>
         </div>
-        
+
         <!-- Right: Resume Type Selector + Zoom -->
         <div class="header-right-controls">
             <div id="resume-type-selector" style="display: flex; align-items: center; gap: 8px;">
-                <button id="qe-resume-btn" class="resume-type-btn-compact active" onclick="switchResumeType('qe')" title="Quality Engineering">
+                <button id="qe-resume-btn" class="resume-type-btn-compact active" onclick="switchResumeType('qe')"
+                    title="Quality Engineering">
                     <span class="iconify" data-icon="mdi:test-tube"></span> QE
                 </button>
-                <button id="tpm-resume-btn" class="resume-type-btn-compact" onclick="switchResumeType('tpm')" title="Technical Product Manager">
+                <button id="tpm-resume-btn" class="resume-type-btn-compact" onclick="switchResumeType('tpm')"
+                    title="Technical Product Manager">
                     <span class="iconify" data-icon="mdi:chart-timeline-variant"></span> TPM
                 </button>
             </div>
             <div class="zoom-controls">
-                <button onclick="zoomOut('resume')" title="Zoom Out"><span class="iconify" data-icon="mdi:magnify-minus"></span></button>
+                <button onclick="zoomOut('resume')" title="Zoom Out"><span class="iconify"
+                        data-icon="mdi:magnify-minus"></span></button>
                 <span id="zoom-level-resume">100%</span>
-                <button onclick="zoomIn('resume')" title="Zoom In"><span class="iconify" data-icon="mdi:magnify-plus"></span></button>
-                <button onclick="resetZoom('resume')" title="Reset Zoom"><span class="iconify" data-icon="mdi:magnify"></span></button>
+                <button onclick="zoomIn('resume')" title="Zoom In"><span class="iconify"
+                        data-icon="mdi:magnify-plus"></span></button>
+                <button onclick="resetZoom('resume')" title="Reset Zoom"><span class="iconify"
+                        data-icon="mdi:magnify"></span></button>
             </div>
         </div>
     </div>
@@ -187,7 +196,7 @@
             // Restore previous tab and resume type from sessionStorage
             const savedTab = sessionStorage.getItem('currentTab');
             const savedResumeType = sessionStorage.getItem('currentResumeType');
-            
+
             // Restore resume type if saved
             if (savedResumeType && (savedResumeType === 'qe' || savedResumeType === 'tpm')) {
                 currentResumeType = savedResumeType;
@@ -195,41 +204,41 @@
                 document.getElementById('tpm-resume-btn').classList.remove('active');
                 document.getElementById(`${savedResumeType}-resume-btn`).classList.add('active');
             }
-            
+
             // Restore tab if saved
             if (savedTab && (savedTab === 'resume' || savedTab === 'cover-letter' || savedTab === 'ats-checker')) {
                 switchTab(savedTab);
             }
-            
+
             loadResume();
             loadCoverLetter();
         });
 
         function switchResumeType(type) {
             currentResumeType = type;
-            
+
             // Save to sessionStorage
             sessionStorage.setItem('currentResumeType', type);
-            
+
             // Update button styles
             document.getElementById('qe-resume-btn').classList.remove('active');
             document.getElementById('tpm-resume-btn').classList.remove('active');
-            
+
             if (type === 'qe') {
                 document.getElementById('qe-resume-btn').classList.add('active');
             } else {
                 document.getElementById('tpm-resume-btn').classList.add('active');
             }
-            
+
             // Load the selected resume type
             loadResume();
         }
 
         function loadResume() {
-            const resumePath = currentResumeType === 'qe' 
-                ? 'components/resume/resume.md' 
+            const resumePath = currentResumeType === 'qe'
+                ? 'components/resume/resume.md'
                 : 'components/resume-tpm/resume-tpm.md';
-                
+
             fetch(resumePath)
                 .then(response => response.text())
                 .then(text => {
@@ -245,12 +254,12 @@
 
         function toggleMode() {
             const activeTab = document.querySelector('.tab-content.active');
-            
+
             if (activeTab.id === 'cover-letter-tab') {
                 toggleCoverLetterMode();
                 return;
             }
-            
+
             const toggleBtn = document.getElementById('toggle-mode');
             const saveBtn = document.getElementById('save-button');
             const editorContainer = document.getElementById('editor-container');
@@ -392,21 +401,21 @@
                     }
                     currentGroup.elements.push(element);
                     currentGroup.height += elHeight;
-                    
+
                     // Look ahead - include H4 if it follows
                     if (i + 1 < children.length && children[i + 1].tagName === 'H4') {
                         i++;
                         currentGroup.elements.push(children[i]);
                         currentGroup.height += children[i].offsetHeight;
                     }
-                    
+
                     // Include first content element to prevent orphaned headers
                     if (i + 1 < children.length) {
                         i++;
                         currentGroup.elements.push(children[i]);
                         currentGroup.height += children[i].offsetHeight;
                     }
-                    
+
                     groups.push(currentGroup);
                     currentGroup = { elements: [], height: 0 };
                 }
@@ -451,18 +460,18 @@
                 // If adding this group exceeds page height, try to fit what we can
                 if (currentHeight + group.height > maxPageHeight && currentPage.length > 0) {
                     const remainingHeight = maxPageHeight - currentHeight;
-                    
+
                     // If group has multiple elements, try to split it
                     if (group.elements.length > 1 && remainingHeight > 100) {
                         console.log(`Splitting group across pages. Remaining height: ${remainingHeight}px`);
-                        
+
                         let partialGroup = { elements: [], height: 0 };
                         let nextPageGroup = { elements: [], height: 0 };
                         let fillingCurrentPage = true;
-                        
+
                         for (let element of group.elements) {
                             const elHeight = element.offsetHeight;
-                            
+
                             if (fillingCurrentPage && currentHeight + partialGroup.height + elHeight <= maxPageHeight) {
                                 partialGroup.elements.push(element);
                                 partialGroup.height += elHeight;
@@ -472,13 +481,13 @@
                                 nextPageGroup.height += elHeight;
                             }
                         }
-                        
+
                         // Add partial group to current page if it has elements
                         if (partialGroup.elements.length > 0) {
                             currentPage.push(partialGroup);
                             currentHeight += partialGroup.height;
                         }
-                        
+
                         // Start new page with remaining elements
                         console.log(`Starting new page. Previous page: ${currentHeight}px`);
                         pages.push(currentPage);
@@ -541,12 +550,12 @@
 
         function saveResume() {
             const activeTab = document.querySelector('.tab-content.active');
-            
+
             if (activeTab.id === 'cover-letter-tab') {
                 saveCoverLetter();
                 return;
             }
-            
+
             markdownContent = document.getElementById('markdown-editor').value;
 
             // Save to localStorage
@@ -568,12 +577,12 @@
 
         function downloadMarkdown() {
             const activeTab = document.querySelector('.tab-content.active');
-            
+
             if (activeTab.id === 'cover-letter-tab') {
                 downloadCoverLetter();
                 return;
             }
-            
+
             const content = currentMode === 'edit'
                 ? document.getElementById('markdown-editor').value
                 : markdownContent;
@@ -645,7 +654,7 @@
         function switchTab(tabName) {
             // Save to sessionStorage
             sessionStorage.setItem('currentTab', tabName);
-            
+
             // Hide all tab contents
             const tabContents = document.querySelectorAll('.tab-content');
             tabContents.forEach(tab => tab.classList.remove('active'));
@@ -656,7 +665,7 @@
             // Update active state on navigation buttons
             const navButtons = document.querySelectorAll('.nav-tab-btn');
             navButtons.forEach(btn => btn.classList.remove('active'));
-            
+
             // Find and activate the correct button
             navButtons.forEach(btn => {
                 const onclick = btn.getAttribute('onclick');
@@ -664,7 +673,7 @@
                     btn.classList.add('active');
                 }
             });
-            
+
             // Show/hide resume type selector
             const resumeTypeSelector = document.getElementById('resume-type-selector');
             if (tabName === 'resume') {
@@ -680,7 +689,7 @@
         window.addEventListener('beforeprint', function () {
             const activeTab = document.querySelector('.tab-content.active');
             const companyName = document.getElementById('company-name').value.trim();
-            
+
             if (activeTab && activeTab.id === 'cover-letter-tab') {
                 if (companyName) {
                     const cleanCompanyName = companyName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
@@ -745,7 +754,7 @@
             const content = coverLetterMode === 'edit'
                 ? document.getElementById('cover-markdown-editor').value
                 : coverLetterContent;
-            
+
             const companyName = document.getElementById('company-name').value.trim() || 'Company';
             const filename = `Cover_Letter_Sivasankaramalan_G_${companyName.replace(/\s+/g, '_')}.md`;
 
