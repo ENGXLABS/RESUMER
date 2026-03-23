@@ -1,0 +1,565 @@
+/* ============================================================
+   Resume Template V3 — "Impact-First"
+   
+   An original design built for direct referrals & HR emails.
+   NOT ATS-optimised. Built to make a human recruiter stop scrolling.
+   
+   Design philosophy:
+   - Impact metrics are the FIRST visual (dashboard strip)
+   - Single column, strong hierarchy, maximum readability
+   - Timeline-connected experience cards
+   - Skills as modern pill chips
+   - Minimal color: one accent used with purpose
+   - The design itself signals quality thinking
+   - Outfit font throughout — geometric, clean, modern
+   - Compact: fits 2 pages, zero wasted space
+   ============================================================ */
+
+/* ---------- Palette ---------- */
+:root {
+    --v3-accent: #1E3A5F;
+    --v3-accent-light: #EDF1F5;
+    --v3-accent-mid: #B8C9D9;
+    --v3-highlight: #D4883A;
+    --v3-highlight-light: #FBF4EB;
+    --v3-text: #1A1A1A;
+    --v3-text-secondary: #4A4A4A;
+    --v3-text-muted: #7A7A7A;
+    --v3-bg: #ffffff;
+    --v3-card-bg: #F8F9FA;
+    --v3-border: #DDE1E6;
+    --v3-metric-bg: var(--v3-highlight-light);
+}
+
+/* ---------- Page ---------- */
+@page {
+    size: A4;
+    margin: 0.35in 0.4in;
+}
+
+/* ---------- Base — Outfit everywhere ---------- */
+.resume-page {
+    font-family: 'Outfit', sans-serif;
+    font-size: 9.5pt;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--v3-text);
+    background: var(--v3-bg);
+}
+
+/* Kill any inherited font / layout from other stylesheets */
+.resume-page * {
+    font-family: inherit;
+}
+
+/* Override TPM leaks into V3 */
+.resume-page .v3-summary p,
+.resume-page .v3-education p,
+.resume-page .v3-projects p,
+.resume-page .v3-achievements p {
+    text-align: left;
+}
+
+.resume-page .v3-projects h3,
+.resume-page .v3-projects h4 {
+    display: block;
+    margin-left: 0;
+    font-style: normal;
+}
+
+/* Kill browser/TPM default ul/li indentation for all V3 sections */
+.resume-page .v3-summary ul,
+.resume-page .v3-job ul,
+.resume-page .v3-projects ul,
+.resume-page .v3-achievements ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    padding-inline-start: 0;
+    margin-inline-start: 0;
+}
+
+/* ══════════════════════════════════════════
+   HEADER
+   ══════════════════════════════════════════ */
+.v3-header {
+    text-align: center;
+    padding: 0 0 4px 0;
+    position: relative;
+}
+
+.resume-page .v3-header h1 {
+    font-size: 14pt;
+    font-weight: 300;
+    letter-spacing: 2pt;
+    text-transform: uppercase;
+    color: var(--v3-accent);
+    margin: 0;
+    padding: 0;
+    border: none;
+    line-height: 1.15;
+    white-space: nowrap;
+}
+
+.resume-page .v3-header::after {
+    content: '';
+    display: block;
+    width: 44px;
+    height: 2px;
+    background: var(--v3-highlight);
+    margin: 4px auto 5px auto;
+    border-radius: 2px;
+}
+
+.v3-contact {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    font-size: 8.5pt;
+    color: var(--v3-text-secondary);
+}
+
+.v3-contact a {
+    color: var(--v3-text-secondary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.v3-contact a:hover {
+    color: var(--v3-accent);
+}
+
+.v3-contact .iconify {
+    font-size: 10px;
+    color: var(--v3-accent);
+}
+
+/* ══════════════════════════════════════════
+   IMPACT METRICS STRIP
+   ══════════════════════════════════════════ */
+.v3-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin: 6px 0 8px 0;
+    border: 1px solid var(--v3-border);
+    border-radius: 5px;
+    overflow: hidden;
+    background: var(--v3-metric-bg);
+}
+
+.v3-metric {
+    text-align: center;
+    padding: 7px 4px 5px 4px;
+}
+
+.v3-metric:not(:last-child) {
+    border-right: 1px solid rgba(212, 136, 58, 0.2);
+}
+
+.v3-metric-value {
+    display: block;
+    font-size: 16pt;
+    font-weight: 700;
+    color: var(--v3-highlight);
+    line-height: 1.1;
+    letter-spacing: -0.5pt;
+}
+
+.v3-metric-label {
+    display: block;
+    font-size: 7pt;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.8pt;
+    color: var(--v3-text-muted);
+    margin-top: 1px;
+    line-height: 1.15;
+}
+
+/* ══════════════════════════════════════════
+   SECTION HEADERS
+   ══════════════════════════════════════════ */
+.v3-section-title {
+    font-size: 9pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2pt;
+    color: var(--v3-accent);
+    margin: 8px 0 3px 0;
+    padding: 0 0 2px 0;
+    border-bottom: 1.5px solid var(--v3-accent);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.v3-section-title:first-child {
+    margin-top: 0;
+}
+
+.v3-section-title .iconify {
+    font-size: 11px;
+}
+
+/* ══════════════════════════════════════════
+   PROFESSIONAL SUMMARY
+   ══════════════════════════════════════════ */
+/* (ul reset handled by global V3 reset above) */
+
+.resume-page .v3-summary ul li {
+    font-size: 9.5pt;
+    line-height: 1.35;
+    color: var(--v3-text);
+    padding: 1px 0 1px 14px;
+    margin: 0;
+    position: relative;
+}
+
+.resume-page .v3-summary ul li::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 7px;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--v3-accent);
+}
+
+/* ══════════════════════════════════════════
+   CORE SKILLS — Pill chips
+   ══════════════════════════════════════════ */
+.v3-skills-grid {
+    margin: 1px 0 2px 0;
+    line-height: 1.8;
+}
+
+.v3-skill-pill {
+    display: inline;
+    font-size: 8pt;
+    font-weight: 500;
+    color: var(--v3-accent);
+    background: var(--v3-accent-light);
+    padding: 2px 6px;
+    border-radius: 10px;
+    letter-spacing: 0.2pt;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
+/* ══════════════════════════════════════════
+   TECHNICAL SKILLS — Compact inline tags
+   ══════════════════════════════════════════ */
+.v3-tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    margin: 1px 0 2px 0;
+}
+
+.v3-tech-tag {
+    display: inline-block;
+    font-size: 8pt;
+    font-weight: 400;
+    color: var(--v3-text-secondary);
+    border: 1px solid var(--v3-border);
+    padding: 1.5px 6px;
+    border-radius: 3px;
+    line-height: 1.3;
+}
+
+/* ══════════════════════════════════════════
+   EXPERIENCE — Timeline
+   ══════════════════════════════════════════ */
+.v3-experience {
+    position: relative;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.v3-experience::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 3px;
+    bottom: 3px;
+    width: 1px;
+    background: var(--v3-accent-mid);
+}
+
+.v3-job {
+    position: relative;
+    margin-bottom: 5px;
+    padding-bottom: 0;
+}
+
+.v3-job::before {
+    content: '';
+    position: absolute;
+    left: -11px;
+    top: 4px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--v3-bg);
+    border: 1.5px solid var(--v3-accent);
+    z-index: 1;
+}
+
+.v3-job:first-child::before {
+    background: var(--v3-highlight);
+    border-color: var(--v3-highlight);
+}
+
+.v3-job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 3px;
+}
+
+.v3-job-title {
+    font-size: 10pt;
+    font-weight: 600;
+    color: var(--v3-accent);
+    margin: 0;
+    line-height: 1.25;
+}
+
+.v3-job-dates {
+    font-size: 8.5pt;
+    font-weight: 400;
+    color: var(--v3-text-muted);
+    white-space: nowrap;
+}
+
+.v3-job-company {
+    font-size: 8.5pt;
+    font-weight: 500;
+    color: var(--v3-highlight);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.resume-page .v3-job ul {
+    list-style: none;
+    padding: 0;
+    margin: 1px 0 0 0;
+}
+
+.resume-page .v3-job ul li {
+    font-size: 9pt;
+    color: var(--v3-text);
+    padding: 0.5px 0 0.5px 14px;
+    margin: 0;
+    position: relative;
+    line-height: 1.35;
+}
+
+.resume-page .v3-job ul li::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 6.5px;
+    width: 2.5px;
+    height: 2.5px;
+    border-radius: 50%;
+    background: var(--v3-text-muted);
+}
+
+.v3-job ul li strong {
+    font-weight: 600;
+}
+
+/* ══════════════════════════════════════════
+   PROJECTS
+   ══════════════════════════════════════════ */
+.v3-projects .v3-project {
+    margin-bottom: 3px;
+}
+
+.v3-projects h3,
+.v3-project-title {
+    font-size: 9.5pt;
+    font-weight: 600;
+    color: var(--v3-text);
+    margin: 0;
+    line-height: 1.25;
+}
+
+.resume-page .v3-projects ul {
+    list-style: none;
+    padding: 0;
+    margin: 1px 0 0 0;
+}
+
+.resume-page .v3-projects ul li {
+    font-size: 9pt;
+    color: var(--v3-text);
+    padding: 0.5px 0 0.5px 14px;
+    margin: 0;
+    position: relative;
+    line-height: 1.35;
+}
+
+.resume-page .v3-projects ul li::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 6.5px;
+    width: 2.5px;
+    height: 2.5px;
+    border-radius: 50%;
+    background: var(--v3-text-muted);
+}
+
+/* ══════════════════════════════════════════
+   KEY ACHIEVEMENTS — Highlighted strip
+   ══════════════════════════════════════════ */
+.v3-achievements {
+    background: var(--v3-accent-light);
+    border-radius: 4px;
+    padding: 4px 10px;
+    margin: 1px 0 2px 0;
+}
+
+.resume-page .v3-achievements ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.resume-page .v3-achievements ul li {
+    font-size: 9pt;
+    color: var(--v3-text);
+    padding: 1px 0 1px 10px;
+    position: relative;
+    line-height: 1.35;
+}
+
+.resume-page .v3-achievements ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5.5px;
+    width: 5px;
+    height: 5px;
+    background: var(--v3-highlight);
+    border-radius: 1px;
+    transform: rotate(45deg);
+}
+
+/* ══════════════════════════════════════════
+   CERTIFICATIONS — Badge chips
+   ══════════════════════════════════════════ */
+.v3-certs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 1px 0 2px 0;
+}
+
+.v3-cert-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 8pt;
+    font-weight: 500;
+    color: var(--v3-text-secondary);
+    background: var(--v3-card-bg);
+    border: 1px solid var(--v3-border);
+    border-radius: 3px;
+    padding: 2px 7px;
+}
+
+.v3-cert-badge .iconify {
+    color: var(--v3-accent);
+    font-size: 9px;
+}
+
+.v3-cert-badge a {
+    color: var(--v3-text-secondary);
+    text-decoration: none;
+}
+
+.v3-cert-badge a:hover {
+    color: var(--v3-accent);
+}
+
+/* ══════════════════════════════════════════
+   EDUCATION
+   ══════════════════════════════════════════ */
+.v3-education {
+    margin: 1px 0 2px 0;
+}
+
+.v3-edu-entry {
+    margin-bottom: 1px;
+    font-size: 8pt;
+    color: var(--v3-text);
+    line-height: 1.3;
+}
+
+.v3-edu-entry strong {
+    font-weight: 600;
+}
+
+/* ══════════════════════════════════════════
+   SCREEN PREVIEW
+   ══════════════════════════════════════════ */
+@media screen {
+    .resume-page {
+        max-width: 8.27in;
+        margin: 0 auto;
+        box-shadow: 0 1px 24px rgba(0, 0, 0, 0.08);
+        border-radius: 3px;
+        padding: 0.35in 0.4in;
+    }
+}
+
+/* ══════════════════════════════════════════
+   PRINT
+   ══════════════════════════════════════════ */
+@media print {
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        background: white !important;
+    }
+
+    .resume-page {
+        box-shadow: none;
+        border-radius: 0;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+    }
+}
+
+/* ---------- Page break controls ---------- */
+.v3-section-title { break-after: avoid; }
+.v3-job-header { break-after: avoid; }
+.v3-job-company { break-after: avoid; }
+.v3-job { break-inside: avoid; }
+.v3-project { break-inside: avoid; }
+
+/* ---------- Responsive ---------- */
+@media screen and (max-width: 600px) {
+    .v3-metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .v3-job-header {
+        flex-direction: column;
+    }
+}

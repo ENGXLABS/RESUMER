@@ -1,21 +1,22 @@
 /* You can poke around this CSS if you want to customize your formatting / styling further */
 /* You can even import custom fonts! */
 
-@import url('https://www.resume.lol/fonts/cm/fonts.css');
+/* ATS-safe: using standard system fonts instead of external web fonts */
 
 /* ---------- Improved print / page-break rules ---------- */
 
 /* Page sizing */
 @page {
     size: A4;
-    margin: 0.25in 0.15in;
+    margin: 0.4in 0.35in;
 }
 
-/* meta */
-body {
-    font-family: "Computer Modern Serif", serif;
+/* Resume font & sizing (scoped to .resume-page to avoid polluting app UI) */
+.resume-page {
+    font-family: Calibri, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     font-size: 11pt;
-    font-weight: 500;
+    font-weight: 400;
+    line-height: 1.3;
 }
 
 /* ===== Print rules - natural flow with margins on all pages ===== */
@@ -32,10 +33,12 @@ body {
     }
 
     body {
-        margin: 0.25in 0.15in !important;
+        margin: 0.4in 0.35in !important;
         /* Body margins work on all pages */
         padding: 0 !important;
         background: white !important;
+        font-family: Calibri, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+        font-size: 11pt;
     }
 
     #resume-content {
@@ -72,7 +75,7 @@ body {
 /* Page break visualization for screen */
 @media screen {
     #resume-content {
-        background: #e0e0e0;
+        background: var(--surface-app, #e0e0e0);
         padding: 20px;
         display: flex;
         flex-wrap: wrap;
@@ -82,8 +85,8 @@ body {
 
     .resume-page {
         width: 8.30in;
-        padding: 0.2in 0.1in;
-        margin: 0.25in 0.15in;
+        padding: 0.4in 0.35in;
+        margin: 20px auto;
         background: white;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         box-sizing: border-box;
@@ -100,131 +103,125 @@ body {
     }
 }
 
-p {
+.resume-page p {
     text-align: justify;
 }
 
-.spacer {
+.resume-page .spacer {
     margin: 0px auto;
 }
 
-/* styling content */
-h1,
-h2,
-h3,
-h4,
-p,
-a,
-li {
+/* styling content (scoped) */
+.resume-page h1,
+.resume-page h2,
+.resume-page h3,
+.resume-page h4,
+.resume-page p,
+.resume-page a,
+.resume-page li {
     color: black;
 }
 
-h1 {
-    color: black;
+.resume-page h1 {
+    color: #000000;
     text-align: center;
-    font-size: 26pt;
+    font-size: 20pt;
+    font-weight: 700;
     margin: 0;
     padding: 0;
-    margin-top: -0.1in;
+    margin-top: -0.05in;
 }
 
-h2 {
-    border-bottom: 1px solid #000000;
+.resume-page h2 {
+    border-bottom: 1.5px solid #000000;
+    color: #000000;
     text-transform: uppercase;
-    font-size: 11pt;
-    font-weight: normal;
+    font-size: 12pt;
+    font-weight: 700;
     padding: 0;
     margin: 0;
-    margin-bottom: 2pt;
-    margin-top: 3pt;
+    margin-bottom: 3pt;
+    margin-top: 6pt;
+    letter-spacing: 0.5pt;
 }
 
-h2::first-letter {
-    font-size: 14pt;
-}
-
-h3,
-h4 {
+.resume-page h3,
+.resume-page h4 {
     margin: 0;
-    margin-left: 0.15in;
+    margin-left: 0.1in;
 }
 
-h3 {
+.resume-page h3 {
     display: flex;
     font-size: 11pt;
+    font-weight: 700;
     padding: 0;
     margin: 0;
     justify-content: space-between;
 }
 
-.indent {
-    margin-left: 0.15in;
+.resume-page .indent {
+    margin-left: 0.1in;
 }
 
-.tech-stack {
+.resume-page .tech-stack {
     font-style: normal;
     font-weight: normal;
 }
 
-h4 {
+.resume-page h4 {
     display: flex;
-    font-size: 11pt;
-    font-weight: normal;
+    font-size: 10.5pt;
+    font-weight: 400;
     font-style: italic;
     padding: 0;
     margin: 0;
     justify-content: space-between;
 }
 
-p {
+.resume-page p {
     margin: 0;
     padding: 0;
 }
 
-a {
+.resume-page a {
     color: black;
-    text-underline-offset: 4px;
+    text-decoration: none;
 }
 
-ul {
+.resume-page .headerInfo a {
+    color: #000000;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.resume-page ul {
     margin: 0;
-    margin-left: 0.15in;
+    margin-left: 0.1in;
     padding: 0;
     padding-left: 0;
-    padding-right: 20px;
+    padding-right: 15px;
     font-size: 11pt;
 }
 
-ul>li {
+.resume-page ul>li {
     margin: 0;
     padding: 0;
     margin-bottom: 1pt;
 }
 
 
-/* header info content */
-.headerInfo>ul {
-    display: flex;
+/* header info - paragraph after h1 */
+.resume-page h1 + p {
     text-align: center;
-    justify-content: center;
-    margin: 0px auto 0pt !important;
-    margin-top: -1pt;
-    padding: 0;
+    margin: 3pt 0 0 0;
+    font-size: 10pt;
 }
 
-.headerInfo>ul>li {
-    display: inline;
-    white-space: pre;
-    list-style-type: none;
-}
-
-.headerInfo>ul>li:not(:last-child) {
-    margin-right: 8px;
-}
-
-.headerInfo>ul>li:not(:last-child):after {
-    content: "|";
-    margin-left: 8px;
+.resume-page h1 + p a {
+    color: #000000;
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
 /* ---------- Optional: only use for SHORT jobs that should never split ---------- */

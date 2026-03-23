@@ -6,19 +6,19 @@
     </div>
 </div>
 
-**Date:** February 1, 2026
+**Date:** March 23, 2026
 
-**SIX Group**
+**Grab**
 
 Dear Hiring Manager,
 
-I'm applying for the Software Test Manager role at SIX Group. Your focus on quality engineering, modern testing practices, and leading high-performing teams matches how I've approached QA leadership for the past 11 years. I've managed teams through QA transformation while staying hands-on with the tools and practices that deliver quality.
+The Senior Software Engineer in Test role with Grab's Fulfillment team connects well with my background. With 11 years designing and scaling test automation frameworks for high-throughput distributed systems, I bring the technical depth and mentoring track record to contribute from day one.
 
-I've led end-to-end QA activities across complex projects managing defect lifecycles, quality assurance, and team development. At EPAM, I reduced late cycle defects by 40% while coaching QA teams on Agile practices and automation. At OkCredit, I increased coverage from 60% to 95% while leading a 5-person QA team through framework development and continuous improvement. I work extensively with JIRA, Xray, Confluence, Python, SQL, and have adapted testing approaches to both Agile and SAFe frameworks. I communicate quality insights to stakeholders in business-friendly language while managing priorities and deadlines across multiple projects.
+At EPAM, I own quality strategy for distributed backend systems, building Selenium and API automation suites embedded in CI/CD pipelines that increased automation stability by 45% and reduced late-cycle defects by 40%. I design performance and simulation tests to validate system reliability under high-traffic and variable load conditions, identifying stability gaps before production. At Navi Technologies, I automated 120+ critical backend workflows using Java and REST Assured, built structured test strategies spanning functional, integration, and performance layers, and trained engineers on automation framework adoption across microservices teams.
 
-What stands out about SIX Group is your commitment to continuous learning, flexible work models, and agile working methods. I value the opportunity to strengthen product quality, optimize test processes, and empower teams through best-in-class QA practices.
+Grab's Fulfillment platform handling hundreds of millions of requests daily across rides, food, and logistics is the kind of scale I find genuinely motivating. The team's focus on replacing manual tests with robust automation while mentoring engineers on best practices matches how I prefer to operate as both a hands-on engineer and a quality advocate.
 
-Thanks for considering my application. Happy to discuss how I approach test management, team leadership, and quality engineering.
+Happy to walk through how I approach building automation for distributed backend systems and the value I would bring to the Fulfillment test team.
 
 Best regards,  
 Sivasankaramalan Gunasekarasivam
