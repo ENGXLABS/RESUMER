@@ -1,34 +1,34 @@
 /* ============================================================
-   Resume Template V3 — "Impact-First"
+   Resume AI — "Neural" Theme
    
-   An original design built for direct referrals & HR emails.
-   NOT ATS-optimised. Built to make a human recruiter stop scrolling.
+   Premium AI-native design, built to outclass V3 "Impact-First".
+   Designed for AI/ML QE leadership roles.
    
    Design philosophy:
-   - Impact metrics are the FIRST visual (dashboard strip)
-   - Single column, strong hierarchy, maximum readability
-   - Timeline-connected experience cards
-   - Skills as modern pill chips
-   - Minimal color: one accent used with purpose
-   - The design itself signals quality thinking
-   - Outfit font throughout — geometric, clean, modern
+   - AI-specific impact dashboard as the first visual
+   - Core skills as structured capsule groups (not flat text)
+   - Timeline experience with refined dot markers
+   - AI Agent Projects rendered as distinct cards
+   - Outfit font — geometric, clean, modern (same as V3)
+   - Deep blue palette with cyan metric highlights
    - Compact: fits 2 pages, zero wasted space
    ============================================================ */
 
 /* ---------- Palette ---------- */
 :root {
-    --v3-accent: #1E3A5F;
-    --v3-accent-light: #EDF1F5;
-    --v3-accent-mid: #B8C9D9;
-    --v3-highlight: #D4883A;
-    --v3-highlight-light: #FBF4EB;
-    --v3-text: #1A1A1A;
-    --v3-text-secondary: #4A4A4A;
-    --v3-text-muted: #7A7A7A;
-    --v3-bg: #ffffff;
-    --v3-card-bg: #F8F9FA;
-    --v3-border: #DDE1E6;
-    --v3-metric-bg: var(--v3-highlight-light);
+    --ai-primary: #1e3a5f;
+    --ai-accent: #2563eb;
+    --ai-accent-light: #eff6ff;
+    --ai-accent-mid: #bfdbfe;
+    --ai-highlight: #0891b2;
+    --ai-highlight-light: #ecfeff;
+    --ai-text: #0f172a;
+    --ai-text-secondary: #334155;
+    --ai-text-muted: #64748b;
+    --ai-bg: #ffffff;
+    --ai-card-bg: #f8fafc;
+    --ai-border: #e2e8f0;
+    --ai-metric-bg: linear-gradient(135deg, #ecfeff 0%, #eff6ff 100%);
 }
 
 /* ---------- Page ---------- */
@@ -42,36 +42,21 @@
     font-family: 'Outfit', sans-serif;
     font-size: 9.5pt;
     font-weight: 400;
-    line-height: 1.35;
-    color: var(--v3-text);
-    background: var(--v3-bg);
+    line-height: 1.38;
+    color: var(--ai-text);
+    background: var(--ai-bg);
 }
 
-/* Kill any inherited font / layout from other stylesheets */
 .resume-page * {
     font-family: inherit;
 }
 
-/* Override TPM leaks into V3 */
-.resume-page .v3-summary p,
-.resume-page .v3-education p,
-.resume-page .v3-projects p,
-.resume-page .v3-achievements p {
-    text-align: left;
-}
-
-.resume-page .v3-projects h3,
-.resume-page .v3-projects h4 {
-    display: block;
-    margin-left: 0;
-    font-style: normal;
-}
-
-/* Kill browser/TPM default ul/li indentation for all V3 sections */
-.resume-page .v3-summary ul,
-.resume-page .v3-job ul,
-.resume-page .v3-projects ul,
-.resume-page .v3-achievements ul {
+/* Kill inherited ul/li indentation for all AI sections */
+.resume-page .ai-summary ul,
+.resume-page .ai-job ul,
+.resume-page .ai-projects ul,
+.resume-page .ai-achievements ul,
+.resume-page .ai-project-card ul {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -82,18 +67,18 @@
 /* ══════════════════════════════════════════
    HEADER
    ══════════════════════════════════════════ */
-.v3-header {
+.ai-header {
     text-align: center;
     padding: 0 0 4px 0;
     position: relative;
 }
 
-.resume-page .v3-header h1 {
-    font-size: 14pt;
+.resume-page .ai-header h1 {
+    font-size: 15pt;
     font-weight: 300;
-    letter-spacing: 2pt;
+    letter-spacing: 2.5pt;
     text-transform: uppercase;
-    color: var(--v3-accent);
+    color: var(--ai-primary);
     margin: 0;
     padding: 0;
     border: none;
@@ -101,172 +86,184 @@
     white-space: nowrap;
 }
 
-.resume-page .v3-header::after {
+.resume-page .ai-header::after {
     content: '';
     display: block;
-    width: 44px;
-    height: 2px;
-    background: var(--v3-highlight);
+    width: 52px;
+    height: 2.5px;
+    background: linear-gradient(90deg, var(--ai-accent), var(--ai-highlight));
     margin: 4px auto 5px auto;
     border-radius: 2px;
 }
 
-.v3-contact {
+.ai-contact {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 4px 14px;
     font-size: 8.5pt;
-    color: var(--v3-text-secondary);
+    color: var(--ai-text-secondary);
 }
 
-.v3-contact a {
-    color: var(--v3-text-secondary);
+.ai-contact a {
+    color: var(--ai-text-secondary);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 2px;
+    gap: 3px;
+    transition: color 0.15s;
 }
 
-.v3-contact a:hover {
-    color: var(--v3-accent);
+.ai-contact a:hover {
+    color: var(--ai-accent);
 }
 
-.v3-contact .iconify {
+.ai-contact .iconify {
     font-size: 10px;
-    color: var(--v3-accent);
+    color: var(--ai-accent);
 }
 
 /* ══════════════════════════════════════════
-   IMPACT METRICS STRIP
+   IMPACT METRICS DASHBOARD
    ══════════════════════════════════════════ */
-.v3-metrics {
+.ai-metrics {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 0;
-    margin: 6px 0 8px 0;
-    border: 1px solid var(--v3-border);
-    border-radius: 5px;
+    margin: 7px 0 9px 0;
+    border: 1px solid var(--ai-accent-mid);
+    border-radius: 6px;
     overflow: hidden;
-    background: var(--v3-metric-bg);
+    background: var(--ai-metric-bg);
 }
 
-.v3-metric {
+.ai-metric {
     text-align: center;
-    padding: 7px 4px 5px 4px;
+    padding: 8px 4px 6px 4px;
 }
 
-.v3-metric:not(:last-child) {
-    border-right: 1px solid rgba(212, 136, 58, 0.2);
+.ai-metric:not(:last-child) {
+    border-right: 1px solid rgba(37, 99, 235, 0.15);
 }
 
-.v3-metric-value {
+.ai-metric-value {
     display: block;
-    font-size: 16pt;
+    font-size: 17pt;
     font-weight: 700;
-    color: var(--v3-highlight);
+    color: var(--ai-highlight);
     line-height: 1.1;
     letter-spacing: -0.5pt;
 }
 
-.v3-metric-label {
+.ai-metric-label {
     display: block;
-    font-size: 7pt;
-    font-weight: 500;
+    font-size: 6.5pt;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.8pt;
-    color: var(--v3-text-muted);
-    margin-top: 1px;
+    letter-spacing: 0.9pt;
+    color: var(--ai-text-muted);
+    margin-top: 2px;
     line-height: 1.15;
 }
 
 /* ══════════════════════════════════════════
    SECTION HEADERS
    ══════════════════════════════════════════ */
-.v3-section-title {
+.ai-section-title {
     font-size: 9pt;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 2pt;
-    color: var(--v3-accent);
-    margin: 8px 0 3px 0;
+    color: var(--ai-primary);
+    margin: 9px 0 4px 0;
     padding: 0 0 2px 0;
-    border-bottom: 1.5px solid var(--v3-accent);
+    border-bottom: 1.5px solid var(--ai-primary);
     display: flex;
     align-items: center;
     gap: 4px;
 }
 
-.v3-section-title:first-child {
+.ai-section-title:first-child {
     margin-top: 0;
 }
 
-.v3-section-title .iconify {
+.ai-section-title .iconify {
     font-size: 11px;
+    color: var(--ai-accent);
 }
 
 /* ══════════════════════════════════════════
    PROFESSIONAL SUMMARY
    ══════════════════════════════════════════ */
-/* (ul reset handled by global V3 reset above) */
-
-.resume-page .v3-summary ul li {
+.resume-page .ai-summary ul li {
     font-size: 9.5pt;
-    line-height: 1.35;
-    color: var(--v3-text);
-    padding: 1px 0 1px 14px;
+    line-height: 1.38;
+    color: var(--ai-text);
+    padding: 1.5px 0 1.5px 14px;
     margin: 0;
     position: relative;
 }
 
-.resume-page .v3-summary ul li::before {
+.resume-page .ai-summary ul li::before {
     content: '';
     position: absolute;
     left: 5px;
-    top: 7px;
+    top: 7.5px;
     width: 3px;
     height: 3px;
     border-radius: 50%;
-    background: var(--v3-accent);
+    background: var(--ai-accent);
 }
 
 /* ══════════════════════════════════════════
-   CORE SKILLS — Pill chips
+   CORE SKILLS — Structured Capsule Groups
    ══════════════════════════════════════════ */
-.v3-skills-grid {
-    margin: 1px 0 2px 0;
-    line-height: 1.8;
+.ai-skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 2px 0 3px 0;
 }
 
-.v3-skill-pill {
-    display: inline;
+.ai-skill-pill {
+    display: inline-block;
     font-size: 8pt;
-    font-weight: 500;
-    color: var(--v3-accent);
-    background: var(--v3-accent-light);
-    padding: 2px 6px;
-    border-radius: 10px;
-    letter-spacing: 0.2pt;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
+    color: var(--ai-primary);
+    background: var(--ai-accent-light);
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--ai-accent-mid);
+    line-height: 1.3;
+}
+
+.ai-skill-pill strong {
+    font-weight: 600;
+    color: var(--ai-accent);
+    font-size: 8pt;
+}
+
+.ai-skill-subs {
+    font-size: 7.5pt;
+    color: var(--ai-text-secondary);
+    font-weight: 400;
 }
 
 /* ══════════════════════════════════════════
-   TECHNICAL SKILLS — Compact inline tags
+   TECHNICAL SKILLS — Compact Tags
    ══════════════════════════════════════════ */
-.v3-tech-tags {
+.ai-tech-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 3px;
-    margin: 1px 0 2px 0;
+    margin: 2px 0 3px 0;
 }
 
-.v3-tech-tag {
+.ai-tech-tag {
     display: inline-block;
     font-size: 8pt;
     font-weight: 400;
-    color: var(--v3-text-secondary);
-    border: 1px solid var(--v3-border);
+    color: var(--ai-text-secondary);
+    border: 1px solid var(--ai-border);
     padding: 1.5px 6px;
     border-radius: 3px;
     line-height: 1.3;
@@ -275,29 +272,29 @@
 /* ══════════════════════════════════════════
    EXPERIENCE — Timeline
    ══════════════════════════════════════════ */
-.v3-experience {
+.ai-experience {
     position: relative;
     padding-left: 0;
     margin-left: 0;
 }
 
-.v3-experience::before {
+.ai-experience::before {
     content: '';
     position: absolute;
     left: -8px;
     top: 3px;
     bottom: 3px;
-    width: 1px;
-    background: var(--v3-accent-mid);
+    width: 1.5px;
+    background: linear-gradient(180deg, var(--ai-accent), var(--ai-accent-mid));
 }
 
-.v3-job {
+.ai-job {
     position: relative;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     padding-bottom: 0;
 }
 
-.v3-job::before {
+.ai-job::before {
     content: '';
     position: absolute;
     left: -11px;
@@ -305,17 +302,17 @@
     width: 5px;
     height: 5px;
     border-radius: 50%;
-    background: var(--v3-bg);
-    border: 1.5px solid var(--v3-accent);
+    background: var(--ai-bg);
+    border: 1.5px solid var(--ai-accent);
     z-index: 1;
 }
 
-.v3-job:first-child::before {
-    background: var(--v3-highlight);
-    border-color: var(--v3-highlight);
+.ai-job:first-child::before {
+    background: var(--ai-highlight);
+    border-color: var(--ai-highlight);
 }
 
-.v3-job-header {
+.ai-job-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -323,189 +320,208 @@
     gap: 3px;
 }
 
-.v3-job-title {
+.ai-job-title {
     font-size: 10pt;
     font-weight: 600;
-    color: var(--v3-accent);
+    color: var(--ai-primary);
     margin: 0;
     line-height: 1.25;
 }
 
-.v3-job-dates {
+.ai-job-dates {
     font-size: 8.5pt;
     font-weight: 400;
-    color: var(--v3-text-muted);
+    color: var(--ai-text-muted);
     white-space: nowrap;
 }
 
-.v3-job-company {
+.ai-job-company {
     font-size: 8.5pt;
     font-weight: 500;
-    color: var(--v3-highlight);
+    color: var(--ai-highlight);
     margin: 0;
     line-height: 1.2;
 }
 
-.resume-page .v3-job ul {
+.resume-page .ai-job ul {
     list-style: none;
     padding: 0;
-    margin: 1px 0 0 0;
+    margin: 2px 0 0 0;
 }
 
-.resume-page .v3-job ul li {
+.resume-page .ai-job ul li {
     font-size: 9pt;
-    color: var(--v3-text);
+    color: var(--ai-text);
     padding: 0.5px 0 0.5px 14px;
     margin: 0;
     position: relative;
-    line-height: 1.35;
+    line-height: 1.38;
 }
 
-.resume-page .v3-job ul li::before {
+.resume-page .ai-job ul li::before {
     content: '';
     position: absolute;
     left: 5px;
-    top: 6.5px;
+    top: 7px;
     width: 2.5px;
     height: 2.5px;
     border-radius: 50%;
-    background: var(--v3-text-muted);
+    background: var(--ai-text-muted);
 }
 
-.v3-job ul li strong {
+.ai-job ul li strong {
     font-weight: 600;
 }
 
 /* ══════════════════════════════════════════
-   PROJECTS
+   AI AGENT PROJECTS — Cards
    ══════════════════════════════════════════ */
-.v3-projects .v3-project {
-    margin-bottom: 3px;
+.ai-projects {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 2px 0 3px 0;
 }
 
-.v3-projects h3,
-.v3-project-title {
+.ai-project-card {
+    background: var(--ai-accent-light);
+    border: 1px solid var(--ai-accent-mid);
+    border-left: 3px solid var(--ai-accent);
+    border-radius: 4px;
+    padding: 5px 10px;
+}
+
+.ai-project-title {
     font-size: 9.5pt;
     font-weight: 600;
-    color: var(--v3-text);
-    margin: 0;
+    color: var(--ai-primary);
+    margin: 0 0 2px 0;
     line-height: 1.25;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
-.resume-page .v3-projects ul {
+.ai-project-title .iconify {
+    font-size: 11px;
+    color: var(--ai-accent);
+}
+
+.resume-page .ai-project-card ul {
     list-style: none;
     padding: 0;
-    margin: 1px 0 0 0;
+    margin: 0;
 }
 
-.resume-page .v3-projects ul li {
+.resume-page .ai-project-card ul li {
     font-size: 9pt;
-    color: var(--v3-text);
+    color: var(--ai-text);
     padding: 0.5px 0 0.5px 14px;
     margin: 0;
     position: relative;
-    line-height: 1.35;
+    line-height: 1.38;
 }
 
-.resume-page .v3-projects ul li::before {
+.resume-page .ai-project-card ul li::before {
     content: '';
     position: absolute;
     left: 5px;
-    top: 6.5px;
+    top: 7px;
     width: 2.5px;
     height: 2.5px;
     border-radius: 50%;
-    background: var(--v3-text-muted);
+    background: var(--ai-accent);
 }
 
 /* ══════════════════════════════════════════
-   KEY ACHIEVEMENTS — Highlighted strip
+   KEY ACHIEVEMENTS — Highlighted Strip
    ══════════════════════════════════════════ */
-.v3-achievements {
-    background: var(--v3-accent-light);
+.ai-achievements {
+    background: var(--ai-highlight-light);
     border-radius: 4px;
-    padding: 4px 10px;
-    margin: 1px 0 2px 0;
+    padding: 5px 10px;
+    margin: 2px 0 3px 0;
+    border: 1px solid rgba(8, 145, 178, 0.15);
 }
 
-.resume-page .v3-achievements ul {
+.resume-page .ai-achievements ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.resume-page .v3-achievements ul li {
+.resume-page .ai-achievements ul li {
     font-size: 9pt;
-    color: var(--v3-text);
-    padding: 1px 0 1px 10px;
+    color: var(--ai-text);
+    padding: 1px 0 1px 12px;
     position: relative;
-    line-height: 1.35;
+    line-height: 1.38;
 }
 
-.resume-page .v3-achievements ul li::before {
+.resume-page .ai-achievements ul li::before {
     content: '';
     position: absolute;
     left: 0;
     top: 5.5px;
     width: 5px;
     height: 5px;
-    background: var(--v3-highlight);
+    background: var(--ai-highlight);
     border-radius: 1px;
     transform: rotate(45deg);
 }
 
 /* ══════════════════════════════════════════
-   CERTIFICATIONS — Badge chips
+   CERTIFICATIONS — Badge Chips
    ══════════════════════════════════════════ */
-.v3-certs {
+.ai-certs {
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
-    margin: 1px 0 2px 0;
+    margin: 2px 0 3px 0;
 }
 
-.v3-cert-badge {
+.ai-cert-badge {
     display: inline-flex;
     align-items: center;
     gap: 3px;
     font-size: 8pt;
     font-weight: 500;
-    color: var(--v3-text-secondary);
-    background: var(--v3-card-bg);
-    border: 1px solid var(--v3-border);
+    color: var(--ai-text-secondary);
+    background: var(--ai-card-bg);
+    border: 1px solid var(--ai-border);
     border-radius: 3px;
-    padding: 2px 7px;
+    padding: 2.5px 8px;
 }
 
-.v3-cert-badge .iconify {
-    color: var(--v3-accent);
-    font-size: 9px;
+.ai-cert-badge .iconify {
+    color: var(--ai-accent);
+    font-size: 10px;
 }
 
-.v3-cert-badge a {
-    color: var(--v3-text-secondary);
+.ai-cert-badge a {
+    color: var(--ai-text-secondary);
     text-decoration: none;
 }
 
-.v3-cert-badge a:hover {
-    color: var(--v3-accent);
+.ai-cert-badge a:hover {
+    color: var(--ai-accent);
 }
 
 /* ══════════════════════════════════════════
    EDUCATION
    ══════════════════════════════════════════ */
-.v3-education {
-    margin: 1px 0 2px 0;
+.ai-education {
+    margin: 2px 0 3px 0;
 }
 
-.v3-edu-entry {
+.ai-edu-entry {
     margin-bottom: 1px;
-    font-size: 8pt;
-    color: var(--v3-text);
+    font-size: 8.5pt;
+    color: var(--ai-text);
     line-height: 1.3;
 }
 
-.v3-edu-entry strong {
+.ai-edu-entry strong {
     font-weight: 600;
 }
 
@@ -516,7 +532,10 @@
     .resume-page {
         max-width: 8.27in;
         margin: 0 auto;
-        box-shadow: 0 1px 24px rgba(0, 0, 0, 0.08);
+        box-shadow:
+            0 1px 3px rgba(37, 99, 235, 0.06),
+            0 4px 16px rgba(37, 99, 235, 0.08),
+            0 12px 32px rgba(0, 0, 0, 0.05);
         border-radius: 3px;
         padding: 0.35in 0.4in;
     }
@@ -547,18 +566,19 @@
 }
 
 /* ---------- Page break controls ---------- */
-.v3-section-title { break-after: avoid; }
-.v3-job-header { break-after: avoid; }
-.v3-job-company { break-after: avoid; }
-.v3-project { break-inside: avoid; }
+.ai-section-title { break-after: avoid; }
+.ai-job-header { break-after: avoid; }
+.ai-job-company { break-after: avoid; }
+.ai-project-card { break-inside: avoid; }
+.ai-cert-badge { break-inside: avoid; }
 
 /* ---------- Responsive ---------- */
 @media screen and (max-width: 600px) {
-    .v3-metrics {
+    .ai-metrics {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .v3-job-header {
+    .ai-job-header {
         flex-direction: column;
     }
 }

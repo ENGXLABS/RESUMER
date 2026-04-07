@@ -6,19 +6,19 @@
     </div>
 </div>
 
-**Date:** March 23, 2026
+**Date:** April 5, 2026
 
-**Grab**
+**Slalom Build**
 
 Dear Hiring Manager,
 
-The Senior Software Engineer in Test role with Grab's Fulfillment team connects well with my background. With 11 years designing and scaling test automation frameworks for high-throughput distributed systems, I bring the technical depth and mentoring track record to contribute from day one.
+The Sr Consultant/Principal Quality Engineering role at Slalom Build is the kind of work I've been doing in practice for several years, assessing testing maturity, designing frameworks that engineering teams can actually follow, and helping organizations shift quality left rather than treating it as a final gate.
 
-At EPAM, I own quality strategy for distributed backend systems, building Selenium and API automation suites embedded in CI/CD pipelines that increased automation stability by 45% and reduced late-cycle defects by 40%. I design performance and simulation tests to validate system reliability under high-traffic and variable load conditions, identifying stability gaps before production. At Navi Technologies, I automated 120+ critical backend workflows using Java and REST Assured, built structured test strategies spanning functional, integration, and performance layers, and trained engineers on automation framework adoption across microservices teams.
+At EPAM, I ran testing maturity assessments across multi-squad cloud-native programmes, evaluating coverage gaps, tooling fitness, team capacity, and test data management, then translated findings into actionable gap analyses presented directly to engineering and delivery leadership. I designed testing standards covering unit, integration, and E2E conventions that development teams could act on independently. On the UAT side, at OkCredit I led UAT process improvement by engaging cross-functional stakeholders, documenting workflows, identifying cycle time and defect leakage pain points, and building a structured framework that reduced manual regression effort by 70% for a 1M+ user platform. Across both roles, I embedded shift-left practices through API contract testing, CI/CD quality gates, and testable design reviews, reducing late-cycle defects by 40%.
 
-Grab's Fulfillment platform handling hundreds of millions of requests daily across rides, food, and logistics is the kind of scale I find genuinely motivating. The team's focus on replacing manual tests with robust automation while mentoring engineers on best practices matches how I prefer to operate as both a hands-on engineer and a quality advocate.
+What draws me to Slalom Build specifically is how your team integrates AI into engineering delivery. I've been actively evaluating AI-assisted test generation through GitHub Copilot and related tooling, assessing coverage quality, maintainability, and effort savings in real product contexts, which aligns directly with the AI-SDLC collaboration this role describes.
 
-Happy to walk through how I approach building automation for distributed backend systems and the value I would bring to the Fulfillment test team.
+Happy to walk through how I approach maturity assessments and QE framework design if this looks like a fit.
 
 Best regards,  
 Sivasankaramalan Gunasekarasivam

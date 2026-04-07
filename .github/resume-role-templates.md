@@ -387,6 +387,10 @@ Analyze the job description to determine which template best matches:
 
 ```
 JD Analysis:
+├─ Does JD mention AI testing, AI agents, MCP, LLM, prompt engineering, GenAI QE?
+│  └─ YES → Use Template #6 (AI-Native QE Lead)
+│  └─ NO → Continue...
+│
 ├─ Is role in Singapore?
 │  └─ YES → Use Template #5 structure
 │  └─ NO → Continue...
@@ -405,6 +409,55 @@ JD Analysis:
 │
 └─ Default → Use Template #1 (Master Resume)
 ```
+
+---
+
+## Template #6: AI-Native QE Lead Resume
+
+### Structure Overview
+
+| **Position** | AI-Native QE Lead, AI QE Manager, GenAI Testing Lead |
+|---|---|
+| **Best For** | Roles at the intersection of AI and quality engineering |
+| **Emphasis** | AI agent engineering, MCP protocol, prompt engineering, AI team leadership |
+| **Key Differentiator** | 6 production-grade AI agents with measurable impact, not just AI-curious |
+
+### Professional Summary Pattern (4 bullets)
+
+1. **Identity:** AI-native Quality Engineering leader with X years building autonomous test agents and operationalizing AI-assisted testing
+2. **Impact:** Built N production-grade AI agents that saved X+ hours per quarter across Y teams with measurable metrics
+3. **Leadership:** Led AI testing transformation for Z-person team, training on Copilot/Claude/MCP/Cursor, defined AI roadmap
+4. **Credential:** Microsoft Certified GitHub Copilot Engineer with deep prompt engineering and MCP expertise
+
+### Core Skills Pattern (7 buckets)
+
+1. **AI Agent Engineering** - Autonomous test agents, LLM tool-calling, multi-agent orchestration, self-healing pipelines
+2. **MCP Protocol and Tool Orchestration** - Playwright MCP, Appium MCP, Atlassian MCP, custom MCP servers, context window management
+3. **Prompt Engineering** - Multi-shot, role-play, temperature tuning, deterministic outputs, prompt validation
+4. **AI-Augmented Test Design** - LLM test generation, AI regression prioritization, semantic matching, flaky test detection
+5. **QE Fundamentals** - Shift-left, risk-based strategies, API testing, contract testing, performance testing, DORA metrics
+6. **CI/CD and DevOps** - Jenkins, GitHub Actions, quality gates, pipeline automation, continuous testing
+7. **People Leadership** - Team of 24, AI adoption, roadmap definition, stakeholder communication
+
+### Technical Skills Pattern
+
+Lead with AI tools: GitHub Copilot, Claude Code, MCP Protocol, Playwright MCP, Appium MCP, Atlassian MCP, Prompt Engineering, LLM Tool-Calling. Then traditional: Java, Kotlin, Selenium, Playwright, Appium, REST Assured, Jenkins, etc.
+
+### Experience Bullet Patterns (EPAM - AI Focus)
+
+- **Agent building:** "Built [agent name] that [specific capability], achieving [metric] across [scale]"
+- **MCP migration:** "Refactored [what] to enterprise MCP architecture with [capabilities], deployed across [teams]"
+- **Team training:** "Led AI transformation for [N] engineers, training on [tools] while defining [roadmap]"
+- **Prompt engineering:** "Mastered [techniques] to achieve [outcome] with [metric]"
+- **Impact metrics:** Always include hours saved, error rate reduction, compliance rates, team count
+
+### Previous Roles Pattern
+
+Keep previous roles (Navi, OkCredit, Rakuten Viki, etc.) in their original mobile/traditional automation focus. DO NOT rewrite them for AI. The AI story is EPAM-centric.
+
+### Content Source
+
+All AI content MUST be verified against `.github/resume-ai-master-content.md` (NOT the main master content file).
 
 ---
 

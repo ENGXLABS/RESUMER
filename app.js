@@ -203,15 +203,41 @@
 
         $('#qe-resume-btn').classList.toggle('active', type === 'qe');
         $('#tpm-resume-btn').classList.toggle('active', type === 'tpm');
+        const aiBtn = $('#ai-resume-btn');
+        if (aiBtn) aiBtn.classList.toggle('active', type === 'ai');
+
+        // Handle AI-specific CSS and template selector visibility
+        const aiCss = $('#resume-css-ai');
+        const tplSelector = $('#template-selector');
+        if (type === 'ai') {
+            // Enable AI CSS, disable QE template CSS
+            if (aiCss) aiCss.disabled = false;
+            const v1 = $('#resume-css-v1');
+            const v2 = $('#resume-css-v2');
+            const v3 = $('#resume-css-v3');
+            const settings = $('#resume-settings-css');
+            if (v1) v1.disabled = true;
+            if (v2) v2.disabled = true;
+            if (v3) v3.disabled = true;
+            if (settings) settings.disabled = true;
+            if (tplSelector) tplSelector.style.display = 'none';
+        } else {
+            // Disable AI CSS, restore template selector
+            if (aiCss) aiCss.disabled = true;
+            if (tplSelector) tplSelector.style.display = 'flex';
+            // Re-apply current template
+            switchTemplate(currentTemplate);
+        }
 
         loadResume();
         updateStatusBar();
     };
 
     function loadResume() {
-        const path = currentResumeType === 'qe'
-            ? 'components/resume/resume.md'
-            : 'components/resume-tpm/resume-tpm.md';
+        let path;
+        if (currentResumeType === 'ai') path = 'components/resume-ai/resume-ai.md';
+        else if (currentResumeType === 'tpm') path = 'components/resume-tpm/resume-tpm.md';
+        else path = 'components/resume/resume.md';
 
         fetch(path)
             .then(r => r.text())
@@ -242,7 +268,9 @@
         wrapper.className = 'resume-page';
         container.innerHTML = '';
 
-        if (currentTemplate === 'v3') {
+        if (currentResumeType === 'ai') {
+            restructureForAI(wrapper);
+        } else if (currentTemplate === 'v3') {
             restructureForV3(wrapper);
         }
 
@@ -567,6 +595,320 @@
         wrapper.appendChild(output);
     }
 
+    // ────── AI "Neural" DOM Restructuring ──────
+    // Transforms flat markdown into the AI-Native resume layout:
+    //   .ai-header       (centered name + gradient accent + contact icons)
+    //   .ai-metrics      (4 AI-specific impact metrics dashboard)
+    //   sections:        Summary → Core Skills (capsules) → Technical Skills (tags)
+    //                    → Experience (timeline) → AI Agent Projects (cards)
+    //                    → Achievements (highlight strip) → Certs (badges) → Education
+
+    const aiIcons = {
+        'professional summary': 'mdi:account-circle-outline',
+        'core skills': 'mdi:brain',
+        'technical skills': 'mdi:cpu-64-bit',
+        'professional experience': 'mdi:briefcase-outline',
+        'ai agent projects': 'mdi:robot-outline',
+        'key achievements': 'mdi:trophy-outline',
+        'certifications': 'mdi:certificate-outline',
+        'education': 'mdi:school-outline'
+    };
+
+    function extractAIMetrics(text) {
+        const metrics = [];
+        const patterns = [
+            { regex: /(\d+)\s+production-grade\s+AI\s+agents/i, label: 'AI Agents Built' },
+            { regex: /(\d+)\+?\s+hours?\s+(?:saved\s+)?per\s+quarter/i, label: 'Hrs Saved / Quarter', transform: v => v + '+' },
+            { regex: /(\d+)%\s+reduction\s+in\s+test\s+case\s+creation/i, label: 'Faster Test Creation', transform: v => v + '%' },
+            { regex: /(\d+)-person\s+QE\s+organization/i, label: 'Engineers Trained' },
+            { regex: /across\s+(\d+)\s+(?:DCX\s+)?teams/i, label: 'Teams Adopted' },
+            { regex: /(\d+)\s*(?:\+\s*)?years?\s+of\s+experience/i, label: 'Years Experience', transform: v => v + '+' },
+        ];
+        for (const p of patterns) {
+            if (metrics.length >= 4) break;
+            const match = text.match(p.regex);
+            if (match) {
+                const value = p.transform ? p.transform(match[1]) : match[1];
+                metrics.push({ value, label: p.label });
+            }
+        }
+        return metrics;
+    }
+
+    function restructureForAI(wrapper) {
+        const plainText = wrapper.textContent || '';
+
+        // ── 1. Header ──
+        const header = document.createElement('div');
+        header.className = 'ai-header';
+
+        const h1 = wrapper.querySelector('h1');
+        if (h1) {
+            const nameEl = document.createElement('h1');
+            nameEl.textContent = h1.textContent;
+            header.appendChild(nameEl);
+        }
+
+        const firstP = wrapper.querySelector('h1 + p');
+        if (firstP) {
+            const contactDiv = document.createElement('div');
+            contactDiv.className = 'ai-contact';
+            const iconMap = {
+                'mailto:': 'mdi:email-outline',
+                'linkedin': 'mdi:linkedin',
+                'github.com': 'mdi:github',
+                'portfolio': 'mdi:web',
+                'sivasankaramalan.is': 'mdi:web'
+            };
+            firstP.querySelectorAll('a').forEach(link => {
+                const a = document.createElement('a');
+                a.href = link.href;
+                a.target = '_blank';
+                a.rel = 'noopener noreferrer';
+                let icon = 'mdi:link';
+                const href = (link.href || '').toLowerCase();
+                const text = (link.textContent || '').toLowerCase();
+                for (const [key, val] of Object.entries(iconMap)) {
+                    if (href.includes(key) || text.includes(key)) { icon = val; break; }
+                }
+                a.innerHTML = `<span class="iconify" data-icon="${icon}"></span>${link.textContent}`;
+                contactDiv.appendChild(a);
+            });
+            header.appendChild(contactDiv);
+        }
+
+        // ── 2. AI Metrics Dashboard ──
+        const metricsData = extractAIMetrics(plainText);
+        let metricsEl = null;
+        if (metricsData.length >= 3) {
+            metricsEl = document.createElement('div');
+            metricsEl.className = 'ai-metrics';
+            metricsData.forEach(m => {
+                const cell = document.createElement('div');
+                cell.className = 'ai-metric';
+                cell.innerHTML = `<span class="ai-metric-value">${m.value}</span><span class="ai-metric-label">${m.label}</span>`;
+                metricsEl.appendChild(cell);
+            });
+        }
+
+        // ── 3. Collect sections ──
+        const sections = [];
+        let currentSection = null;
+        for (const el of Array.from(wrapper.children)) {
+            if (el.tagName === 'H1' || (el.tagName === 'P' && el === firstP)) continue;
+            if (el.tagName === 'H2') {
+                currentSection = { name: el.textContent.trim().toLowerCase(), heading: el, elements: [] };
+                sections.push(currentSection);
+            } else if (currentSection) {
+                currentSection.elements.push(el);
+            }
+        }
+
+        // ── 4. Build output ──
+        const output = document.createDocumentFragment();
+        output.appendChild(header);
+        if (metricsEl) output.appendChild(metricsEl);
+
+        for (const section of sections) {
+            const iconName = aiIcons[section.name] || 'mdi:information-outline';
+
+            const title = document.createElement('div');
+            title.className = 'ai-section-title';
+            title.innerHTML = `<span class="iconify" data-icon="${iconName}"></span>${section.heading.textContent}`;
+
+            // ── Professional Summary ──
+            if (section.name === 'professional summary') {
+                output.appendChild(title);
+                const wrap = document.createElement('div');
+                wrap.className = 'ai-summary';
+                section.elements.forEach(el => wrap.appendChild(el.cloneNode(true)));
+                output.appendChild(wrap);
+                continue;
+            }
+
+            // ── Core Skills → capsule pills ──
+            if (section.name === 'core skills') {
+                output.appendChild(title);
+                const grid = document.createElement('div');
+                grid.className = 'ai-skills-grid';
+                section.elements.forEach(el => {
+                    const text = el.textContent || '';
+                    // Parse skill groups: "GroupName (sub1, sub2), GroupName2 (sub3, sub4)"
+                    const groups = [];
+                    let depth = 0, start = 0;
+                    for (let i = 0; i < text.length; i++) {
+                        if (text[i] === '(') depth++;
+                        else if (text[i] === ')') depth--;
+                        else if (text[i] === ',' && depth === 0) {
+                            const s = text.slice(start, i).trim();
+                            if (s) groups.push(s);
+                            start = i + 1;
+                        }
+                    }
+                    const last = text.slice(start).trim();
+                    if (last) groups.push(last);
+
+                    groups.forEach(group => {
+                        const pill = document.createElement('span');
+                        pill.className = 'ai-skill-pill';
+                        // Extract group name vs sub-items
+                        const parenIdx = group.indexOf('(');
+                        if (parenIdx > -1) {
+                            const name = group.slice(0, parenIdx).trim();
+                            const subs = group.slice(parenIdx + 1).replace(/\)$/, '').trim();
+                            pill.innerHTML = `<strong>${name}</strong> <span class="ai-skill-subs">${subs}</span>`;
+                        } else {
+                            pill.textContent = group;
+                        }
+                        grid.appendChild(pill);
+                    });
+                });
+                output.appendChild(grid);
+                continue;
+            }
+
+            // ── Technical Skills → tags ──
+            if (section.name === 'technical skills') {
+                output.appendChild(title);
+                const tags = document.createElement('div');
+                tags.className = 'ai-tech-tags';
+                section.elements.forEach(el => {
+                    (el.textContent || '').split(',').map(s => s.trim()).filter(Boolean).forEach(skill => {
+                        const tag = document.createElement('span');
+                        tag.className = 'ai-tech-tag';
+                        tag.textContent = skill;
+                        tags.appendChild(tag);
+                    });
+                });
+                output.appendChild(tags);
+                continue;
+            }
+
+            // ── Professional Experience → timeline ──
+            if (section.name === 'professional experience') {
+                output.appendChild(title);
+                const timeline = document.createElement('div');
+                timeline.className = 'ai-experience';
+                let currentJob = null;
+
+                for (const el of section.elements) {
+                    if (el.tagName === 'H3') {
+                        currentJob = document.createElement('div');
+                        currentJob.className = 'ai-job';
+                        const jobHeader = document.createElement('div');
+                        jobHeader.className = 'ai-job-header';
+
+                        const titleText = el.childNodes[0]?.textContent?.trim() || el.textContent.trim();
+                        const dateSpan = el.querySelector('.normal');
+                        const dates = dateSpan ? dateSpan.textContent.trim() : '';
+
+                        const titleEl = document.createElement('div');
+                        titleEl.className = 'ai-job-title';
+                        titleEl.textContent = titleText.replace(/\s+$/, '');
+                        jobHeader.appendChild(titleEl);
+
+                        if (dates) {
+                            const dateEl = document.createElement('div');
+                            dateEl.className = 'ai-job-dates';
+                            dateEl.textContent = dates;
+                            jobHeader.appendChild(dateEl);
+                        }
+
+                        currentJob.appendChild(jobHeader);
+                        timeline.appendChild(currentJob);
+                    } else if (el.tagName === 'H4' && currentJob) {
+                        const company = document.createElement('div');
+                        company.className = 'ai-job-company';
+                        company.textContent = el.textContent;
+                        currentJob.appendChild(company);
+                    } else if (currentJob) {
+                        currentJob.appendChild(el.cloneNode(true));
+                    }
+                }
+
+                output.appendChild(timeline);
+                continue;
+            }
+
+            // ── AI Agent Projects → cards ──
+            if (section.name === 'ai agent projects') {
+                output.appendChild(title);
+                const wrap = document.createElement('div');
+                wrap.className = 'ai-projects';
+                let currentProject = null;
+
+                for (const el of section.elements) {
+                    if (el.tagName === 'H3') {
+                        currentProject = document.createElement('div');
+                        currentProject.className = 'ai-project-card';
+                        const pTitle = document.createElement('div');
+                        pTitle.className = 'ai-project-title';
+                        pTitle.innerHTML = `<span class="iconify" data-icon="mdi:chip"></span>${el.textContent.trim()}`;
+                        currentProject.appendChild(pTitle);
+                        wrap.appendChild(currentProject);
+                    } else if (currentProject) {
+                        currentProject.appendChild(el.cloneNode(true));
+                    }
+                }
+
+                output.appendChild(wrap);
+                continue;
+            }
+
+            // ── Key Achievements → highlight strip ──
+            if (section.name === 'key achievements') {
+                output.appendChild(title);
+                const wrap = document.createElement('div');
+                wrap.className = 'ai-achievements';
+                section.elements.forEach(el => wrap.appendChild(el.cloneNode(true)));
+                output.appendChild(wrap);
+                continue;
+            }
+
+            // ── Certifications → badges ──
+            if (section.name === 'certifications') {
+                output.appendChild(title);
+                const certs = document.createElement('div');
+                certs.className = 'ai-certs';
+                section.elements.forEach(el => {
+                    if (el.tagName === 'UL') {
+                        el.querySelectorAll('li').forEach(li => {
+                            const badge = document.createElement('div');
+                            badge.className = 'ai-cert-badge';
+                            badge.innerHTML = `<span class="iconify" data-icon="mdi:shield-check"></span>${li.innerHTML}`;
+                            certs.appendChild(badge);
+                        });
+                    }
+                });
+                output.appendChild(certs);
+                continue;
+            }
+
+            // ── Education ──
+            if (section.name === 'education') {
+                output.appendChild(title);
+                const wrap = document.createElement('div');
+                wrap.className = 'ai-education';
+                section.elements.forEach(el => {
+                    const entry = document.createElement('div');
+                    entry.className = 'ai-edu-entry';
+                    entry.innerHTML = el.innerHTML;
+                    wrap.appendChild(entry);
+                });
+                output.appendChild(wrap);
+                continue;
+            }
+
+            // ── Default fallback ──
+            output.appendChild(title);
+            section.elements.forEach(el => output.appendChild(el.cloneNode(true)));
+        }
+
+        // ── 5. Replace wrapper contents ──
+        wrapper.innerHTML = '';
+        wrapper.appendChild(output);
+    }
+
     // ────── Mode Toggle ──────
     function setHeaderMode(isEditing) {
         const previewActions = $('#preview-actions');
@@ -659,7 +1001,7 @@
             : markdownContent;
 
         const companyName = $('#company-name').value.trim();
-        const label = currentResumeType === 'qe' ? 'QE' : 'TPM';
+        const label = currentResumeType === 'ai' ? 'AI' : currentResumeType === 'tpm' ? 'TPM' : 'QE';
         let filename = `Resume_Sivasankaramalan_G_${label}`;
         if (companyName) {
             filename += `_${companyName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_')}`;
@@ -689,7 +1031,7 @@
         const tplSelector = $('#template-selector');
         const isResume = tabName === 'resume';
         if (typeSelector) typeSelector.style.display = isResume ? 'flex' : 'none';
-        if (tplSelector) tplSelector.style.display = isResume ? 'flex' : 'none';
+        if (tplSelector) tplSelector.style.display = (isResume && currentResumeType !== 'ai') ? 'flex' : 'none';
 
         updateStatusBar();
     };
@@ -776,7 +1118,8 @@
         if (tabEl) tabEl.textContent = tabLabels[currentTab] || 'Resume';
         if (modeEl) modeEl.textContent = currentMode === 'edit' ? 'Editing' : 'Preview';
         if (typeEl) {
-            typeEl.textContent = currentResumeType === 'qe' ? 'Quality Engineering' : 'Tech Product Manager';
+            const typeLabels = { qe: 'Quality Engineering', tpm: 'Tech Product Manager', ai: 'AI-Native Testing' };
+            typeEl.textContent = typeLabels[currentResumeType] || 'Quality Engineering';
             typeEl.parentElement.style.display = currentTab === 'resume' ? 'flex' : 'none';
         }
 
@@ -1507,10 +1850,28 @@
         const savedTab = sessionStorage.getItem('currentTab');
         const savedType = sessionStorage.getItem('currentResumeType');
 
-        if (savedType === 'qe' || savedType === 'tpm') {
+        if (savedType === 'qe' || savedType === 'tpm' || savedType === 'ai') {
             currentResumeType = savedType;
             $('#qe-resume-btn').classList.toggle('active', savedType === 'qe');
             $('#tpm-resume-btn').classList.toggle('active', savedType === 'tpm');
+            const aiBtn = $('#ai-resume-btn');
+            if (aiBtn) aiBtn.classList.toggle('active', savedType === 'ai');
+
+            // Handle AI-specific CSS and template selector on restore
+            if (savedType === 'ai') {
+                const aiCss = $('#resume-css-ai');
+                if (aiCss) aiCss.disabled = false;
+                const v1 = $('#resume-css-v1');
+                const v2 = $('#resume-css-v2');
+                const v3 = $('#resume-css-v3');
+                const settings = $('#resume-settings-css');
+                if (v1) v1.disabled = true;
+                if (v2) v2.disabled = true;
+                if (v3) v3.disabled = true;
+                if (settings) settings.disabled = true;
+                const tplSelector = $('#template-selector');
+                if (tplSelector) tplSelector.style.display = 'none';
+            }
         }
 
         if (savedTab && ['resume', 'cover-letter', 'ats-checker'].includes(savedTab)) {
@@ -1519,11 +1880,108 @@
 
         loadResume();
         loadCoverLetter();
+        initFileWatcher();
+
+        // Restore persisted company name
+        const savedCompany = localStorage.getItem('resumer-company-name');
+        const companyInput = $('#company-name');
+        if (savedCompany && companyInput) companyInput.value = savedCompany;
+
+        // Persist company name on every change
+        if (companyInput) {
+            companyInput.addEventListener('input', () => {
+                localStorage.setItem('resumer-company-name', companyInput.value);
+            });
+        }
+
+        // Auto-extract company name from JD input
+        const jdInput = $('#jd-input');
+        if (jdInput) {
+            jdInput.addEventListener('input', () => {
+                const extracted = extractCompanyFromJD(jdInput.value);
+                if (extracted && companyInput && !companyInput.value.trim()) {
+                    companyInput.value = extracted;
+                    localStorage.setItem('resumer-company-name', extracted);
+                    toast(`Company detected: ${extracted}`, 'info', 2500);
+                }
+            });
+        }
 
         // Clear stale drafts on fresh load (drafts are only useful during an active edit session)
         localStorage.removeItem('resumeContentDraft');
 
         updateStatusBar();
     });
+
+    // ────── Live File Watcher (auto-reload on save/undo) ──────
+    function initFileWatcher() {
+        const files = [
+            { path: 'components/resume/resume.md',      type: 'resume-qe' },
+            { path: 'components/resume-tpm/resume-tpm.md', type: 'resume-tpm' },
+            { path: 'components/resume-ai/resume-ai.md',   type: 'resume-ai' },
+            { path: 'components/cover-letter/cover-letter.md', type: 'cover' },
+        ];
+
+        const lastSeen = {};
+
+        async function checkFile(file) {
+            try {
+                const res = await fetch(file.path, { method: 'HEAD', cache: 'no-store' });
+                const stamp = res.headers.get('Last-Modified') || res.headers.get('ETag') || '';
+                if (lastSeen[file.path] !== undefined && lastSeen[file.path] !== stamp) {
+                    lastSeen[file.path] = stamp;
+                    return true;
+                }
+                lastSeen[file.path] = stamp;
+            } catch { /* server not available */ }
+            return false;
+        }
+
+        async function poll() {
+            for (const file of files) {
+                const changed = await checkFile(file);
+                if (!changed) continue;
+
+                if (file.type === 'cover') {
+                    loadCoverLetter();
+                    toast('Cover letter updated', 'info', 1500);
+                } else {
+                    const typeMap = { 'resume-qe': 'qe', 'resume-tpm': 'tpm', 'resume-ai': 'ai' };
+                    if (currentResumeType === typeMap[file.type]) {
+                        // Don't overwrite editor if user is actively editing
+                        if (currentMode !== 'edit') {
+                            loadResume();
+                            toast('Resume updated', 'info', 1500);
+                        }
+                    }
+                }
+                break; // one change per cycle
+            }
+        }
+
+        setInterval(poll, 1500);
+    }
+
+    // ────── Extract company name from JD text ──────
+    function extractCompanyFromJD(jdText) {
+        if (!jdText || jdText.length < 20) return null;
+
+        // Common patterns: "at CompanyName", "join CompanyName", "About CompanyName", "Company: CompanyName"
+        const patterns = [
+            /^(?:about\s+)?([A-Z][\w\s,\.]+(?:Inc|Ltd|LLC|Corp|Corporation|Technologies|Solutions|Systems|Labs|Health|Group|India|Global)?)\.?$/im,
+            /(?:join|joining)\s+([A-Z][\w]+(?:\s+[A-Z][\w]+){0,3})/i,
+            /([A-Z][\w]+(?:\s+[A-Z][\w]+){0,3})\s+is\s+(?:a|an|the)\s+(?:leading|global|pioneer|fast)/i,
+            /^([A-Z][\w]+(?:\s+[A-Z][\w]+){0,3})\s+(?:Corporation|Inc|Ltd|LLC|Corp|Technologies|Solutions)/im,
+        ];
+
+        for (const pattern of patterns) {
+            const match = jdText.match(pattern);
+            if (match && match[1]) {
+                const name = match[1].trim().replace(/[,\.]+$/, '');
+                if (name.length > 2 && name.length < 50) return name;
+            }
+        }
+        return null;
+    }
 
 })();

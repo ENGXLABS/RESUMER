@@ -29,6 +29,27 @@
 
 ---
 
+### AI-Native Testing / AI QE Roles → Use AI Resume
+**Keywords to look for:**
+- AI testing, AI-native testing, AI-augmented testing
+- AI agent engineering, test agents, autonomous testing
+- MCP, Model Context Protocol, MCP server
+- LLM, large language model, prompt engineering
+- GenAI QE, AI-assisted testing, AI-driven testing
+- GitHub Copilot, Claude, Cursor, AI tools
+- RAG, vector stores, embedding models
+- Multi-agent orchestration, tool-calling
+- AI test generation, AI test prioritization
+- Self-healing tests, intelligent test selection
+
+**Action:**
+- Work on: `components/resume-ai/resume-ai.md`
+- Reference: `.github/instructions/resume-instructions.md` (adapt for AI QE context)
+- Content source: `.github/resume-ai-master-content.md`
+- Focus: AI agent engineering, MCP expertise, prompt engineering, AI team leadership, QE fundamentals
+
+---
+
 ### Product/Program Management Roles → Use TPM Resume
 **Keywords to look for:**
 - Technical Product Manager, TPM, Product Manager

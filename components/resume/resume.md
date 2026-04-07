@@ -4,18 +4,18 @@
 
 ## Professional Summary
 
-- Senior Software Engineer in Test with 11 years of experience designing and scaling automated testing frameworks for backend services, distributed systems, and full-stack applications across SaaS, fintech, and OTT domains
-- Hands-on expertise building automation test suites using Java and Selenium embedded in CI/CD pipelines, scaling automation coverage from 60% to 95% while reducing regression time by 40%
-- Experienced in performance and simulation testing to validate system stability under high-traffic and variable load conditions, and in mentoring engineers across backend, mobile, and fullstack automation domains
-- Proven track record collaborating with development and product teams to embed quality into delivery workflows, reducing late-cycle defects by 40% through shift-left practices and automated quality gates
+- Principal Quality Engineering Consultant with 11 years of experience designing test strategies, Quality Engineering frameworks, and UAT processes across enterprise SaaS, fintech, and distributed systems platforms
+- Deep expertise in full testing pyramid strategy (unit, integration, E2E, UAT), testing maturity assessments, shift-left adoption, and continuous testing integration within CI/CD pipelines across multi-squad engineering organizations
+- Reduced late-cycle defects by 40%, scaled automation coverage from 60% to 95% for a 1M+ user platform, and cut regression time by 40% through structured testing standards, UAT framework design, and CI/CD quality gates
+- Strong background in QA transformation consulting, delivering testing maturity gap analyses, actionable standards documentation, and QE team uplift recommendations for engineering and business stakeholders
 
 ## Core Skills
 
-Test Automation Framework Development (Selenium, Appium, REST Assured, Cucumber), Backend and API Testing (RESTful Services, Contract Testing, Microservices), Performance and Load Testing (Simulation Testing, Stress Testing, System Stability), Full Stack and Mobile Testing (Web, Android, iOS, Backend), CI/CD Integration and Quality Gates (Jenkins, GitHub Actions, GoCD), Mentorship and Training in Automation Best Practices, Distributed Systems Testing (Async Workflows, Data Integrity, Event-Driven Flows), AI-Assisted Testing and Tooling Innovation
+Quality Engineering Assessment (Testing Maturity Assessment, Gap Analysis, Risk Identification, Coverage Evaluation, QA Team Capacity Assessment, UAT Process Evaluation, Business Workflow Analysis), Test Strategy Design (Full Testing Pyramid, Unit, Integration, E2E and UAT Strategy, Framework Recommendations, Quality Metrics and KPIs, Code Coverage Tooling), UAT Framework Design (UAT Process Workflows, Test Case Templates, Business User Training and Onboarding, Cycle Time Analysis, Defect Leakage Reduction), Shift-Left and Continuous Testing (Shift-Left Practices, API Contract Testing, Testable Design, CI/CD Quality Gates, Continuous Testing Strategy, DevOps Integration), Test Automation (Selenium WebDriver, Playwright, Cypress, REST Assured, BDD/ATDD, Cucumber, Java, Kotlin, Automation Framework Architecture), QE Transformation and Leadership (QE Team Structure Recommendations, Skills Uplift Planning, QA Transformation Programs, Executive Readouts, Stakeholder Reporting, Technical Documentation), Performance and Quality Tooling (k6, JMeter, Code Coverage Tooling, TestRail, Azure DevOps, JIRA, Confluence), AI-Assisted Testing (AI-SDLC Evaluation, GitHub Copilot, AI-Assisted Test Generation Assessment, Coverage and Maintainability Review)
 
 ## Technical Skills
 
-Java, Kotlin, Python, Selenium WebDriver, Appium, REST Assured, Playwright, Cucumber, TestNG, JUnit, XCUITest, k6, JMeter, Gatling, Postman, SQL, PostgreSQL, MySQL, MongoDB, Jenkins, GitHub Actions, GoCD, Docker, Kubernetes, GCP, AWS, Charles Proxy, Grafana, Kibana, Prometheus, Git, JIRA, TestRail, Agile, Scrum, BDD, TDD, GitHub Copilot, Cursor
+Java, Kotlin, JavaScript, TypeScript, Selenium WebDriver, Playwright, Cypress, REST Assured, Karate, TestNG, JUnit, Cucumber, BDD/ATDD, Postman, API Contract Testing, Pact, TestRail, k6, JMeter, Jenkins, GitHub Actions, Docker, Kubernetes, GCP, AWS, Azure, GitHub Copilot, AI-Assisted Testing, Git, JIRA, Confluence
 
 ## Professional Experience
 
@@ -23,72 +23,71 @@ Java, Kotlin, Python, Selenium WebDriver, Appium, REST Assured, Playwright, Cucu
 
 #### EPAM Systems | India
 
-- Owned domain-level quality strategy for cloud-native distributed systems, designing automated test frameworks and end-to-end test scenarios for backend services that reduced late-cycle defects by 40% across multiple squads
-- Built and maintained scalable Selenium and Playwright automation suites integrated into CI/CD pipelines, increasing automation stability by 45% through modular test architecture and intelligent test selection
-- Designed and executed performance and simulation test scenarios for high-traffic and concurrency conditions, validating system reliability across distributed workflows and identifying bottlenecks before production
-- Implemented API contract testing across microservices to validate service interactions and ensure backward compatibility during platform upgrades, preventing breaking changes from reaching production
-- Mentored SDETs across teams on automation framework design, debugging practices, and quality as code principles, elevating testing standards and adoption across the engineering organisation
-- Leveraged AI-assisted testing tools including GitHub Copilot and Cursor to accelerate test script generation and automation workflows, improving team delivery speed while maintaining coverage quality
+- Assessed current state testing across multi-squad cloud-native products, evaluating coverage gaps, tooling fitness, test data management, and QA team capacity, delivering testing maturity assessments with actionable gap analysis for engineering and delivery leadership
+- Designed comprehensive testing standards for distributed systems covering unit, integration, and E2E testing conventions, code coverage tooling adoption, and quality KPIs that development teams could follow and action directly
+- Drove shift-left transformation by embedding API contract testing, testable design reviews, and early QA involvement into sprint planning, reducing late-cycle defects by 40% and establishing continuous testing within CI/CD pipelines
+- Defined Quality Engineering framework integrating performance testing considerations, shift-left and continuous delivery practices, contributing findings to executive readouts and technical deep-dive sessions with client engineering teams
+- Architected centralized test orchestration framework enabling quality as code practices across multiple squads, improving automation stability by 45% through Selenium and Playwright suites integrated into CI/CD quality gates
+- Evaluated AI-assisted test generation tools, assessing quality, coverage, maintainability, and effort savings to determine integration suitability within the overall testing strategy and delivery approach
+- Recommended QE team structure and skills uplift paths for engineering squads, mentoring SDETs on modern QE standards and shift-left practices through hands-on coaching and technical direction
 
 ### Senior SDET <span class="spacer"></span><span class="normal">Apr 2022 - Oct 2023</span>
 
 #### Navi Technologies | Bangalore, India
 
-- Built reusable API automation frameworks using REST Assured and Java for fintech microservices, automating 120+ critical workflows across payment flows and event-driven components while reducing regression time by 40%
-- Designed structured test strategies covering data integrity, high-risk transaction paths, and multi-service interactions across functional, integration, and performance test layers
-- Developed stress and stability tests for payment processing workflows, validating system behaviour under peak transaction loads and identifying failure modes in async and cached data flows
-- Implemented quality gates for microservices deployment through API contract validation, ensuring backward compatibility and preventing production incidents through early defect detection
-- Collaborated with product and engineering teams to prioritise test coverage by business risk, establishing clear defect tracking and release readiness criteria in agile delivery cycles
+- Designed comprehensive test strategies for fintech backend systems covering integration, API contract, and E2E testing across microservices, reducing regression time by 40% through risk-based prioritization and CI/CD quality gates
+- Automated 120+ critical workflows across async flows, data sync, and event-driven components using REST Assured and Java, establishing reusable BDD-aligned test frameworks integrated into CI/CD pipelines
+- Identified critical business workflows with insufficient test coverage, documenting findings and driving risk-based prioritization with PMs and EMs to address highest-risk testing gaps systematically
+- Established quality gates for microservices deployment ensuring backward compatibility, API contract adherence, and performance validation aligned to continuous delivery standards
 
-### Associate Tech Lead (Quality & Automation) <span class="spacer"></span><span class="normal">Apr 2020 - Apr 2022</span>
+### Associate Tech Lead (Quality and Automation) <span class="spacer"></span><span class="normal">Apr 2020 - Apr 2022</span>
 
 #### OkCredit | Bangalore, India
 
-- Scaled automation coverage from 60% to 95% for a SaaS product serving 1M+ users, building reusable test frameworks using Selenium and Java supporting web, Android, and iOS platforms
-- Established automated CI/CD pipelines with Jenkins integrating test suites for continuous testing, reducing manual regression effort by 70% while improving release cycle time by 50%
-- Introduced API contract checks and async flow monitoring for distributed backend components, validating data consistency and ensuring reliability across microservices
-- Trained and mentored QE team members on automation frameworks, mobile testing with Appium, and structured test design, building capability across fullstack and backend testing domains
+- Designed and implemented end-to-end Quality Engineering framework for a 1M+ user SaaS platform, scaling automation coverage from 60% to 95% through strategic prioritization, modular test architecture, and structured testing standards
+- Led UAT process improvement by engaging cross-functional stakeholders, documenting workflows, and reducing manual regression effort by 70% through test automation and streamlined release criteria aligned to business expectations
+- Implemented API contract checks, performance testing baselines using JMeter, and data consistency validations, improving release cycle time by 50% through continuous testing integrated into CI/CD pipelines
+- Built quality metrics dashboard providing real-time visibility into test coverage, defect trends, and release readiness for product and engineering stakeholders, enabling data-driven quality decisions
 
-### Senior Software Engineer (Quality - OTT & Cross Device) <span class="spacer"></span><span class="normal">Nov 2019 - Apr 2020</span>
+### Senior Software Engineer (Quality - OTT and Cross-Device) <span class="spacer"></span><span class="normal">Nov 2019 - Apr 2020</span>
 
 #### Rakuten Viki | Singapore
 
-- Led quality across multi-device OTT applications (iOS, Android, FireTV, AppleTV), executing risk-based test strategies across 50+ device configurations and reducing video playback defects by 35%
-- Built mobile automation frameworks using Appium and XCUITest, establishing testing standards adopted by globally distributed QA teams across backend and client-side testing
-- Drove deep debugging using Charles Proxy and device-level instrumentation to identify cross-platform streaming failures, network-dependent issues, and sync inconsistencies
+- Led quality assurance across multi-device OTT applications in Singapore, establishing risk-based test strategy and testing standards across 50+ device configurations, reducing consumer-facing defects by 35%
+- Drove deep technical debugging using Charles Proxy and distributed system instrumentation, validating performance, sync, and cross-platform behaviours across iOS, Android, and smart TV platforms
 
 ### Software Engineer <span class="spacer"></span><span class="normal">Jun 2017 - Oct 2019</span>
 
 #### Altisource | Bangalore, India
 
-- Built scalable automation frameworks with Selenium and Java achieving 92% coverage across web applications, integrated into Jenkins CI/CD pipelines reducing test execution time by 50%
-- Designed data validation and stability checks using SQL, improving early defect detection rate by 40% through stronger assertions and structured test scenarios across web workflows
+- Built automation pipelines with 92% coverage across web and mobile workflows integrated into Jenkins CI/CD, reducing test execution time by 50% through parallel execution and test prioritization
 
 ### Software Test Engineer <span class="spacer"></span><span class="normal">May 2015 - May 2017</span>
 
 #### AB Innovative | Bangalore, India
 
-- Automated legacy B2B workflows using Selenium and Java, building reusable test frameworks that improved coverage from 30% to 80% while reducing manual testing effort by 60%
-- Established structured test case management, defect tracking documentation, and testing standards for enterprise application release validation
+- Automated legacy B2B workflows using Selenium and Java, reducing manual testing effort by 60% and improving test coverage from 30% to 80% through structured test case design and defect tracking
 
-## Selected Projects
+## Projects
 
-### API Contract Testing Suite
+### API Contract Testing Framework
 
-- Designed and implemented API contract testing framework using Pact and REST Assured across microservices, enforcing backward compatibility and preventing breaking changes from reaching production
-- Prevented 50+ breaking API changes through automated contract validation in CI/CD, reducing integration testing time by 40% and improving team autonomy across service boundaries
+- Established API contract testing framework ensuring backward compatibility across 30+ microservices, preventing 50+ breaking API changes from reaching production through producer-consumer validation using Pact and REST Assured
+- Integrated contract validation with CI/CD pipelines using OpenAPI specification checks, reducing integration testing time by 40% and improving microservices reliability across engineering teams
 
-### Intelligent Test Orchestration Platform
+### Domain Driven Test Orchestration Platform
 
-- Built centralised test execution and quality gate engine across CI/CD using Jenkins, Docker, and Kubernetes, enabling domain teams to enforce quality as code practices with impact-based test selection
-- Reduced CI/CD pipeline execution time by 60% through parallel execution, intelligent test selection based on code change impact, and optimised resource utilisation across environments
+- Architected centralized test execution and quality gate engine integrated into CI/CD pipelines, enabling continuous delivery quality practices with intelligent test selection across 10+ teams
+- Built code impact analysis for test selection, reducing CI/CD pipeline time by 60% while maintaining high defect detection rates
 
 ## Key Achievements
 
-- Scaled automation coverage from 60% to 95% for a product serving 1M+ users, automating 120+ critical backend and API workflows using Java, Selenium, and REST Assured while reducing regression time by 40%
-- Designed performance and simulation test frameworks validating system stability under high-traffic conditions, identifying 20+ performance bottlenecks before production across distributed services
-- Reduced late-cycle defects by 40% through shift-left practices, API contract testing, and automated quality gates across distributed microservices
-- Mentored 30+ engineers across teams on automation frameworks, testing standards, and quality as code practices, embedding sustainable testing culture across engineering organisations
+- Reduced late-cycle defects by 40% through shift-left practices, API contract testing, and CI/CD quality gate integration across multi-squad engineering organizations
+- Designed Quality Engineering framework that scaled automation coverage from 60% to 95% for a 1M+ user SaaS platform, reducing manual regression effort by 70%
+- Automated 120+ critical fintech workflows reducing regression time by 40% through risk-based test strategies and continuous testing integration
+- Mentored 30+ engineers on QE standards, testing frameworks, and shift-left practices, growing QA team maturity and cross-functional delivery capability
+- Prevented 50+ breaking API changes from reaching production by establishing API contract testing framework across 30+ microservices with CI/CD-integrated validation
+- Reduced CI/CD pipeline time by 60% through intelligent test selection and impact-based execution, maintaining 95% defect detection rate with optimized resource utilization
 
 ## Certifications
 

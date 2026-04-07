@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="components/resume/resume-v3.css" id="resume-css-v3" disabled>
     <link rel="stylesheet" href="components/resume/resume-settings.css" id="resume-settings-css">
     <link rel="stylesheet" href="components/resume-tpm/resume-tpm.css">
+    <link rel="stylesheet" href="components/resume-ai/resume-ai.css" id="resume-css-ai" disabled>
     <link rel="stylesheet" href="components/cover-letter/cover-letter.css">
     <link rel="stylesheet" href="components/ats-checker/ats-checker.css">
     <title>Resumer - Resume Builder & ATS Optimizer</title>
@@ -107,6 +108,10 @@
                 <button id="tpm-resume-btn" class="resume-type-btn-compact" onclick="switchResumeType('tpm')"
                     title="Technical Product Manager">
                     <span class="iconify" data-icon="mdi:chart-timeline-variant"></span> TPM
+                </button>
+                <button id="ai-resume-btn" class="resume-type-btn-compact" onclick="switchResumeType('ai')"
+                    title="AI-Native Testing">
+                    <span class="iconify" data-icon="mdi:robot"></span> AI
                 </button>
             </div>
             <div class="zoom-controls">
