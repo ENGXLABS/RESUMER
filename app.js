@@ -303,7 +303,7 @@
             { regex: /(\d+)\s*(?:\+\s*)?years?\s+of\s+experience/i, label: 'Years Experience' },
             { regex: /coverage\s+(?:from\s+\d+%\s+)?to\s+(\d+)%/i, label: 'Test Coverage' },
             { regex: /reducing?\s+(?:late[- ]cycle\s+)?defects?\s+by\s+(\d+)%/i, label: 'Defect Reduction' },
-            { regex: /automating\s+(\d+)\+?\s+critical/i, label: 'Workflows Automated' },
+            { regex: /automat(?:ing|ed)\s+(\d+)\+?\s+critical/i, label: 'Workflows Automated' },
             { regex: /(\d+)\+?\s+breaking\s+(?:api\s+)?changes/i, label: 'Breaking Changes Caught' },
             { regex: /regression\s+time\s+by\s+(\d+)%/i, label: 'Faster Regression' },
             { regex: /(\d+)M\+?\s+users/i, label: 'Users Served', transform: v => v + 'M+' },
@@ -345,10 +345,11 @@
             contactDiv.className = 'v3-contact';
             const iconMap = {
                 'mailto:': 'mdi:email-outline',
+                'tel:': 'mdi:phone-outline',
                 'linkedin': 'mdi:linkedin',
                 'github.com': 'mdi:github',
-                'portfolio': 'mdi:web',
-                'sivasankaramalan.is': 'mdi:web'
+                'portfolio': 'mdi:briefcase-outline',
+                'sivasankaramalan.is': 'mdi:briefcase-outline'
             };
             firstP.querySelectorAll('a').forEach(link => {
                 const a = document.createElement('a');

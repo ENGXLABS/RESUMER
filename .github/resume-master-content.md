@@ -131,6 +131,10 @@ Engineering Partnership, Product Alignment, Stakeholder Management, Cross-Functi
    - Mentored SDETs on quality as code, debugging, architecture awareness, and modern QE standards
    - Influenced hiring, onboarding, and skill development for quality engineers across the organization
 
+6. **AI Agent Development**
+   - Built an AI agent using GitHub Copilot and MCP integrations with Atlassian, qTest, and GitHub that automates test case generation, defect triage, and test plan creation for both manual and automated QA workflows
+   - Recognised as AI Native Engineer within EPAM's QE practice for driving end-to-end AI adoption and innovation across the organisation
+
 #### Quantifiable Impacts:
 - Reduced late cycle defects by 40%
 - Increased automation stability by 45%
@@ -437,6 +441,10 @@ Engineering Partnership, Product Alignment, Stakeholder Management, Cross-Functi
 4. **[Agile Project Management](https://www.coursera.org/account/accomplishments/verify/5KZFTRN4ZY3R)**
    - Issuer: Google
    - Focus: Agile methodologies, project planning, team collaboration
+
+5. **AI Native Engineer - QE Practice**
+   - Issuer: EPAM Systems
+   - Focus: AI-driven QA workflows, test generation, defect triage, MCP integrations, GitHub Copilot adoption in QE
 
 ---
 

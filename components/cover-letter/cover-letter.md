@@ -6,19 +6,19 @@
     </div>
 </div>
 
-**Date:** April 5, 2026
+**Date:** May 5, 2026
 
-**Slalom Build**
+**ASB Bank**
 
 Dear Hiring Manager,
 
-The Sr Consultant/Principal Quality Engineering role at Slalom Build is the kind of work I've been doing in practice for several years, assessing testing maturity, designing frameworks that engineering teams can actually follow, and helping organizations shift quality left rather than treating it as a final gate.
+The Principal Engineer - Test role at ASB is a strong fit for how I work, improving test management and automation foundations so squads can deliver reliable changes at pace.
 
-At EPAM, I ran testing maturity assessments across multi-squad cloud-native programmes, evaluating coverage gaps, tooling fitness, team capacity, and test data management, then translated findings into actionable gap analyses presented directly to engineering and delivery leadership. I designed testing standards covering unit, integration, and E2E conventions that development teams could act on independently. On the UAT side, at OkCredit I led UAT process improvement by engaging cross-functional stakeholders, documenting workflows, identifying cycle time and defect leakage pain points, and building a structured framework that reduced manual regression effort by 70% for a 1M+ user platform. Across both roles, I embedded shift-left practices through API contract testing, CI/CD quality gates, and testable design reviews, reducing late-cycle defects by 40%.
+In my current role at EPAM, I lead domain-level quality strategy across distributed programmes, designing reusable automation assets across API, UI, and integration layers while embedding quality gates into CI/CD. That work improved automation stability by 45% and reduced late-cycle defects by 40%. At Navi Technologies, I automated 120+ critical workflows across async and event-driven fintech services, strengthened API contract coverage, and reduced regression time by 40% through practical test orchestration and risk-based prioritisation. Earlier at OkCredit, I helped scale automation coverage from 60% to 95% for a 1M+ user platform while reducing manual regression effort by 70%, improving release confidence across squads.
 
-What draws me to Slalom Build specifically is how your team integrates AI into engineering delivery. I've been actively evaluating AI-assisted test generation through GitHub Copilot and related tooling, assessing coverage quality, maintainability, and effort savings in real product contexts, which aligns directly with the AI-SDLC collaboration this role describes.
+What stands out to me about ASB is the focus on Courage, Care, and Curiosity, combined with the expectation to uplift engineering practices through influence and collaboration. I have consistently partnered with enterprise test leads, engineering leaders, and squads to simplify tooling choices, identify integration risks early, and help teams adopt better testing practices without slowing delivery. I also value ASB's balance of large-scale engineering standards and continuous learning, which matches how I approach long-term quality uplift in regulated and high-trust environments.
 
-Happy to walk through how I approach maturity assessments and QE framework design if this looks like a fit.
+Happy to discuss how I would approach strengthening test management, reusable automation frameworks, and quality engineering adoption across ASB's strategic programmes.
 
 Best regards,  
 Sivasankaramalan Gunasekarasivam
