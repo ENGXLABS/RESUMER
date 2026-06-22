@@ -2,13 +2,11 @@
 # Your personal profile — NEVER commit this (contains personal data)
 profile.json
 
-# Personal AI instruction files — contain personal resume data, not for public repo
+# Personal AI files (deleted — entries kept for safety)
 .github/resume-master-content.md
 .github/resume-role-templates.md
 .github/resume-ai-master-content.md
-.github/instructions/
 .github/antigravity-agent-instructions.md
-.github/agents/
 CLAUDE.md
 GEMINI.md
 DUAL_RESUME_FEATURE.md
