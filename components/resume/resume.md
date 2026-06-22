@@ -1,101 +1,116 @@
+<!-- markdownlint-disable MD033 -->
+
 # Sivasankaramalan Gunasekarasivam
 
-[ssmalan94@gmail.com](mailto:ssmalan94@gmail.com) | [linkedin.com/in/Sivasankaramalan](https://linkedin.com/in/Sivasankaramalan) | [github.com/Sivasankaramalan](https://github.com/Sivasankaramalan) | [Portfolio](https://sivasankaramalan.is-a.dev/) | [+91 90039 99957](tel:+919003999957)
+<div class="section headerInfo">
+
+- [ssmalan94@gmail.com](mailto:ssmalan94@gmail.com)
+- [linkedin.com/in/Sivasankaramalan](https://linkedin.com/in/Sivasankaramalan)
+- [github.com/Sivasankaramalan](https://github.com/Sivasankaramalan)
+- [Portfolio](https://sivasankaramalan.is-a.dev/)
+
+</div>
 
 ## Professional Summary
 
-- Principal Test Automation Engineer with 11 years leading quality engineering uplift across strategic programmes in fintech, SaaS, and distributed cloud-native platforms
-- Built and scaled enterprise test management practices through automation strategy, reusable framework architecture, and clear quality roadmaps across backend, frontend, and integration layers
-- Improved delivery outcomes by reducing late-cycle defects by 40%, increasing automation stability by 45%, and automating 120+ critical workflows across high-risk financial and event-driven systems
-- Brings a hands-on, influence-first leadership style that enables squads to adopt modern testing practices, identify risks early, and ship reliable changes at pace in complex environments
+- Senior Quality Engineering Leader with 11 years driving end-to-end QE strategy, team leadership, and multi-platform quality programs across fintech, SaaS, and mobile product organizations
+- Leads QA teams across functional, UI, mobile, and API testing using Selenium, Appium, Playwright, and Cypress, delivering comprehensive test plans, traceability matrices, defect logs, and exit reports aligned to program delivery
+- Scaled automation coverage from 60% to 95% and reduced late-cycle defects by 40% by embedding shift-left practices, API contract testing, and quality gates across distributed cloud-native systems
+- Recognized as AI Native Engineer within EPAM's QE practice for driving end-to-end GenAI adoption and building GitHub Copilot and MCP-driven QA agents that automate test case generation, defect triage, and test planning across multiple engineering portfolios
+- Engineered 6 production-grade AI QA agents saving 400+ hours per quarter across 7 teams, reducing test creation error rates from 15% to under 1% through GitHub Copilot, MCP, and Cursor integrations  
 
 ## Core Skills
 
-Test Management Uplift (Programme Test Strategy, Test Roadmaps, Test Coverage Planning, Risk-Based Prioritisation, Quality Governance), Automation Framework Leadership (Reusable Automation Assets, API UI Integration Frameworks, Modular Architecture, Framework Standardisation), Enterprise Integration Testing (Microservices Testing, Distributed Systems Validation, Async Workflow Coverage, Data Integrity Validation, Cross-Platform Integration), Tooling and Quality Engineering Practices (Tooling Simplification, Test Data Management, CI/CD Quality Gates, Continuous Testing, Quality as Code), Hands-On Squad Enablement (Automation Adoption Support, Technical Coaching, Testable Design Reviews, Early Risk Identification, Incremental Change Delivery), Performance and Reliability Engineering (k6, Gatling, Concurrency Testing, Bottleneck Analysis, Crash Recovery, Stability Improvements), Stakeholder and Engineering Influence (Cross-Functional Collaboration, Engineering Leadership Partnership, Mentoring SDETs, Transformation Adoption)
+Quality Strategy and Governance (Test Plans, Test Strategies, Traceability, Exit Reporting, Risk Assessment, Quality Gates, Release Readiness, Defect Slippage Tracking), People Leadership and Team Building (Team Leadership, Capacity Management, Performance Management, Mentoring, Hiring, Onboarding, Career Development, Coaching), Web Mobile and API Testing (Functional Testing, UI Testing, Mobile Testing, Web Testing, REST API Testing, Integration Testing, Exploratory Testing), Test Automation Strategy (Selenium WebDriver, Appium, Playwright, Cypress, REST Assured, Postman, Framework Design, CI/CD Integration), AI and GenAI in Quality Engineering (GitHub Copilot, Cursor, MCP AI-assisted testing, Test Case Generation, Defect Triage, Test Plan Automation), Agile Delivery and Collaboration (JIRA, Confluence, Scrum, Stakeholder Management, QE Standards, Continuous Improvement, Cross-Functional Leadership), Performance and Quality Metrics (k6, Gatling, Load Testing, KPI Reporting, Defect Metrics, Test Velocity Tracking)
 
 ## Technical Skills
 
-Java, Kotlin, Python, Selenium WebDriver, Playwright, REST Assured, TestNG, JUnit, Cucumber, API Contract Testing, Postman, k6, Gatling, JMeter, Jenkins, GitHub Actions, Docker, Kubernetes, SQL, PostgreSQL, MySQL, MongoDB, Redis, Grafana, Kibana, Prometheus, Elasticsearch, Charles Proxy, Git, GitHub, JIRA, TestRail
+Java, Kotlin, Python, JavaScript, TypeScript, Selenium WebDriver, Appium, Playwright, Cypress, REST Assured, Postman, Swagger, SOAP UI, API Contract Testing, JUnit, TestNG, Cucumber, GitHub Copilot, Cursor, MCP AI-assisted testing, JIRA, Confluence, TestRail, Jenkins, GitHub Actions, Docker, Kubernetes, SQL, PostgreSQL, MySQL, MongoDB, Redis, Grafana, Kibana, Elasticsearch, Prometheus, Charles Proxy, AWS, GCP, Azure, Git, GitHub, Bitbucket
 
 ## Professional Experience
 
 ### Lead QA Engineer (Domain Lead - QE) <span class="spacer"></span><span class="normal">Oct 2023 - Present</span>
 
-#### EPAM Systems | India
+#### EPAM Systems <span class="spacer"></span> India
 
-- Established domain-level test and automation strategy across strategic programme delivery, aligning quality roadmaps, coverage goals, and risk controls for multiple distributed squads
-- Architected reusable automation frameworks across API, UI, and integration layers, integrating quality gates into Jenkins and GitHub Actions CI/CD pipelines that improved automation stability by 45%
-- Embedded testability into system design through architecture reviews, API contract validation, and early QA engagement, reducing late-cycle defects by 40% across cloud-native microservices
-- Built centralized orchestration assets and quality-as-code standards that enabled teams to adopt consistent automation practices and accelerate feedback loops across environments
-- Worked hands on with squads to implement modern automation tooling, support framework adoption, and solve delivery blockers in high-risk workflows spanning backend and frontend services
-- Mentored SDETs on framework extension, debugging, and scalable test design, raising engineering capability while strengthening quality foundations across teams
+- Led domain QE strategy by publishing test plans, traceability matrices, and exit reports aligned to risk controls and release criteria across multiple cloud-native squads
+- Embedded shift-left practices through API contract testing, testable design, and early QA involvement, reducing late-cycle defects by 40% across distributed microservices
+- Directed QE capacity planning and performance reviews for teams of 5-10 engineers, overseeing hiring and onboarding of 15+ QE professionals across the organization
+- Drove hands-on automation delivery building Playwright and REST API test suites that improved automation stability by 45%, with quality gates integrated into Jenkins and GitHub Actions pipelines
+- Designed high-impact test scenarios covering performance, concurrency, crash recovery, and multi-device behaviour, coordinating test data and environment setup across delivery streams
+- Built an AI QA agent using GitHub Copilot and MCP integrations with Atlassian, qTest, and GitHub that automates test case generation, defect triage, and test plan creation, recognized as AI Native Engineer within EPAM's QE practice
+- Tracked and reported QA KPIs including defect slippage, test velocity, and flakiness rates, presenting continuous improvement insights to product and engineering leadership
 
 ### Senior SDET <span class="spacer"></span><span class="normal">Apr 2022 - Oct 2023</span>
 
-#### Navi Technologies | Bangalore, India
+#### Navi Technologies <span class="spacer"></span> Bangalore, India
 
-- Designed and executed programme-level test strategies for fintech backend services, improving integration reliability across payment flows, transaction processing, and financial data validation paths
-- Automated 120+ critical workflows across async, caching, data sync, and event-driven components using Java and REST Assured, reducing regression time by 40% while maintaining strong defect detection
-- Built reusable microservices test assets and API contract suites that strengthened coverage consistency and supported safer release execution across squads
-- Identified integration risks early, including flaky service dependencies and inconsistent API error handling, driving practical mitigation plans and long-term architecture improvements
+- Designed program-level API test strategies for fintech backend services covering payment flows, transaction processing, and financial data validation paths
+- Automated 120+ critical workflows using Java and REST Assured across async, event-driven, and caching components, reducing regression time by 40%
+- Established quality gates for microservices deployments that protected backward compatibility and reduced defect slippage across high-risk services
+- Partnered with PMs and EMs to prioritize testing by business impact, identifying and remediating noncompliance items to drive quality standards across squads
 
 ### Associate Tech Lead (Quality and Automation) <span class="spacer"></span><span class="normal">Apr 2020 - Apr 2022</span>
 
-#### OkCredit | Bangalore, India
+#### OkCredit <span class="spacer"></span> Bangalore, India
 
-- Scaled automation coverage from 60% to 95% for a 1M+ user SaaS platform by building reusable frameworks for web and API testing, improving release confidence across engineering squads
-- Reduced manual regression effort by 70% and improved release cycle time by 50% by integrating automated suites into CI/CD pipelines and standardising quality gates for feature delivery
-- Introduced API contract checks, async flow validation, and sync reliability testing across distributed backend components, improving data consistency across services
-- Established quality dashboards for defect leakage, coverage, and release readiness, enabling data-driven test management decisions and stronger engineering accountability
+- Owned quality for a SaaS platform serving 1M+ users, redefining regression workflows, release criteria, and quality ownership across web, Android, and iOS platforms
+- Increased automation coverage from 60% to 95% by building reusable frameworks, reducing manual regression effort by 70% and improving release cycle time by 50%
+- Established quality dashboards tracking defect trends, test velocity, and release readiness to enable data-driven QA management and engineering accountability
+- Mentored QE team members across onboarding and capability development, coaching engineers on test automation best practices, test design, and quality ownership
 
 ### Senior Software Engineer (Quality - OTT and Cross-Device) <span class="spacer"></span><span class="normal">Nov 2019 - Apr 2020</span>
 
-#### Rakuten Viki | Singapore
+#### Rakuten Viki <span class="spacer"></span> Singapore
 
-- Led quality validation across distributed multi-device systems, executing large-scale integration scenarios across 50+ configurations to improve release stability
-- Drove deep technical debugging using Charles Proxy and network traffic analysis, reducing consumer-facing defects by 35% through structured root cause investigation
+- Led multi-device quality validation across iOS, Android, FireTV, and AppleTV, establishing device-matrix coverage across 50+ configurations and reducing video playback defects by 35%
+- Drove root cause analysis through Charles Proxy, logs, and device instrumentation, improving regression stability across globally distributed QA teams
 
 ### Software Engineer <span class="spacer"></span><span class="normal">Jun 2017 - Oct 2019</span>
 
-#### Altisource | Bangalore, India
+#### Altisource <span class="spacer"></span> Bangalore, India
 
-- Built automation pipelines with 92% coverage using Java and Selenium WebDriver, reducing test execution time by 50% through parallel execution and risk-based test prioritization
-- Improved defect detection rate by 40% by designing stronger assertions, data validations, and structured failure analysis across web and API workflows
+- Built automation pipelines with 92% coverage using Java and Selenium WebDriver, reducing test execution time by 50% through parallel execution and risk-based prioritization
+- Enhanced defect detection by 40% through stronger assertions, data validation, and CI-integrated functional regression checks across web and API workflows
 
 ### Software Test Engineer <span class="spacer"></span><span class="normal">May 2015 - May 2017</span>
 
-#### AB Innovative | Bangalore, India
+#### AB Innovative <span class="spacer"></span> Bangalore, India
 
-- Automated legacy B2B flows reducing manual testing effort by 60% and migrated 200+ manual test cases to automated scripts using Selenium and Java
+- Automated 200+ legacy B2B test cases with Selenium and Java, reducing manual testing effort by 60% and increasing coverage from 30% to 80%
 
 ## Projects
 
-### Domain Driven Test Orchestration Platform
+### Domain-Driven Test Orchestration Platform
 
-- Built centralized execution and quality gate engine across CI/CD pipelines, enabling quality as code practices and reducing cycle time by 60% across multi-team delivery workflows
-- Designed intelligent test selection and orchestration capabilities that improved reliability while simplifying how squads adopted common automation assets
+- Built centralized quality gate engine across CI/CD pipelines, enabling quality as code practices and reducing cycle time by 60% across multi-team delivery workflows
+- Designed intelligent test impact analysis and selection logic that improved test reliability while simplifying automation adoption across 10+ engineering teams
 
-### Performance Engineering Framework
+### Device Farm and Cross-Device Reliability Testing
 
-- Built comprehensive performance testing framework using k6 and Gatling for load, stress, and endurance testing of distributed systems, validating system behaviour under 10x expected load while identifying 20+ performance bottlenecks
-- Integrated performance regression detection into CI/CD pipelines with Prometheus and Grafana dashboards enabling real-time performance monitoring and automated alerting on degradation across distributed services
+- Implemented device matrix testing across Android and iOS using Appium and XCUITest, validating sync behaviours, offline states, and crash recovery across 50+ configurations
+- Automated cross-device test execution reducing manual effort by 70% and reducing device-specific bugs by 45%
 
 ## Key Achievements
 
-- Reduced late-cycle defects by 40% through shift-left practices across distributed fintech and cloud-native systems by influencing testable design from the architecture phase
-- Automated 120+ critical workflows across payment flows, async components, and event-driven fintech systems, reducing regression time by 40% while maintaining high defect detection coverage
-- Scaled automation coverage from 60% to 95% and improved automation stability by 45% through modular, reusable framework architecture integrated across CI/CD pipelines
-- Built automation pipelines with 92% coverage and reduced test execution time by 50% through parallel execution and risk-based test prioritization
-- Reduced manual testing effort by 60% by automating legacy B2B workflows and migrating 200+ manual test cases to Selenium-based automation
+- Reduced late-cycle defects by 40% and scaled automation coverage from 60% to 95% by embedding shift-left practices and quality gates across cloud-native and fintech systems
+- Automated 120+ critical fintech workflows using Java and REST Assured, reducing regression time by 40% while maintaining strong defect detection coverage
+- Led QE teams of 5-10 engineers, mentored 30+ quality professionals, and hired or onboarded 15+ QE staff across organizations
+- Built a production AI QA agent using GitHub Copilot and MCP integrations, recognized as AI Native Engineer within EPAM's QE practice
+-  Refactored instruction-based agents to MCP architecture for governance and scalability and Built MCP + LLM context window management for extended test flow execution
 
 ## Certifications
 
-- **[Enterprise Chaos Engineering Certification](https://www.credly.com/badges/580fdd5f-9284-42e1-98c2-702aedfefe87/linked_in_profile)**
 - **[Microsoft Certified: GitHub Copilot](https://learn.microsoft.com/api/credentials/share/en-us/sivasankaramalan/9F2B9433CE3C091C?sharingId)** - Microsoft
+- **[Agile Project Management](https://www.coursera.org/account/accomplishments/verify/5KZFTRN4ZY3R)** - Google
 - **[Professional Scrum Master](https://www.credly.com/badges/580fdd5f-9284-42e1-98c2-702aedfefe87/linked_in_profile)** - Scrum.org
+- **[Enterprise Chaos Engineering Certification](https://www.credly.com/badges/580fdd5f-9284-42e1-98c2-702aedfefe87/linked_in_profile)**
+- **AI Native Engineer - QE Practice** - EPAM Systems
 
 ## Education
 
 **Executive MBA - Product Engineering** | Indian Institute of Technology Madras (IIT Madras)
 
 **Bachelor of Engineering - Mechanical Engineering** | Anna University
+
+<!-- markdownlint-enable MD033 -->
