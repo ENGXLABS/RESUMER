@@ -3,13 +3,14 @@
   "version": "2.0.0",
   "description": "Local-first, markdown-powered, AI-native resume builder with embedded real-time ATS scoring",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "dev": "live-server --port=8000 --open=index.html --ignore=node_modules,.git",
-    "test": "jest --testPathPattern=src/",
-    "test:watch": "jest --watch --testPathPattern=src/",
-    "test:coverage": "jest --coverage --testPathPattern=src/",
-    "lint": "eslint src/ --ext .js",
-    "lint:fix": "eslint src/ --ext .js --fix"
+    "test": "node --experimental-vm-modules node_modules/.bin/jest",
+    "test:watch": "node --experimental-vm-modules node_modules/.bin/jest --watch",
+    "test:coverage": "node --experimental-vm-modules node_modules/.bin/jest --coverage",
+    "lint": "eslint src/ tests/ --ext .js",
+    "lint:fix": "eslint src/ tests/ --ext .js --fix"
   },
   "devDependencies": {
     "eslint": "^9.0.0",
@@ -17,7 +18,8 @@
     "live-server": "^1.2.2"
   },
   "jest": {
-    "testEnvironment": "jsdom",
+    "testEnvironment": "node",
+    "testMatch": ["**/tests/**/*.test.js"],
     "transform": {}
   },
   "eslintConfig": {

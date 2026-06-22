@@ -120,6 +120,15 @@
                 <button onclick="zoomIn('resume')" title="Zoom In"><span class="iconify" data-icon="mdi:magnify-plus"></span></button>
                 <button onclick="resetZoom('resume')" title="Reset Zoom"><span class="iconify" data-icon="mdi:magnify"></span></button>
             </div>
+            <!-- ATS Live Badge -->
+            <button id="ats-live-badge" class="ats-live-badge" onclick="toggleJDPanel()" title="ATS score — click to open Job Description panel" aria-label="ATS live score">
+                <span class="iconify" data-icon="mdi:target"></span>
+                <span id="ats-badge-score">--</span>
+            </button>
+            <button id="jd-toggle-btn" class="icon-btn" onclick="toggleJDPanel()" data-tooltip="Toggle Job Description panel" aria-label="Toggle JD panel">
+                <span class="iconify" data-icon="mdi:briefcase-search"></span>
+            </button>
+            <span class="header-divider"></span>
             <button id="theme-toggle" class="icon-btn" onclick="toggleTheme()" data-tooltip="Toggle dark mode" aria-label="Toggle dark mode">
                 <span class="iconify theme-icon-light" data-icon="mdi:weather-sunny"></span>
                 <span class="iconify theme-icon-dark" data-icon="mdi:weather-night" style="display:none;"></span>
@@ -132,21 +141,52 @@
 
     <!-- Resume Generator Tab -->
     <div id="resume-tab" class="tab-content active">
+        <div id="resume-workspace" class="resume-workspace">
 
-        <!-- Editor Container -->
-        <div id="editor-container" style="display:none;">
-            <textarea id="markdown-editor" placeholder="Enter your resume in Markdown format..."></textarea>
-            <div class="editor-help">
-                <p><strong>Tip:</strong> Use Markdown syntax - # for headings, ** for bold, * for italic, - for bullet
-                    points</p>
+            <!-- Editor Container -->
+            <div id="editor-container" style="display:none;">
+                <textarea id="markdown-editor" placeholder="Enter your resume in Markdown format..."></textarea>
+                <div class="editor-help">
+                    <p><strong>Tip:</strong> Use Markdown syntax - # for headings, ** for bold, * for italic, - for bullet
+                        points</p>
+                </div>
             </div>
-        </div>
 
-        <!-- Preview Container -->
-        <div id="preview-container">
-            <div id="resume-content"
-                style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 20px;">
+            <!-- Preview Container -->
+            <div id="preview-container">
+                <div id="resume-content"
+                    style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 20px;">
+                </div>
             </div>
+
+            <!-- Collapsible JD Sidebar -->
+            <aside id="jd-sidebar" class="jd-sidebar collapsed" aria-label="Job Description panel">
+                <div class="jd-sidebar-header">
+                    <span class="jd-sidebar-title">
+                        <span class="iconify" data-icon="mdi:briefcase-search"></span>
+                        Job Description
+                    </span>
+                    <div class="jd-sidebar-actions">
+                        <button id="heatmap-toggle-btn" class="jd-action-btn" onclick="toggleHeatMap()" title="Toggle keyword highlights" aria-label="Toggle heat map">
+                            <span class="iconify" data-icon="mdi:format-color-highlight"></span>
+                        </button>
+                        <button class="jd-action-btn" onclick="toggleJDPanel()" title="Close panel" aria-label="Close JD panel">
+                            <span class="iconify" data-icon="mdi:close"></span>
+                        </button>
+                    </div>
+                </div>
+                <textarea
+                    id="jd-sidebar-input"
+                    class="jd-textarea"
+                    placeholder="Paste the job description here to get a live ATS score as you edit your resume..."
+                    aria-label="Job description input"
+                ></textarea>
+                <div id="quick-wins-panel" class="quick-wins-panel" aria-live="polite">
+                    <div class="quick-wins-header">Quick Wins — Missing Keywords</div>
+                    <div id="quick-wins-list" class="quick-wins-list"></div>
+                </div>
+            </aside>
+
         </div>
     </div>
 
@@ -283,6 +323,7 @@
 
     <!-- Application JS -->
     <script src="app.js"></script>
+    <script type="module" src="src/main.js"></script>
 </body>
 
 </html>

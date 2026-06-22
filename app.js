@@ -247,6 +247,7 @@
                 const editor = $('#markdown-editor');
                 if (editor) editor.value = text;
                 updateStatusBar();
+                if (window._triggerLiveATS) window._triggerLiveATS();
             })
             .catch(() => {
                 $('#resume-content').innerHTML = `
@@ -941,6 +942,7 @@
             markdownContent = $('#markdown-editor').value;
             updatePreview();
             setHeaderMode(false);
+            if (window._triggerLiveATS) window._triggerLiveATS();
         }
         updateStatusBar();
     };
@@ -979,6 +981,7 @@
         markdownContent = $('#markdown-editor').value;
         localStorage.setItem('resumeContent', markdownContent);
         updatePreview();
+        if (window._triggerLiveATS) window._triggerLiveATS();
 
         // Switch back to preview mode after saving
         currentMode = 'preview';
@@ -1911,6 +1914,9 @@
         // Clear stale drafts on fresh load (drafts are only useful during an active edit session)
         localStorage.removeItem('resumeContentDraft');
 
+        // Phase 3: Live ATS badge
+        _initLiveATS();
+
         updateStatusBar();
     });
 
@@ -1984,5 +1990,171 @@
         }
         return null;
     }
+
+    // ────── Live ATS Badge + JD Sidebar ──────
+
+    let _liveATSDebounce = null;
+    let _heatMapActive = false;
+
+    window.toggleJDPanel = function () {
+        const sidebar = document.getElementById('jd-sidebar');
+        if (!sidebar) return;
+        sidebar.classList.toggle('collapsed');
+        const isOpen = !sidebar.classList.contains('collapsed');
+        if (isOpen) {
+            const ta = document.getElementById('jd-sidebar-input');
+            if (ta) ta.focus();
+        } else {
+            // Remove heat map when panel closes
+            if (_heatMapActive) {
+                _removeHeatMapDOM();
+                _heatMapActive = false;
+                const btn = document.getElementById('heatmap-toggle-btn');
+                if (btn) btn.classList.remove('active');
+            }
+        }
+    };
+
+    window.toggleHeatMap = function () {
+        _heatMapActive = !_heatMapActive;
+        const btn = document.getElementById('heatmap-toggle-btn');
+        if (btn) btn.classList.toggle('active', _heatMapActive);
+        if (_heatMapActive && window._lastLiveATSResult) {
+            _applyHeatMapDOM(window._lastLiveATSResult.matched, window._lastLiveATSResult.missing);
+        } else {
+            _removeHeatMapDOM();
+        }
+    };
+
+    function _updateLiveBadge(score) {
+        const badge = document.getElementById('ats-live-badge');
+        const scoreEl = document.getElementById('ats-badge-score');
+        if (!badge || !scoreEl) return;
+        scoreEl.textContent = score === null ? '--' : score + '%';
+        badge.classList.remove('score-low', 'score-medium', 'score-high', 'score-excellent');
+        if (score === null) return;
+        if (score < 50) badge.classList.add('score-low');
+        else if (score < 65) badge.classList.add('score-medium');
+        else if (score < 80) badge.classList.add('score-high');
+        else badge.classList.add('score-excellent');
+    }
+
+    function _updateQuickWins(missingDetails) {
+        const list = document.getElementById('quick-wins-list');
+        if (!list) return;
+        const top5 = (missingDetails || [])
+            .sort((a, b) => (b.importance || 0) - (a.importance || 0))
+            .slice(0, 5);
+        if (top5.length === 0) {
+            list.innerHTML = '<div class="quick-wins-empty">All key terms found!</div>';
+            return;
+        }
+        list.innerHTML = top5.map(item => `
+            <div class="quick-win-item">
+                <span class="quick-win-keyword" title="${item.keyword}">${item.keyword}</span>
+                <button class="quick-win-insert" onclick="window._insertKeyword('${item.keyword.replace(/'/g, "\\'")}')" title="Add to resume">+Add</button>
+            </div>
+        `).join('');
+    }
+
+    window._insertKeyword = function (kw) {
+        const editor = document.getElementById('markdown-editor');
+        if (!editor) return;
+        const pos = editor.selectionStart || editor.value.length;
+        editor.value = editor.value.slice(0, pos) + ' ' + kw + editor.value.slice(pos);
+        editor.dispatchEvent(new Event('input'));
+        editor.focus();
+        editor.selectionStart = editor.selectionEnd = pos + kw.length + 1;
+    };
+
+    function _applyHeatMapDOM(matched, missing) {
+        const previewEl = document.getElementById('resume-content');
+        if (!previewEl) return;
+        _removeHeatMapDOM();
+        const matArr = (matched || []).map(k => k.toLowerCase()).filter(k => k.length > 2);
+        const misArr = (missing || []).map(k => k.toLowerCase()).filter(k => k.length > 2);
+        // Sort longest first to avoid partial double-wraps
+        const sortByLen = arr => [...arr].sort((a, b) => b.length - a.length);
+        _walkAndWrap(previewEl, sortByLen(matArr), sortByLen(misArr));
+    }
+
+    function _removeHeatMapDOM() {
+        document.querySelectorAll('.kw-highlighted').forEach(el => {
+            el.replaceWith(...el.childNodes);
+        });
+    }
+
+    function _walkAndWrap(root, matched, missing) {
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+            acceptNode(node) {
+                const tag = node.parentElement?.tagName?.toLowerCase();
+                if (['script', 'style', 'code', 'pre'].includes(tag)) return NodeFilter.FILTER_REJECT;
+                if (node.parentElement?.closest('.kw-highlighted')) return NodeFilter.FILTER_REJECT;
+                return NodeFilter.FILTER_ACCEPT;
+            }
+        });
+        const nodes = [];
+        let n;
+        while ((n = walker.nextNode())) nodes.push(n);
+        nodes.forEach(textNode => {
+            let html = textNode.nodeValue.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            let changed = false;
+            for (const kw of matched) {
+                const re = new RegExp('(' + kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+                if (re.test(html)) { html = html.replace(re, '<span class="kw-match">$1</span>'); changed = true; }
+            }
+            for (const kw of missing) {
+                const re = new RegExp('(' + kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+                if (re.test(html)) { html = html.replace(re, '<span class="kw-miss">$1</span>'); changed = true; }
+            }
+            if (changed) {
+                const wrap = document.createElement('span');
+                wrap.className = 'kw-highlighted';
+                wrap.innerHTML = html;
+                textNode.parentNode.replaceChild(wrap, textNode);
+            }
+        });
+    }
+
+    function _runLiveATS() {
+        const jdText = (document.getElementById('jd-sidebar-input')?.value || '').trim();
+        if (!jdText) { _updateLiveBadge(null); return; }
+        const resumeText = markdownContent || document.getElementById('markdown-editor')?.value || '';
+        if (!resumeText.trim()) { _updateLiveBadge(null); return; }
+        const jdKw = extractKeywords(jdText);
+        const resumeKw = extractKeywords(resumeText);
+        const result = calculateATSScore(jdKw, resumeKw, resumeText);
+        window._lastLiveATSResult = result;
+        _updateLiveBadge(result.score);
+        _updateQuickWins(result.missingDetails);
+        if (_heatMapActive) {
+            _applyHeatMapDOM(result.matched, result.missing);
+        }
+    }
+
+    function _initLiveATS() {
+        const jdInput = document.getElementById('jd-sidebar-input');
+        if (!jdInput) return;
+
+        // Restore saved JD
+        const savedJD = localStorage.getItem('resumer-jd');
+        if (savedJD) jdInput.value = savedJD;
+
+        // Debounced scoring on JD input
+        jdInput.addEventListener('input', () => {
+            localStorage.setItem('resumer-jd', jdInput.value);
+            clearTimeout(_liveATSDebounce);
+            _liveATSDebounce = setTimeout(_runLiveATS, 350);
+        });
+
+        // Run initial score if JD already loaded
+        if (savedJD) setTimeout(_runLiveATS, 100);
+    }
+
+    // Expose for external triggers (e.g. after resume re-render)
+    window._triggerLiveATS = function () {
+        clearTimeout(_liveATSDebounce);
+        _liveATSDebounce = setTimeout(_runLiveATS, 350);
+    };
 
 })();
