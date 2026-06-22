@@ -1049,6 +1049,13 @@
                 $('#cover-letter-content').innerHTML = marked.parse(text);
                 const editor = $('#cover-markdown-editor');
                 if (editor) editor.value = text;
+                // Phase 6: run analysis on initial load
+                _triggerCLAnalysis(text);
+                // Reapply cover letter style after re-render
+                if (_clStyle && _clStyle !== 'classic') {
+                    const el = document.getElementById('cover-letter-content');
+                    if (el) el.classList.add(`cl-${_clStyle}`);
+                }
             })
             .catch(() => {
                 $('#cover-letter-content').innerHTML = `
@@ -1089,6 +1096,12 @@
             coverLetterContent = editor.value;
             localStorage.setItem('coverLetterContent', coverLetterContent);
             $('#cover-letter-content').innerHTML = marked.parse(coverLetterContent);
+            // Phase 6: re-apply style and analysis after save
+            if (_clStyle && _clStyle !== 'classic') {
+                const el = document.getElementById('cover-letter-content');
+                if (el) el.classList.add(`cl-${_clStyle}`);
+            }
+            _triggerCLAnalysis(coverLetterContent);
         }
 
         // Switch back to preview mode after saving
@@ -1920,6 +1933,9 @@
         // Phase 5: Customise panel
         _initThemeSettings();
 
+        // Phase 6: Cover letter builder
+        _initCoverLetterBuilder();
+
         updateStatusBar();
     });
 
@@ -2160,8 +2176,239 @@
         _liveATSDebounce = setTimeout(_runLiveATS, 350);
     };
 
-    // ────── Phase 5: Customise Panel ──────
-    // Settings are sourced from localStorage key `resumer-theme-settings`.
+    // ────── Phase 6: Cover Letter Builder ──────
+
+    let _clStyle = 'classic';
+
+    // ── Style switcher ──────────────────────────────────────────────────────────
+    window.setCLStyle = function (style) {
+        _clStyle = style;
+        sessionStorage.setItem('cl-style', style);
+        const el = document.getElementById('cover-letter-content');
+        if (el) {
+            el.classList.remove('cl-modern', 'cl-minimal', 'cl-bold');
+            if (style !== 'classic') el.classList.add(`cl-${style}`);
+        }
+        document.querySelectorAll('.cl-style-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(`cl-style-btn-${style}`)?.classList.add('active');
+    };
+
+    function _initCLStyle() {
+        const saved = sessionStorage.getItem('cl-style') || 'classic';
+        setCLStyle(saved);
+    }
+
+    // ── Word counter ────────────────────────────────────────────────────────────
+    function _updateCLWordCount(text) {
+        const words = _clCountWords(text);
+        const badge = document.getElementById('cl-word-count-badge');
+        const label = document.getElementById('cl-word-count');
+        if (!badge || !label) return;
+        label.textContent = `${words} words`;
+        const health = _clScoreWordCount(words);
+        badge.classList.remove('good', 'amber', 'red', 'low');
+        badge.classList.add(health);
+        badge.title = {
+            low:   'Too short (aim for 250-300 words)',
+            good:  'Ideal length (250-300 words)',
+            amber: 'Getting long (300-350 words)',
+            red:   'Too long — trim to under 350 words',
+        }[health] || '';
+    }
+
+    function _clCountWords(text) {
+        if (!text) return 0;
+        const noHtml = text.replace(/<[^>]*>/g, ' ');
+        const noMd = noHtml
+            .replace(/```[\s\S]*?```/g, ' ')
+            .replace(/`[^`]*`/g, ' ')
+            .replace(/!\[.*?\]\(.*?\)/g, ' ')
+            .replace(/\[.*?\]\(.*?\)/g, ' ')
+            .replace(/^#{1,6}\s+/gm, ' ')
+            .replace(/[*_~]{1,3}/g, ' ')
+            .replace(/^[-*+]\s+/gm, ' ')
+            .replace(/^\d+\.\s+/gm, ' ');
+        return noMd.trim().split(/\s+/).filter(w => w.length > 0).length;
+    }
+
+    function _clScoreWordCount(words) {
+        if (words < 150) return 'low';
+        if (words <= 300) return 'good';
+        if (words <= 350) return 'amber';
+        return 'red';
+    }
+
+    // ── Forbidden phrase detector ───────────────────────────────────────────────
+    const _CL_FORBIDDEN = [
+        'excited to apply', 'excited about this opportunity', 'thrilled to apply',
+        'i am thrilled', 'i am writing to express', 'i am writing to apply',
+        'please consider my application', 'it would be an honor',
+        'i would be a perfect fit', 'perfect fit for', 'i believe i would be',
+        'passionate about', 'highly motivated', 'i am highly motivated',
+        'i am a quick learner', 'hardworking individual', 'team player',
+        'i am a team player', 'i am eager to', 'i would be grateful',
+        'please feel free to contact me', 'at your earliest convenience',
+        'to whom it may concern', 'thank you for your consideration',
+    ];
+
+    function _updateCLForbidden(text) {
+        if (!text) return;
+        const lower = text.toLowerCase();
+        const hits = [];
+        const seen = new Set();
+        for (const phrase of _CL_FORBIDDEN) {
+            if (lower.includes(phrase) && !seen.has(phrase)) {
+                seen.add(phrase);
+                const idx = lower.indexOf(phrase);
+                const start = Math.max(0, idx - 15);
+                const end   = Math.min(text.length, idx + phrase.length + 15);
+                const ctx = (start > 0 ? '…' : '') + text.slice(start, end).trim() + (end < text.length ? '…' : '');
+                hits.push({ phrase, context: ctx });
+            }
+        }
+
+        const listEl = document.getElementById('cl-forbidden-list');
+        const countBadge = document.getElementById('cl-forbidden-count');
+        if (!listEl) return;
+
+        if (hits.length === 0) {
+            listEl.innerHTML = '<p class="cl-sidebar-empty">No forbidden phrases detected.</p>';
+            if (countBadge) countBadge.style.display = 'none';
+        } else {
+            listEl.innerHTML = hits.map(h => `
+                <div class="cl-forbidden-item">
+                    <div class="cl-forbidden-phrase">${h.phrase}</div>
+                    <div class="cl-forbidden-context">${h.context}</div>
+                </div>`).join('');
+            if (countBadge) { countBadge.textContent = hits.length; countBadge.style.display = 'inline'; }
+        }
+
+        // Also highlight in live preview
+        _highlightForbiddenInPreview(hits);
+    }
+
+    function _highlightForbiddenInPreview(hits) {
+        const el = document.getElementById('cover-letter-content');
+        if (!el || hits.length === 0) return;
+        // Only highlight in preview mode (not raw HTML replacement — scan text nodes)
+        const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+        const textNodes = [];
+        let node;
+        while ((node = walker.nextNode())) textNodes.push(node);
+
+        for (const textNode of textNodes) {
+            const lower = textNode.nodeValue.toLowerCase();
+            let hit = hits.find(h => lower.includes(h.phrase));
+            if (!hit) continue;
+            const span = document.createElement('span');
+            const re = new RegExp(hit.phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+            span.innerHTML = textNode.nodeValue.replace(re, m =>
+                `<mark class="cl-forbidden-highlight" title="Forbidden phrase: ${hit.phrase}">${m}</mark>`);
+            textNode.parentNode.replaceChild(span, textNode);
+        }
+    }
+
+    // ── Role input ──────────────────────────────────────────────────────────────
+    window.onCLRoleInput = function () {
+        // Persist role for use in AI cover letter generation
+        const val = document.getElementById('cl-role-input')?.value || '';
+        sessionStorage.setItem('cl-target-role', val);
+    };
+
+    function _syncCLRoleFromJD() {
+        const jd = document.getElementById('jd-input')?.value || document.getElementById('jd-sidebar-input')?.value || '';
+        const roleInput = document.getElementById('cl-role-input');
+        if (!roleInput || roleInput.value.trim()) return;
+
+        // Try to extract role from JD (look for common patterns)
+        const patterns = [
+            /(?:looking for|hiring|seeking|role of|position of|title:)\s+(?:a|an)?\s*([A-Z][A-Za-z\s\-\/]{3,40}?)(?:\.|,|\n|with|who|to)/i,
+            /^([A-Z][A-Za-z\s\-\/]{5,40}?)\s*(?:\n|$)/m,
+        ];
+        for (const p of patterns) {
+            const m = jd.match(p);
+            if (m?.[1]?.trim().length > 3 && m[1].trim().length < 40) {
+                roleInput.value = m[1].trim();
+                sessionStorage.setItem('cl-target-role', roleInput.value);
+                break;
+            }
+        }
+    }
+
+    // ── CL ATS score ────────────────────────────────────────────────────────────
+    window.runCLATS = function () {
+        const jdText = document.getElementById('jd-input')?.value ||
+                       document.getElementById('jd-sidebar-input')?.value || '';
+        if (!jdText.trim()) { toast('Paste a Job Description in the ATS Checker tab first', 'warning'); return; }
+        if (!coverLetterContent.trim()) { toast('No cover letter loaded', 'warning'); return; }
+
+        const btn = document.getElementById('cl-ats-btn');
+        if (btn) btn.disabled = true;
+
+        // Simple keyword matching (in-IIFE, no import needed — same logic as scorer.js)
+        const clLower  = coverLetterContent.toLowerCase();
+        const jdLower  = jdText.toLowerCase();
+        const jdWords  = jdLower.replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(w => w.length >= 3);
+        const stopWords = new Set(['the','a','an','and','or','but','in','on','at','to','for','of','with','by','from','as','is','was','are','were','be','have','has','had','do','does','did','will','would','should','could','may','might','must','can','this','that','these','those','i','you','he','she','it','we','they']);
+        const freq = {};
+        for (const w of jdWords) { if (!stopWords.has(w)) freq[w] = (freq[w]||0)+1; }
+        const keywords = Object.entries(freq).filter(([,c])=>c>=2).sort(([,a],[,b])=>b-a).slice(0,30).map(([w])=>w);
+
+        if (keywords.length === 0) { toast('JD too short for keyword extraction', 'warning'); if (btn) btn.disabled = false; return; }
+
+        const matched = keywords.filter(k => clLower.includes(k));
+        const missing = keywords.filter(k => !clLower.includes(k));
+        const score = Math.round((matched.length / keywords.length) * 100);
+
+        // Update ring
+        const ring = document.getElementById('cl-ats-ring');
+        const val  = document.getElementById('cl-ats-score-val');
+        if (ring && val) {
+            val.textContent = score;
+            ring.classList.remove('good', 'amber', 'low');
+            ring.classList.add(score >= 70 ? 'good' : score >= 50 ? 'amber' : 'low');
+        }
+
+        // Show matched/missing chips
+        const detail = document.getElementById('cl-ats-detail');
+        if (detail) {
+            const matchedHTML = matched.slice(0,10).map(k=>`<span class="cl-ats-kw-chip matched">${k}</span>`).join('');
+            const missingHTML = missing.slice(0,8).map(k=>`<span class="cl-ats-kw-chip missing">${k}</span>`).join('');
+            detail.innerHTML = `${matchedHTML}${missingHTML ? `<div style="margin-top:4px;">${missingHTML}</div>` : ''}`;
+            detail.style.display = 'block';
+        }
+
+        toast(`CL ATS Score: ${score}/100`, score >= 70 ? 'success' : score >= 50 ? 'warning' : 'error');
+        if (btn) btn.disabled = false;
+    };
+
+    // ── Patch loadCoverLetter / saveCoverLetter to trigger analysis ─────────────
+    const _origLoadCL = loadCoverLetter;
+    // We can't reassign the closure, so we hook via _triggerCLAnalysis called from
+    // loadCoverLetter's then() callback — patched inline below in DOMContentLoaded.
+
+    function _triggerCLAnalysis(text) {
+        if (!text) return;
+        _updateCLWordCount(text);
+        _updateCLForbidden(text);
+    }
+
+    // ── Init ─────────────────────────────────────────────────────────────────────
+    function _initCoverLetterBuilder() {
+        _initCLStyle();
+        const saved = sessionStorage.getItem('cl-target-role');
+        if (saved) {
+            const ri = document.getElementById('cl-role-input');
+            if (ri) ri.value = saved;
+        }
+        // Hook the cover-markdown-editor to live-update analysis on each keystroke
+        const editor = document.getElementById('cover-markdown-editor');
+        if (editor) {
+            editor.addEventListener('input', () => _triggerCLAnalysis(editor.value));
+        }
+    }
+
+    // ────── Phase 5: Customise Panel ──────    // Settings are sourced from localStorage key `resumer-theme-settings`.
     // Overrides are injected into <style id="resumer-theme-overrides"> so
     // all 3 resume templates pick them up with no changes to their CSS files.
 

@@ -172,3 +172,85 @@
         right: 40px;
     }
 }
+/* ════════════════════════════════════════════════════
+   Phase 6 — Cover Letter Style Variants
+   Applied by adding a class to #cover-letter-content
+   ════════════════════════════════════════════════════ */
+
+/* ── Modern: Inter font + left accent bar on h2 ─── */
+#cover-letter-content.cl-modern {
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+#cover-letter-content.cl-modern h2,
+#cover-letter-content.cl-modern h3 {
+    border-left: 3px solid var(--v3-accent, #1E3A5F);
+    padding-left: 8px;
+    color: var(--v3-accent, #1E3A5F);
+}
+#cover-letter-content.cl-modern h1 {
+    color: var(--v3-accent, #1E3A5F);
+    letter-spacing: 1px;
+}
+
+/* ── Minimal: Georgia serif, subtle and clean ───── */
+#cover-letter-content.cl-minimal {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 11pt;
+    line-height: 1.6;
+    color: #2d2d2d;
+}
+#cover-letter-content.cl-minimal h1 {
+    font-size: 15pt;
+    font-weight: normal;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 6px;
+}
+#cover-letter-content.cl-minimal h2,
+#cover-letter-content.cl-minimal h3 {
+    font-weight: normal;
+    font-style: italic;
+    color: #555;
+}
+#cover-letter-content.cl-minimal .gradient-header {
+    background: none !important;
+    border-bottom: 2px solid #2d2d2d;
+    padding-bottom: 12px;
+}
+#cover-letter-content.cl-minimal .gradient-header h1 {
+    color: #2d2d2d !important;
+}
+
+/* ── Bold: Strong headings, high-contrast accent ── */
+#cover-letter-content.cl-bold {
+    font-family: Calibri, 'Segoe UI', Arial, sans-serif;
+}
+#cover-letter-content.cl-bold .gradient-header {
+    background: var(--v3-accent, #1E3A5F) !important;
+    color: white !important;
+    border-radius: 4px 4px 0 0;
+}
+#cover-letter-content.cl-bold .gradient-header h1 {
+    color: white !important;
+    font-size: 18pt;
+    font-weight: 700;
+}
+#cover-letter-content.cl-bold .gradient-header a {
+    color: rgba(255,255,255,0.85) !important;
+}
+#cover-letter-content.cl-bold p strong {
+    color: var(--v3-accent, #1E3A5F);
+}
+#cover-letter-content.cl-bold .footer-bar {
+    background: var(--v3-accent, #1E3A5F) !important;
+    border-radius: 0 0 4px 4px;
+}
+
+/* ── Forbidden phrase highlights in preview ─────── */
+.cl-forbidden-highlight {
+    background: rgba(239, 68, 68, 0.18);
+    border-bottom: 2px solid #ef4444;
+    border-radius: 2px;
+    cursor: help;
+}

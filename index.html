@@ -201,18 +201,118 @@
 
     <!-- Cover Letter Generator Tab -->
     <div id="cover-letter-tab" class="tab-content">
-        <!-- Editor Container -->
-        <div id="cover-editor-container" style="display:none;">
-            <textarea id="cover-markdown-editor" placeholder="Enter your cover letter in Markdown format..."></textarea>
-            <div class="editor-help">
-                <p><strong>Tip:</strong> Customize the template with company name, job title, and specific details</p>
-            </div>
-        </div>
+        <div class="cl-workspace">
 
-        <!-- Preview Container -->
-        <div id="cover-preview-container">
-            <div id="cover-letter-content"></div>
-        </div>
+            <!-- ── Main column: toolbar + editor/preview ── -->
+            <div class="cl-main">
+
+                <!-- Toolbar: style switcher + word counter -->
+                <div class="cl-toolbar">
+                    <div class="cl-style-group" id="cl-style-group" title="Cover letter style">
+                        <button id="cl-style-btn-classic"  class="cl-style-btn active" onclick="setCLStyle('classic')">Classic</button>
+                        <button id="cl-style-btn-modern"   class="cl-style-btn"        onclick="setCLStyle('modern')">Modern</button>
+                        <button id="cl-style-btn-minimal"  class="cl-style-btn"        onclick="setCLStyle('minimal')">Minimal</button>
+                        <button id="cl-style-btn-bold"     class="cl-style-btn"        onclick="setCLStyle('bold')">Bold</button>
+                    </div>
+                    <div class="cl-word-count-badge" id="cl-word-count-badge" title="Word count (ideal: 250-300)">
+                        <span class="iconify" data-icon="mdi:text"></span>
+                        <span id="cl-word-count">0 words</span>
+                    </div>
+                </div>
+
+                <!-- Editor Container -->
+                <div id="cover-editor-container" style="display:none;">
+                    <textarea id="cover-markdown-editor" placeholder="Enter your cover letter in Markdown format..."></textarea>
+                    <div class="editor-help">
+                        <p><strong>Tip:</strong> Customize the template with company name, job title, and specific details</p>
+                    </div>
+                </div>
+
+                <!-- Preview Container -->
+                <div id="cover-preview-container">
+                    <div id="cover-letter-content"></div>
+                </div>
+            </div>
+
+            <!-- ── Sidebar: structure guide + forbidden phrases + ATS ── -->
+            <div class="cl-sidebar">
+
+                <!-- Role input (scoped to cover letter) -->
+                <div class="cl-sidebar-section">
+                    <label class="cl-sidebar-label" for="cl-role-input">
+                        <span class="iconify" data-icon="mdi:briefcase-outline"></span> Target Role
+                    </label>
+                    <input id="cl-role-input" type="text" class="cl-role-input" placeholder="e.g. Senior SDET" oninput="onCLRoleInput()">
+                </div>
+
+                <!-- Structure guide -->
+                <div class="cl-sidebar-section">
+                    <div class="cl-sidebar-heading">
+                        <span class="iconify" data-icon="mdi:format-list-numbered"></span> Structure Guide
+                    </div>
+                    <div class="cl-guide">
+                        <div class="cl-guide-step">
+                            <span class="cl-guide-num">1</span>
+                            <div>
+                                <strong>Opening</strong>
+                                <p>1-2 lines. Role + company + why strong fit. Skip clichés.</p>
+                            </div>
+                        </div>
+                        <div class="cl-guide-step">
+                            <span class="cl-guide-num">2</span>
+                            <div>
+                                <strong>What You Bring</strong>
+                                <p>3-4 lines. 2-3 strengths matching the JD with verified metrics.</p>
+                            </div>
+                        </div>
+                        <div class="cl-guide-step">
+                            <span class="cl-guide-num">3</span>
+                            <div>
+                                <strong>Why This Company</strong>
+                                <p>2-3 lines. Specific detail about the company. Genuine connection.</p>
+                            </div>
+                        </div>
+                        <div class="cl-guide-step">
+                            <span class="cl-guide-num">4</span>
+                            <div>
+                                <strong>Close</strong>
+                                <p>1-2 lines. Confident close. No "look forward to hearing".</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Forbidden phrase detector -->
+                <div class="cl-sidebar-section" id="cl-forbidden-section">
+                    <div class="cl-sidebar-heading">
+                        <span class="iconify" data-icon="mdi:alert-circle-outline"></span>
+                        Forbidden Phrases
+                        <span class="cl-badge" id="cl-forbidden-count" style="display:none;">0</span>
+                    </div>
+                    <div id="cl-forbidden-list" class="cl-forbidden-list">
+                        <p class="cl-sidebar-empty">No forbidden phrases detected.</p>
+                    </div>
+                </div>
+
+                <!-- ATS score -->
+                <div class="cl-sidebar-section">
+                    <div class="cl-sidebar-heading">
+                        <span class="iconify" data-icon="mdi:target"></span> CL ATS Score
+                    </div>
+                    <div class="cl-ats-wrap">
+                        <div class="cl-ats-score-ring" id="cl-ats-ring">
+                            <span id="cl-ats-score-val">--</span>
+                            <span class="cl-ats-label">/100</span>
+                        </div>
+                        <button class="cl-ats-btn" onclick="runCLATS()" id="cl-ats-btn">
+                            <span class="iconify" data-icon="mdi:chart-box-outline"></span> Analyse
+                        </button>
+                    </div>
+                    <div id="cl-ats-detail" class="cl-ats-detail" style="display:none;"></div>
+                </div>
+
+            </div><!-- /.cl-sidebar -->
+        </div><!-- /.cl-workspace -->
     </div>
 
     <!-- ATS Score Checker Tab -->
