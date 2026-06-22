@@ -1,0 +1,136 @@
+{
+  "_comment": "Copy this file to profile.json and fill in your details. profile.json is gitignored.",
+  "identity": {
+    "name": "Your Full Name",
+    "email": "your.email@example.com",
+    "phone": "+1 234 567 8900",
+    "linkedin": "linkedin.com/in/yourprofile",
+    "github": "github.com/yourusername",
+    "portfolio": "https://yourportfolio.dev",
+    "location": "City, Country"
+  },
+  "professional_identity": {
+    "current_title": "Your Current Role",
+    "years_experience": 8,
+    "tagline": "Brief one-line professional identity statement",
+    "specializations": [
+      "Core Specialization 1",
+      "Core Specialization 2",
+      "Core Specialization 3"
+    ]
+  },
+  "summary_variations": {
+    "leadership": [
+      "Bullet 1: Years of experience + role identity",
+      "Bullet 2: Major strengths aligned to JD",
+      "Bullet 3: Key improvements delivered with metrics",
+      "Bullet 4: Why fit for the team or domain"
+    ],
+    "technical": [
+      "Bullet 1: Years of experience + technical identity",
+      "Bullet 2: Core technical strengths",
+      "Bullet 3: Key technical achievements with metrics",
+      "Bullet 4: Technical impact and scope"
+    ]
+  },
+  "core_skills": [
+    {
+      "bucket": "Bucket Name 1",
+      "skills": ["Skill A", "Skill B", "Skill C", "Skill D"]
+    },
+    {
+      "bucket": "Bucket Name 2",
+      "skills": ["Skill E", "Skill F", "Skill G"]
+    },
+    {
+      "bucket": "Bucket Name 3",
+      "skills": ["Skill H", "Skill I", "Skill J", "Skill K"]
+    }
+  ],
+  "technical_skills": {
+    "languages": ["Language 1", "Language 2", "Language 3"],
+    "frameworks": ["Framework 1", "Framework 2"],
+    "testing": ["Tool 1", "Tool 2", "Tool 3"],
+    "cloud_devops": ["AWS", "Docker", "Kubernetes", "Jenkins"],
+    "databases": ["PostgreSQL", "MySQL", "MongoDB"],
+    "monitoring": ["Grafana", "Kibana", "Prometheus"],
+    "tools": ["JIRA", "Confluence", "Git", "GitHub"]
+  },
+  "experience": [
+    {
+      "title": "Senior Engineer / Lead",
+      "company": "Company Name",
+      "location": "City, Country",
+      "start": "Jan 2023",
+      "end": "Present",
+      "bullets": [
+        "Led [scope] by [action], achieving [metric] through [method]",
+        "Built [what] using [tools] that improved [outcome] by [metric]",
+        "Directed [team/process] resulting in [quantified impact]",
+        "Established [standard/framework] enabling [result] across [scope]",
+        "Mentored [N] engineers on [topic], raising [outcome] across teams"
+      ]
+    },
+    {
+      "title": "Mid-Level Engineer",
+      "company": "Previous Company",
+      "location": "City, Country",
+      "start": "Jun 2020",
+      "end": "Dec 2022",
+      "bullets": [
+        "Designed [what] for [context], improving [outcome] by [metric]",
+        "Automated [N]+ [workflows] using [tool], reducing [effort] by [metric]",
+        "Established [process/standard] that protected [outcome] across [scope]",
+        "Partnered with [stakeholders] to [action], driving [result]"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Project Name",
+      "description": "Brief description of what you built and why",
+      "bullets": [
+        "Built [core capability] enabling [outcome] across [scope]",
+        "Designed [feature] that improved [metric] by [percentage]"
+      ],
+      "technologies": ["Tech 1", "Tech 2", "Tech 3"],
+      "impact": {
+        "metric_1": "Reduced X by Y%",
+        "metric_2": "Improved Z from A to B"
+      }
+    }
+  ],
+  "key_achievements": [
+    "Quantified achievement 1 with specific metric (e.g., Reduced X by 40%)",
+    "Quantified achievement 2 with specific metric",
+    "Quantified achievement 3 with specific metric",
+    "Quantified achievement 4 with specific metric"
+  ],
+  "certifications": [
+    {
+      "name": "Certification Name",
+      "issuer": "Issuing Organization",
+      "url": "https://verify-link.example.com",
+      "year": 2024
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Science in Computer Science",
+      "institution": "University Name",
+      "year": 2016,
+      "focus": "Optional: relevant focus area"
+    }
+  ],
+  "ai_tools": {
+    "github_copilot": true,
+    "cursor": true,
+    "claude": true,
+    "tools_list": ["GitHub Copilot", "Cursor", "Claude Code"]
+  },
+  "_meta": {
+    "schema_version": "1.0.0",
+    "last_updated": "2026-06-22",
+    "resume_types": ["default", "leadership", "technical"]
+  }
+}

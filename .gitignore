@@ -1,4 +1,6 @@
 # Personal Content - DO NOT COMMIT
+# Your personal profile — NEVER commit this (contains personal data)
+profile.json
 
 # Backup files
 *-backup.md
