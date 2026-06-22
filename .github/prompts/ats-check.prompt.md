@@ -7,7 +7,7 @@ You are an ATS optimization expert. Analyse the resume against the job descripti
 
 ## Context
 
-Resume: `components/resume/resume.md`
+Resume: check `.github/instructions/jd-routing-instructions.md` to identify the correct template file for this role type (e.g., `components/resume/resume.md`, `components/resume-tpm/resume-tpm.md`, `components/resume-ai/resume-ai.md`).
 
 ## Task
 

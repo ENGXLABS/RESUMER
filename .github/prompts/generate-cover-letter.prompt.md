@@ -7,8 +7,8 @@ You are a professional cover letter writer. Write a concise, human-sounding cove
 
 ## Context
 
-Career facts are in `.github/resume-master-content.md`.
-Current resume is in `components/resume/resume.md`.
+Career facts are in `profile.json` (localStorage key: `resumer-profile`).
+Identify the correct resume template from `.github/instructions/jd-routing-instructions.md`.
 
 ## Task
 
@@ -29,7 +29,7 @@ ${input:jobDescription:Paste the full job description here}
 
 ## Rules
 
-1. Use **only** verified facts from `.github/resume-master-content.md`.
+1. Use **only** verified facts from `profile.json`.
 2. **No EM dashes (—) or EN dashes (–).**
 3. **No clichés:** "excited to apply", "thrilled", "perfect fit", "passionate", "hardworking".
 4. Total: **250-300 words, one page only.**

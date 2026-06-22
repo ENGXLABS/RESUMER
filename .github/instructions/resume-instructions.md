@@ -496,19 +496,14 @@ All missing high-priority JD keywords.
 
 Provide resume-ready lines to add missing keywords naturally.
 
-**Must include strategic QE items such as:**
-- Change safety nets
-- Release orchestration
-- Feature flag management
-- Observability insights
-- RCA automation
-- SRE alignment
-- Quality as code
-- Multi-locale E2E automation
-- Scaling automation frameworks
-- Automation-first quality strategy
-- DevSecOps
-- Rollout and rollback validation
+**Suggest domain-specific strategic terms aligned with the JD's role type:**
+- For Software Engineering: system design, scalable architecture, CI/CD pipelines, technical debt reduction, code review
+- For DevOps/SRE: observability, SLA/SLO, incident response, infrastructure as code, reliability engineering
+- For QA/Testing: test coverage, shift-left testing, automation strategy, quality gates, release confidence
+- For Product/Program: OKRs, roadmap execution, stakeholder alignment, delivery cadence, risk mitigation
+- For Data/ML: data pipelines, model accuracy, feature engineering, data quality, MLOps
+- For Security: threat modelling, secure SDLC, vulnerability management, compliance, AppSec
+- Use the JD's own domain language — mirror the terminology the employer uses
 
 #### 6. Resume Improvement Instructions
 
@@ -527,7 +522,7 @@ Ask user: "Would you like me to generate a complete resume rewrite optimized for
 
 ## Example Interaction
 
-**User:** "Update my resume for a Senior QE Manager role at [Company]"
+**User:** "Update my resume for a Senior [Role] at [Company]"
 
 **Response:**
 1. Ask for the full job description if not provided
@@ -545,239 +540,127 @@ Ask user: "Would you like me to generate a complete resume rewrite optimized for
 
 ---
 
-## Role-Specific Content Strategies
+## Role-Level Content Strategies
 
-Different QA roles require different positioning, emphasis, and content patterns. Use this guide to tailor resumes appropriately.
+Different seniority levels and role types require different positioning, emphasis, and content patterns. Use this guide to tailor resumes for any professional domain.
 
-### 1. QA Manager / QA Lead / QA Engineering Manager
+### 1. People Manager / Team Lead
 
-**Role Type:** People leadership + technical oversight  
-**Level:** Manager (5-15+ reports typically)
+**Applies to:** Engineering Manager, QA Manager, Product Lead, Program Director, Head of [Function]
+**Level:** Manager with direct reports
 
 #### Professional Summary Positioning
-- Lead with people leadership scope: "Lead QA Manager with 10+ years building and scaling quality engineering teams"
-- Emphasize: team size, hiring, organizational impact, quality strategy, cross-functional collaboration
-- Include: process transformation, quality culture, stakeholder management
-- Metrics to feature: team growth, delivery velocity improvements, defect reduction across organization
+- Lead with people leadership scope: "[Domain] Manager with X+ years building and scaling [function] teams"
+- Emphasize: team size, hiring and retention, org impact, cross-functional collaboration
+- Include: process transformation, culture building, stakeholder management
+- Metrics: team growth, delivery velocity, cost/efficiency improvements, org health
 
 #### Core Skills Emphasis
-Prioritize in this order:
-1. Quality strategy and planning
-2. Team leadership and mentorship
-3. Process improvement and standardization
-4. Stakeholder management
-5. Test automation strategy (not hands-on implementation)
-6. Tools and frameworks evaluation
-
-Sample Core Skills:
-- Quality Engineering Leadership & Team Building
-- Test Strategy & Release Planning
-- Cross-Functional Stakeholder Management
-- Agile/Scrum Process Implementation
-- Automation Strategy & Framework Selection
-- Quality Metrics & Reporting
-
-#### Experience Bullet Content Patterns
-- **Team scope:** "Led team of 8 QA engineers across web, mobile, and API testing"
-- **Hiring/growth:** "Hired and onboarded 5 senior SDETs, reducing time-to-productivity by 40%"
-- **Process/strategy:** "Established risk-based testing strategy, reducing release cycle time from 2 weeks to 3 days"
-- **Org-wide impact:** "Drove quality standards across 6 product teams, improving production stability by 35%"
-- **Stakeholder:** "Partnered with Product and Engineering leadership to define quality gates for 50+ monthly releases"
-- **Culture:** "Built quality champion program across engineering org, increasing test coverage from 45% to 78%"
-
-#### JD Keyword Priorities
-Look for and emphasize:
-- Team leadership, mentorship, coaching, hiring
-- Quality strategy, test strategy, release planning
-- Agile ceremonies, sprint planning, retrospectives
-- Stakeholder management, cross-functional collaboration
-- Metrics, KPIs, reporting, dashboards
-- Process improvement, standardization
-- Risk assessment, test planning
+1. Team leadership, mentorship, coaching
+2. Strategic planning for the function
+3. Stakeholder management and communication
+4. Process improvement and standardization
+5. Cross-functional delivery and alignment
+6. Hiring, performance, career development
 
 #### Tone Adjustments
 - Use "Led," "Directed," "Established," "Drove," "Built" (leadership verbs)
-- Emphasize influence: "Partnered with," "Collaborated across," "Aligned stakeholders"
-- Show scale: team size, number of releases, org reach
-- Avoid hands-on implementation details unless asked
+- Emphasize influence: "Partnered with," "Aligned stakeholders," "Collaborated across"
+- Show scale: team size, number of teams, org reach, headcount managed
+- Include org-wide impact over individual technical details
 
 ---
 
-### 2. Staff SDET / Staff QA Engineer
+### 2. Staff / Principal / Senior Individual Contributor
 
-**Role Type:** Senior Individual Contributor (IC) with platform/architecture ownership  
-**Level:** Staff level (L6/E6 equivalent, no direct reports but broad influence)
+**Applies to:** Staff Engineer, Principal Engineer, Staff SDET, Lead Architect, Senior Specialist
+**Level:** Senior IC with broad technical influence, no direct reports
 
 #### Professional Summary Positioning
-- Lead with technical depth + influence: "Staff SDET with 10+ years building scalable test automation platforms and leading quality architecture"
-- Emphasize: platform ownership, architectural decisions, technical leadership, cross-team influence, mentorship without direct reports
-- Include: system design, tooling strategy, framework modernization, observability
-- Metrics to feature: automation coverage, test execution speed, framework adoption across teams, infrastructure reliability
+- Lead with technical depth and cross-team influence
+- Emphasize: platform ownership, architectural decisions, mentorship without management
+- Include: system design, tooling strategy, framework creation, observability
+- Metrics: adoption across teams, scale, reliability improvements, time savings
 
 #### Core Skills Emphasis
-Prioritize in this order:
-1. Test automation architecture and platform design
-2. Framework development and tooling strategy
-3. Technical leadership and mentorship (as senior IC)
-4. CI/CD integration and infrastructure
-5. Cross-team collaboration and influence
-6. Observability, monitoring, quality metrics
-
-Sample Core Skills:
-- Test Automation Architecture & Platform Design
-- Scalable Framework Development & Tooling Strategy
-- Technical Leadership as Senior IC
-- CI/CD Pipeline Integration & Infrastructure as Code
-- Cross-Team Collaboration & Technical Influence
-- Observability & Quality Metrics
-
-#### Experience Bullet Content Patterns
-- **Platform ownership:** "Architected company-wide test automation platform, adopted by 12 product teams and reducing setup time by 70%"
-- **Framework design:** "Designed modular API testing framework in Python, enabling parallel execution and reducing suite runtime from 2 hours to 15 minutes"
-- **Infrastructure:** "Built containerized test infrastructure on Kubernetes, scaling from 50 to 500 concurrent test executions"
-- **Technical influence:** "Led technical design reviews for 6 teams, establishing testing standards and patterns across 30+ microservices"
-- **Tooling:** "Developed internal CLI tooling for test data generation, adopted by 50+ engineers and cutting test setup time by 60%"
-- **Mentorship (IC style):** "Mentored 8 SDETs across teams on advanced testing patterns and system design, elevating org-wide testing maturity"
-
-#### JD Keyword Priorities
-Look for and emphasize:
-- Platform, architecture, system design
-- Scalability, performance, reliability
-- Framework design, tooling strategy
-- Technical leadership, influence without authority
-- Cross-team collaboration, technical mentorship
-- Infrastructure as code, containerization
-- Observability, monitoring, telemetry
-- Standards, best practices, design patterns
+1. Architecture and platform/system design
+2. Scalable tooling and framework development
+3. Technical leadership and cross-team influence
+4. Infrastructure, CI/CD, or domain-specific platform skills
+5. Mentorship and knowledge sharing
+6. Standards and best practices definition
 
 #### Tone Adjustments
-- Use "Architected," "Designed," "Built," "Led" (technical ownership verbs)
-- Emphasize scale and impact: "adopted by X teams," "scaled to Y executions," "reduced Z by N%"
-- Show technical depth: specific technologies, architectural patterns, system constraints
-- Highlight influence: "established standards," "led technical reviews," "mentored across teams"
-- Avoid management language (no "team of X reports")
+- Use "Architected," "Designed," "Built," "Defined," "Led" (ownership verbs)
+- Show scale: "adopted by X teams," "scaled to Y," "reduced Z by N%"
+- Highlight influence: "established standards," "led design reviews," "mentored across teams"
+- Avoid management language unless specifically relevant
 
 ---
 
-### 3. Senior SDET / Senior QA Engineer
+### 3. Senior / Mid-Level Individual Contributor
 
-**Role Type:** Hands-on automation engineer with advanced technical skills  
-**Level:** Senior IC (L4/E5 equivalent, strong technical execution)
+**Applies to:** Senior Engineer, Senior [Specialist], Mid-level Developer, Senior Analyst
+**Level:** Hands-on technical execution with domain expertise
 
 #### Professional Summary Positioning
-- Lead with hands-on expertise: "Senior SDET with 7+ years building robust test automation frameworks and CI/CD integration"
-- Emphasize: framework development, hands-on coding, test coverage expansion, CI/CD ownership
-- Include: specific technologies, testing domains (API, web, mobile, performance), automation best practices
-- Metrics to feature: test coverage, defect detection, CI/CD reliability, automation suite performance
+- Lead with hands-on expertise in the role's primary domain
+- Emphasize: delivering measurable impact, owning features or systems, CI/CD and collaboration
+- Include: specific technologies, domain expertise, problem-solving wins
+- Metrics: output delivered, defects reduced, coverage expanded, performance improved
 
 #### Core Skills Emphasis
-Prioritize in this order:
-1. Test automation framework development
-2. Hands-on test script implementation
-3. CI/CD pipeline integration
-4. API, web, mobile, or performance testing (domain-specific)
-5. Debugging and troubleshooting
-6. Collaboration with developers
-
-Sample Core Skills:
-- Test Automation Framework Development
-- API, Web & Mobile Test Automation
-- CI/CD Pipeline Integration & Maintenance
-- Test Coverage Expansion & Quality Assurance
-- Performance & Load Testing
-- Debugging & Root Cause Analysis
-
-#### Experience Bullet Content Patterns
-- **Framework implementation:** "Built API automation framework using Playwright and TypeScript, achieving 85% endpoint coverage across 20 microservices"
-- **Hands-on coding:** "Implemented 300+ automated test cases for web and mobile apps using Selenium and Appium"
-- **CI/CD integration:** "Integrated test suites into GitHub Actions pipelines, enabling automated regression on every pull request"
-- **Coverage expansion:** "Increased API test coverage from 40% to 82%, catching 15 critical bugs before production"
-- **Performance testing:** "Designed load tests using k6, validating system performance at 10,000 concurrent users"
-- **Collaboration:** "Partnered with developers to implement contract testing using Pact, reducing integration defects by 30%"
-
-#### JD Keyword Priorities
-Look for and emphasize:
-- Specific test frameworks (Selenium, Playwright, Appium, Jest, Pytest, etc.)
-- Programming languages (Python, Java, JavaScript, TypeScript, etc.)
-- CI/CD tools (GitHub Actions, Jenkins, GitLab CI, CircleCI)
-- Testing types (API, web, mobile, performance, integration, e2e)
-- Test coverage, regression testing, smoke testing
-- Debugging, troubleshooting, root cause analysis
-- Agile practices, sprint testing, collaboration
+1. Hands-on domain skills (match the JD closely)
+2. Primary tools, languages, and frameworks
+3. Delivery and execution
+4. Collaboration with cross-functional partners
+5. Debugging and root cause analysis
+6. Agile practices and sprint delivery
 
 #### Tone Adjustments
-- Use "Built," "Implemented," "Developed," "Automated," "Integrated" (hands-on execution verbs)
-- Show technical breadth: specific tools, languages, frameworks
-- Emphasize execution: "implemented X tests," "automated Y workflows," "integrated into Z pipeline"
-- Include collaboration: "partnered with developers," "worked closely with product"
-- Keep it practical and concrete (avoid high-level strategy unless relevant)
+- Use "Built," "Implemented," "Developed," "Automated," "Integrated" (execution verbs)
+- Show technical breadth: specific tools, languages, and frameworks used
+- Emphasize concrete results: "shipped X," "automated Y," "improved Z by N%"
+- Stay practical and specific — avoid high-level strategy language
 
 ---
 
-### 4. Principal QA Engineer / QA Architect
+### 4. Product / Program / Business Role
 
-**Role Type:** Senior technical leader with org-wide quality architecture ownership  
-**Level:** Principal/Staff+ (L7/E7+ equivalent, high influence, no direct reports)
+**Applies to:** Product Manager, Technical Program Manager, Business Analyst, Scrum Master
+**Level:** Any seniority, non-engineering primary output
 
 #### Professional Summary Positioning
-- Lead with strategic + technical depth: "Principal QA Engineer with 12+ years defining quality architecture and testing strategy across multi-product organizations"
-- Emphasize: org-wide quality standards, architecture decisions, platform strategy, technical vision
-- Include: multi-team impact, complex system testing (microservices, distributed systems), innovation
-- Metrics to feature: org-wide improvements, adoption across teams, strategic initiatives delivered
+- Lead with delivery scope and cross-functional value
+- Emphasize: aligning stakeholders, shipping products/programs, data-driven decisions
+- Include: roadmap ownership, OKRs, customer impact, delivery metrics
+- Metrics: features shipped, adoption rate, cycle time, revenue impact, customer satisfaction
 
 #### Core Skills Emphasis
-Prioritize in this order:
-1. Quality architecture and platform strategy
-2. Org-wide standards and best practices
-3. Technical vision and innovation
-4. Multi-team influence and leadership
-5. Complex system testing (distributed, microservices, cloud-native)
-6. Advanced tooling and frameworks
-
-Sample Core Skills:
-- Quality Architecture & Platform Strategy
-- Org-Wide Testing Standards & Best Practices
-- Distributed Systems & Microservices Testing
-- Technical Vision & Innovation Leadership
-- Multi-Team Collaboration & Influence
-- Advanced Test Automation & Tooling
-
-#### Experience Bullet Content Patterns
-- **Org-wide strategy:** "Defined company-wide quality architecture for 50+ microservices, establishing testing standards adopted by 15 engineering teams"
-- **Platform strategy:** "Led technical vision for test automation platform, enabling multi-region test execution and reducing CI/CD time by 45%"
-- **Innovation:** "Pioneered AI-assisted test generation framework, reducing test authoring time by 60% and expanding coverage by 40%"
-- **Complex systems:** "Architected end-to-end testing strategy for distributed event-driven systems, validating multi-service workflows at scale"
-- **Influence:** "Established quality engineering guild, driving adoption of chaos engineering and production testing across organization"
-- **Technical leadership:** "Led technical due diligence for 3 acquisitions, integrating testing infrastructure and teams into unified platform"
-
-#### JD Keyword Priorities
-Look for and emphasize:
-- Architecture, platform, strategy, vision
-- Org-wide, multi-team, cross-functional
-- Microservices, distributed systems, cloud-native
-- Innovation, R&D, experimentation
-- Chaos engineering, resilience testing, production validation
-- Technical leadership, guild/chapter leadership
-- Standards, best practices, patterns
+1. Product strategy, roadmap, or program planning
+2. Stakeholder management and communication
+3. Cross-functional team delivery
+4. Data analysis and decision making
+5. Process design and Agile practice
+6. Technical literacy relevant to the domain
 
 #### Tone Adjustments
-- Use "Defined," "Pioneered," "Established," "Led" (strategic leadership verbs)
-- Emphasize breadth: org-wide reach, multi-team adoption
-- Show depth: complex systems, advanced patterns, innovation
-- Highlight strategic impact: long-term vision, foundational work
-- Balance technical detail with business outcomes
+- Use "Defined," "Drove," "Launched," "Delivered," "Aligned," "Coordinated" (delivery verbs)
+- Show business impact: revenue, adoption, churn, NPS, cycle time
+- Connect technical decisions to customer or business outcomes
+- Demonstrate stakeholder influence and conflict resolution
 
 ---
 
 ### Content Differentiation Quick Reference
 
-| Aspect | QA Manager/Lead | Staff SDET | Senior SDET | Principal QA |
-|--------|-----------------|------------|-------------|--------------|
-| **Focus** | People + Strategy | Platform + Architecture | Hands-on Execution | Org Strategy + Vision |
-| **Scope** | Team (5-15 people) | Cross-team (no reports) | Individual/Small team | Org-wide (multi-team) |
-| **Verbs** | Led, Directed, Built (team) | Architected, Designed, Built (platform) | Implemented, Developed, Automated | Defined, Pioneered, Established |
-| **Metrics** | Team growth, org KPIs | Platform adoption, scale | Test coverage, CI/CD speed | Org-wide improvements |
-| **Keywords** | Hiring, coaching, stakeholders | Architecture, scalability, influence | Frameworks, CI/CD, hands-on | Strategy, vision, innovation |
+| Aspect | People Manager | Staff/Principal IC | Senior/Mid IC | Product/Program |
+|--------|---------------|-------------------|---------------|----------------|
+| **Focus** | People + Org Strategy | Platform + Architecture | Hands-on Execution | Delivery + Alignment |
+| **Scope** | Team or Org | Cross-team | Individual / Small team | Cross-functional |
+| **Verbs** | Led, Directed, Built (team) | Architected, Designed, Defined | Implemented, Developed, Built | Launched, Drove, Delivered |
+| **Metrics** | Team growth, org KPIs | Adoption, scale, reliability | Coverage, speed, quality | Revenue, adoption, cycle time |
+| **Keywords** | Hiring, coaching, stakeholders | Architecture, influence, scale | Tools, CI/CD, execution | Roadmap, OKRs, stakeholders |
 
 ---
 

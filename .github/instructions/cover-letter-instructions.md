@@ -60,10 +60,10 @@
 - **Rule:** If the JD offers multiple language options, choose the one the user lists first in their profile
 - **Rule:** Do not overemphasize languages absent or minimal in the user's profile
 
-### Test Automation Tools Priority
+### Tools and Technology Priority
 
-- **Core Strength:** The user's top automation tool from `profile.json > skills.core`
-- **Rule:** When JD says "Tool A OR Tool B", focus on the tool the user lists first in their profile
+- **Core Strength:** The user's primary tool or technology from `profile.json > skills.core` and `skills.technical`
+- **Rule:** When JD says "Tool A OR Tool B", choose the one the user lists first in their profile
 - **Rule:** Don't list all options, emphasise the user's strongest match
 
 ---
@@ -290,9 +290,9 @@ The output must include:
 
 ### Content Verification
 
-- [ ] All metrics verified against master-content.md
+- [ ] All metrics verified against `profile.json`
 - [ ] No fabricated companies or achievements
-- [ ] Exact company names and dates from master content
+- [ ] Exact company names and dates from the user's profile
 
 ### Structure & Tone
 
