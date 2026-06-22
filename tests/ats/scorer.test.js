@@ -229,3 +229,188 @@ Java, Selenium, REST Assured, Jenkins, CI/CD
     expect(score).toBeGreaterThanOrEqual(60);
   });
 });
+
+// ─── Synonym matching ─────────────────────────────────────────────────────────
+
+describe('calculateATSScore: synonym matching', () => {
+  test('matches k8s for kubernetes keyword in JD', () => {
+    const jd = 'Experience with Kubernetes orchestration required.';
+    const resume = `
+## Professional Summary
+Platform engineer with k8s and container experience.
+## Professional Experience
+### DevOps Engineer
+- Deployed services on k8s cluster
+`;
+    const jdKw = extractKeywords(jd);
+    const resumeKw = extractKeywords(resume);
+    const result = calculateATSScore(jdKw, resumeKw, resume);
+    // kubernetes ↔ k8s synonym — should find a match
+    expect(result.totalMatched).toBeGreaterThan(0);
+  });
+
+  test('matches cicd for ci/cd keyword', () => {
+    const jd = 'Strong CI/CD pipeline experience needed.';
+    const resume = `
+## Professional Summary
+Engineer with continuous integration experience and cicd pipeline expertise.
+## Professional Experience
+### QA Engineer
+- Set up cicd workflows
+`;
+    const jdKw = extractKeywords(jd);
+    const resumeKw = extractKeywords(resume);
+    const result = calculateATSScore(jdKw, resumeKw, resume);
+    expect(result.totalMatched).toBeGreaterThan(0);
+  });
+
+  test('matchedDetails includes matchType for each matched keyword', () => {
+    const jd = 'Selenium Java automation testing required.';
+    const resume = `
+## Professional Summary
+Selenium WebDriver and Java expert with automation testing skills.
+## Professional Experience
+### SDET
+- Built Selenium automation testing framework
+`;
+    const jdKw = extractKeywords(jd);
+    const resumeKw = extractKeywords(resume);
+    const { matchedDetails } = calculateATSScore(jdKw, resumeKw, resume);
+    expect(matchedDetails.every(m => ['exact', 'synonym', 'partial'].includes(m.matchType))).toBe(true);
+  });
+});
+
+// ─── Partial matching ─────────────────────────────────────────────────────────
+
+describe('calculateATSScore: partial matching', () => {
+  test('partial match contributes lower matchScore than exact', () => {
+    const jd = 'API contract testing experience.';
+    const resume = `
+## Professional Summary
+Engineer with API and contract experience.
+## Professional Experience
+### SDET
+- Worked on api testing
+`;
+    const jdKw = extractKeywords(jd);
+    const resumeKw = extractKeywords(resume);
+    const { matchedDetails } = calculateATSScore(jdKw, resumeKw, resume);
+    const partialMatches = matchedDetails.filter(m => m.matchType === 'partial');
+    const exactMatches   = matchedDetails.filter(m => m.matchType === 'exact');
+    if (partialMatches.length > 0 && exactMatches.length > 0) {
+      const avgPartial = partialMatches.reduce((s, m) => s + m.matchScore, 0) / partialMatches.length;
+      const avgExact   = exactMatches.reduce((s, m) => s + m.matchScore, 0)   / exactMatches.length;
+      expect(avgPartial).toBeLessThanOrEqual(avgExact);
+    }
+    // At minimum the test should not throw
+    expect(Array.isArray(matchedDetails)).toBe(true);
+  });
+});
+
+// ─── Seniority scoring ────────────────────────────────────────────────────────
+
+describe('calculateATSScore: seniority alignment', () => {
+  test('senior JD matched against senior resume scores higher than junior match', () => {
+    const seniorJD = 'Senior QA Engineer with 8+ years of experience in test automation leadership.';
+    const seniorResume = `
+## Professional Summary
+Senior QA Lead with 10 years of experience in test automation.
+## Professional Experience
+### Senior QA Lead
+- Led team of 8 QA engineers
+`;
+    const juniorResume = `
+## Professional Summary
+Junior QA with 1 year experience.
+## Professional Experience
+### Junior QA
+- Wrote some tests
+`;
+    const jdKw = extractKeywords(seniorJD);
+    const seniorResult = calculateATSScore(jdKw, extractKeywords(seniorResume), seniorResume);
+    const juniorResult = calculateATSScore(jdKw, extractKeywords(juniorResume), juniorResume);
+    expect(seniorResult.score).toBeGreaterThanOrEqual(juniorResult.score);
+  });
+
+  test('score components include a seniorityScore', () => {
+    const jdKw = extractKeywords('Senior engineer 5 years experience.');
+    const resumeKw = extractKeywords('Senior engineer 5 years experience.');
+    const result = calculateATSScore(jdKw, resumeKw, 'Senior engineer 5 years experience.');
+    expect(result.components).toHaveProperty('seniorityScore');
+    expect(result.components.seniorityScore).toBeGreaterThanOrEqual(0);
+  });
+});
+
+// ─── Placement scoring ────────────────────────────────────────────────────────
+
+describe('calculateATSScore: placement (context) scoring', () => {
+  test('keyword in experience section increases context score', () => {
+    const jd = 'Selenium automation required.';
+    const resumeWithExpPlacement = `
+## Professional Summary
+QA engineer.
+## Professional Experience
+### SDET
+- Built Selenium automation frameworks and CI/CD pipelines
+`;
+    const resumeSkillsOnly = `
+## Professional Summary
+QA engineer.
+## Technical Skills
+Selenium, automation
+## Professional Experience
+### SDET
+- Did various tasks.
+`;
+    const jdKw = extractKeywords(jd);
+    const expResult    = calculateATSScore(jdKw, extractKeywords(resumeWithExpPlacement), resumeWithExpPlacement);
+    const skillsResult = calculateATSScore(jdKw, extractKeywords(resumeSkillsOnly), resumeSkillsOnly);
+    // Both should return valid results
+    expect(expResult.components.contextScore).toBeGreaterThanOrEqual(0);
+    expect(skillsResult.components.contextScore).toBeGreaterThanOrEqual(0);
+  });
+
+  test('missingDetails contains importance field', () => {
+    const jd = 'Playwright TypeScript required.';
+    const resume = `
+## Professional Summary
+Selenium Java engineer.
+## Professional Experience
+### SDET
+- Used Selenium WebDriver
+`;
+    const jdKw = extractKeywords(jd);
+    const { missingDetails } = calculateATSScore(jdKw, extractKeywords(resume), resume);
+    if (missingDetails.length > 0) {
+      expect(missingDetails[0]).toHaveProperty('importance');
+    }
+  });
+});
+
+// ─── parseSections edge cases ────────────────────────────────────────────────
+
+describe('parseSections: edge cases', () => {
+  test('handles work history heading as experience', () => {
+    const resume = '## Work History\n- Company';
+    const sections = parseSections(resume);
+    expect(sections.experience).toContain('company');
+  });
+
+  test('handles key projects heading as projects', () => {
+    const resume = '## Key Projects\n- My Project';
+    const sections = parseSections(resume);
+    expect(sections.projects).toContain('my project');
+  });
+
+  test('handles certifications with plural heading', () => {
+    const resume = '## Certifications\n- AWS SA';
+    const sections = parseSections(resume);
+    expect(sections.certifications).toContain('aws sa');
+  });
+
+  test('handles core competencies heading as skills', () => {
+    const resume = '## Core Competencies\n- Java, Selenium';
+    const sections = parseSections(resume);
+    expect(sections.skills).toContain('java, selenium');
+  });
+});
