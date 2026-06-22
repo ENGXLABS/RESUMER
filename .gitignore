@@ -7,10 +7,13 @@ profile.json
 .github/resume-role-templates.md
 .github/resume-ai-master-content.md
 .github/instructions/
+.github/antigravity-agent-instructions.md
+.github/agents/
 CLAUDE.md
 GEMINI.md
 DUAL_RESUME_FEATURE.md
 .agent/
+.gemini/
 
 # Backup files
 *-backup.md
