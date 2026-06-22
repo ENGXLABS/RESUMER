@@ -98,6 +98,9 @@
     /* Status bar */
     --status-bar-height: 28px;
     --header-height: 56px;
+
+    /* Left toolbar */
+    --left-toolbar-width: 112px;
 }
 
 /* ---------- Dark Theme ---------- */

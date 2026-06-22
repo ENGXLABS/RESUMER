@@ -2,16 +2,12 @@
 # Your personal profile — NEVER commit this (contains personal data)
 profile.json
 
-# Personal AI files (deleted — entries kept for safety)
-.github/resume-master-content.md
-.github/resume-role-templates.md
-.github/resume-ai-master-content.md
-.github/antigravity-agent-instructions.md
+# AI agent instruction files (personal, user-specific)
 CLAUDE.md
 GEMINI.md
-DUAL_RESUME_FEATURE.md
 .cursorrules
 .gemini/
+DUAL_RESUME_FEATURE.md
 
 # Backup files
 *-backup.md

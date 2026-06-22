@@ -34,77 +34,13 @@
 <body>
     <!-- Single Row Header -->
     <div id="compact-header">
-        <!-- Left: Brand + Control Actions -->
+        <!-- Left: Brand -->
         <div class="header-left">
             <div class="brand" onclick="location.reload()" role="button" tabindex="0" aria-label="Resumer Home">
                 <span class="brand-icon">
                     <span class="iconify" data-icon="mdi:file-document-edit"></span>
                 </span>
                 <span class="brand-name">Resumer</span>
-            </div>
-            <span class="header-divider"></span>
-            <!-- Preview Mode Actions -->
-            <div class="control-actions" id="preview-actions">
-                <button id="toggle-mode" onclick="toggleMode()" data-tooltip="Edit content">
-                    <span class="iconify" data-icon="mdi:pencil"></span>
-                    <span class="btn-label">Edit</span>
-                </button>
-                <input type="text" id="company-name" placeholder="Company name..." aria-label="Company name" />
-                <button id="download-button" onclick="downloadMarkdown()" data-tooltip="Download markdown">
-                    <span class="iconify" data-icon="mdi:download"></span>
-                    <span class="btn-label">Download</span>
-                </button>
-                <button id="print-button" onclick="window.print()" data-tooltip="Print / Save as PDF">
-                    <span class="iconify" data-icon="mdi:printer"></span>
-                    <span class="btn-label">Print</span>
-                </button>
-                <!-- Phase 7: Export dropdown -->
-                <div class="export-drop">
-                    <button id="export-btn" onclick="toggleExportMenu(event)" data-tooltip="Export resume">
-                        <span class="iconify" data-icon="mdi:export"></span>
-                        <span class="btn-label">Export</span>
-                    </button>
-                    <div id="export-menu" class="export-menu" role="menu">
-                        <button role="menuitem" onclick="exportPDF()">
-                            <span class="iconify" data-icon="mdi:file-pdf-box"></span> PDF (Print)
-                        </button>
-                        <button role="menuitem" onclick="exportDOCX()">
-                            <span class="iconify" data-icon="mdi:file-word-box"></span> Word (.docx)
-                        </button>
-                        <button role="menuitem" onclick="exportJSONResume()">
-                            <span class="iconify" data-icon="mdi:code-json"></span> JSON Resume
-                        </button>
-                        <button role="menuitem" onclick="openShareModal()">
-                            <span class="iconify" data-icon="mdi:link-variant"></span> Share Link
-                        </button>
-                    </div>
-                </div>
-                <!-- Phase 7: Import dropdown -->
-                <div class="import-drop">
-                    <button id="import-btn" onclick="toggleImportMenu(event)" data-tooltip="Import data">
-                        <span class="iconify" data-icon="mdi:import"></span>
-                        <span class="btn-label">Import</span>
-                    </button>
-                    <div id="import-menu" class="import-menu" role="menu">
-                        <button role="menuitem" onclick="openGitHubImport()">
-                            <span class="iconify" data-icon="mdi:github"></span> From GitHub
-                        </button>
-                        <button role="menuitem" onclick="openLinkedInImport()">
-                            <span class="iconify" data-icon="mdi:linkedin"></span> From LinkedIn CSV
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <!-- Edit Mode Actions -->
-            <div class="control-actions edit-actions" id="edit-actions" style="display:none;">
-                <button id="discard-button" class="btn-discard" onclick="discardChanges()" data-tooltip="Discard all changes">
-                    <span class="iconify" data-icon="mdi:undo-variant"></span>
-                    <span class="btn-label">Discard</span>
-                </button>
-                <button id="save-button" class="btn-save" onclick="saveResume()" data-tooltip="Save changes">
-                    <span class="iconify" data-icon="mdi:content-save"></span>
-                    <span class="btn-label">Save</span>
-                </button>
             </div>
         </div>
 
@@ -177,6 +113,76 @@
             </button>
             <button class="icon-btn" onclick="openShortcutModal()" data-tooltip="Keyboard shortcuts" aria-label="Keyboard shortcuts">
                 <span class="iconify" data-icon="mdi:keyboard"></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Left Floating Toolbar -->
+    <div id="left-toolbar" role="toolbar" aria-label="Document actions">
+        <!-- Preview mode actions -->
+        <div class="lt-actions" id="preview-actions">
+            <button id="toggle-mode" onclick="toggleMode()" data-tooltip="Edit content">
+                <span class="iconify" data-icon="mdi:pencil"></span>
+                <span class="btn-label">Edit</span>
+            </button>
+            <div class="lt-divider"></div>
+            <input type="text" id="company-name" placeholder="Company..." aria-label="Company name" />
+            <div class="lt-divider"></div>
+            <button id="download-button" onclick="downloadMarkdown()" data-tooltip="Download markdown">
+                <span class="iconify" data-icon="mdi:download"></span>
+                <span class="btn-label">Download</span>
+            </button>
+            <button id="print-button" onclick="window.print()" data-tooltip="Print / Save as PDF">
+                <span class="iconify" data-icon="mdi:printer"></span>
+                <span class="btn-label">Print</span>
+            </button>
+            <div class="lt-divider"></div>
+            <!-- Export dropdown -->
+            <div class="export-drop">
+                <button id="export-btn" onclick="toggleExportMenu(event)" data-tooltip="Export resume">
+                    <span class="iconify" data-icon="mdi:export"></span>
+                    <span class="btn-label">Export</span>
+                </button>
+                <div id="export-menu" class="export-menu" role="menu">
+                    <button role="menuitem" onclick="exportPDF()">
+                        <span class="iconify" data-icon="mdi:file-pdf-box"></span> PDF (Print)
+                    </button>
+                    <button role="menuitem" onclick="exportDOCX()">
+                        <span class="iconify" data-icon="mdi:file-word-box"></span> Word (.docx)
+                    </button>
+                    <button role="menuitem" onclick="exportJSONResume()">
+                        <span class="iconify" data-icon="mdi:code-json"></span> JSON Resume
+                    </button>
+                    <button role="menuitem" onclick="openShareModal()">
+                        <span class="iconify" data-icon="mdi:link-variant"></span> Share Link
+                    </button>
+                </div>
+            </div>
+            <!-- Import dropdown -->
+            <div class="import-drop">
+                <button id="import-btn" onclick="toggleImportMenu(event)" data-tooltip="Import data">
+                    <span class="iconify" data-icon="mdi:import"></span>
+                    <span class="btn-label">Import</span>
+                </button>
+                <div id="import-menu" class="import-menu" role="menu">
+                    <button role="menuitem" onclick="openGitHubImport()">
+                        <span class="iconify" data-icon="mdi:github"></span> From GitHub
+                    </button>
+                    <button role="menuitem" onclick="openLinkedInImport()">
+                        <span class="iconify" data-icon="mdi:linkedin"></span> From LinkedIn CSV
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Edit mode actions -->
+        <div class="lt-actions lt-edit-actions" id="edit-actions" style="display:none;">
+            <button id="discard-button" class="btn-discard" onclick="discardChanges()" data-tooltip="Discard all changes">
+                <span class="iconify" data-icon="mdi:undo-variant"></span>
+                <span class="btn-label">Discard</span>
+            </button>
+            <button id="save-button" class="btn-save" onclick="saveResume()" data-tooltip="Save changes">
+                <span class="iconify" data-icon="mdi:content-save"></span>
+                <span class="btn-label">Save</span>
             </button>
         </div>
     </div>
