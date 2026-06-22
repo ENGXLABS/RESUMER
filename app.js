@@ -2157,4 +2157,390 @@
         _liveATSDebounce = setTimeout(_runLiveATS, 350);
     };
 
+    // ────── Phase 4: AI Panel ──────
+
+    window.toggleAIPanel = function () {
+        const panel = document.getElementById('ai-panel');
+        const btn   = document.getElementById('ai-panel-btn');
+        if (!panel) return;
+        panel.classList.toggle('collapsed');
+        const isOpen = !panel.classList.contains('collapsed');
+        if (btn) btn.classList.toggle('active', isOpen);
+        if (isOpen) _syncAIProviderLabel();
+    };
+
+    function _syncAIProviderLabel() {
+        const el = document.getElementById('ai-provider-label');
+        if (!el) return;
+        try {
+            const cfg = JSON.parse(localStorage.getItem('resumer-ai-config') || '{}');
+            const names = { ollama: 'Ollama (local)', openai: 'OpenAI', anthropic: 'Anthropic', custom: 'Custom' };
+            el.textContent = names[cfg.provider || 'ollama'] || 'Ollama (local)';
+            el.className = 'ai-provider-label';
+        } catch {
+            el.textContent = 'Ollama (local)';
+        }
+    }
+
+    window.aiTestConnection = async function () {
+        const btn = document.querySelector('.ai-test-btn');
+        const label = document.getElementById('ai-provider-label');
+        if (btn) btn.disabled = true;
+        if (label) { label.textContent = 'Testing...'; label.className = 'ai-provider-label'; }
+        try {
+            const cfg = JSON.parse(localStorage.getItem('resumer-ai-config') || '{}');
+            const provider = cfg.provider || 'ollama';
+            const model    = cfg.model    || 'llama3';
+            const baseUrls = { ollama: 'http://localhost:11434', openai: 'https://api.openai.com/v1', anthropic: 'https://api.anthropic.com/v1', custom: cfg.customUrl || '' };
+            const url = `${baseUrls[provider]}/api/chat`;
+            // Minimal ping for Ollama; for cloud providers just report configured
+            if (provider === 'ollama') {
+                const res = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ model, messages: [{ role: 'user', content: 'Hi' }], stream: false }),
+                    signal: AbortSignal.timeout(5000),
+                }).catch(() => null);
+                if (res && res.ok) {
+                    if (label) { label.textContent = 'Ollama connected'; label.className = 'ai-provider-label connected'; }
+                    toast('Ollama is running', 'success');
+                } else {
+                    if (label) { label.textContent = 'Ollama not running'; label.className = 'ai-provider-label error'; }
+                    toast('Ollama not found — start it with: ollama serve', 'warning', 5000);
+                }
+            } else {
+                if (label) { label.textContent = cfg.openaiKey || cfg.anthropicKey ? 'API key configured' : 'No key configured'; label.className = 'ai-provider-label connected'; }
+                toast(`${provider} configured. Key must be valid to run AI actions.`, 'info');
+            }
+        } catch {
+            if (label) { label.textContent = 'Connection failed'; label.className = 'ai-provider-label error'; }
+        }
+        if (btn) btn.disabled = false;
+    };
+
+    window.aiAction = function (action) {
+        if (action === 'paste-parse') { openImportModal(); return; }
+
+        const panel = document.getElementById('ai-panel');
+        if (panel?.classList.contains('collapsed')) toggleAIPanel();
+
+        const outputEl = document.getElementById('ai-output');
+        const diffPanel = document.getElementById('ai-diff-panel');
+        if (diffPanel) diffPanel.style.display = 'none';
+
+        const jdText = document.getElementById('jd-sidebar-input')?.value?.trim() || '';
+        const resumeText = markdownContent || document.getElementById('markdown-editor')?.value || '';
+
+        const actionLabels = { tailor: 'Tailor Resume', 'cover-letter': 'Generate Cover Letter', summary: 'Generate Summary', 'ats-gap': 'ATS Gap Analysis' };
+        if (outputEl) outputEl.innerHTML = `<div class="ai-output-loading"><div class="ai-spinner"></div><span>Running: ${actionLabels[action] || action}...</span></div>`;
+
+        _runAIAction(action, resumeText, jdText).then(result => {
+            _renderAIResult(action, result);
+        }).catch(err => {
+            if (outputEl) outputEl.innerHTML = `<div class="ai-output-empty">${err.message}</div>`;
+            toast(`AI error: ${err.message}`, 'error', 5000);
+        });
+    };
+
+    async function _runAIAction(action, resumeText, jdText) {
+        const cfg = JSON.parse(localStorage.getItem('resumer-ai-config') || '{}');
+        const provider = cfg.provider || 'ollama';
+
+        if (!resumeText.trim()) throw new Error('No resume loaded. Load your resume first.');
+        if ((action === 'tailor' || action === 'cover-letter' || action === 'ats-gap') && !jdText) {
+            throw new Error('Paste a Job Description in the JD panel first.');
+        }
+
+        const prompts = {
+            tailor: () => _buildTailorPrompt(resumeText, jdText),
+            'cover-letter': () => _buildCoverLetterPrompt(resumeText, jdText),
+            summary: () => _buildSummaryPrompt(resumeText, jdText),
+            'ats-gap': () => _buildATSGapPrompt(resumeText, jdText),
+        };
+
+        const { system, user } = prompts[action]();
+        const raw = await _callProvider(system, user, cfg, provider);
+        return _parseAIResponse(action, raw);
+    }
+
+    function _buildTailorPrompt(resumeText, jdText) {
+        return {
+            system: `You are a senior resume writer and ATS optimization expert. Tailor the resume to the job description. NEVER fabricate experience. No EM dashes. Return ONLY valid JSON: { "summary": ["bullet1","bullet2","bullet3","bullet4"], "tailoredBullets": [{"section":"...","original":"...","tailored":"..."}], "addedKeywords": [], "atsScore": {"before":0,"after":0} }`,
+            user: `Job Description:\n---\n${jdText}\n---\nResume:\n---\n${resumeText}\n---\nReturn the JSON tailoring result.`
+        };
+    }
+    function _buildCoverLetterPrompt(resumeText, jdText) {
+        const company = document.getElementById('company-name')?.value?.trim() || 'the company';
+        return {
+            system: `You are a professional cover letter writer. Write 4 paragraphs, 250-300 words. No fabrication, no EM dashes, no clichés. Return ONLY valid JSON: { "coverLetter": "full text with \\n for newlines" }`,
+            user: `Resume:\n${resumeText}\nJob Description:\n${jdText}\nCompany: ${company}\nWrite the cover letter JSON.`
+        };
+    }
+    function _buildSummaryPrompt(resumeText, jdText) {
+        return {
+            system: `You are an expert resume writer. Write exactly 4 professional summary bullets. No fabrication, no clichés. Return ONLY valid JSON: { "summary": ["bullet1","bullet2","bullet3","bullet4"] }`,
+            user: `Resume:\n${resumeText}${jdText ? `\nJD:\n${jdText}` : ''}\nWrite the 4-bullet summary JSON.`
+        };
+    }
+    function _buildATSGapPrompt(resumeText, jdText) {
+        return {
+            system: `You are an ATS optimization expert. Analyze the resume against the JD. Return ONLY valid JSON: { "score": {"estimate": 0, "rationale": ""}, "critical": [{"keyword":"","suggestedSection":"","insertionHint":""}], "important": [{"keyword":"","suggestedSection":""}], "strengths": [] }`,
+            user: `JD:\n${jdText}\nResume:\n${resumeText}\nProvide the ATS gap analysis JSON.`
+        };
+    }
+
+    async function _callProvider(system, user, cfg, provider) {
+        const baseUrls = { ollama: 'http://localhost:11434', openai: 'https://api.openai.com/v1', anthropic: 'https://api.anthropic.com/v1', custom: cfg.customUrl || '' };
+        const model = cfg.model || (provider === 'ollama' ? 'llama3' : provider === 'openai' ? 'gpt-4o-mini' : 'claude-3-haiku-20240307');
+
+        if (provider === 'ollama') {
+            const res = await fetch(`${baseUrls.ollama}/api/chat`, {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ model, messages: [{ role: 'system', content: system }, { role: 'user', content: user }], stream: false }),
+            });
+            if (!res.ok) throw new Error(`Ollama error ${res.status}. Is it running? Try: ollama serve`);
+            return (await res.json()).message?.content || '';
+        }
+
+        if (provider === 'openai') {
+            if (!cfg.openaiKey) throw new Error('OpenAI API key not set. Click the gear icon to configure.');
+            const res = await fetch(`${baseUrls.openai}/chat/completions`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${cfg.openaiKey}` },
+                body: JSON.stringify({ model, messages: [{ role: 'system', content: system }, { role: 'user', content: user }], temperature: 0.3 }),
+            });
+            if (!res.ok) throw new Error(`OpenAI error ${res.status}`);
+            return (await res.json()).choices?.[0]?.message?.content || '';
+        }
+
+        if (provider === 'anthropic') {
+            if (!cfg.anthropicKey) throw new Error('Anthropic API key not set. Click the gear icon to configure.');
+            const res = await fetch(`${baseUrls.anthropic}/messages`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'x-api-key': cfg.anthropicKey, 'anthropic-version': '2023-06-01' },
+                body: JSON.stringify({ model, max_tokens: 4096, system, messages: [{ role: 'user', content: user }] }),
+            });
+            if (!res.ok) throw new Error(`Anthropic error ${res.status}`);
+            return (await res.json()).content?.[0]?.text || '';
+        }
+
+        throw new Error(`Unknown provider: ${provider}`);
+    }
+
+    function _parseAIResponse(action, raw) {
+        let text = raw.trim();
+        const fence = text.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
+        if (fence) text = fence[1].trim();
+        const start = text.indexOf('{');
+        const end   = text.lastIndexOf('}');
+        if (start === -1 || end === -1) throw new Error('AI returned no JSON. Try again or check your provider.');
+        try {
+            return JSON.parse(text.slice(start, end + 1));
+        } catch {
+            throw new Error('Could not parse AI response. The model may not support JSON output well.');
+        }
+    }
+
+    window._pendingAIResult = null;
+
+    function _renderAIResult(action, data) {
+        const outputEl = document.getElementById('ai-output');
+        const diffPanel = document.getElementById('ai-diff-panel');
+        const diffTitle = document.getElementById('ai-diff-title');
+        const diffContent = document.getElementById('ai-diff-content');
+        if (!outputEl) return;
+
+        window._pendingAIResult = { action, data };
+
+        if (action === 'tailor') {
+            const summary = (data.summary || []).map((b, i) => `<div class="ai-bullet-item"><span style="color:var(--color-primary);font-weight:700;">${i+1}.</span> ${b}</div>`).join('');
+            const keywords = (data.addedKeywords || []).map(k => `<span class="ai-keyword-chip">${k}</span>`).join('');
+            outputEl.innerHTML = `
+                <div class="ai-output-section"><h4>Tailored Summary</h4>${summary}</div>
+                ${keywords ? `<div class="ai-output-section"><h4>Keywords Added</h4>${keywords}</div>` : ''}
+                ${data.atsScore ? `<div class="ai-output-section"><h4>Score Projection</h4><span style="font-size:1.1rem;font-weight:700;color:#16a34a;">${data.atsScore.before} → ${data.atsScore.after}</span></div>` : ''}`;
+            if (data.tailoredBullets?.length && diffPanel && diffContent && diffTitle) {
+                diffTitle.textContent = `Review ${data.tailoredBullets.length} tailored bullet(s)`;
+                diffContent.innerHTML = data.tailoredBullets.slice(0, 5).map(b => `
+                    <div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--color-border,#eee);">
+                        <div style="font-size:0.72rem;color:var(--color-text-muted,#888);margin-bottom:4px;">${b.section}</div>
+                        <div class="ai-diff-old">${b.original}</div>
+                        <div class="ai-diff-new">${b.tailored}</div>
+                    </div>`).join('');
+                diffPanel.style.display = 'block';
+            }
+        } else if (action === 'cover-letter') {
+            const text = (data.coverLetter || '').replace(/\n/g, '<br>');
+            outputEl.innerHTML = `<div class="ai-output-section"><h4>Generated Cover Letter</h4><div style="line-height:1.7;">${text}</div></div>`;
+            if (diffPanel && diffContent && diffTitle) {
+                diffTitle.textContent = 'Accept cover letter?';
+                diffContent.innerHTML = `<p style="font-size:0.8rem;">This will replace your current cover letter file content. Review above, then accept.</p>`;
+                diffPanel.style.display = 'block';
+            }
+        } else if (action === 'summary') {
+            const bullets = (data.summary || []).map((b, i) => `<div class="ai-bullet-item"><span style="color:var(--color-primary);font-weight:700;">${i+1}.</span> ${b}</div>`).join('');
+            outputEl.innerHTML = `<div class="ai-output-section"><h4>Generated Summary</h4>${bullets}</div>`;
+            if (diffPanel && diffTitle) {
+                diffTitle.textContent = 'Accept summary?';
+                if (diffContent) diffContent.innerHTML = `<p style="font-size:0.8rem;">This will update the Professional Summary in your resume.</p>`;
+                diffPanel.style.display = 'block';
+            }
+        } else if (action === 'ats-gap') {
+            const critical = (data.critical || []).map(g => `<span class="ai-keyword-chip critical">${g.keyword}</span>`).join('');
+            const important = (data.important || []).map(g => `<span class="ai-keyword-chip">${g.keyword}</span>`).join('');
+            const strengths = (data.strengths || []).map(s => `<span class="ai-keyword-chip" style="background:#f0fdf4;color:#166534;border-color:#4ade80;">${s}</span>`).join('');
+            outputEl.innerHTML = `
+                ${data.score ? `<div class="ai-output-section"><h4>Estimated Score</h4><span style="font-size:1.2rem;font-weight:700;">${data.score.estimate}/100</span> <span style="font-size:0.75rem;color:var(--color-text-muted);">${data.score.rationale}</span></div>` : ''}
+                ${critical ? `<div class="ai-output-section"><h4>Critical Gaps</h4>${critical}</div>` : ''}
+                ${important ? `<div class="ai-output-section"><h4>Nice to Have</h4>${important}</div>` : ''}
+                ${strengths ? `<div class="ai-output-section"><h4>Strengths Found</h4>${strengths}</div>` : ''}`;
+        }
+
+        toast('AI analysis complete', 'success');
+    }
+
+    window.aiAcceptChanges = function () {
+        const pending = window._pendingAIResult;
+        if (!pending) return;
+        const { action, data } = pending;
+
+        if (action === 'tailor' && data.summary) {
+            const summaryText = data.summary.map(b => `- ${b}`).join('\n');
+            const newContent = markdownContent.replace(
+                /## Professional Summary[\s\S]*?(?=\n## )/,
+                `## Professional Summary\n\n${summaryText}\n\n`
+            );
+            if (newContent !== markdownContent) {
+                markdownContent = newContent;
+                const editor = document.getElementById('markdown-editor');
+                if (editor) editor.value = markdownContent;
+                updatePreview();
+                if (window._triggerLiveATS) window._triggerLiveATS();
+                toast('Summary updated', 'success');
+            } else {
+                toast('Could not locate summary section — edit manually', 'warning');
+            }
+        } else if (action === 'cover-letter' && data.coverLetter) {
+            const clContent = document.getElementById('cover-letter-content');
+            if (clContent) clContent.innerHTML = data.coverLetter.replace(/\n/g, '<br>');
+            toast('Cover letter updated — save to persist changes', 'success');
+        } else if (action === 'summary' && data.summary) {
+            const summaryText = data.summary.map(b => `- ${b}`).join('\n');
+            const newContent = markdownContent.replace(
+                /## Professional Summary[\s\S]*?(?=\n## )/,
+                `## Professional Summary\n\n${summaryText}\n\n`
+            );
+            markdownContent = newContent;
+            const editor = document.getElementById('markdown-editor');
+            if (editor) editor.value = markdownContent;
+            updatePreview();
+            toast('Summary updated', 'success');
+        }
+
+        const diffPanel = document.getElementById('ai-diff-panel');
+        if (diffPanel) diffPanel.style.display = 'none';
+        window._pendingAIResult = null;
+    };
+
+    window.aiRejectChanges = function () {
+        const diffPanel = document.getElementById('ai-diff-panel');
+        if (diffPanel) diffPanel.style.display = 'none';
+        window._pendingAIResult = null;
+        toast('Changes discarded', 'info');
+    };
+
+    // ── Import from text (Paste & Parse) ─────────────────────────────────────
+
+    window.openImportModal = function () {
+        const modal = document.getElementById('import-modal');
+        if (modal) { modal.style.display = 'flex'; document.getElementById('import-text-input')?.focus(); }
+    };
+    window.closeImportModal = function () {
+        const modal = document.getElementById('import-modal');
+        if (modal) modal.style.display = 'none';
+    };
+
+    window.runImportParse = async function () {
+        const input = document.getElementById('import-text-input');
+        const rawText = input?.value?.trim();
+        if (!rawText || rawText.length < 50) { toast('Please paste some text (50+ characters)', 'warning'); return; }
+
+        const btn = document.querySelector('.import-modal-content .btn-primary');
+        if (btn) { btn.disabled = true; btn.textContent = 'Extracting...'; }
+
+        const cfg = JSON.parse(localStorage.getItem('resumer-ai-config') || '{}');
+        const provider = cfg.provider || 'ollama';
+
+        const system = `You are a precise data extraction engine. Extract career information from text and return ONLY valid JSON. NEVER fabricate. If a field has no data, use empty string or empty array. Return ONLY the JSON with these keys: identity (name, email, phone, location, linkedin, github, portfolio), summary (string), experience (array of {title, company, location, startDate, endDate, current, bullets}), skills ({core: [{label, items}], technical: []}), education (array of {degree, field, institution, year}), certifications (array of {name, issuer, year}), projects (array of {name, description, bullets}), achievements (array of strings).`;
+        const user = `Extract career profile from:\n\n${rawText}`;
+
+        try {
+            const raw = await _callProvider(system, user, cfg, provider);
+            const profile = _parseAIResponse('paste-parse', raw);
+
+            // Store in localStorage
+            localStorage.setItem('resumer-profile', JSON.stringify(profile));
+
+            closeImportModal();
+            if (input) input.value = '';
+            toast(`Profile extracted: ${profile.identity?.name || 'Unknown'}. ${profile.experience?.length || 0} roles, ${profile.skills?.technical?.length || 0} technical skills.`, 'success', 6000);
+        } catch (err) {
+            toast(`Import failed: ${err.message}`, 'error', 6000);
+        }
+
+        if (btn) { btn.disabled = false; btn.innerHTML = '<span class="iconify" data-icon="mdi:robot"></span> Extract profile'; }
+    };
+
+    // ── AI Settings ───────────────────────────────────────────────────────────
+
+    window.openAISettings = function () {
+        const modal = document.getElementById('ai-settings-modal');
+        if (!modal) return;
+        // Populate current values
+        const cfg = JSON.parse(localStorage.getItem('resumer-ai-config') || '{}');
+        const provSel = document.getElementById('ai-provider-select');
+        const modelIn = document.getElementById('ai-model-input');
+        const keyIn   = document.getElementById('ai-key-input');
+        const urlIn   = document.getElementById('ai-url-input');
+        if (provSel) provSel.value = cfg.provider || 'ollama';
+        if (modelIn) modelIn.value = cfg.model || '';
+        if (keyIn) keyIn.value = cfg.openaiKey || cfg.anthropicKey || '';
+        if (urlIn) urlIn.value = cfg.customUrl || '';
+        modal.style.display = 'flex';
+        _updateAISettingsFields();
+    };
+    window.closeAISettings = function () {
+        const modal = document.getElementById('ai-settings-modal');
+        if (modal) modal.style.display = 'none';
+    };
+    window.onAIProviderChange = function () { _updateAISettingsFields(); };
+
+    function _updateAISettingsFields() {
+        const provider = document.getElementById('ai-provider-select')?.value || 'ollama';
+        const keyField = document.getElementById('ai-key-field');
+        const urlField = document.getElementById('ai-url-field');
+        if (keyField) keyField.style.display = (provider === 'openai' || provider === 'anthropic') ? 'block' : 'none';
+        if (urlField) urlField.style.display = (provider === 'ollama' || provider === 'custom') ? 'block' : 'none';
+        const modelPlaceholders = { ollama: 'e.g. llama3, mistral, phi3', openai: 'e.g. gpt-4o-mini, gpt-4o', anthropic: 'e.g. claude-3-haiku-20240307', custom: 'model name' };
+        const modelIn = document.getElementById('ai-model-input');
+        if (modelIn) modelIn.placeholder = modelPlaceholders[provider] || 'model name';
+    }
+
+    window.saveAISettings = function () {
+        const provider = document.getElementById('ai-provider-select')?.value || 'ollama';
+        const model    = document.getElementById('ai-model-input')?.value?.trim() || '';
+        const key      = document.getElementById('ai-key-input')?.value?.trim() || '';
+        const url      = document.getElementById('ai-url-input')?.value?.trim() || '';
+
+        const existing = JSON.parse(localStorage.getItem('resumer-ai-config') || '{}');
+        const cfg = { ...existing, provider, model, customUrl: url };
+        if (provider === 'openai')    cfg.openaiKey    = key;
+        if (provider === 'anthropic') cfg.anthropicKey = key;
+        localStorage.setItem('resumer-ai-config', JSON.stringify(cfg));
+
+        closeAISettings();
+        _syncAIProviderLabel();
+        toast('AI settings saved', 'success');
+    };
+
 })();

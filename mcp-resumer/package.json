@@ -1,0 +1,19 @@
+{
+  "name": "mcp-resumer",
+  "version": "1.0.0",
+  "description": "MCP server for Resumer — AI-powered resume tailoring and ATS analysis tools",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "mcp-resumer": "src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "keywords": ["mcp", "resume", "ats", "ai"],
+  "license": "MIT"
+}

@@ -129,6 +129,10 @@
                 <span class="iconify" data-icon="mdi:briefcase-search"></span>
             </button>
             <span class="header-divider"></span>
+            <button id="ai-panel-btn" class="icon-btn ai-panel-btn" onclick="toggleAIPanel()" data-tooltip="AI assistant" aria-label="Open AI assistant">
+                <span class="iconify" data-icon="mdi:robot"></span>
+            </button>
+            <span class="header-divider"></span>
             <button id="theme-toggle" class="icon-btn" onclick="toggleTheme()" data-tooltip="Toggle dark mode" aria-label="Toggle dark mode">
                 <span class="iconify theme-icon-light" data-icon="mdi:weather-sunny"></span>
                 <span class="iconify theme-icon-dark" data-icon="mdi:weather-night" style="display:none;"></span>
@@ -279,6 +283,140 @@
 
     <!-- Toast Notification Container -->
     <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- AI Panel -->
+    <div id="ai-panel" class="ai-panel collapsed" role="dialog" aria-label="AI assistant panel">
+        <div class="ai-panel-header">
+            <span class="ai-panel-title">
+                <span class="iconify" data-icon="mdi:robot"></span>
+                AI Assistant
+            </span>
+            <div class="ai-panel-header-actions">
+                <button class="ai-icon-btn" onclick="openAISettings()" title="AI settings" aria-label="AI settings">
+                    <span class="iconify" data-icon="mdi:cog"></span>
+                </button>
+                <button class="ai-icon-btn" onclick="toggleAIPanel()" title="Close" aria-label="Close AI panel">
+                    <span class="iconify" data-icon="mdi:close"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="ai-actions">
+            <button class="ai-action-btn" onclick="aiAction('paste-parse')" title="Import from any text — paste LinkedIn, old resume, or a bio">
+                <span class="iconify" data-icon="mdi:import"></span>
+                <span class="ai-action-label">Import from text</span>
+            </button>
+            <button class="ai-action-btn" onclick="aiAction('tailor')" title="Tailor resume to the job description in the JD panel">
+                <span class="iconify" data-icon="mdi:tune"></span>
+                <span class="ai-action-label">Tailor to JD</span>
+            </button>
+            <button class="ai-action-btn" onclick="aiAction('cover-letter')" title="Generate a cover letter from your profile and the JD">
+                <span class="iconify" data-icon="mdi:email-edit"></span>
+                <span class="ai-action-label">Cover letter</span>
+            </button>
+            <button class="ai-action-btn" onclick="aiAction('summary')" title="Rewrite the Professional Summary section">
+                <span class="iconify" data-icon="mdi:text-box-edit"></span>
+                <span class="ai-action-label">New summary</span>
+            </button>
+            <button class="ai-action-btn" onclick="aiAction('ats-gap')" title="Get a detailed ATS gap analysis with specific insertion hints">
+                <span class="iconify" data-icon="mdi:chart-bar"></span>
+                <span class="ai-action-label">ATS gaps</span>
+            </button>
+        </div>
+
+        <!-- Provider status -->
+        <div class="ai-provider-bar">
+            <span id="ai-provider-label" class="ai-provider-label">Ollama (local)</span>
+            <button class="ai-test-btn" onclick="aiTestConnection()" title="Test connection">
+                <span class="iconify" data-icon="mdi:connection"></span> Test
+            </button>
+        </div>
+
+        <!-- Output area -->
+        <div id="ai-output" class="ai-output" aria-live="polite">
+            <div class="ai-output-empty">Select an action above to get started.</div>
+        </div>
+
+        <!-- Diff / Accept panel -->
+        <div id="ai-diff-panel" class="ai-diff-panel" style="display:none;">
+            <div class="ai-diff-header">
+                <span id="ai-diff-title">Review changes</span>
+                <div class="ai-diff-actions">
+                    <button class="ai-accept-btn" onclick="aiAcceptChanges()">Accept</button>
+                    <button class="ai-reject-btn" onclick="aiRejectChanges()">Discard</button>
+                </div>
+            </div>
+            <div id="ai-diff-content" class="ai-diff-content"></div>
+        </div>
+    </div>
+
+    <!-- Import from Text Modal -->
+    <div id="import-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true" aria-label="Import from text">
+        <div class="modal-backdrop" onclick="closeImportModal()"></div>
+        <div class="modal-content import-modal-content">
+            <h2 class="modal-title">
+                <span class="iconify" data-icon="mdi:import"></span>
+                Import from text
+            </h2>
+            <p class="import-modal-desc">Paste anything: your LinkedIn About section, an old resume, a bio, or a bullet dump. AI will extract your profile.</p>
+            <textarea
+                id="import-text-input"
+                class="import-textarea"
+                placeholder="Paste your text here..."
+                rows="12"
+                aria-label="Text to import"
+            ></textarea>
+            <div class="import-modal-actions">
+                <button class="btn-secondary" onclick="closeImportModal()">Cancel</button>
+                <button class="btn-primary" onclick="runImportParse()">
+                    <span class="iconify" data-icon="mdi:robot"></span>
+                    Extract profile
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Settings Modal -->
+    <div id="ai-settings-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true" aria-label="AI settings">
+        <div class="modal-backdrop" onclick="closeAISettings()"></div>
+        <div class="modal-content ai-settings-content">
+            <h2 class="modal-title"><span class="iconify" data-icon="mdi:cog"></span> AI Settings</h2>
+
+            <div class="ai-settings-field">
+                <label for="ai-provider-select">Provider</label>
+                <select id="ai-provider-select" onchange="onAIProviderChange()">
+                    <option value="ollama">Ollama (local, free)</option>
+                    <option value="openai">OpenAI</option>
+                    <option value="anthropic">Anthropic (Claude)</option>
+                    <option value="custom">Custom endpoint</option>
+                </select>
+            </div>
+
+            <div class="ai-settings-field">
+                <label for="ai-model-input">Model</label>
+                <input id="ai-model-input" type="text" placeholder="e.g. llama3, gpt-4o-mini, claude-3-haiku-20240307" />
+            </div>
+
+            <div class="ai-settings-field" id="ai-key-field" style="display:none;">
+                <label for="ai-key-input">API Key <span class="ai-key-hint">(stored in your browser only)</span></label>
+                <input id="ai-key-input" type="password" placeholder="sk-..." autocomplete="off" />
+            </div>
+
+            <div class="ai-settings-field" id="ai-url-field" style="display:none;">
+                <label for="ai-url-input">Endpoint URL</label>
+                <input id="ai-url-input" type="url" placeholder="http://localhost:11434" />
+            </div>
+
+            <div class="ai-settings-actions">
+                <button class="btn-secondary" onclick="closeAISettings()">Cancel</button>
+                <button class="btn-primary" onclick="saveAISettings()">
+                    <span class="iconify" data-icon="mdi:content-save"></span>
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Status Bar -->
     <div id="status-bar">
