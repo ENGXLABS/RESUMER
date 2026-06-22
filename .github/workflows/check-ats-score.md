@@ -1,12 +1,12 @@
 ---
-description: detailed ATS score analysis and optimization recommendations for a resume against a JD.
+description: Detailed ATS score analysis and optimization recommendations for a resume against a JD.
 ---
 
 1. **Prerequisite Check**:
     - Resume content (or generated draft).
     - Job Description (JD).
     - Read `.github/instructions/ats-checker-instructions.md`.
-    - Read `.github/resume-master-content.md` (to check valid additions).
+    - Load `profile.json` (to check valid additions — never fabricate).
 
 2. **Keyword Extraction**:
     - Extract Technical Skills, Tools, Domain terms, Responsibilities, Soft Skills from JD.
@@ -23,7 +23,7 @@ description: detailed ATS score analysis and optimization recommendations for a 
 
 5. **Recommendations (Auto-Patch)**:
     - Generate exact sentence insertions for missing/weak keywords.
-    - **Source**: `resume-master-content.md` (don't fabricate).
+    - **Source**: `profile.json > experience` (don't fabricate).
     - **Placement**: Summary, Experience bullets (contextualized).
 
 6. **Output Report**:

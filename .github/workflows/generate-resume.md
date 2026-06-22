@@ -1,5 +1,5 @@
 ---
-description: Generate a tailored resume optimized for a specific Job Description (JD) using the Master Resume Content.
+description: Generate a tailored resume optimized for a specific Job Description (JD).
 ---
 
 // turbo-all
@@ -9,43 +9,38 @@ description: Generate a tailored resume optimized for a specific Job Description
 ## Step 1: Prerequisite Check
 
 - Ensure you have the Job Description (JD) text
-- Ensure `.github/resume-master-content.md` is accessible (Note: It may be gitignored. If read fails, ask user to unignore or provide content)
+- Ensure `profile.json` is loaded (localStorage key: `resumer-profile`)
 
-## Step 2: Read ALL Instruction Files (MANDATORY)
+## Step 2: Read Instruction Files (MANDATORY)
 
 **You MUST read these files completely and state what you read:**
 
-1. Read `.github/instructions/resume-instructions.md` (ALL 828 lines)
-2. Read `.github/resume-master-content.md` (ALL lines for fact verification)
-3. Read `.github/resume-role-templates.md` (to identify correct resume structure)
+1. Read `.github/instructions/resume-instructions.md` (ALL lines)
+2. Load `profile.json` for verified experience, metrics, and skills
 
 **After reading, explicitly state:**
 
 ```
-✅ Read resume-instructions.md (828 lines)
-✅ Read resume-master-content.md (XXX lines)
-✅ Read resume-role-templates.md (430 lines)
+✅ Read resume-instructions.md
+✅ Loaded profile.json for fact verification
 ```
 
 ## Step 3: Analyze Job Description
 
 - Extract keywords, required skills, and role level (Manager/Staff/Senior/Principal)
 - Identify seniority and focus area from JD
-- **Select appropriate role template** from `.github/resume-role-templates.md`:
-  - Template #1: Master (General strong candidate)
-  - Template #2: SDET Focus (Hands-on automation engineering)
-  - Template #3: QA Lead (Team leadership + quality governance)
-  - Template #4: Staff QE/Reliability (Staff-level, architecture influence)
-  - Template #5: Singapore Market (Singapore-specific roles)
+- **Select appropriate role template** from the role-specific strategies in `resume-instructions.md`:
+  - QA Manager / QA Lead
+  - Staff SDET
+  - Senior SDET
+  - Principal QA Engineer
 
 ## Step 4: Planning
 
-- Select relevant experience and bullets from `resume-master-content.md`
+- Select relevant experience and bullets from `profile.json > experience`
 - Plan the 4-bullet Professional Summary tailored to the JD
-- Select the 6-8 Core Skills buckets
-- **CRITICAL:** Prioritize Siva's core strengths:
-  - **Languages:** Java, Kotlin (PRIMARY) > Python, JavaScript, TypeScript (secondary)
-  - **Test Tools:** Selenium WebDriver (PRIMARY) > Playwright, Cypress, Appium
+- Select 6-8 Core Skills buckets from `profile.json > skills.core`
+- **Prioritize the user's core strengths** — use the first-listed tools and languages in `profile.json > skills.technical`
 
 ## Step 5: Generation
 
@@ -61,20 +56,20 @@ Generate the resume content following the selected role template structure.
 
 **Content Verification:**
 
-- ✅ **Verify ALL metrics** against master content - NEVER fabricate numbers
-- ✅ Use exact company names and dates from master content
-- ❌ If it's not in master content, DO NOT include it
+- ✅ **Verify ALL metrics** against `profile.json` — NEVER fabricate numbers
+- ✅ Use exact company names and dates from `profile.json > experience`
+- ❌ If it's not in `profile.json`, DO NOT include it
 
 **Tone:**
 
-- ✅ Natural, human, Siva's voice
+- ✅ Natural, human, the user's authentic voice
 - ✅ Use connection words: "while", "through", "by", "ensuring"
 - ✅ Start bullets with unique action verbs
 - ❌ Avoid robotic disconnected clauses
 
 **Structure:**
 
-1. Header (name + contact info)
+1. Header (name + contact info from `profile.json > identity`)
 2. Professional Summary (EXACTLY 4 bullets)
 3. Core Skills (6-8 thematic buckets, comma-separated)
 4. Technical Skills (comma-separated list, NO prose)
@@ -87,17 +82,17 @@ Generate the resume content following the selected role template structure.
 
 ### HTML Template Preservation (CRITICAL!)
 
-When updating `components/resume/resume.md`, **NEVER remove or modify these HTML sections:**
+When updating `components/resume/resume.md`, **NEVER remove or modify the HTML structure sections:**
 
 ```markdown
-# Sivasankaramalan Gunasekarasivam
+# [Full Name — from profile.json > identity.name]
 
 <div class="section headerInfo">
 
-- [ssmalan94@gmail.com](mailto:ssmalan94@gmail.com)
-- [linkedin.com/in/Sivasankaramalan](https://linkedin.com/in/Sivasankaramalan)
-- [github.com/Sivasankaramalan](https://github.com/Sivasankaramalan)
-- [Portfolio](https://sivasankaramalan.is-a.dev/)
+- [email](mailto:[profile.identity.email])
+- [linkedin.com/in/handle](https://linkedin.com/in/[profile.identity.linkedin])
+- [github.com/handle](https://github.com/[profile.identity.github])
+- [Portfolio]([profile.identity.portfolio])
 
 </div>
 ```
@@ -125,11 +120,11 @@ When updating `components/resume/resume.md`, **NEVER remove or modify these HTML
 ### Content Verification
 
 - [ ] Read complete instruction files
-- [ ] All metrics verified against master content
+- [ ] All metrics verified against `profile.json`
 - [ ] No fabricated companies, dates, or achievements
-- [ ] Exact company names from master content
-- [ ] Prioritized Java/Kotlin over Python/JS/TS
-- [ ] Prioritized Selenium over Playwright/Cypress
+- [ ] Exact company names from `profile.json > experience`
+- [ ] Prioritized user's core languages from `profile.json > skills.technical`
+- [ ] Prioritized user's core test tools from `profile.json > skills.core`
 
 ### Resume-Specific
 
@@ -150,7 +145,7 @@ When updating `components/resume/resume.md`, **NEVER remove or modify these HTML
 
 ```
 ✅ Self-audit completed:
-- Verified all metrics from master content
+- Verified all metrics from profile.json
 - No EM/EN dashes used
 - 4-bullet summary, 6-8 core skills
 - HTML template preserved
@@ -170,8 +165,3 @@ When updating `components/resume/resume.md`, **NEVER remove or modify these HTML
 ## Step 8: Output
 
 Present the final resume showing what file was updated and confirmation of self-audit completion.
-
----
-
-**Created:** February 1, 2026  
-**Last Updated:** February 1, 2026

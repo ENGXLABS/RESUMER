@@ -9,20 +9,20 @@ description: Generate a tailored cover letter for a specific Job Description (JD
 ## Step 1: Prerequisite Check
 
 - Ensure you have the Job Description (JD) text
-- Ensure `.github/resume-master-content.md` is accessible for fact-checking
+- Ensure `profile.json` is loaded (localStorage key: `resumer-profile`)
 
-## Step 2: Read ALL Instruction Files (MANDATORY)
+## Step 2: Read Instruction Files (MANDATORY)
 
 **You MUST read these files completely and state what you read:**
 
-1. Read `.github/instructions/cover-letter-instructions.md` (ALL 282 lines)
-2. Read `.github/resume-master-content.md` (ALL lines for fact verification)
+1. Read `.github/instructions/cover-letter-instructions.md` (ALL lines)
+2. Load `profile.json` for verified experience and metrics
 
 **After reading, explicitly state:**
 
 ```
-✅ Read cover-letter-instructions.md (282 lines)
-✅ Read resume-master-content.md (XXX lines)
+✅ Read cover-letter-instructions.md
+✅ Loaded profile.json for fact verification
 ```
 
 ## Step 3: Analyze Job Description
@@ -34,7 +34,7 @@ description: Generate a tailored cover letter for a specific Job Description (JD
 
 ## Step 4: Planning
 
-- Identify 2-3 key strengths/achievements from master content that map to JD
+- Identify 2-3 key strengths/achievements from `profile.json > experience` that map to JD
 - Plan the 4-paragraph structure:
   1. **Opening (1-2 lines):** Hook mentioning role + company, no "excited to apply"
   2. **What You Bring (3-4 lines):** Evidence + verified metrics matching JD
@@ -61,13 +61,13 @@ Generate the cover letter following the four-paragraph structure.
 
 **Content Verification:**
 
-- ✅ **Verify ALL metrics** against master content
+- ✅ **Verify ALL metrics** against `profile.json`
 - ❌ NEVER fabricate numbers or achievements
 - ✅ Use exact company names and dates
 
 **Tone:**
 
-- ✅ Direct, confident, human (Siva's voice)
+- ✅ Direct, confident, the user's natural voice
 - ✅ Conversational and natural flow
 - ✅ Use connection words: "while", "through", "by"
 - ❌ NO inflated language or thesaurus words
@@ -86,28 +86,28 @@ Generate the cover letter following the four-paragraph structure.
 
 When updating `components/cover-letter/cover-letter.md`, **NEVER remove or modify these HTML sections:**
 
-**Header (ALWAYS preserve):**
+**Header (ALWAYS preserve — populated from profile.json > identity):**
 
 ```markdown
 <div class="gradient-header">
-    <h1>Sivasankaramalan Gunasekarasivam</h1>
+    <h1>[Full Name]</h1>
     <div class="contact-line">
-        <a href="mailto:ssmalan94@gmail.com"><span class="iconify" data-icon="mdi:email"></span>ssmalan94@gmail.com</a>
-        <a href="https://linkedin.com/in/Sivasankaramalan"><span class="iconify" data-icon="mdi:linkedin"></span>linkedin.com/in/Sivasankaramalan</a>
+        <a href="mailto:[email]"><span class="iconify" data-icon="mdi:email"></span>[email]</a>
+        <a href="[linkedin]"><span class="iconify" data-icon="mdi:linkedin"></span>[linkedin handle]</a>
     </div>
 </div>
 ```
 
-**Footer (ALWAYS preserve):**
+**Footer (ALWAYS preserve — populated from profile.json > identity):**
 
 ```markdown
 <br>
 <br>
 
 <div class="footer-bar">
-    <a href="https://github.com/Sivasankaramalan"><span class="iconify" data-icon="mdi:github"></span>GitHub</a>
-    <a href="https://sivasankaramalan.is-a.dev/"><span class="iconify" data-icon="mdi:web"></span>Portfolio</a>
-    <a href="https://linkedin.com/in/Sivasankaramalan"><span class="iconify" data-icon="mdi:linkedin"></span>LinkedIn</a>
+    <a href="[github]"><span class="iconify" data-icon="mdi:github"></span>GitHub</a>
+    <a href="[portfolio]"><span class="iconify" data-icon="mdi:web"></span>Portfolio</a>
+    <a href="[linkedin]"><span class="iconify" data-icon="mdi:linkedin"></span>LinkedIn</a>
 </div>
 ```
 
@@ -128,8 +128,8 @@ Dear [Hiring Manager],
 
 [PARAGRAPH 4 - Closing]
 
-Best regards,  
-Sivasankaramalan Gunasekarasivam
+Best regards,
+[Full Name from profile.json > identity.name]
 ```
 
 ## Step 6: Self-Audit (MANDATORY)
@@ -146,7 +146,7 @@ Sivasankaramalan Gunasekarasivam
 ### Content Verification
 
 - [ ] Read complete instruction files
-- [ ] All metrics verified against master content
+- [ ] All metrics verified against `profile.json`
 - [ ] No fabricated achievements
 - [ ] Company name spelled exactly as in JD
 
@@ -171,9 +171,9 @@ Sivasankaramalan Gunasekarasivam
 
 ```
 ✅ Self-audit completed:
-- Verified all metrics from master content
+- Verified all metrics from profile.json
 - No EM/EN dashes used
-- 4-paragraph structure, 280 words, fits on one page
+- 4-paragraph structure, ~280 words, fits on one page
 - HTML template preserved
 - Natural human tone, no forbidden phrases
 ```
@@ -191,8 +191,3 @@ Sivasankaramalan Gunasekarasivam
 ## Step 8: Output
 
 Present the final cover letter showing what file was updated and confirmation of self-audit completion.
-
----
-
-**Created:** February 1, 2026  
-**Last Updated:** February 1, 2026
