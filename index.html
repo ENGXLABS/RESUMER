@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="components/resume-ai/resume-ai.css" id="resume-css-ai" disabled>
     <link rel="stylesheet" href="components/cover-letter/cover-letter.css">
     <link rel="stylesheet" href="components/ats-checker/ats-checker.css">
+    <!-- Phase 5: live theme overrides injected by JS -->
+    <style id="resumer-theme-overrides"></style>
     <title>Resumer - Resume Builder & ATS Optimizer</title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
@@ -97,6 +99,9 @@
                 </button>
                 <button id="tpl-v3-btn" class="resume-type-btn-compact" onclick="switchTemplate('v3')" title="Two-column modern">
                     <span class="iconify" data-icon="mdi:view-split-vertical"></span> v3
+                </button>
+                <button id="customize-btn" class="resume-type-btn-compact" onclick="openCustomizePanel()" title="Customise fonts, colors & spacing" aria-label="Customise theme">
+                    <span class="iconify" data-icon="mdi:palette-outline"></span>
                 </button>
             </div>
             <span class="header-divider"></span>
@@ -283,6 +288,66 @@
 
     <!-- Toast Notification Container -->
     <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Phase 5: Customize Panel -->
+    <div id="customize-panel" class="customize-panel" role="dialog" aria-label="Theme customisation" aria-hidden="true">
+        <div class="customize-panel-header">
+            <span><span class="iconify" data-icon="mdi:palette-outline"></span> Customise</span>
+            <button class="customize-close" onclick="closeCustomizePanel()" aria-label="Close customise panel">&times;</button>
+        </div>
+
+        <div class="customize-section">
+            <div class="customize-label">Font</div>
+            <div class="customize-font-btns" id="font-btn-group">
+                <button id="font-btn-calibri"  class="font-btn active" onclick="setCustomFont('calibri')"  title="ATS-safe">Calibri</button>
+                <button id="font-btn-inter"    class="font-btn"        onclick="setCustomFont('inter')"                  >Inter</button>
+                <button id="font-btn-georgia"  class="font-btn"        onclick="setCustomFont('georgia')"  title="ATS-safe">Georgia</button>
+                <button id="font-btn-garamond" class="font-btn"        onclick="setCustomFont('garamond')"               >Garamond</button>
+                <button id="font-btn-mono"     class="font-btn"        onclick="setCustomFont('mono')"                   >Mono</button>
+            </div>
+        </div>
+
+        <div class="customize-section">
+            <div class="customize-label">Accent Color <span class="customize-hint">(V2 &amp; V3)</span></div>
+            <div class="customize-swatches" id="accent-swatch-group">
+                <button class="accent-swatch active" style="--swatch:#1E3A5F" onclick="setCustomAccent('#1E3A5F')" title="Navy"></button>
+                <button class="accent-swatch"        style="--swatch:#2563eb" onclick="setCustomAccent('#2563eb')" title="Blue"></button>
+                <button class="accent-swatch"        style="--swatch:#4f46e5" onclick="setCustomAccent('#4f46e5')" title="Indigo"></button>
+                <button class="accent-swatch"        style="--swatch:#7c3aed" onclick="setCustomAccent('#7c3aed')" title="Violet"></button>
+                <button class="accent-swatch"        style="--swatch:#059669" onclick="setCustomAccent('#059669')" title="Emerald"></button>
+                <button class="accent-swatch"        style="--swatch:#0d9488" onclick="setCustomAccent('#0d9488')" title="Teal"></button>
+                <button class="accent-swatch"        style="--swatch:#e11d48" onclick="setCustomAccent('#e11d48')" title="Rose"></button>
+                <button class="accent-swatch"        style="--swatch:#d97706" onclick="setCustomAccent('#d97706')" title="Amber"></button>
+                <input type="color" id="accent-color-picker" value="#1E3A5F" onchange="setCustomAccent(this.value)" title="Custom color" class="accent-color-picker">
+            </div>
+        </div>
+
+        <div class="customize-section">
+            <div class="customize-label">Text Size — <span id="font-size-display">11pt</span></div>
+            <input type="range" id="font-size-range" class="customize-range" min="9" max="13" step="0.5" value="11" oninput="setCustomFontSize(this.value)">
+            <div class="customize-range-labels"><span>9pt</span><span>13pt</span></div>
+        </div>
+
+        <div class="customize-section">
+            <div class="customize-label">Line Spacing — <span id="line-height-display">1.3</span></div>
+            <input type="range" id="line-height-range" class="customize-range" min="1.1" max="1.8" step="0.1" value="1.3" oninput="setCustomLineHeight(this.value)">
+            <div class="customize-range-labels"><span>Tight</span><span>Relaxed</span></div>
+        </div>
+
+        <div class="customize-section">
+            <div class="customize-label">Page Margins</div>
+            <div class="customize-margin-btns" id="margin-btn-group">
+                <button id="margin-btn-narrow" class="margin-btn"        onclick="setCustomMargins('narrow')">Narrow</button>
+                <button id="margin-btn-normal" class="margin-btn active" onclick="setCustomMargins('normal')">Normal</button>
+                <button id="margin-btn-wide"   class="margin-btn"        onclick="setCustomMargins('wide')"  >Wide</button>
+            </div>
+        </div>
+
+        <div class="customize-footer">
+            <button class="btn-secondary" onclick="resetThemeSettings()">Reset defaults</button>
+            <button class="btn-primary"   onclick="saveThemeSettings()">Save</button>
+        </div>
+    </div>
 
     <!-- AI Panel -->
     <div id="ai-panel" class="ai-panel collapsed" role="dialog" aria-label="AI assistant panel">

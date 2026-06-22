@@ -1917,6 +1917,9 @@
         // Phase 3: Live ATS badge
         _initLiveATS();
 
+        // Phase 5: Customise panel
+        _initThemeSettings();
+
         updateStatusBar();
     });
 
@@ -2156,6 +2159,169 @@
         clearTimeout(_liveATSDebounce);
         _liveATSDebounce = setTimeout(_runLiveATS, 350);
     };
+
+    // ────── Phase 5: Customise Panel ──────
+    // Settings are sourced from localStorage key `resumer-theme-settings`.
+    // Overrides are injected into <style id="resumer-theme-overrides"> so
+    // all 3 resume templates pick them up with no changes to their CSS files.
+
+    const _THEME_FONTS = {
+        calibri:  "Calibri, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif",
+        inter:    "'Inter', 'Segoe UI', system-ui, sans-serif",
+        georgia:  "Georgia, 'Times New Roman', serif",
+        garamond: "Garamond, 'EB Garamond', Georgia, serif",
+        mono:     "'JetBrains Mono', 'Fira Code', 'Courier New', monospace",
+    };
+    const _THEME_MARGINS = {
+        narrow: { block: '0.28in', inline: '0.22in' },
+        normal: { block: '0.40in', inline: '0.35in' },
+        wide:   { block: '0.55in', inline: '0.50in' },
+    };
+    const _THEME_DEFAULTS = { font: 'calibri', fontSize: 11, lineHeight: 1.3, accent: '#1E3A5F', margins: 'normal' };
+    let _themeSettings = { ..._THEME_DEFAULTS };
+
+    function _loadThemeSettings() {
+        try {
+            const raw = localStorage.getItem('resumer-theme-settings');
+            _themeSettings = raw ? { ..._THEME_DEFAULTS, ...JSON.parse(raw) } : { ..._THEME_DEFAULTS };
+        } catch { _themeSettings = { ..._THEME_DEFAULTS }; }
+    }
+
+    function _hexAlpha(hex, a) {
+        const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+        return `rgba(${r},${g},${b},${a})`;
+    }
+
+    function _applyThemeSettings(s) {
+        const styleEl = document.getElementById('resumer-theme-overrides');
+        if (!styleEl) return;
+        const font   = _THEME_FONTS[s.font] || _THEME_FONTS.calibri;
+        const margin = _THEME_MARGINS[s.margins] || _THEME_MARGINS.normal;
+        const accent = s.accent || '#1E3A5F';
+        const aLight = _hexAlpha(accent, 0.08);
+        const aMid   = _hexAlpha(accent, 0.20);
+        styleEl.textContent = `
+@page { margin: ${margin.block} ${margin.inline}; }
+.resume-page { font-family: ${font} !important; font-size: ${s.fontSize}pt !important; line-height: ${s.lineHeight} !important; }
+@media print { body { font-family: ${font} !important; font-size: ${s.fontSize}pt !important; margin: ${margin.block} ${margin.inline} !important; } }
+@media screen { .resume-page { padding: ${margin.block} ${margin.inline} !important; } }
+:root { --v3-accent:${accent}; --v3-accent-light:${aLight}; --v3-accent-mid:${aMid}; --v3-highlight:${accent}; --v3-highlight-light:${aLight}; }
+.resume-page h2 { background:${aLight} !important; border-left:3px solid ${accent} !important; padding-left:6pt !important; }
+`.trim();
+    }
+
+    function _syncCustomizePanelUI(s) {
+        // Font buttons
+        document.querySelectorAll('.font-btn').forEach(b => b.classList.remove('active'));
+        const fb = document.getElementById(`font-btn-${s.font}`);
+        if (fb) fb.classList.add('active');
+
+        // Accent swatches
+        document.querySelectorAll('.accent-swatch').forEach(b => {
+            b.classList.toggle('active', b.title.toLowerCase() === _swatchTitle(s.accent));
+        });
+        const picker = document.getElementById('accent-color-picker');
+        if (picker) picker.value = s.accent;
+
+        // Sliders + displays
+        const fsRange = document.getElementById('font-size-range');
+        const fsDisplay = document.getElementById('font-size-display');
+        if (fsRange) fsRange.value = s.fontSize;
+        if (fsDisplay) fsDisplay.textContent = `${s.fontSize}pt`;
+
+        const lhRange = document.getElementById('line-height-range');
+        const lhDisplay = document.getElementById('line-height-display');
+        if (lhRange) lhRange.value = s.lineHeight;
+        if (lhDisplay) lhDisplay.textContent = String(s.lineHeight);
+
+        // Margin buttons
+        document.querySelectorAll('.margin-btn').forEach(b => b.classList.remove('active'));
+        const mb = document.getElementById(`margin-btn-${s.margins}`);
+        if (mb) mb.classList.add('active');
+    }
+
+    function _swatchTitle(accent) {
+        const map = { '#1E3A5F':'navy','#2563eb':'blue','#4f46e5':'indigo','#7c3aed':'violet','#059669':'emerald','#0d9488':'teal','#e11d48':'rose','#d97706':'amber' };
+        return (map[accent.toLowerCase()] || '').toLowerCase();
+    }
+
+    function _initThemeSettings() {
+        _loadThemeSettings();
+        _applyThemeSettings(_themeSettings);
+    }
+
+    window.openCustomizePanel = function () {
+        const panel = document.getElementById('customize-panel');
+        if (!panel) return;
+        _syncCustomizePanelUI(_themeSettings);
+        panel.classList.add('open');
+        panel.setAttribute('aria-hidden', 'false');
+        document.getElementById('customize-btn')?.classList.add('active');
+    };
+    window.closeCustomizePanel = function () {
+        const panel = document.getElementById('customize-panel');
+        if (!panel) return;
+        panel.classList.remove('open');
+        panel.setAttribute('aria-hidden', 'true');
+        document.getElementById('customize-btn')?.classList.remove('active');
+    };
+
+    window.setCustomFont = function (fontId) {
+        _themeSettings.font = fontId;
+        _applyThemeSettings(_themeSettings);
+        document.querySelectorAll('.font-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(`font-btn-${fontId}`)?.classList.add('active');
+    };
+    window.setCustomAccent = function (color) {
+        _themeSettings.accent = color;
+        _applyThemeSettings(_themeSettings);
+        // Update swatches
+        document.querySelectorAll('.accent-swatch').forEach(b => {
+            const sw = (b.style.getPropertyValue('--swatch') || '').trim().toLowerCase();
+            b.classList.toggle('active', sw === color.toLowerCase());
+        });
+        const picker = document.getElementById('accent-color-picker');
+        if (picker) picker.value = color;
+    };
+    window.setCustomFontSize = function (val) {
+        _themeSettings.fontSize = parseFloat(val);
+        _applyThemeSettings(_themeSettings);
+        const display = document.getElementById('font-size-display');
+        if (display) display.textContent = `${parseFloat(val)}pt`;
+    };
+    window.setCustomLineHeight = function (val) {
+        _themeSettings.lineHeight = parseFloat(val);
+        _applyThemeSettings(_themeSettings);
+        const display = document.getElementById('line-height-display');
+        if (display) display.textContent = String(parseFloat(val));
+    };
+    window.setCustomMargins = function (preset) {
+        _themeSettings.margins = preset;
+        _applyThemeSettings(_themeSettings);
+        document.querySelectorAll('.margin-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(`margin-btn-${preset}`)?.classList.add('active');
+    };
+    window.saveThemeSettings = function () {
+        localStorage.setItem('resumer-theme-settings', JSON.stringify(_themeSettings));
+        toast('Theme saved', 'success');
+        window.closeCustomizePanel();
+    };
+    window.resetThemeSettings = function () {
+        localStorage.removeItem('resumer-theme-settings');
+        _themeSettings = { ..._THEME_DEFAULTS };
+        _applyThemeSettings(_themeSettings);
+        _syncCustomizePanelUI(_themeSettings);
+        toast('Theme reset to defaults', 'info');
+    };
+
+    // Close panel when clicking outside
+    document.addEventListener('click', (e) => {
+        const panel = document.getElementById('customize-panel');
+        const btn   = document.getElementById('customize-btn');
+        if (panel?.classList.contains('open') && !panel.contains(e.target) && e.target !== btn && !btn?.contains(e.target)) {
+            window.closeCustomizePanel();
+        }
+    });
 
     // ────── Phase 4: AI Panel ──────
 
