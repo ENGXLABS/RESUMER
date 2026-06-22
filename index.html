@@ -143,16 +143,16 @@
             <span class="header-divider"></span>
             <div id="resume-type-selector" style="display: flex; align-items: center; gap: 4px;">
                 <button id="qe-resume-btn" class="resume-type-btn-compact active" onclick="switchResumeType('qe')"
-                    title="Quality Engineering">
-                    <span class="iconify" data-icon="mdi:test-tube"></span> QE
+                    title="Classic — standard single-column resume">
+                    <span class="iconify" data-icon="mdi:file-document-outline"></span> Classic
                 </button>
                 <button id="tpm-resume-btn" class="resume-type-btn-compact" onclick="switchResumeType('tpm')"
-                    title="Technical Product Manager">
-                    <span class="iconify" data-icon="mdi:chart-timeline-variant"></span> TPM
+                    title="Professional — executive and leadership focused">
+                    <span class="iconify" data-icon="mdi:briefcase-outline"></span> Professional
                 </button>
                 <button id="ai-resume-btn" class="resume-type-btn-compact" onclick="switchResumeType('ai')"
-                    title="AI-Native Testing">
-                    <span class="iconify" data-icon="mdi:robot"></span> AI
+                    title="Modern — AI-native and technical focused">
+                    <span class="iconify" data-icon="mdi:lightning-bolt-outline"></span> Modern
                 </button>
             </div>
             <div class="zoom-controls">
@@ -165,9 +165,6 @@
             <button id="ats-live-badge" class="ats-live-badge" onclick="toggleJDPanel()" title="ATS score — click to open Job Description panel" aria-label="ATS live score">
                 <span class="iconify" data-icon="mdi:target"></span>
                 <span id="ats-badge-score">--</span>
-            </button>
-            <button id="jd-toggle-btn" class="icon-btn" onclick="toggleJDPanel()" data-tooltip="Toggle Job Description panel" aria-label="Toggle JD panel">
-                <span class="iconify" data-icon="mdi:briefcase-search"></span>
             </button>
             <span class="header-divider"></span>
             <button id="ai-panel-btn" class="icon-btn ai-panel-btn" onclick="toggleAIPanel()" data-tooltip="AI assistant" aria-label="Open AI assistant">
@@ -627,7 +624,7 @@
             <span class="status-item"><span class="iconify" data-icon="mdi:eye"></span> <span id="status-mode">Preview</span></span>
         </div>
         <div class="status-right">
-            <span class="status-item"><span class="iconify" data-icon="mdi:file-document"></span> <span id="status-type">Quality Engineering</span></span>
+            <span class="status-item"><span class="iconify" data-icon="mdi:file-document"></span> <span id="status-type">Classic</span></span>
             <span class="status-item"><span class="iconify" data-icon="mdi:text"></span> <span id="status-words">0 words</span></span>
             <span class="status-item" onclick="openShortcutModal()" style="cursor:pointer;"><span class="iconify" data-icon="mdi:keyboard"></span> Shortcuts</span>
         </div>

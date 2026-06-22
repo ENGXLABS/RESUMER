@@ -350,7 +350,7 @@
                 'linkedin': 'mdi:linkedin',
                 'github.com': 'mdi:github',
                 'portfolio': 'mdi:briefcase-outline',
-                'sivasankaramalan.is': 'mdi:briefcase-outline'
+                'is-a.dev': 'mdi:briefcase-outline'
             };
             firstP.querySelectorAll('a').forEach(link => {
                 const a = document.createElement('a');
@@ -660,7 +660,7 @@
                 'linkedin': 'mdi:linkedin',
                 'github.com': 'mdi:github',
                 'portfolio': 'mdi:web',
-                'sivasankaramalan.is': 'mdi:web'
+                'is-a.dev': 'mdi:web'
             };
             firstP.querySelectorAll('a').forEach(link => {
                 const a = document.createElement('a');
@@ -1005,8 +1005,9 @@
             : markdownContent;
 
         const companyName = $('#company-name').value.trim();
-        const label = currentResumeType === 'ai' ? 'AI' : currentResumeType === 'tpm' ? 'TPM' : 'QE';
-        let filename = `Resume_Sivasankaramalan_G_${label}`;
+        const typeLabel = currentResumeType === 'ai' ? 'Modern' : currentResumeType === 'tpm' ? 'Professional' : 'Classic';
+        const nameSlug = getProfileNameSlug();
+        let filename = `Resume_${nameSlug}_${typeLabel}`;
         if (companyName) {
             filename += `_${companyName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_')}`;
         }
@@ -1119,7 +1120,7 @@
             : coverLetterContent;
 
         const company = $('#company-name').value.trim() || 'Company';
-        const filename = `Cover_Letter_Sivasankaramalan_G_${company.replace(/\s+/g, '_')}.md`;
+        const filename = `Cover_Letter_${getProfileNameSlug()}_${company.replace(/\s+/g, '_')}.md`;
         downloadBlob(content, filename, 'text/markdown');
         toast(`Downloaded ${filename}`, 'success');
     }
@@ -1135,8 +1136,8 @@
         if (tabEl) tabEl.textContent = tabLabels[currentTab] || 'Resume';
         if (modeEl) modeEl.textContent = currentMode === 'edit' ? 'Editing' : 'Preview';
         if (typeEl) {
-            const typeLabels = { qe: 'Quality Engineering', tpm: 'Tech Product Manager', ai: 'AI-Native Testing' };
-            typeEl.textContent = typeLabels[currentResumeType] || 'Quality Engineering';
+            const typeLabels = { qe: 'Classic', tpm: 'Professional', ai: 'Modern' };
+            typeEl.textContent = typeLabels[currentResumeType] || 'Classic';
             typeEl.parentElement.style.display = currentTab === 'resume' ? 'flex' : 'none';
         }
 
@@ -1185,9 +1186,9 @@
         const activeTab = currentTab;
 
         if (activeTab === 'cover-letter') {
-            document.title = clean ? `Cover_Letter_Sivasankaramalan_G_${clean}` : 'Cover_Letter_Sivasankaramalan_G';
+            document.title = clean ? `Cover_Letter_${getProfileNameSlug()}_${clean}` : `Cover_Letter_${getProfileNameSlug()}`;
         } else {
-            document.title = clean ? `Resume_Sivasankaramalan_G_${clean}` : 'Resume_Sivasankaramalan_G';
+            document.title = clean ? `Resume_${getProfileNameSlug()}_${clean}` : `Resume_${getProfileNameSlug()}`;
         }
     });
 
@@ -1797,6 +1798,18 @@
     };
 
     // ────── Utilities ──────
+    function getProfileNameSlug() {
+        try {
+            const raw = localStorage.getItem('resumer-profile');
+            if (raw) {
+                const profile = JSON.parse(raw);
+                const name = profile?.identity?.name;
+                if (name) return name.replace(/[^a-zA-Z0-9\s]/g, '').trim().replace(/\s+/g, '_');
+            }
+        } catch (_) {}
+        return 'Resume';
+    }
+
     function downloadBlob(content, filename, type) {
         const blob = new Blob([content], { type });
         const url = URL.createObjectURL(blob);
