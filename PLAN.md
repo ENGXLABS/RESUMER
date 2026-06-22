@@ -1,10 +1,393 @@
-# Resumer — World-Class Open Source Resume Builder: Implementation Plan
+# Resumer — Implementation Plan
 
-> **Vision:** A local-first, markdown-powered, AI-native resume builder with embedded real-time ATS scoring — usable by anyone, not just one person.
+> **Vision:** An open source, local-first resume builder hosted at a public URL — anyone visits, fills in their profile, gets an ATS-optimized resume with real-time scoring. No account. No tracking. No backend.
+
+## Product Direction
+
+| Axis | Decision |
+|------|----------|
+| **Distribution** | Open source repo (GitHub) + hosted web app (resumer.app or similar) |
+| **Architecture** | Static site, zero backend — all data in browser localStorage |
+| **Editor model** | Markdown-first for launch (Option A); AI paste-and-parse in Phase 4 (Option C) |
+| **Monetization** | Free forever, open source. Optional: GitHub Sponsors, premium themes |
+| **Audience** | Developers first (launch), everyone eventually |
 
 ---
 
-## Current State Baseline
+## Key Differentiators
+
+1. **Live ATS score in the editor** — not a separate tool, updates as you type
+2. **Markdown-first** — every AI tool (Claude, Copilot, Cursor, any LLM) reads and writes resumes natively
+3. **Local-first, zero tracking** — profile never leaves the browser unless the user exports it
+4. **AI paste-and-parse** — paste your LinkedIn / old resume, AI extracts your profile (Phase 4)
+5. **Open standard** — JSON Resume export works with the entire ecosystem
+
+---
+
+## Phase 1 — Open Source Foundation ✅
+
+**Branch:** `feature/phase-1-open-source-foundation`
+**Status:** Complete
+
+- ✅ `LICENSE` (MIT)
+- ✅ `CONTRIBUTING.md`
+- ✅ `.github/ISSUE_TEMPLATE/` (bug report + feature request)
+- ✅ `.github/pull_request_template.md`
+- ✅ `.github/workflows/ci.yml` (test + lint on push/PR)
+- ✅ `README.md` updated for open source
+- ✅ `.gitignore` updated (personal data excluded)
+- ✅ `package.json` (npm dev/test/lint scripts)
+- ✅ `profile.sample.json` (full schema template)
+- ✅ `src/core/state.js` + `src/core/events.js`
+- ✅ `src/features/profile.js`
+- ✅ `src/ui/toast.js` + `src/ui/shortcuts.js` + `src/ui/onboarding.js`
+- ✅ `src/main.js` (ES module bootstrap)
+
+---
+
+## Phase 2 — Production Cleanup + Hosted Deployment
+
+**Branch:** `feature/phase-2-production-cleanup`
+**Goal:** Remove all personal data from the repo. Make it safe and deployable to a public URL.
+
+### 2.1 Remove Personal Data from Committed Files
+
+- [ ] Replace `components/resume/resume.md` with sample/demo content (generic persona)
+- [ ] Replace `components/cover-letter/cover-letter.md` with sample content
+- [ ] Replace `components/resume-tpm/resume-tpm.md` with sample content
+- [ ] Replace `components/resume-ai/resume-ai.md` with sample content
+- [ ] Gitignore `.github/resume-master-content.md` (personal)
+- [ ] Gitignore `.github/resume-role-templates.md` (personal)
+- [ ] Gitignore `.github/resume-ai-master-content.md` (personal)
+- [ ] Gitignore `.github/instructions/` (personal AI workflow instructions)
+- [ ] Gitignore `CLAUDE.md` → replace with generic public version
+- [ ] Gitignore `GEMINI.md`
+- [ ] Rewrite `.github/copilot-instructions.md` to be generic (not Siva-specific)
+
+### 2.2 Folder Restructure (Production-Grade)
+
+```
+resumer/
+├── public/                   ← NEW: favicon, og-image, robots.txt
+├── src/
+│   ├── core/                 ← Done
+│   ├── features/
+│   │   ├── profile.js        ← Done
+│   │   ├── ats/              ← NEW in Phase 3
+│   │   ├── export/           ← NEW in Phase 7
+│   │   └── ai/               ← NEW in Phase 4
+│   ├── ui/                   ← Done
+│   └── data/
+│       └── keywords/         ← NEW: ATS industry keyword libraries
+├── templates/                ← NEW: CSS themes (replaces components/resume/*.css)
+│   ├── classic/
+│   ├── modern/
+│   └── minimal/
+├── docs/                     ← NEW: user-facing documentation
+├── tests/                    ← NEW: Jest test suites
+└── vercel.json               ← NEW: static deployment config
+```
+
+### 2.3 Hosted Deployment
+
+- [ ] `vercel.json` — static deployment config (zero config, just points to `index.html`)
+- [ ] Check domain availability: `resumer.app`, `resumer.dev`, `resumer.io`
+- [ ] Configure custom domain in Vercel
+- [ ] Add `public/robots.txt`, `public/og-image.png`, `public/favicon.svg`
+- [ ] Add Open Graph meta tags to `index.html` (title, description, og:image)
+- [ ] Test full app on deployed URL
+
+### 2.4 Demo Content
+
+The repo ships with a realistic sample resume (generic persona "Alex Rivera") so anyone can:
+1. Clone the repo and see a working resume immediately
+2. Replace the sample with their own content
+3. The sample demonstrates all template features
+
+### Phase 2 Definition of Done
+
+- [ ] Zero personal data in any committed file
+- [ ] App deploys to Vercel with one click
+- [ ] Custom domain points to the deployed app
+- [ ] Sample resume looks professional and demonstrates all features
+- [ ] Any developer can clone → `npm run dev` → see a working app in 60 seconds
+
+---
+
+## Phase 3 — World-Class ATS Engine
+
+**Branch:** `feature/phase-3-ats-engine`
+**Goal:** Real-time ATS scoring embedded directly into the resume-making experience.
+
+### 3.1 JD Input Panel (Persistent Sidebar)
+
+- [ ] Collapsible right panel alongside the preview
+- [ ] JD textarea persists in `localStorage` (key: `resumer-jd`)
+- [ ] "Analyze JD" button → triggers keyword extraction
+- [ ] Auto-extracts keywords into categories:
+  - Required Skills, Tools & Technologies, Leadership & Soft Skills, Domain Keywords, Action Verbs
+
+### 3.2 Live ATS Score Badge
+
+- [ ] Score badge in the header updates in real-time as user types
+- [ ] Color coding: 0–60% red, 61–80% amber, 81–100% green
+- [ ] Score breakdown panel: click badge → shows per-category scores
+- [ ] Score persists between sessions
+
+### 3.3 ATS Scoring Algorithm (Pure JS, No API)
+
+```javascript
+const WEIGHTS = {
+  required_skills: 2.0,
+  tools:           1.5,
+  leadership:      1.0,
+  domain:          1.0,
+  action_verbs:    0.5
+};
+
+function calculateScore(resumeText, jdKeywords) {
+  let totalWeight = 0, matchedWeight = 0;
+  for (const [category, keywords] of Object.entries(jdKeywords)) {
+    const weight = WEIGHTS[category] || 1.0;
+    for (const kw of keywords) {
+      totalWeight += weight;
+      if (resumeText.toLowerCase().includes(kw.toLowerCase())) matchedWeight += weight;
+    }
+  }
+  return Math.round((matchedWeight / totalWeight) * 100);
+}
+```
+
+### 3.4 Keyword Heat Map in Preview
+
+- [ ] Keywords found in resume: green underline in preview
+- [ ] Matched keywords listed in sidebar with green checkmarks
+- [ ] Missing keywords listed with red X marks
+- [ ] Click missing keyword → copies a suggested bullet snippet to clipboard
+- [ ] Toggle heat map on/off
+
+### 3.5 Smart Suggestion Panel
+
+- [ ] "Quick Wins" — top 5 missing keywords with most impact
+- [ ] One-click "Insert" → adds placeholder bullet with the keyword to editor
+- [ ] Detects overused words (flags 5+ uses of "Responsible for")
+- [ ] "Predicted score after fixes: XX%" shown at bottom
+
+### 3.6 Industry Keyword Libraries (`src/data/keywords/`)
+
+- [ ] `quality-engineering.json`
+- [ ] `software-engineering.json`
+- [ ] `product-management.json`
+- [ ] `data-engineering.json`
+- [ ] `devops-sre.json`
+- [ ] `frontend-engineering.json`
+- [ ] `backend-engineering.json`
+- [ ] `ai-ml-engineering.json`
+- [ ] `management-leadership.json`
+
+### Phase 3 Definition of Done
+
+- [ ] ATS score updates within 300ms of typing
+- [ ] Keyword heat map visible on resume preview
+- [ ] Smart suggestions generate actionable copy-paste bullets
+- [ ] All 9 keyword libraries present with 50+ keywords each
+- [ ] Score accuracy validated against 10 real JDs
+
+---
+
+## Phase 4 — AI Integration (Paste & Parse + Tailoring)
+
+**Branch:** `feature/phase-4-ai-integration`
+**Goal:** The killer feature — paste anything, get a resume. Plus one-sentence tailoring.
+
+### 4.1 Paste & Parse (The Killer Feature)
+
+The #1 drop-off point for resume tools is the blank slate. Solve it:
+
+- [ ] "Import from text" button in onboarding and settings
+- [ ] User pastes: LinkedIn About section, old resume text, bio, bullet dump — anything
+- [ ] App sends text to chosen AI provider with a structured extraction prompt
+- [ ] AI returns a `profile.json`-compatible object
+- [ ] User reviews extracted data in a diff-style UI before confirming
+- [ ] Saves to localStorage
+
+**Why this is different:** No other free/open source tool does this. It eliminates the #1 reason people abandon resume builders (setup friction).
+
+### 4.2 One-Sentence JD Tailoring
+
+- [ ] User pastes JD into the JD panel
+- [ ] Clicks "Tailor" → AI rewrites the summary and top 3 bullets to match the JD
+- [ ] Shows a diff view: original vs tailored (user accepts/rejects each change)
+- [ ] Uses `profile.json` as the source of truth (never fabricates)
+
+### 4.3 MCP Server (`mcp-resumer/`)
+
+For Claude Code / Cursor users — control Resumer from the AI chat:
+
+| Tool | Description |
+|------|-------------|
+| `tailor_resume` | Tailors resume to a JD |
+| `improve_bullet` | Improves a single bullet with metrics |
+| `ats_check` | Returns score + gaps |
+| `generate_summary` | 4-bullet professional summary |
+| `generate_cover_letter` | Full cover letter |
+| `get_profile` | Returns current profile.json |
+
+### 4.4 GitHub Copilot Prompts
+
+- [ ] `.github/prompts/tailor-resume.prompt.md`
+- [ ] `.github/prompts/generate-cover-letter.prompt.md`
+- [ ] `.github/prompts/ats-check.prompt.md`
+
+### 4.5 In-App AI Panel
+
+- [ ] Floating AI panel in header
+- [ ] Provider selector: Ollama (local) / OpenAI / Anthropic / Custom API
+- [ ] API key stored in `localStorage` only (never sent except to chosen provider)
+- [ ] Actions: Tailor Resume, Generate Cover Letter, Improve Selected Bullet, Check Tone
+
+### Phase 4 Definition of Done
+
+- [ ] Paste & Parse works end-to-end with at least one provider
+- [ ] MCP server tools all return correct output
+- [ ] In-app AI panel connects to Ollama (free, local) successfully
+- [ ] All AI operations use `profile.json` — zero fabrication
+
+---
+
+## Phase 5 — UI Themes & Customization
+
+**Branch:** `feature/phase-5-ui-themes`
+**Goal:** Beautiful, professional, fully customizable themes.
+
+### Theme 1: Classic (ATS-Safe)
+Single column, zero decoration, maximum ATS compatibility. Font: Inter. Best for: Banking, Consulting, Corporate.
+
+### Theme 2: Modern Executive
+Single column with subtle left accent bar. Customizable accent color (8 presets + color picker). Best for: Tech, Product, Engineering.
+
+### Theme 3: Impact (Two-Column)
+Left sidebar: skills, certs, education. Right main: summary, experience, projects. Best for: Startups, Senior ICs.
+
+### Customization Panel
+
+- [ ] Font family, accent color, font size, line spacing, margins
+- [ ] All settings in `localStorage`
+- [ ] Live preview as settings change
+- [ ] "Reset to defaults" per theme
+
+### Phase 5 Definition of Done
+
+- [ ] All 3 themes render correctly in print/PDF
+- [ ] Customization panel works for all settings
+- [ ] Themes pass ATS text-extraction test
+
+---
+
+## Phase 6 — Cover Letter Builder
+
+**Branch:** `feature/phase-6-cover-letter`
+**Goal:** Full-featured cover letter builder with structure enforcement.
+
+- [ ] 4 styles: Classic, Modern, Minimal, Bold
+- [ ] Live word counter (amber at 300, red at 350)
+- [ ] Company name + role auto-fill from JD input
+- [ ] Forbidden phrase detector (highlights "excited to apply", "passionate about")
+- [ ] 4-paragraph structure guide in sidebar
+- [ ] Cover letter ATS score (same engine as resume)
+
+---
+
+## Phase 7 — Export & Sharing
+
+**Branch:** `feature/phase-7-export-sharing`
+**Goal:** Every format users need, shareable without a server.
+
+- [ ] **PDF** — improved `@page` CSS, proper page break hints
+- [ ] **DOCX** — `docx.js`, render from profile JSON
+- [ ] **JSON Resume** — export as `jsonresume.org` standard
+- [ ] **Share link** — Base64-encode resume markdown into URL hash (no backend)
+  - `https://resumer.app/#resume=<base64>`
+- [ ] **LinkedIn import** — parse LinkedIn data export → auto-populate profile
+- [ ] **GitHub import** — read public repos → auto-generate projects section
+
+---
+
+## Phase 8 — Developer Experience
+
+**Branch:** `feature/phase-8-dx`
+**Goal:** Make contributing easy, tested, and documented.
+
+### Test Coverage Targets
+
+| Module | Target |
+|--------|--------|
+| ATS scoring engine | 90% |
+| Profile schema validation | 100% |
+| Markdown → resume rendering | 80% |
+| Export (JSON Resume) | 80% |
+
+### Docs Site (GitHub Pages)
+
+- [ ] `docs/getting-started.md`
+- [ ] `docs/profile-schema.md`
+- [ ] `docs/ats-engine.md`
+- [ ] `docs/ai-integration.md`
+- [ ] `docs/themes.md`
+
+---
+
+## Branch Strategy
+
+```
+main
+  └── feature/phase-1-open-source-foundation   ✅ Complete
+        └── feature/phase-2-production-cleanup   ← Current
+              └── feature/phase-3-ats-engine
+                    └── feature/phase-4-ai-integration
+                          └── feature/phase-5-ui-themes
+                                └── feature/phase-6-cover-letter
+                                      └── feature/phase-7-export-sharing
+                                            └── feature/phase-8-dx
+```
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Runtime | Vanilla JS (ES Modules), no build step |
+| Markdown | `marked.js` |
+| Styling | Plain CSS with custom properties |
+| Dev server | `live-server` |
+| Hosting | Vercel (static, free tier) |
+| Testing | Jest |
+| Linting | ESLint |
+| AI (MCP) | Node.js MCP server |
+| AI (in-app) | Fetch API → LLM provider (Ollama / OpenAI / Anthropic) |
+| Export (DOCX) | `docx.js` |
+| Export (PDF) | Browser print |
+| CI/CD | GitHub Actions |
+
+---
+
+## Success Metrics
+
+| Metric | Target |
+|--------|--------|
+| Time to first resume (new user) | < 5 minutes |
+| ATS score update latency | < 300ms |
+| PDF render accuracy | Pixel-perfect, Chrome/Firefox/Safari |
+| GitHub stars (6 months post-launch) | 500+ |
+| Monthly active users (hosted) | 1,000+ |
+| Community contributors | 10+ |
+| Resume templates | 3 built-in + community gallery |
+
+---
+
+*Last updated: 2026-06-22*
+
 
 | Aspect | Current |
 |---|---|
