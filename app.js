@@ -1936,6 +1936,9 @@
         // Phase 6: Cover letter builder
         _initCoverLetterBuilder();
 
+        // Phase 7: Export & Sharing — share link from URL hash
+        _initPhase7();
+
         updateStatusBar();
     });
 
@@ -2175,6 +2178,395 @@
         clearTimeout(_liveATSDebounce);
         _liveATSDebounce = setTimeout(_runLiveATS, 350);
     };
+
+    // ════════════════════════════════════════════════════════════════
+    // Phase 7 — Export & Sharing
+    // ════════════════════════════════════════════════════════════════
+
+    // ── Export / Import Dropdown toggle ──────────────────────────────────────
+    function _closeAllMenus() {
+        document.querySelectorAll('.export-menu, .import-menu').forEach(m => m.classList.remove('open'));
+    }
+
+    window.toggleExportMenu = function (e) {
+        e.stopPropagation();
+        const menu = document.getElementById('export-menu');
+        if (!menu) return;
+        const wasOpen = menu.classList.contains('open');
+        _closeAllMenus();
+        if (!wasOpen) menu.classList.add('open');
+    };
+
+    window.toggleImportMenu = function (e) {
+        e.stopPropagation();
+        const menu = document.getElementById('import-menu');
+        if (!menu) return;
+        const wasOpen = menu.classList.contains('open');
+        _closeAllMenus();
+        if (!wasOpen) menu.classList.add('open');
+    };
+
+    document.addEventListener('click', _closeAllMenus);
+
+    // ── PDF Export ──────────────────────────────────────────────────────────
+    window.exportPDF = function () {
+        _closeAllMenus();
+        window.print();
+    };
+
+    // ── JSON Resume Export ──────────────────────────────────────────────────
+    window.exportJSONResume = function () {
+        _closeAllMenus();
+        const raw = localStorage.getItem('resumer-profile');
+        let profile = {};
+        if (raw) {
+            try { profile = JSON.parse(raw); } catch { /* ignore */ }
+        }
+
+        const id = profile.identity || {};
+        const jsonResume = {
+            $schema: 'https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json',
+            basics: {
+                name:  id.name      || '',
+                email: id.email     || '',
+                url:   id.portfolio || '',
+                profiles: [
+                    id.linkedin && { network: 'LinkedIn', url: id.linkedin, username: (id.linkedin || '').replace(/\/$/, '').split('/').pop() },
+                    id.github   && { network: 'GitHub',   url: id.github,   username: (id.github   || '').replace(/\/$/, '').split('/').pop() },
+                ].filter(Boolean),
+            },
+            work: (profile.experience || []).map(e => ({
+                name: e.company || '', position: e.title || '',
+                startDate: e.start || '', endDate: e.end || '', highlights: e.bullets || [],
+            })),
+            education: (profile.education || []).map(e => ({
+                institution: e.institution || '', area: e.area || e.degree || '',
+                studyType: e.studyType || '', startDate: e.start || '', endDate: e.end || '',
+            })),
+            skills: [
+                ...(profile.skills?.core || []).map(g => ({ name: g.name || '', keywords: g.items || [] })),
+                (profile.skills?.technical?.length) ? { name: 'Technical', keywords: profile.skills.technical } : null,
+            ].filter(Boolean),
+            projects: (profile.projects || []).map(p => ({
+                name: p.name || '', description: p.description || '', url: p.url || '', keywords: p.keywords || [],
+            })),
+            certificates: (profile.certifications || []).map(c => ({
+                name: c.name || '', issuer: c.issuer || '', date: c.date || '', url: c.url || '',
+            })),
+        };
+
+        const blob = new Blob([JSON.stringify(jsonResume, null, 2)], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'resume.json';
+        a.click();
+        URL.revokeObjectURL(a.href);
+        toast('JSON Resume exported', 'success');
+    };
+
+    // ── DOCX Export (lazy-loads docx.js from CDN) ───────────────────────────
+    let _docxLoading = false;
+
+    window.exportDOCX = function () {
+        _closeAllMenus();
+        if (_docxLoading) return;
+        _docxLoading = true;
+        toast('Loading DOCX engine...', 'info');
+
+        if (window.docx) {
+            _buildAndDownloadDocx();
+            _docxLoading = false;
+            return;
+        }
+        const s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/docx@8/build/index.js';
+        s.onload  = () => { _buildAndDownloadDocx(); _docxLoading = false; };
+        s.onerror = () => { toast('Failed to load DOCX engine', 'error'); _docxLoading = false; };
+        document.head.appendChild(s);
+    };
+
+    function _buildAndDownloadDocx() {
+        const { Document, Paragraph, TextRun, HeadingLevel, Packer } = window.docx;
+        const lines = markdownContent.split('\n');
+        const children = [];
+
+        for (const raw of lines) {
+            const line = raw.trim();
+            if (!line) { children.push(new Paragraph('')); continue; }
+
+            if      (line.startsWith('### ')) { children.push(new Paragraph({ text: line.slice(4), heading: HeadingLevel.HEADING_3 })); }
+            else if (line.startsWith('## '))  { children.push(new Paragraph({ text: line.slice(3), heading: HeadingLevel.HEADING_2 })); }
+            else if (line.startsWith('# '))   { children.push(new Paragraph({ text: line.slice(2), heading: HeadingLevel.HEADING_1 })); }
+            else if (line.startsWith('- ') || line.startsWith('* ')) {
+                children.push(new Paragraph({ text: line.slice(2), bullet: { level: 0 } }));
+            } else {
+                // Inline bold: **text**
+                const runs = [];
+                const boldRe = /\*\*(.+?)\*\*/g;
+                let last = 0, m;
+                while ((m = boldRe.exec(line)) !== null) {
+                    if (m.index > last) runs.push(new TextRun(line.slice(last, m.index)));
+                    runs.push(new TextRun({ text: m[1], bold: true }));
+                    last = m.index + m[0].length;
+                }
+                if (last < line.length) runs.push(new TextRun(line.slice(last)));
+                children.push(new Paragraph({ children: runs }));
+            }
+        }
+
+        Packer.toBlob(new Document({ sections: [{ children }] })).then(blob => {
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'resume.docx';
+            a.click();
+            URL.revokeObjectURL(a.href);
+            toast('DOCX downloaded', 'success');
+        });
+    }
+
+    // ── Share Link ───────────────────────────────────────────────────────────
+    window.openShareModal = function () {
+        _closeAllMenus();
+        if (!markdownContent) { toast('No resume content to share.', 'error'); return; }
+
+        const bytes = new TextEncoder().encode(markdownContent);
+        const binary = Array.from(bytes, b => String.fromCharCode(b)).join('');
+        const encoded = btoa(binary);
+        const base = location.href.split('#')[0];
+        const url = `${base}#resume=${encoded}`;
+
+        const input = document.getElementById('share-url-input');
+        if (input) input.value = url;
+
+        const sizeEl = document.getElementById('share-url-size');
+        if (sizeEl) {
+            const kb = (encoded.length / 1024).toFixed(1);
+            sizeEl.textContent = `${kb} KB encoded`;
+            sizeEl.className = 'share-url-size' + (encoded.length > 8000 ? ' warn' : '');
+        }
+
+        const modal = document.getElementById('share-modal');
+        if (modal) { modal.style.display = 'flex'; modal.focus(); }
+    };
+
+    window.closeShareModal = function () {
+        const modal = document.getElementById('share-modal');
+        if (modal) modal.style.display = 'none';
+    };
+
+    window.copyShareLink = function () {
+        const input = document.getElementById('share-url-input');
+        if (!input) return;
+        input.select();
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(input.value)
+                .then(() => toast('Link copied to clipboard', 'success'))
+                .catch(() => { document.execCommand('copy'); toast('Link copied', 'success'); });
+        } else {
+            document.execCommand('copy');
+            toast('Link copied', 'success');
+        }
+    };
+
+    // Decode share link from URL hash — must run AFTER loadResume's fetch resolves.
+    // We use a MutationObserver on #resume-content to wait for the first render.
+    let _shareOverrideMD = null;
+
+    function _initPhase7() {
+        const m = location.hash.match(/#resume=([^&]+)/);
+        if (!m) return;
+        try {
+            const binary = atob(m[1]);
+            const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
+            const md = new TextDecoder().decode(bytes);
+            if (!md) return;
+            _shareOverrideMD = md;
+            history.replaceState(null, '', location.pathname + location.search);
+
+            const target = document.getElementById('resume-content');
+            if (!target) return;
+            const obs = new MutationObserver(() => {
+                obs.disconnect();
+                markdownContent = _shareOverrideMD;
+                _shareOverrideMD = null;
+                updatePreview();
+                const editor = document.getElementById('markdown-editor');
+                if (editor) editor.value = markdownContent;
+                toast('Shared resume loaded', 'info');
+            });
+            obs.observe(target, { childList: true });
+        } catch (e) {
+            console.warn('[Phase 7] Share link decode failed:', e);
+        }
+    }
+
+    // ── GitHub Import ────────────────────────────────────────────────────────
+    window.openGitHubImport = function () {
+        _closeAllMenus();
+        const modal = document.getElementById('github-import-modal');
+        if (modal) {
+            modal.style.display = 'flex';
+            document.getElementById('github-username-input')?.focus();
+        }
+    };
+
+    window.closeGitHubImport = function () {
+        const modal = document.getElementById('github-import-modal');
+        if (modal) modal.style.display = 'none';
+    };
+
+    window.runGitHubImport = async function () {
+        const input = document.getElementById('github-username-input');
+        const username = input?.value?.trim();
+        if (!username) { toast('Enter a GitHub username', 'error'); return; }
+
+        const btn = document.getElementById('github-import-btn');
+        if (btn) { btn.disabled = true; btn.textContent = 'Fetching...'; }
+
+        try {
+            const url = `https://api.github.com/users/${encodeURIComponent(username)}/repos?sort=updated&per_page=8&type=public`;
+            const res = await fetch(url, { headers: { Accept: 'application/vnd.github.v3+json' } });
+            if (!res.ok) {
+                const msg = res.status === 404 ? `User '${username}' not found` : `GitHub API error ${res.status}`;
+                throw new Error(msg);
+            }
+            const repos = await res.json();
+
+            const lines = ['## Projects', ''];
+            for (const r of repos) {
+                if (r.fork) continue;
+                const lang  = r.language             ? ` \`${r.language}\``         : '';
+                const stars = r.stargazers_count > 0 ? ` ⭐ ${r.stargazers_count}` : '';
+                lines.push(`### [${r.name}](${r.html_url})${lang}${stars}`);
+                if (r.description) lines.push(`- ${r.description}`);
+                if (r.topics?.length) lines.push(`- Topics: ${r.topics.join(', ')}`);
+                lines.push('');
+            }
+
+            const preview = document.getElementById('github-import-preview');
+            if (preview) preview.textContent = lines.join('\n');
+            const out = document.getElementById('github-import-output');
+            if (out) out.style.display = 'block';
+            const confirm = document.getElementById('github-import-confirm');
+            if (confirm) confirm.style.display = 'flex';
+        } catch (e) {
+            toast('GitHub fetch failed: ' + e.message, 'error');
+        } finally {
+            if (btn) { btn.disabled = false; btn.textContent = 'Fetch Repos'; }
+        }
+    };
+
+    window.acceptGitHubProjects = function () {
+        const preview = document.getElementById('github-import-preview');
+        if (!preview) return;
+        const section = preview.textContent.trim();
+        if (!section) return;
+
+        // Replace existing ## Projects section or append at the end
+        const cleaned = markdownContent.replace(/\n?## Projects[\s\S]*?(?=\n## |\n---|\n# [^#]|$)/, '');
+        markdownContent = cleaned.trimEnd() + '\n\n' + section + '\n';
+        localStorage.setItem('resumeContent', markdownContent);
+        updatePreview();
+        const editor = document.getElementById('markdown-editor');
+        if (editor) editor.value = markdownContent;
+        closeGitHubImport();
+        toast('Projects section updated from GitHub', 'success');
+    };
+
+    // ── LinkedIn CSV Import ──────────────────────────────────────────────────
+    window.openLinkedInImport = function () {
+        _closeAllMenus();
+        const modal = document.getElementById('linkedin-import-modal');
+        if (modal) modal.style.display = 'flex';
+    };
+
+    window.closeLinkedInImport = function () {
+        const modal = document.getElementById('linkedin-import-modal');
+        if (modal) modal.style.display = 'none';
+    };
+
+    window.onLinkedInFileChange = function (input) {
+        const file = input.files[0];
+        const statusEl = document.getElementById('linkedin-file-status');
+        if (statusEl) statusEl.textContent = file ? `Selected: ${file.name}` : 'No file selected';
+        const btn = document.getElementById('linkedin-parse-btn');
+        if (btn) btn.disabled = !file;
+    };
+
+    window.runLinkedInImport = async function () {
+        const input = document.getElementById('linkedin-file-input');
+        const file = input?.files[0];
+        if (!file) { toast('Select a LinkedIn export CSV first', 'error'); return; }
+
+        const text = await file.text();
+        const fname = file.name.toLowerCase();
+        const firstLine = text.split('\n')[0].toLowerCase();
+
+        // Detect type by filename then by headers
+        let type;
+        if (fname.includes('position') || fname.includes('experience') || firstLine.includes('company name')) type = 'positions';
+        else if (fname.includes('education') || firstLine.includes('school name')) type = 'education';
+        else if (fname.includes('skill') || (firstLine.includes('name') && !firstLine.includes('company'))) type = 'skills';
+        else if (fname.includes('profile') || firstLine.includes('first name')) type = 'profile';
+        else { toast('Unrecognised LinkedIn export file. Expected Positions, Education, Skills, or Profile CSV.', 'error'); return; }
+
+        const raw = localStorage.getItem('resumer-profile');
+        let profile = {};
+        try { if (raw) profile = JSON.parse(raw); } catch { /* ignore */ }
+
+        const rows = _parseLinkedInCSV(text);
+        const headers = rows.length ? rows[0].map(h => h.trim().toLowerCase()) : [];
+        const getVal = (row, key) => { const i = headers.indexOf(key); return i >= 0 ? (row[i] || '').trim() : ''; };
+
+        if (type === 'positions') {
+            profile.experience = rows.slice(1).map(r => ({
+                company: getVal(r, 'company name'), title: getVal(r, 'title'),
+                start: getVal(r, 'started on'), end: getVal(r, 'finished on') || 'Present', bullets: [],
+            })).filter(e => e.company);
+        } else if (type === 'education') {
+            profile.education = rows.slice(1).map(r => ({
+                institution: getVal(r, 'school name'), degree: getVal(r, 'degree name'),
+                area: getVal(r, 'field of study'), start: getVal(r, 'start date'), end: getVal(r, 'end date'),
+            })).filter(e => e.institution);
+        } else if (type === 'skills') {
+            const ni = headers.indexOf('name');
+            if (!profile.skills) profile.skills = {};
+            profile.skills.technical = ni >= 0 ? rows.slice(1).map(r => (r[ni] || '').trim()).filter(Boolean) : [];
+        } else if (type === 'profile') {
+            const r = rows[1] || [];
+            const name = `${getVal(r, 'first name')} ${getVal(r, 'last name')}`.trim();
+            profile.identity = { ...profile.identity, name, email: getVal(r, 'email address') };
+        }
+
+        localStorage.setItem('resumer-profile', JSON.stringify(profile));
+        closeLinkedInImport();
+        const count = type === 'profile' ? 1 : (Array.isArray(profile[type === 'positions' ? 'experience' : type]) ? profile[type === 'positions' ? 'experience' : type].length : 0);
+        toast(`LinkedIn ${type} imported (${count} entries)`, 'success');
+    };
+
+    // Minimal RFC 4180 CSV parser (inline, no external dep)
+    function _parseLinkedInCSV(text) {
+        const rows = [];
+        let row = [], field = '', inQ = false;
+        for (let i = 0; i < text.length; i++) {
+            const c = text[i];
+            if (inQ) {
+                if (c === '"' && text[i + 1] === '"') { field += '"'; i++; }
+                else if (c === '"') inQ = false;
+                else field += c;
+            } else {
+                if      (c === '"')  inQ = true;
+                else if (c === ',')  { row.push(field); field = ''; }
+                else if (c === '\n' || (c === '\r' && text[i + 1] === '\n')) {
+                    row.push(field); field = '';
+                    if (row.some(x => x.trim())) rows.push(row);
+                    row = []; if (c === '\r') i++;
+                } else field += c;
+            }
+        }
+        if (field || row.length) { row.push(field); if (row.some(x => x.trim())) rows.push(row); }
+        return rows;
+    }
 
     // ────── Phase 6: Cover Letter Builder ──────
 

@@ -70,6 +70,38 @@
     .page-number {
         display: none;
     }
+
+    /* ── Page-break hints (Phase 7) ── */
+    /* Never break immediately after a heading — keep heading with its content */
+    .resume-page h2 { break-after: avoid; page-break-after: avoid; }
+    .resume-page h3 { break-after: avoid; page-break-after: avoid; }
+
+    /* The bullet list paired with an h3 should not orphan on the next page */
+    .resume-page h3 + ul,
+    .resume-page h3 + p {
+        break-before: avoid;
+        page-break-before: avoid;
+    }
+
+    /* Avoid splitting individual list items across pages */
+    .resume-page li {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        orphans: 2;
+        widows: 2;
+    }
+
+    /* Section headings should not appear alone at the bottom of a page */
+    .resume-page h2 + * {
+        break-before: avoid;
+        page-break-before: avoid;
+    }
+
+    /* Avoid orphaning the contact header row */
+    .resume-page .section.headerInfo {
+        break-after: avoid;
+        page-break-after: avoid;
+    }
 }
 
 /* Page break visualization for screen */
