@@ -186,7 +186,7 @@
         // Re-render preview to apply/remove V3 DOM restructuring
         updatePreview();
 
-        const labels = { v1: 'Classic', v2: 'Modern', v3: 'Two-Column' };
+        const labels = { v1: 'Standard', v2: 'Accent', v3: 'Timeline' };
         toast(`Template: ${labels[tpl] || 'Classic'}`, 'info');
     };
 
