@@ -73,22 +73,6 @@ cp profile.sample.json profile.json
 
 ---
 
-## Roadmap
-
-See [PLAN.md](PLAN.md) for the full 7-phase roadmap.
-
-| Phase | Status | Description |
-|-------|--------|-------------|
-| 1 | In Progress | Open Source Foundation — profile system, modular JS, onboarding |
-| 2 | Planned | ATS Engine — live scoring, keyword heat map, industry libraries |
-| 3 | Planned | AI Integration — Copilot/Cursor/MCP hooks, smart tailoring |
-| 4 | Planned | UI Themes — dark mode, accessibility, more layouts |
-| 5 | Planned | Cover Letter — template system, AI generation |
-| 6 | Planned | Export & Sharing — PDF, DOCX, shareable links |
-| 7 | Planned | Developer Experience — plugin API, CLI, tests |
-
----
-
 ## Contributing
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md) for setup, coding standards, and the PR process.

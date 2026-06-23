@@ -2,13 +2,6 @@
 # Your personal profile — NEVER commit this (contains personal data)
 profile.json
 
-# AI agent instruction files (personal, user-specific)
-CLAUDE.md
-GEMINI.md
-.cursorrules
-.gemini/
-DUAL_RESUME_FEATURE.md
-PLAN.md
 
 # Backup files
 *-backup.md
