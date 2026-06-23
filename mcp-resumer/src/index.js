@@ -23,8 +23,8 @@ const ROOT = path.resolve(__dirname, '..');
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
-async function readResumeFile(type = 'qe') {
-    const map = { qe: 'components/resume/resume.md', tpm: 'components/resume-tpm/resume-tpm.md', ai: 'components/resume-ai/resume-ai.md' };
+async function readResumeFile(type = 'classic') {
+    const map = { classic: 'components/resume/resume.md', professional: 'components/resume-professional/resume-professional.md', modern: 'components/resume-modern/resume-modern.md' };
     const file = path.join(ROOT, map[type] || map.qe);
     return fs.readFile(file, 'utf8');
 }
@@ -48,7 +48,7 @@ server.tool(
     'Analyse a resume against a job description and return tailored bullet rewrites plus ATS improvements. Never fabricates experience.',
     {
         job_description: z.string().min(50).describe('Full job description text'),
-        resume_type: z.enum(['qe', 'tpm', 'ai']).default('qe').describe('Which resume variant to tailor'),
+        resume_type: z.enum(['classic', 'professional', 'modern']).default('classic').describe('Which resume variant to tailor'),
     },
     async ({ job_description, resume_type }) => {
         const [resume, master] = await Promise.all([readResumeFile(resume_type), readMasterContent()]);
@@ -125,7 +125,7 @@ server.tool(
     'Score and gap-analyse a resume against a job description. Returns missing keywords, weak placements, and quick wins.',
     {
         job_description: z.string().min(50).describe('Full job description text'),
-        resume_type: z.enum(['qe', 'tpm', 'ai']).default('qe').describe('Which resume variant to analyse'),
+        resume_type: z.enum(['classic', 'professional', 'modern']).default('classic').describe('Which resume variant to analyse'),
     },
     async ({ job_description, resume_type }) => {
         const resume = await readResumeFile(resume_type);
@@ -163,7 +163,7 @@ server.tool(
     'Generate a 4-bullet Professional Summary tailored to a role and job description.',
     {
         job_description: z.string().optional().describe('Job description to tailor toward (optional)'),
-        resume_type: z.enum(['qe', 'tpm', 'ai']).default('qe'),
+        resume_type: z.enum(['classic', 'professional', 'modern']).default('classic'),
     },
     async ({ job_description, resume_type }) => {
         const [resume, master] = await Promise.all([readResumeFile(resume_type), readMasterContent()]);
@@ -203,7 +203,7 @@ server.tool(
         job_description: z.string().min(50).describe('Full job description text'),
         company: z.string().optional().describe('Company name'),
         role: z.string().optional().describe('Job title'),
-        resume_type: z.enum(['qe', 'tpm', 'ai']).default('qe'),
+        resume_type: z.enum(['classic', 'professional', 'modern']).default('classic'),
     },
     async ({ job_description, company, role, resume_type }) => {
         const [resume, master] = await Promise.all([readResumeFile(resume_type), readMasterContent()]);

@@ -1,6 +1,6 @@
 # mcp-resumer
 
-MCP (Model Context Protocol) server for the [Resumer](https://github.com/Sivasankaramalan/resumer) open-source resume builder.
+MCP (Model Context Protocol) server for the [Resumer](https://github.com/codemie/resumer) open-source resume builder.
 
 Exposes 6 tools for AI coding assistants (GitHub Copilot, Claude, Cursor, etc.) to tailor resumes, analyse ATS scores, and generate cover letters — all without leaving your editor.
 
@@ -73,7 +73,7 @@ Once configured, ask your AI assistant:
 ```
 
 ```
-@resumer ats_check job_description="..." resume_type=qe
+@resumer ats_check job_description="..." resume_type=classic
 ```
 
 ```

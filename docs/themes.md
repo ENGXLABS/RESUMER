@@ -11,8 +11,8 @@ Select a template from the **Theme** menu in the app.
 | Template | File | Best for |
 |----------|------|----------|
 | **Classic (v1)** | `components/resume/resume.css` | Traditional, ATS-safe single column |
-| **Modern (v2)** | `components/resume/resume-v2.css` | Clean two-tone header, wider margins |
-| **Minimal (v3)** | `components/resume/resume-v3.css` | Ultra-clean, maximum whitespace |
+| **Accent** | `components/resume/resume-accent.css` | Clean two-tone header, wider margins |
+| **Timeline** | `components/resume/resume-timeline.css` | Ultra-clean, maximum whitespace |
 
 ---
 
@@ -82,7 +82,7 @@ All theme values are defined as CSS custom properties in `settings.css`. Overrid
 
 ## Per-Template Variables
 
-Each template may declare its own overrides scoped to its class. For example `resume-v2.css`:
+Each template may declare its own overrides scoped to its class. For example `resume-accent.css`:
 
 ```css
 .theme-v2 {
@@ -118,7 +118,7 @@ When exporting to PDF via the browser's **Print → Save as PDF** dialog, use:
 
 ## Adding a New Theme
 
-1. Create `components/resume/resume-v4.css` with your styles.
+1. Create `components/resume/resume-custom.css` with your styles.
 2. Add a `<link>` tag for it in `index.html` (disabled by default).
 3. Register it in the theme switcher array inside `app.js`:
 

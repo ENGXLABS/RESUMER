@@ -53,12 +53,12 @@ describe('json-resume: buildBasics', () => {
     });
 
     test('extracts LinkedIn and GitHub usernames', () => {
-        const b = buildBasics({ identity: { linkedin: 'https://linkedin.com/in/siva/', github: 'https://github.com/sivasankaramalan' } });
+        const b = buildBasics({ identity: { linkedin: 'https://linkedin.com/in/alex-rivera/', github: 'https://github.com/alex-rivera' } });
         expect(b.profiles).toHaveLength(2);
         expect(b.profiles[0].network).toBe('LinkedIn');
-        expect(b.profiles[0].username).toBe('siva');
+        expect(b.profiles[0].username).toBe('alex-rivera');
         expect(b.profiles[1].network).toBe('GitHub');
-        expect(b.profiles[1].username).toBe('sivasankaramalan');
+        expect(b.profiles[1].username).toBe('alex-rivera');
     });
 
     test('only linkedin present → one profile entry', () => {

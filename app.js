@@ -9,7 +9,7 @@
     let currentMode = 'preview';
     let markdownContent = '';
     let coverLetterContent = '';
-    let currentResumeType = 'qe';
+    let currentResumeType = 'classic';
     let currentZoomLevel = 100;
     let currentTab = 'resume';
 
@@ -159,9 +159,9 @@
         currentTemplate = tpl;
         sessionStorage.setItem('currentTemplate', tpl);
 
-        const v1 = $('#resume-css-v1');
-        const v2 = $('#resume-css-v2');
-        const v3 = $('#resume-css-v3');
+        const v1 = $('#resume-css-standard');
+        const v2 = $('#resume-css-accent');
+        const v3 = $('#resume-css-timeline');
         const settings = $('#resume-settings-css');
 
         // Disable all first
@@ -201,21 +201,21 @@
         currentResumeType = type;
         sessionStorage.setItem('currentResumeType', type);
 
-        $('#qe-resume-btn').classList.toggle('active', type === 'qe');
-        $('#tpm-resume-btn').classList.toggle('active', type === 'tpm');
-        const aiBtn = $('#ai-resume-btn');
-        if (aiBtn) aiBtn.classList.toggle('active', type === 'ai');
+        $('#classic-resume-btn').classList.toggle('active', type === 'classic');
+        $('#professional-resume-btn').classList.toggle('active', type === 'professional');
+        const aiBtn = $('#modern-resume-btn');
+        if (aiBtn) aiBtn.classList.toggle('active', type === 'modern');
 
         // Handle AI-specific CSS and template selector visibility
-        const aiCss = $('#resume-css-ai');
+        const aiCss = $('#resume-css-modern');
         const tplSelector = $('#template-selector');
         const tplDivider = $('#tpl-divider');
-        if (type === 'ai') {
+        if (type === 'modern') {
             // Enable AI CSS, disable QE template CSS
             if (aiCss) aiCss.disabled = false;
-            const v1 = $('#resume-css-v1');
-            const v2 = $('#resume-css-v2');
-            const v3 = $('#resume-css-v3');
+            const v1 = $('#resume-css-standard');
+            const v2 = $('#resume-css-accent');
+            const v3 = $('#resume-css-timeline');
             const settings = $('#resume-settings-css');
             if (v1) v1.disabled = true;
             if (v2) v2.disabled = true;
@@ -226,7 +226,7 @@
         } else {
             // Disable AI CSS, restore template selector only for Classic
             if (aiCss) aiCss.disabled = true;
-            const showTpl = type === 'qe';
+            const showTpl = type === 'classic';
             if (tplSelector) tplSelector.style.display = showTpl ? 'flex' : 'none';
             if (tplDivider) tplDivider.style.display = showTpl ? 'block' : 'none';
             // Re-apply current template
@@ -239,8 +239,8 @@
 
     function loadResume() {
         let path;
-        if (currentResumeType === 'ai') path = 'components/resume-ai/resume-ai.md';
-        else if (currentResumeType === 'tpm') path = 'components/resume-tpm/resume-tpm.md';
+        if (currentResumeType === 'modern') path = 'components/resume-modern/resume-modern.md';
+        else if (currentResumeType === 'professional') path = 'components/resume-professional/resume-professional.md';
         else path = 'components/resume/resume.md';
 
         fetch(path)
@@ -273,7 +273,7 @@
         wrapper.className = 'resume-page';
         container.innerHTML = '';
 
-        if (currentResumeType === 'ai') {
+        if (currentResumeType === 'modern') {
             restructureForAI(wrapper);
         } else if (currentTemplate === 'v3') {
             restructureForV3(wrapper);
@@ -1009,7 +1009,7 @@
             : markdownContent;
 
         const companyName = $('#company-name').value.trim();
-        const typeLabel = currentResumeType === 'ai' ? 'Modern' : currentResumeType === 'tpm' ? 'Professional' : 'Classic';
+        const typeLabel = currentResumeType === 'modern' ? 'Modern' : currentResumeType === 'professional' ? 'Professional' : 'Classic';
         const nameSlug = getProfileNameSlug();
         let filename = `Resume_${nameSlug}_${typeLabel}`;
         if (companyName) {
@@ -1041,8 +1041,8 @@
         const tplDivider = $('#tpl-divider');
         const isResume = tabName === 'resume';
         if (typeSelector) typeSelector.style.display = isResume ? 'flex' : 'none';
-        if (tplSelector) tplSelector.style.display = (isResume && currentResumeType === 'qe') ? 'flex' : 'none';
-        if (tplDivider) tplDivider.style.display = (isResume && currentResumeType === 'qe') ? 'block' : 'none';
+        if (tplSelector) tplSelector.style.display = (isResume && currentResumeType === 'classic') ? 'flex' : 'none';
+        if (tplDivider) tplDivider.style.display = (isResume && currentResumeType === 'classic') ? 'block' : 'none';
 
         updateStatusBar();
     };
@@ -1142,7 +1142,7 @@
         if (tabEl) tabEl.textContent = tabLabels[currentTab] || 'Resume';
         if (modeEl) modeEl.textContent = currentMode === 'edit' ? 'Editing' : 'Preview';
         if (typeEl) {
-            const typeLabels = { qe: 'Classic', tpm: 'Professional', ai: 'Modern' };
+            const typeLabels = { classic: 'Classic', professional: 'Professional', modern: 'Modern' };
             typeEl.textContent = typeLabels[currentResumeType] || 'Classic';
             typeEl.parentElement.style.display = currentTab === 'resume' ? 'flex' : 'none';
         }
@@ -1886,20 +1886,20 @@
         const savedTab = sessionStorage.getItem('currentTab');
         const savedType = sessionStorage.getItem('currentResumeType');
 
-        if (savedType === 'qe' || savedType === 'tpm' || savedType === 'ai') {
+        if (savedType === 'classic' || savedType === 'professional' || savedType === 'modern') {
             currentResumeType = savedType;
-            $('#qe-resume-btn').classList.toggle('active', savedType === 'qe');
-            $('#tpm-resume-btn').classList.toggle('active', savedType === 'tpm');
-            const aiBtn = $('#ai-resume-btn');
-            if (aiBtn) aiBtn.classList.toggle('active', savedType === 'ai');
+            $('#classic-resume-btn').classList.toggle('active', savedType === 'classic');
+            $('#professional-resume-btn').classList.toggle('active', savedType === 'professional');
+            const aiBtn = $('#modern-resume-btn');
+            if (aiBtn) aiBtn.classList.toggle('active', savedType === 'modern');
 
             // Handle AI-specific CSS and template selector on restore
-            if (savedType === 'ai') {
-                const aiCss = $('#resume-css-ai');
+            if (savedType === 'modern') {
+                const aiCss = $('#resume-css-modern');
                 if (aiCss) aiCss.disabled = false;
-                const v1 = $('#resume-css-v1');
-                const v2 = $('#resume-css-v2');
-                const v3 = $('#resume-css-v3');
+                const v1 = $('#resume-css-standard');
+                const v2 = $('#resume-css-accent');
+                const v3 = $('#resume-css-timeline');
                 const settings = $('#resume-settings-css');
                 if (v1) v1.disabled = true;
                 if (v2) v2.disabled = true;
@@ -1965,8 +1965,8 @@
     function initFileWatcher() {
         const files = [
             { path: 'components/resume/resume.md',      type: 'resume-qe' },
-            { path: 'components/resume-tpm/resume-tpm.md', type: 'resume-tpm' },
-            { path: 'components/resume-ai/resume-ai.md',   type: 'resume-ai' },
+            { path: 'components/resume-professional/resume-professional.md', type: 'resume-professional' },
+            { path: 'components/resume-modern/resume-modern.md',   type: 'resume-modern' },
             { path: 'components/cover-letter/cover-letter.md', type: 'cover' },
         ];
 
@@ -1994,7 +1994,7 @@
                     loadCoverLetter();
                     toast('Cover letter updated', 'info', 1500);
                 } else {
-                    const typeMap = { 'resume-qe': 'qe', 'resume-tpm': 'tpm', 'resume-ai': 'ai' };
+                    const typeMap = { 'resume-classic': 'classic', 'resume-professional': 'professional', 'resume-modern': 'modern' };
                     if (currentResumeType === typeMap[file.type]) {
                         // Don't overwrite editor if user is actively editing
                         if (currentMode !== 'edit') {

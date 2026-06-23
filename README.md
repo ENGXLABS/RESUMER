@@ -171,4 +171,4 @@ resume-builder/
 ---
 
 **Last Updated:** November 30, 2025  
-**Maintained By:** Sivasankaramalan Gunasekarasivam
+**Maintained By:** Community Contributors

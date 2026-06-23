@@ -17,12 +17,12 @@
 
     <link rel="stylesheet" href="app.css">
     <link rel="stylesheet" href="settings.css">
-    <link rel="stylesheet" href="components/resume/resume.css" id="resume-css-v1">
-    <link rel="stylesheet" href="components/resume/resume-v2.css" id="resume-css-v2" disabled>
-    <link rel="stylesheet" href="components/resume/resume-v3.css" id="resume-css-v3" disabled>
+    <link rel="stylesheet" href="components/resume/resume-standard.css" id="resume-css-standard">
+    <link rel="stylesheet" href="components/resume/resume-accent.css" id="resume-css-accent" disabled>
+    <link rel="stylesheet" href="components/resume/resume-timeline.css" id="resume-css-timeline" disabled>
     <link rel="stylesheet" href="components/resume/resume-settings.css" id="resume-settings-css">
-    <link rel="stylesheet" href="components/resume-tpm/resume-tpm.css">
-    <link rel="stylesheet" href="components/resume-ai/resume-ai.css" id="resume-css-ai" disabled>
+    <link rel="stylesheet" href="components/resume-professional/resume-professional.css">
+    <link rel="stylesheet" href="components/resume-modern/resume-modern.css" id="resume-css-modern" disabled>
     <link rel="stylesheet" href="components/cover-letter/cover-letter.css">
     <link rel="stylesheet" href="components/ats-checker/ats-checker.css">
     <!-- Phase 5: live theme overrides injected by JS -->
@@ -63,15 +63,15 @@
         <!-- Right: Resume Type + ATS + AI + Theme -->
         <div class="header-right-controls">
             <div id="resume-type-selector" style="display: flex; align-items: center; gap: 4px;">
-                <button id="qe-resume-btn" class="resume-type-btn-compact active" onclick="switchResumeType('qe')"
+                <button id="classic-resume-btn" class="resume-type-btn-compact active" onclick="switchResumeType('classic')"
                     title="Classic — standard single-column resume">
                     <span class="iconify" data-icon="mdi:file-document-outline"></span> Classic
                 </button>
-                <button id="tpm-resume-btn" class="resume-type-btn-compact" onclick="switchResumeType('tpm')"
+                <button id="professional-resume-btn" class="resume-type-btn-compact" onclick="switchResumeType('professional')"
                     title="Professional — executive and leadership focused">
                     <span class="iconify" data-icon="mdi:briefcase-outline"></span> Professional
                 </button>
-                <button id="ai-resume-btn" class="resume-type-btn-compact" onclick="switchResumeType('ai')"
+                <button id="modern-resume-btn" class="resume-type-btn-compact" onclick="switchResumeType('modern')"
                     title="Modern — AI-native and technical focused">
                     <span class="iconify" data-icon="mdi:lightning-bolt-outline"></span> Modern
                 </button>

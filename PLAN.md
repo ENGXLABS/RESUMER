@@ -858,4 +858,4 @@ Each phase ends with a PR into `main`.
 ---
 
 *Last updated: 2026-06-22*  
-*Maintained by: Sivasankaramalan Gunasekarasivam*
+*Maintained by: Community Contributors*

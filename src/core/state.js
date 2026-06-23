@@ -17,7 +17,7 @@ const initialState = {
   mode: 'preview',           // 'preview' | 'edit'
   currentTab: 'resume',      // 'resume' | 'cover-letter' | 'ats-checker'
   currentTemplate: 'v1',     // 'v1' | 'v2' | 'v3'
-  currentResumeType: 'qe',   // 'qe' | 'tpm' | 'ai'
+  currentResumeType: 'classic',   // 'classic' | 'professional' | 'modern'
   zoomResume: 100,
   zoomCover: 100,
   profile: null,             // Loaded from localStorage or profile.json

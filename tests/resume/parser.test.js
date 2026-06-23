@@ -68,8 +68,8 @@ describe('parseResumeMarkdown: name extraction', () => {
     });
 
     test('trims whitespace from name', () => {
-        const doc = parseResumeMarkdown('#   Sivasankaramalan Gunasekarasivam   \n');
-        expect(doc.name).toBe('Sivasankaramalan Gunasekarasivam');
+        const doc = parseResumeMarkdown('#   Jordan Lee   \n');
+        expect(doc.name).toBe('Jordan Lee');
     });
 });
 
