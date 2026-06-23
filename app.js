@@ -209,6 +209,7 @@
         // Handle AI-specific CSS and template selector visibility
         const aiCss = $('#resume-css-ai');
         const tplSelector = $('#template-selector');
+        const tplDivider = $('#tpl-divider');
         if (type === 'ai') {
             // Enable AI CSS, disable QE template CSS
             if (aiCss) aiCss.disabled = false;
@@ -221,10 +222,13 @@
             if (v3) v3.disabled = true;
             if (settings) settings.disabled = true;
             if (tplSelector) tplSelector.style.display = 'none';
+            if (tplDivider) tplDivider.style.display = 'none';
         } else {
-            // Disable AI CSS, restore template selector
+            // Disable AI CSS, restore template selector only for Classic
             if (aiCss) aiCss.disabled = true;
-            if (tplSelector) tplSelector.style.display = 'flex';
+            const showTpl = type === 'qe';
+            if (tplSelector) tplSelector.style.display = showTpl ? 'flex' : 'none';
+            if (tplDivider) tplDivider.style.display = showTpl ? 'block' : 'none';
             // Re-apply current template
             switchTemplate(currentTemplate);
         }
@@ -1034,9 +1038,11 @@
 
         const typeSelector = $('#resume-type-selector');
         const tplSelector = $('#template-selector');
+        const tplDivider = $('#tpl-divider');
         const isResume = tabName === 'resume';
         if (typeSelector) typeSelector.style.display = isResume ? 'flex' : 'none';
-        if (tplSelector) tplSelector.style.display = (isResume && currentResumeType !== 'ai') ? 'flex' : 'none';
+        if (tplSelector) tplSelector.style.display = (isResume && currentResumeType === 'qe') ? 'flex' : 'none';
+        if (tplDivider) tplDivider.style.display = (isResume && currentResumeType === 'qe') ? 'block' : 'none';
 
         updateStatusBar();
     };

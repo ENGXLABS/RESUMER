@@ -60,23 +60,8 @@
             </button>
         </div>
 
-        <!-- Right: Template + Resume Type + Zoom + Theme -->
+        <!-- Right: Resume Type + ATS + AI + Theme -->
         <div class="header-right-controls">
-            <div id="template-selector" style="display: flex; align-items: center; gap: 2px;">
-                <button id="tpl-v1-btn" class="resume-type-btn-compact active" onclick="switchTemplate('v1')" title="Classic template">
-                    <span class="iconify" data-icon="mdi:file-document-outline"></span> v1
-                </button>
-                <button id="tpl-v2-btn" class="resume-type-btn-compact" onclick="switchTemplate('v2')" title="Modern template">
-                    <span class="iconify" data-icon="mdi:file-document-edit-outline"></span> v2
-                </button>
-                <button id="tpl-v3-btn" class="resume-type-btn-compact" onclick="switchTemplate('v3')" title="Two-column modern">
-                    <span class="iconify" data-icon="mdi:view-split-vertical"></span> v3
-                </button>
-                <button id="customize-btn" class="resume-type-btn-compact" onclick="openCustomizePanel()" title="Customise fonts, colors & spacing" aria-label="Customise theme">
-                    <span class="iconify" data-icon="mdi:palette-outline"></span>
-                </button>
-            </div>
-            <span class="header-divider"></span>
             <div id="resume-type-selector" style="display: flex; align-items: center; gap: 4px;">
                 <button id="qe-resume-btn" class="resume-type-btn-compact active" onclick="switchResumeType('qe')"
                     title="Classic — standard single-column resume">
@@ -91,12 +76,7 @@
                     <span class="iconify" data-icon="mdi:lightning-bolt-outline"></span> Modern
                 </button>
             </div>
-            <div class="zoom-controls">
-                <button onclick="zoomOut('resume')" title="Zoom Out"><span class="iconify" data-icon="mdi:magnify-minus"></span></button>
-                <span id="zoom-level-resume">100%</span>
-                <button onclick="zoomIn('resume')" title="Zoom In"><span class="iconify" data-icon="mdi:magnify-plus"></span></button>
-                <button onclick="resetZoom('resume')" title="Reset Zoom"><span class="iconify" data-icon="mdi:magnify"></span></button>
-            </div>
+            <span class="header-divider"></span>
             <!-- ATS Live Badge -->
             <button id="ats-live-badge" class="ats-live-badge" onclick="toggleJDPanel()" title="ATS score — click to open Job Description panel" aria-label="ATS live score">
                 <span class="iconify" data-icon="mdi:target"></span>
@@ -173,6 +153,23 @@
                     </button>
                 </div>
             </div>
+            <!-- Template Layout Selector (Classic only) -->
+            <div class="lt-divider" id="tpl-divider"></div>
+            <div id="template-selector" class="lt-tpl-selector" style="display: flex; flex-direction: column; gap: 2px; width: 100%;">
+                <span class="lt-section-label">Layout</span>
+                <button id="tpl-v1-btn" class="lt-tpl-btn active" onclick="switchTemplate('v1')" title="Classic — clean ATS-safe layout">
+                    <span class="iconify" data-icon="mdi:file-document-outline"></span>
+                    <span class="btn-label">Classic</span>
+                </button>
+                <button id="tpl-v2-btn" class="lt-tpl-btn" onclick="switchTemplate('v2')" title="Modern — accent colors, left-bar headers">
+                    <span class="iconify" data-icon="mdi:file-document-edit-outline"></span>
+                    <span class="btn-label">Modern</span>
+                </button>
+                <button id="tpl-v3-btn" class="lt-tpl-btn" onclick="switchTemplate('v3')" title="Impact — timeline, metrics cards">
+                    <span class="iconify" data-icon="mdi:view-split-vertical"></span>
+                    <span class="btn-label">Impact</span>
+                </button>
+            </div>
         </div>
         <!-- Edit mode actions -->
         <div class="lt-actions lt-edit-actions" id="edit-actions" style="display:none;">
@@ -202,6 +199,10 @@
 
             <!-- Preview Container -->
             <div id="preview-container">
+                <!-- Floating customize palette button -->
+                <button id="customize-btn" class="preview-customize-fab" onclick="openCustomizePanel()" title="Customise fonts, colors &amp; spacing" aria-label="Customise theme">
+                    <span class="iconify" data-icon="mdi:palette-outline"></span>
+                </button>
                 <div id="resume-content"
                     style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 20px;">
                 </div>
@@ -627,11 +628,18 @@
         <div class="status-left">
             <span class="status-item"><span class="status-dot"></span> Ready</span>
             <span class="status-item"><span class="iconify" data-icon="mdi:tab"></span> <span id="status-tab">Resume</span></span>
-            <span class="status-item"><span class="iconify" data-icon="mdi:eye"></span> <span id="status-mode">Preview</span></span>
+            <span class="status-item" onclick="toggleMode()" style="cursor:pointer;" title="Toggle edit/preview mode"><span class="iconify" data-icon="mdi:eye"></span> <span id="status-mode">Preview</span></span>
         </div>
         <div class="status-right">
             <span class="status-item"><span class="iconify" data-icon="mdi:file-document"></span> <span id="status-type">Classic</span></span>
             <span class="status-item"><span class="iconify" data-icon="mdi:text"></span> <span id="status-words">0 words</span></span>
+            <!-- Zoom controls in footer -->
+            <span class="status-item status-zoom">
+                <button class="zoom-btn" onclick="zoomOut('resume')" title="Zoom Out"><span class="iconify" data-icon="mdi:magnify-minus"></span></button>
+                <span id="zoom-level-resume">100%</span>
+                <button class="zoom-btn" onclick="zoomIn('resume')" title="Zoom In"><span class="iconify" data-icon="mdi:magnify-plus"></span></button>
+                <button class="zoom-btn" onclick="resetZoom('resume')" title="Reset Zoom"><span class="iconify" data-icon="mdi:magnify"></span></button>
+            </span>
             <span class="status-item" onclick="openShortcutModal()" style="cursor:pointer;"><span class="iconify" data-icon="mdi:keyboard"></span> Shortcuts</span>
         </div>
     </div>

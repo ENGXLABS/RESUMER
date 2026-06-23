@@ -78,6 +78,17 @@
     /* ATS-safe: strip all decorative backgrounds in print */
     .resume-page h2 {
         background: none !important;
+        border-left: 3px solid #000 !important;
+        color: #000 !important;
+    }
+    .resume-page h1+p {
+        background: none !important;
+        color: #000 !important;
+        border: 1px solid #ccc !important;
+    }
+    .resume-page h1+p a {
+        color: #000 !important;
+    }
     }
 
     /* Ensure all text and links print as pure black */
@@ -152,58 +163,58 @@
     text-decoration: underline;
 }
 
-/* ---------- Name (h1) — clean, ATS-safe, single line ---------- */
+/* ---------- Name (h1) — distinct style with accent underline ---------- */
 .resume-page h1 {
-    text-align: center;
-    font-size: 13pt;
-    font-weight: 600;
+    text-align: left;
+    font-size: 22pt;
+    font-weight: 700;
     text-transform: none;
-    letter-spacing: 0.5pt;
-    color: #0f172a;
+    letter-spacing: -0.5pt;
+    color: #1e3a5f;
     margin: 0;
-    padding: 0 0 3pt 0;
-    border-bottom: 1.5px solid #1a1a1a;
+    padding: 0 0 6pt 0;
+    border-bottom: 3px solid #2563eb;
     white-space: nowrap;
 }
 
-/* ---------- Contact row (p after h1) — clean centered ---------- */
+/* ---------- Contact row (p after h1) — styled info bar ---------- */
 .resume-page h1+p {
-    text-align: center;
-    margin: 4pt 0 0 0;
+    text-align: left;
+    margin: 6pt 0 0 0;
     font-size: 9pt;
-    letter-spacing: 0.3pt;
-    color: #334155;
-    background: none;
-    padding: 2pt 0;
-    border-radius: 0;
-    line-height: 1.4;
+    letter-spacing: 0.2pt;
+    color: #ffffff;
+    background: #1e3a5f;
+    padding: 4pt 8pt;
+    border-radius: 3px;
+    line-height: 1.5;
 }
 
 .resume-page h1+p a {
-    color: #334155;
+    color: #93c5fd;
     text-decoration: none;
     font-weight: 400;
 }
 
 .resume-page .headerInfo a {
-    color: #334155;
+    color: #93c5fd;
     text-decoration: none;
     font-weight: 400;
 }
 
-/* ---------- Section headers (h2) — ATS-safe subtle tint only ---------- */
+/* ---------- Section headers (h2) — strong left accent bar ---------- */
 .resume-page h2 {
     border-bottom: none;
-    border-left: none;
-    background: #f0f1f3;
-    padding: 3pt 6pt;
+    border-left: 4px solid #2563eb;
+    background: #eff6ff;
+    padding: 3pt 8pt;
     margin: 10pt 0 4pt 0;
     font-size: 10pt;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.2pt;
-    color: #0f172a;
-    border-radius: 2px;
+    color: #1e3a5f;
+    border-radius: 0 3px 3px 0;
 }
 
 /* ---------- Job title (h3) ---------- */
@@ -213,7 +224,7 @@
     align-items: baseline;
     font-size: 10.5pt;
     font-weight: 600;
-    color: #0f172a;
+    color: #1e3a5f;
     margin: 0;
     margin-left: 0 !important;
     padding: 0;
