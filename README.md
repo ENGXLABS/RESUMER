@@ -41,7 +41,7 @@ npm run dev    # starts live-server with auto-reload
 
 ## Project Structure
 
-```
+```text
 resumer/
 ├── index.html              # App entry point — no build step
 ├── app.js                  # Legacy monolith (progressively replaced by src/)
@@ -98,75 +98,6 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) for setup, coding standards, and the PR 
 ## License
 
 MIT — see [LICENSE](LICENSE).
-
-## Project Structure
-
-```
-resume-builder/
-├── README.md (this file)
-├── index.html (main web app)
-├── settings.css (web UI styles)
-├── .github/
-│   ├── copilot-instructions.md (router file)
-│   ├── resume-master-content.md
-│   └── instructions/
-│       ├── resume-instructions.md
-│       ├── cover-letter-instructions.md
-│       └── ats-checker-instructions.md
-└── components/
-    ├── resume/
-    │   ├── resume.css (resume formatting)
-    │   ├── resume-settings.css (print settings)
-    │   └── resume.md (content)
-    ├── cover-letter/
-    │   └── cover-letter.css
-    └── ats-checker/
-```
-
----
-
-## Getting Started
-
-1. **Start Local Server:**
-   ```bash
-   cd resume-builder
-   python3 -m http.server 8000
-   ```
-
-2. **Open in Browser:**
-   ```
-   http://localhost:8000
-   ```
-
-3. **Use the Tools:**
-   - **Resume Generator:** Edit and export tailored resumes
-   - **Cover Letter Generator:** Create personalized cover letters
-   - **ATS Checker:** Analyze and optimize your documents
-
----
-
-## Features
-
-### Resume Generator
-- ✅ Edit Mode with live preview
-- ✅ Company name for dynamic file naming
-- ✅ Download as Markdown
-- ✅ Print to PDF with custom margins
-- ✅ Auto-save drafts
-- ✅ ATS-optimized formatting
-
-### Cover Letter Generator
-- 📝 Four-paragraph structure
-- 📝 Human, direct tone
-- 📝 JD-tailored content
-- 📝 250-300 word limit
-- 📝 Professional formatting
-
-### ATS Score Checker
-- 🎯 Keyword matching analysis
-- 🎯 Formatting compatibility check
-- 🎯 Optimization recommendations
-- 🎯 Match percentage scoring
 
 ---
 

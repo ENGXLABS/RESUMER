@@ -113,32 +113,32 @@ Then produce the ATS MATCH REPORT with these sections:
 
 * Break into categories: Technical skills, Tools, Cloud and DevOps, Automation, Leadership, Domain, Additional keywords
 
-2. Keyword Coverage Table
+1. Keyword Coverage Table
 
 * A table with columns: Keyword | Found | Resume Evidence | Notes
 
-3. Strengths
+1. Strengths
 
 * Short list of strong matches
 
-4. Gaps
+1. Gaps
 
 * All missing high priority JD keywords
 
-5. Copy Paste Phrases (Exact Fixes)
+1. Copy Paste Phrases (Exact Fixes)
 
 * Resume ready lines to add missing keywords naturally
 * Suggest domain-specific strategic terms aligned with the JD's role type (e.g., for DevOps: observability, SLO, IaC; for Product: OKRs, roadmap, stakeholder alignment; for Engineering: system design, CI/CD, scalability)
 
-6. Resume Improvement Instructions
+1. Resume Improvement Instructions
 
 * Clear targeted steps only
 
-7. Updated Predicted Score
+1. Updated Predicted Score
 
 * Predicted new score after fixes, target 98% to 100%
 
-8. Offer Full Rewrite
+1. Offer Full Rewrite
 
 * Ask the user: "Would you like me to generate a complete resume rewrite optimized for this JD?"
 

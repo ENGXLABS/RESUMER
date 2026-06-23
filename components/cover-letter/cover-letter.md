@@ -32,4 +32,3 @@ Alex Rivera
     <a href="https://alexrivera.dev"><span class="iconify" data-icon="mdi:web"></span>Portfolio</a>
     <a href="https://linkedin.com/in/alexrivera"><span class="iconify" data-icon="mdi:linkedin"></span>LinkedIn</a>
 </div>
-

@@ -110,6 +110,7 @@ All templates use `@media print` rules to:
 - Force `font-size` to exact pt values for consistency
 
 When exporting to PDF via the browser's **Print → Save as PDF** dialog, use:
+
 - Paper: A4 or Letter
 - Margins: None (the CSS handles margins)
 - Scale: 100%
@@ -126,4 +127,4 @@ When exporting to PDF via the browser's **Print → Save as PDF** dialog, use:
 const THEMES = ['v1', 'v2', 'v3', 'v4'];
 ```
 
-4. Add a button/option in the Theme panel in `index.html`.
+1. Add a button/option in the Theme panel in `index.html`.

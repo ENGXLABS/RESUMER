@@ -68,15 +68,15 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 
 Once configured, ask your AI assistant:
 
-```
+```text
 @resumer tailor_resume job_description="Senior SDET at Acme Corp..."
 ```
 
-```
+```text
 @resumer ats_check job_description="..." resume_type=classic
 ```
 
-```
+```text
 @resumer improve_bullet bullet="Worked on automation framework" keywords="Selenium, CI/CD"
 ```
 

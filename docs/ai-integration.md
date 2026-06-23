@@ -19,7 +19,7 @@ ollama pull llama3
 ollama pull mistral
 ```
 
-3. In the app, go to **AI Settings** and set:
+1. In the app, go to **AI Settings** and set:
    - **Provider:** `ollama`
    - **Model:** `llama3` (or your pulled model)
    - **Base URL:** `http://localhost:11434`
@@ -102,7 +102,7 @@ AI configuration is saved to `localStorage` under the key `resumer-ai-config`:
 
 System prompts are stored in `src/features/ai/prompts/`. Each file is a plain text template:
 
-```
+```text
 src/features/ai/prompts/
 ├── improve-bullet.txt
 ├── write-summary.txt

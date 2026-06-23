@@ -27,6 +27,7 @@ components/        # Resume + cover letter markdown + CSS themes
 ## Profile Schema
 
 User data lives in `profile.json` (localStorage key: `resumer-profile`). See `profile.sample.json` for the full schema. Key sections:
+
 - `identity` — name, email, LinkedIn, GitHub, portfolio
 - `experience[]` — roles with bullets
 - `skills.core[]` — thematic skill groups

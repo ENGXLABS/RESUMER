@@ -65,7 +65,7 @@ Your profile is saved to `localStorage` under the key `resumer-profile`.
 
 ## Project Structure
 
-```
+```text
 resumer/
 ├── index.html              # Entry point — pure static HTML
 ├── app.js                  # Main IIFE — wires up all UI interactions

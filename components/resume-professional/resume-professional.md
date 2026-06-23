@@ -1,6 +1,6 @@
 # ALEX RIVERA
 
-+1 (555) 000-0000 | alex.rivera@example.com | [linkedin.com/in/alexrivera](https://linkedin.com/in/alexrivera)
++1 (555) 000-0000 | <alex.rivera@example.com> | [linkedin.com/in/alexrivera](https://linkedin.com/in/alexrivera)
 
 ## Professional Summary
 

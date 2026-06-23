@@ -19,23 +19,29 @@ ${input:jobDescription:Paste the full job description here}
 Return a report with these sections:
 
 ### 1. ATS Score Estimate
+
 - Estimated score: `XX/100`
 - Key reason for score
 
 ### 2. Critical Gaps (must-have keywords missing)
+
 | Keyword | Suggested Section | Insertion Hint |
 |---------|------------------|----------------|
 
 ### 3. Important Keywords (nice-to-have, not present)
+
 List keywords with the resume section where they'd fit best.
 
 ### 4. Weak Placements
+
 List keywords that only appear in the Skills section. For each, suggest an experience bullet where they can be added with context.
 
 ### 5. Strengths Found
+
 List keywords and phrases already well-placed in the resume.
 
 ### 6. Top 3 Quick Wins
+
 Specific, actionable edits ranked by ATS score impact. Include the exact sentence to add and where.
 
 ## Rules

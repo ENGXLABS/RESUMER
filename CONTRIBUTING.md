@@ -37,7 +37,7 @@ Edit `profile.json` with your information. This file is gitignored — your pers
 
 ## Project Structure
 
-```
+```text
 resumer/
 ├── index.html              # Main entry point
 ├── app.css                 # Global styles
@@ -76,6 +76,7 @@ resumer/
 ### Reporting Bugs
 
 Use the [Bug Report template](.github/ISSUE_TEMPLATE/bug_report.md). Include:
+
 - Browser and OS
 - Steps to reproduce
 - Expected vs actual behaviour
@@ -103,7 +104,7 @@ Look for issues labelled `good first issue`. These are intentionally small and w
 
 ## Commit Message Format
 
-```
+```text
 type(scope): short description
 
 Types: feat, fix, docs, style, refactor, test, chore
@@ -132,6 +133,7 @@ Examples:
 ## Adding a New Keyword Library
 
 1. Create `src/data/keywords/your-industry.json`:
+
 ```json
 {
   "name": "Your Industry",
@@ -145,9 +147,10 @@ Examples:
   }
 }
 ```
-2. Register it in `src/data/keywords/index.js`
-3. Add a test in `src/features/ats.test.js`
-4. Document it in `docs/ats-engine.md`
+
+1. Register it in `src/data/keywords/index.js`
+2. Add a test in `src/features/ats.test.js`
+3. Document it in `docs/ats-engine.md`
 
 ---
 

@@ -6,7 +6,7 @@ The ATS (Applicant Tracking System) engine scores how well your resume matches a
 
 ## Architecture Overview
 
-```
+```text
 Job Description Text
        │
        ▼
@@ -116,24 +116,31 @@ console.log(result.missingDetails);  // array of unmatched JD keywords
 ## Scoring Phases
 
 ### 1. Exact Match
+
 Compares normalised keyword strings directly. Weight: highest.
 
 ### 2. Synonym Match
+
 Uses `getVariations()` to check if a JD keyword's synonym appears in the resume. Weight: slightly lower than exact.
 
 ### 3. Partial Match
+
 Multi-word JD phrases where individual component words appear in the resume. Weight: lower.
 
 ### 4. Context / Placement Score
+
 Keywords found in the **Professional Experience** section receive a higher context score than those found only in Skills or Education.
 
 ### 5. Seniority Alignment
+
 Compares years-of-experience mentions between JD and resume using `extractYears()` heuristics. A senior JD matched against a senior resume profile receives a bonus.
 
 ### 6. Importance Boost
+
 Keywords flagged as `critical` or `high` importance contribute an additional `importanceBoost` to the final score.
 
 ### 7. Weak Placement Penalty
+
 If a keyword is matched only in the header or certification section (low-signal areas), a small `weakPlacementPenalty` is applied.
 
 ---

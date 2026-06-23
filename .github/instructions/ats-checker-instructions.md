@@ -25,6 +25,7 @@
 **Profile Data Location:** `profile.json` (localStorage key: `resumer-profile`)
 
 **Workflow Before Generating:**
+
 1. Read `profile.json` first
 2. Identify relevant work experiences for the JD
 3. Extract exact achievements and metrics
@@ -46,46 +47,55 @@ Your core objective is to analyze any provided job description and resume, extra
 This ATS checker operates as **Module 5** within an 8-module Complete Resume Engine ecosystem:
 
 ### Module 1: JD Parser
+
 - **Input:** Raw job description text
 - **Tasks:** Normalize text, extract sections (title, responsibilities, required skills, preferred skills, company signals, location, seniority)
 - **Output:** Structured JD JSON with job_title, company, location, seniority, responsibilities[], required_skills[], preferred_skills[], keywords_raw[]
 
 ### Module 2: Keyword Extractor and Prioritizer
+
 - **Input:** JD JSON
 - **Tasks:** Classify keywords into categories, score each keyword 0-1 by importance based on JD repetition/placement/rarity
 - **Output:** Top 30 prioritized keywords, top 10 high-impact keywords with importance scores
 
 ### Module 3: Master Resume Retriever
+
 - **Input:** Candidate master profile (canonical resume)
 - **Tasks:** Load master resume content, identify skills/achievements/metrics/projects, tag each item with canonical keywords
 - **Output:** Master resume JSON with tagged content
 
 ### Module 4: Tailoring Engine
+
 - **Input:** JD keywords prioritized, Master Resume content
 - **Tasks:** Decide insertion points, propose natural keyword insertions, reorder/rewrite bullets to match JD priority
 - **Output:** Tailored resume in Markdown + Word-friendly plain text
 
 ### Module 5: ATS Score Checker (THIS MODULE)
+
 - **Input:** Tailored resume draft, JD keywords (prioritized)
 - **Tasks:** Compute multi-component scoring, produce keyword analysis, recommend minimal edits to reach 95%
 - **Output:** ATS Match Score (0-100), score breakdown, keyword analysis, auto-patch recommendations, JSON report
 
 ### Module 6: Cover Letter Generator
+
 - **Input:** JD JSON, Master Cover Letter Spec, tailored resume highlights
 - **Tasks:** Generate 250-300 word cover letter in the user's authentic voice using 4-paragraph structure
 - **Output:** Cover letter Markdown
 
 ### Module 7: Output Formatter
+
 - **Input:** All generated content
 - **Tasks:** Format outputs for different use cases (Markdown, plain text, LinkedIn notes)
 - **Output:** Final artifacts (MD resume, plain text resume, cover letter, ATS report)
 
 ### Module 8: Self Audit and Reporting
+
 - **Input:** All outputs
 - **Tasks:** Run 7-point audit checklist, produce human-readable ATS report
 - **Output:** Audit results, keywords_added and rationale
 
 **Integration Points for Module 5:**
+
 - Receives prioritized keywords from Module 2 (Keyword Extractor)
 - Sends score report and recommendations to Module 4 (Tailoring Engine) for auto-patch
 - Provides data to Module 8 (Self Audit) for final validation
@@ -102,6 +112,7 @@ This ATS checker operates as **Module 5** within an 8-module Complete Resume Eng
 **Parse the job description thoroughly.**
 
 Identify all:
+
 - Hard skills
 - Technical skills
 - Tools, technologies
@@ -112,6 +123,7 @@ Identify all:
 - Seniority indicators
 
 **Categorize keywords into:**
+
 - **Technical Skills** (Java, Python, Selenium, Rest Assured, Appium, etc.)
 - **Tools & Frameworks** (Jenkins, GitHub Actions, Docker, Kubernetes, JUnit, TestNG, etc.)
 - **Domain/Industry Terminology** (Fintech, Insurance, E-commerce, Microservices, APIs, etc.)
@@ -125,32 +137,38 @@ Identify all:
 Each extracted keyword must be assigned an **importance score from 0 to 1** based on three factors:
 
 **1. JD Repetition (40% weight)**
+
 - Mentioned 1 time: 0.3
 - Mentioned 2 times: 0.6
 - Mentioned 3+ times: 1.0
 
 **2. Placement (35% weight)**
+
 - In job title or "must have" section: 1.0
 - In required skills section: 0.8
 - In preferred/nice-to-have section: 0.5
 - Only in responsibilities: 0.3
 
 **3. Rarity Score (25% weight)**
+
 - Common keywords (e.g., "testing", "qa"): 0.3
 - Specific tools/frameworks (e.g., "selenium", "junit"): 0.7
 - Rare/unique combinations (e.g., "api contract testing", "quality as code"): 1.0
 
 **Final Importance Score Formula:**
+
 ```
 Importance Score = (Repetition × 0.4) + (Placement × 0.35) + (Rarity × 0.25)
 ```
 
 **Priority Tiers:**
+
 - **High Impact (0.75-1.0):** Top 10 keywords that are critical for ATS matching
 - **Medium Impact (0.5-0.74):** Important keywords that strengthen match
 - **Low Impact (0.0-0.49):** Nice-to-have keywords, lower priority
 
 **Example:**
+
 - "Java" mentioned 3 times in required skills → (1.0 × 0.4) + (0.8 × 0.35) + (0.3 × 0.25) = **0.755** (High Impact)
 - "API contract testing" mentioned 2 times in must-have → (0.6 × 0.4) + (1.0 × 0.35) + (1.0 × 0.25) = **0.840** (High Impact)
 - "Agile" mentioned 1 time in responsibilities → (0.3 × 0.4) + (0.3 × 0.35) + (0.3 × 0.25) = **0.300** (Low Impact)
@@ -160,6 +178,7 @@ Importance Score = (Repetition × 0.4) + (Placement × 0.35) + (Rarity × 0.25)
 Use the following comprehensive pattern-based extraction:
 
 **Pattern Categories:**
+
 1. **Languages & Technologies:** Java, J2EE, Python, JavaScript, TypeScript, C++, C#, SQL, NoSQL
 2. **Testing Frameworks:** Selenium, WebDriver, Grid, Appium, Rest Assured, JUnit, TestNG, Cucumber, Pytest, Cypress, Playwright, Karate, SoapUI, Postman, Protractor, WDIO, Coded UI, TestComplete
 3. **CI/CD & DevOps:** Jenkins, GitHub Actions, GitLab CI, Azure DevOps, CI/CD, Continuous Integration, Continuous Delivery, Continuous Testing, Pipeline, Bamboo, Travis
@@ -173,6 +192,7 @@ Use the following comprehensive pattern-based extraction:
 11. **Databases:** PostgreSQL, MongoDB, MySQL, SQL Server, Database, Data Validation, Oracle
 
 **Multi-Word Phrases to Extract:**
+
 - test automation, qa strategy, automation framework, ci/cd pipeline
 - quality assurance, rest api, api testing, performance testing
 - regression testing, integration testing, data validation, test coverage
@@ -181,6 +201,7 @@ Use the following comprehensive pattern-based extraction:
 - devops collaboration, continuous testing, build verification, quality standards
 
 **Extraction Rules:**
+
 - Use case-insensitive regex patterns for all keywords
 - Count keyword frequency (how many times each appears)
 - Extract both exact matches and multi-word phrases
@@ -214,6 +235,7 @@ Assign each keyword an **importance score (0.0 to 1.0)** based on:
 **Total Importance Score** = Repetition + Placement + Rarity (max 1.0)
 
 **Priority Tiers:**
+
 - **Critical** (0.8-1.0): Top 10 high-impact keywords - must match
 - **High** (0.6-0.79): Top 20 keywords - strongly recommended
 - **Medium** (0.4-0.59): Secondary keywords - good to have
@@ -255,6 +277,7 @@ Map variations to canonical keywords using internal synonym dictionary. Each row
 | **smoke testing** | smoke test, sanity testing, sanity test |
 
 **Normalization Rules:**
+
 1. When extracting from JD, normalize all variations to canonical form internally
 2. When displaying results, show the exact term used in JD (preserve original)
 3. When matching against resume, check all variations for each canonical keyword
@@ -268,6 +291,7 @@ Map variations to canonical keywords using internal synonym dictionary. Each row
 **Compare the resume against the extracted keywords.**
 
 Calculate **ATS Match Score** using:
+
 - **Skill Match Rate** (% of JD skills found in resume)
 - **Keyword Frequency** (how often keywords appear)
 - **Contextual Relevance** (keywords used in proper context)
@@ -278,34 +302,38 @@ Calculate **ATS Match Score** using:
 **Compute 4 Scoring Components with Weak Placement Detection:**
 
 **1. Skill Match Rate (40% weight)**
-   - Formula: `(Matched Keywords / Total JD Keywords) × 100`
-   - Use 3-level fuzzy matching for keyword detection
-   - Weight by keyword importance scores (0-1 scale)
-   - Exact match: keyword importance × 1.0
-   - Synonym match: keyword importance × 0.9
-   - Partial match: keyword importance × 0.7
+
+- Formula: `(Matched Keywords / Total JD Keywords) × 100`
+- Use 3-level fuzzy matching for keyword detection
+- Weight by keyword importance scores (0-1 scale)
+- Exact match: keyword importance × 1.0
+- Synonym match: keyword importance × 0.9
+- Partial match: keyword importance × 0.7
 
 **2. Keyword Frequency (20% weight)**
-   - Count how many times each matched keyword appears in resume
-   - Higher frequency = better contextual integration
-   - Formula: `AVG(keyword_frequency_in_resume) / AVG(keyword_frequency_in_JD) × 100`
-   - Cap at 3 mentions to avoid over-optimization detection
+
+- Count how many times each matched keyword appears in resume
+- Higher frequency = better contextual integration
+- Formula: `AVG(keyword_frequency_in_resume) / AVG(keyword_frequency_in_JD) × 100`
+- Cap at 3 mentions to avoid over-optimization detection
 
 **3. Context Match (30% weight) - WITH WEAK PLACEMENT DETECTION**
-   - **Strong placement:** Keyword in Experience bullets = 1.0 points
-   - **Medium placement:** Keyword in Summary/Projects = 0.7 points
-   - **Weak placement:** Keyword only in Skills header = 0.3 points ⚠️
-   - Formula: `(Weighted placements / Total keywords) × 100`
-   - **FLAG ALL WEAK PLACEMENTS:** Any keyword appearing ONLY in Skills section without context in experience/projects
-   - **Weak Placement Penalty:** Reduce keyword's contribution by 70% if only in Skills
-   - **Auto-Patch Target:** Move weak keywords to experience bullets with natural context
+
+- **Strong placement:** Keyword in Experience bullets = 1.0 points
+- **Medium placement:** Keyword in Summary/Projects = 0.7 points
+- **Weak placement:** Keyword only in Skills header = 0.3 points ⚠️
+- Formula: `(Weighted placements / Total keywords) × 100`
+- **FLAG ALL WEAK PLACEMENTS:** Any keyword appearing ONLY in Skills section without context in experience/projects
+- **Weak Placement Penalty:** Reduce keyword's contribution by 70% if only in Skills
+- **Auto-Patch Target:** Move weak keywords to experience bullets with natural context
 
 **4. Seniority Alignment (10% weight)**
-   - Extract JD seniority level from title/requirements (Junior: 0-2 years, Mid: 3-5 years, Senior: 6-10 years, Lead: 10+ years)
-   - Calculate resume experience from oldest job date to present
-   - Compare leadership terms (Lead, Manager, Architect) vs JD expectations
-   - Match: 100 points, Off by 1 level: 70 points, Off by 2+: 40 points
-   - Mismatch detection: Flag if JD says "10+ years" but resume shows 5 years
+
+- Extract JD seniority level from title/requirements (Junior: 0-2 years, Mid: 3-5 years, Senior: 6-10 years, Lead: 10+ years)
+- Calculate resume experience from oldest job date to present
+- Compare leadership terms (Lead, Manager, Architect) vs JD expectations
+- Match: 100 points, Off by 1 level: 70 points, Off by 2+: 40 points
+- Mismatch detection: Flag if JD says "10+ years" but resume shows 5 years
 
 **Final ATS Score Calculation:**
 
@@ -342,6 +370,7 @@ Final Score = MIN(100, Base Score + Importance Boost - Weak Placement Penalty)
    - Example: "kubernetes" matches "k8s"
 
 **Match Score Contribution:**
+
 ```
 Total Match Score = SUM(match_type_score × keyword_importance) / SUM(keyword_importance)
 ```
@@ -349,6 +378,7 @@ Total Match Score = SUM(match_type_score × keyword_importance) / SUM(keyword_im
 ---
 
 **Score Interpretation:**
+
 - **95-100:** Excellent match, resume highly aligned with JD ✅
 - **90-94:** Strong match, minor critical keywords missing
 - **80-89:** Good match, improvements needed for critical keywords
@@ -448,6 +478,7 @@ Auto-Patch Recommendations:
 > "Built end-to-end test automation framework using **Selenium** and **Rest Assured**, integrated with **Jenkins CI/CD** for continuous testing of **microservices** and **REST APIs**"
 
 **Insertion Guidelines:**
+
 - Maximum 3-4 keywords per sentence to maintain readability
 - Always include context (what you did, how you used the tool, what result)
 - Prefer active voice with metrics ("Reduced deployment time 40% using **Docker** containerization")
@@ -463,6 +494,7 @@ Auto-Patch Recommendations:
 Always respond with the following structure:
 
 **1. ATS Match Score (0–100)**
+
 - Current score: XX/100
 - Score breakdown by 4 components:
   - Skill Match Rate: XX/40
@@ -473,6 +505,7 @@ Always respond with the following structure:
 - Weak Placement Penalty: -XX
 
 **2. Extracted Keywords (categorized)**
+
 - Technical Skills: [list]
 - Tools & Frameworks: [list]
 - Domain/Industry: [list]
@@ -480,22 +513,26 @@ Always respond with the following structure:
 - Soft Skills: [list]
 
 **3. Keywords Found in Resume**
+
 - ✅ Exact Matches (XX): [green badges]
 - ⚠️ Partial Matches (XX): [yellow badges]
 - List with placement context (Summary, Experience, Skills)
 
 **4. Missing or Weak Keywords**
+
 - ❌ Critical Missing (High Impact 0.75-1.0): [red badges]
 - 🔶 Medium Missing (Medium Impact 0.5-0.74): [orange badges]
 - ⚠️ Weak Placements (only in Skills section): [keyword → section needed]
 
 **5. Auto-Patch Recommendations**
 For each missing keyword, provide:
+
 - **[Section] → [EXACT SENTENCE with **KEYWORD** bolded]**
 - Rationale: Why this placement and phrasing
 - Projected Impact: +X points to ATS score
 
 Example:
+
 ```
 [Summary] → "...with expertise in **Kubernetes** orchestration and **Azure DevOps** CI/CD pipelines"
 Rationale: High-impact keywords (0.85, 0.78) needed in summary for early ATS detection
@@ -503,10 +540,12 @@ Projected Impact: +8 points
 ```
 
 **6. Improved Resume Sections (Optional)**
+
 - Show before/after comparison if major rewrite needed
 - Highlight added keywords in **bold**
 
 **7. Final Projected Score**
+
 - Projected score after all fixes: XX/100
 - Expected improvement: +XX points
 - Confirmation: ✅ Target >= 95% achieved OR ⚠️ Additional changes needed
@@ -646,30 +685,35 @@ Provide structured JSON for programmatic consumption:
 Execute all checks automatically and flag any failures:
 
 #### ✅ 1. Single Column Layout
+
 - [ ] Resume uses single-column format throughout
 - [ ] No tables, text boxes, or multi-column sections
 - [ ] All content flows top-to-bottom linearly
 - **Why:** ATS parsers fail on multi-column layouts and tables
 
 #### ✅ 2. Top 5 JD Keywords in Critical Sections
+
 - [ ] At least 3 of top 5 keywords appear in Professional Summary
 - [ ] At least 4 of top 5 keywords appear in Technical Skills
 - [ ] All top 5 keywords appear somewhere in Experience bullets
 - **Why:** ATS algorithms weight early sections higher; critical keywords must appear multiple times
 
 #### ✅ 3. Experience Bullets Contain JD Keywords
+
 - [ ] Every experience role has at least 2 bullets with JD keywords
 - [ ] No keyword appears ONLY in Skills section (check for weak placements)
 - [ ] Keywords used in context (not just listed)
 - **Why:** Weak placements (keywords only in Skills) score 70% lower in ATS
 
 #### ✅ 4. Summary Word Count (60-100 words)
+
 - [ ] Professional Summary is 60-100 words
 - [ ] Contains years of experience, domain, and 3-5 critical keywords
 - [ ] Written in paragraph form (not bullets)
 - **Why:** ATS expects summary at top with key qualifications condensed
 
 #### ✅ 5. No Banned Items
+
 - [ ] No tables, images, charts, or graphics
 - [ ] No headers/footers with content
 - [ ] No text boxes or columns
@@ -677,6 +721,7 @@ Execute all checks automatically and flag any failures:
 - **Why:** These elements break ATS parsers and lose content
 
 #### ✅ 6. ATS Score >= 95%
+
 - [ ] Final calculated score is 95% or higher
 - [ ] All high-impact keywords (0.75-1.0) are matched
 - [ ] No more than 2 weak placements remain
@@ -684,6 +729,7 @@ Execute all checks automatically and flag any failures:
 - **Why:** Scores below 95% may not pass initial ATS screening
 
 #### ✅ 7. Human-Readable Report
+
 - [ ] Output includes ATS score with breakdown
 - [ ] Shows matched keywords (green) and missing keywords (red)
 - [ ] Lists weak placements with fix recommendations
@@ -698,12 +744,14 @@ Execute all checks automatically and flag any failures:
 ### 6. Language Rules
 
 **Maintain Resume Integrity:**
+
 - Never break the resume's tone or writing style
 - Avoid robotic phrasing and keyword stuffing
 - Maintain clarity, credibility, and proof of performance
 - Ensure every recommended addition strengthens the resume
 
 **Writing Quality Standards:**
+
 - Use active voice and strong action verbs
 - Quantify achievements where possible
 - Keep bullets concise (1-2 lines max)
@@ -715,6 +763,7 @@ Execute all checks automatically and flag any failures:
 ### 6. Constraints
 
 **DO NOT:**
+
 - Alter achievements, metrics, or experience authenticity
 - Add skills the user does not possess
 - Use tables, icons, or complex formatting
@@ -722,6 +771,7 @@ Execute all checks automatically and flag any failures:
 - Change factual information (dates, company names, titles)
 
 **ALWAYS:**
+
 - Keep the resume ATS-friendly (simple formatting)
 - Preserve the user's authentic voice
 - Ensure keywords fit naturally in context
@@ -732,26 +782,31 @@ Execute all checks automatically and flag any failures:
 ## Workflow
 
 ### Step 1: Receive Job Description
+
 - Extract and categorize all keywords
 - Identify must-have vs. nice-to-have requirements
 - Note seniority level and years of experience required
 
 ### Step 2: Analyze Resume
+
 - Parse all sections (Summary, Experience, Skills, Projects, Education)
 - Extract existing keywords
 - Calculate current ATS match score
 
 ### Step 3: Gap Analysis
+
 - Compare JD keywords vs Resume keywords
 - Identify missing critical keywords
 - Find opportunities to naturally integrate missing terms
 
 ### Step 4: Optimization Recommendations
+
 - Suggest specific additions with exact placement
 - Provide before/after examples
 - Show how keywords fit naturally
 
 ### Step 5: Validation
+
 - Recalculate estimated ATS score
 - Ensure 95%+ match target
 - Verify natural language quality

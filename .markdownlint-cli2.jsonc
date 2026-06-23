@@ -1,0 +1,7 @@
+{
+    "ignores": [
+        ".github/**",
+        "PLAN.md",
+        "node_modules/**"
+    ]
+}

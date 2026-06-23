@@ -23,15 +23,18 @@ Identify the **primary domain** that defines this role's core output. A QA Manag
 ## Role Categories and Routing
 
 ### Software Engineering / Application Development
+
 **Frontend, Backend, Full-Stack, Mobile, Embedded**
 
 **Keywords to look for:**
+
 - Software Engineer, Software Developer, Frontend Developer, Backend Developer
 - Full-Stack, Mobile Developer, iOS, Android
 - API development, system design, code review, feature delivery
 - JavaScript, TypeScript, Python, Java, Go, Rust, Swift, Kotlin, C#, C++
 
 **Action:**
+
 - Resume: `components/resume/resume.md`
 - Focus: Technical projects, system design, languages and frameworks, shipping features with impact
 
@@ -40,12 +43,14 @@ Identify the **primary domain** that defines this role's core output. A QA Manag
 ### DevOps / Platform Engineering / SRE / Cloud Infrastructure
 
 **Keywords to look for:**
+
 - DevOps Engineer, Platform Engineer, Site Reliability Engineer, Cloud Engineer
 - Infrastructure, Kubernetes, Docker, Terraform, Helm, Ansible
 - CI/CD, GitOps, observability, incident management, on-call
 - AWS, Azure, GCP, reliability, SLA/SLO
 
 **Action:**
+
 - Resume: `components/resume/resume.md`
 - Focus: Infrastructure automation, reliability metrics, tooling, deployment pipelines
 
@@ -54,12 +59,14 @@ Identify the **primary domain** that defines this role's core output. A QA Manag
 ### QA / Test Automation / SDET / Quality Engineering
 
 **Keywords to look for:**
+
 - Quality Assurance, QA Engineer, QA Manager, QA Lead, SDET
 - Software Development Engineer in Test, Test Automation Engineer
 - Test strategy, test planning, manual testing, automation frameworks
 - Selenium, Appium, Cypress, Playwright, REST Assured, JMeter, Postman
 
 **Action:**
+
 - Resume: `components/resume/resume.md`
 - Focus: QA strategy, automation coverage, frameworks, quality processes, CI/CD testing
 
@@ -68,12 +75,14 @@ Identify the **primary domain** that defines this role's core output. A QA Manag
 ### Data Engineering / Analytics Engineering
 
 **Keywords to look for:**
+
 - Data Engineer, Analytics Engineer, Data Platform Engineer
 - ETL, ELT, data pipelines, Spark, Kafka, Airflow, dbt, Flink
 - Data warehousing, BigQuery, Snowflake, Redshift, Delta Lake
 - SQL, Python, data quality, data modelling
 
 **Action:**
+
 - Resume: `components/resume/resume.md`
 - Focus: Pipeline reliability, data scale, tooling, data quality, platform impact
 
@@ -82,12 +91,14 @@ Identify the **primary domain** that defines this role's core output. A QA Manag
 ### AI / ML / LLM Engineering
 
 **Keywords to look for:**
+
 - AI Engineer, ML Engineer, LLM Engineer, GenAI, AI-Native
 - Prompt engineering, RAG, vector stores, embeddings, fine-tuning
 - OpenAI, Claude, Hugging Face, LangChain, LlamaIndex, MCP
 - Model evaluation, inference optimization, MLOps
 
 **Action:**
+
 - Resume: `components/resume-ai/resume-ai.md`
 - Focus: AI tooling, model work, prompt engineering, AI-native systems
 
@@ -96,12 +107,14 @@ Identify the **primary domain** that defines this role's core output. A QA Manag
 ### Data Science / Machine Learning Research
 
 **Keywords to look for:**
+
 - Data Scientist, ML Researcher, Applied Scientist
 - Machine learning, statistical modelling, experimentation, A/B testing
 - TensorFlow, PyTorch, scikit-learn, Jupyter, R
 - Predictive models, feature engineering, model deployment
 
 **Action:**
+
 - Resume: `components/resume-ai/resume-ai.md`
 - Focus: Models, experiments, impact on business metrics, methodology
 
@@ -110,12 +123,14 @@ Identify the **primary domain** that defines this role's core output. A QA Manag
 ### Product Management / Product Owner
 
 **Keywords to look for:**
+
 - Product Manager, Technical Product Manager, Product Owner, Product Lead
 - Product strategy, roadmap, prioritization, user research
 - OKRs, PRD, product requirements, go-to-market, discovery
 - Stakeholder management, cross-functional delivery, metrics
 
 **Action:**
+
 - Resume: `components/resume-tpm/resume-tpm.md`
 - Focus: Product vision, delivery outcomes, stakeholder alignment, data-driven decisions
 
@@ -124,12 +139,14 @@ Identify the **primary domain** that defines this role's core output. A QA Manag
 ### Program Management / Project Management / Scrum Master / Agile Coaching
 
 **Keywords to look for:**
+
 - Technical Program Manager, TPM, Program Manager, Project Manager
 - Scrum Master, Agile Coach, Release Manager, Delivery Manager
 - Sprint planning, dependency management, cross-functional alignment
 - JIRA, Confluence, risk management, stakeholder communication
 
 **Action:**
+
 - Resume: `components/resume-tpm/resume-tpm.md`
 - Focus: Delivery execution, cross-team coordination, process improvement, program metrics
 
@@ -138,12 +155,14 @@ Identify the **primary domain** that defines this role's core output. A QA Manag
 ### Business Analysis / Solutions Architecture
 
 **Keywords to look for:**
+
 - Business Analyst, Solutions Architect, Systems Analyst, Enterprise Architect
 - Requirements gathering, BRD, FRD, process mapping, gap analysis
 - Stakeholder workshops, documentation, BPMN, UML
 - Integration design, technical specifications, as-is/to-be mapping
 
 **Action:**
+
 - Resume: `components/resume-tpm/resume-tpm.md`
 - Focus: Requirements, process analysis, cross-functional communication, solution design
 
@@ -152,12 +171,14 @@ Identify the **primary domain** that defines this role's core output. A QA Manag
 ### Security Engineering / Application Security / Cybersecurity
 
 **Keywords to look for:**
+
 - Security Engineer, AppSec, Application Security, InfoSec
 - Penetration testing, SAST, DAST, threat modelling, vulnerability management
 - OWASP, WAF, SIEM, zero-trust, compliance (SOC2, ISO 27001, GDPR)
 - Secure SDLC, security review, bug bounty
 
 **Action:**
+
 - Resume: `components/resume/resume.md`
 - Focus: Security practices, tooling, compliance outcomes, risk reduction
 
@@ -166,12 +187,14 @@ Identify the **primary domain** that defines this role's core output. A QA Manag
 ### Engineering Management / Technical Leadership
 
 **Keywords to look for:**
+
 - Engineering Manager, VP Engineering, Head of Engineering, Director of Technology
 - Tech Lead, Staff Engineer, Principal Engineer
 - People management, hiring, performance, team building, org design
 - Technical strategy, architecture decisions, engineering culture
 
 **Action:**
+
 - Resume: `components/resume/resume.md` (technical-first roles) or `components/resume-tpm/resume-tpm.md` (program-heavy leadership)
 - Focus: Team growth, org impact, technical strategy, hiring, delivery at scale
 
@@ -190,12 +213,14 @@ If the JD spans multiple categories (e.g., a QA Manager role that also expects h
 ## Common Mistakes to Avoid
 
 ❌ **DO NOT:**
+
 - Assume job type without reading the full JD
 - Use the TPM resume for hands-on engineering or QA roles
 - Use the primary technical resume for product/program/BA roles without adjustment
 - Ignore the responsibilities section when determining type
 
 ✅ **DO:**
+
 - Read the complete JD including title, responsibilities, and requirements
 - Identify the primary domain — what 70%+ of the work is
 - Choose the template that best matches that domain

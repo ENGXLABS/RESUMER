@@ -58,10 +58,12 @@ Java, Kotlin, Python, JavaScript, Selenium WebDriver, Appium, Playwright, Cypres
 ## Projects
 
 **Open Source ATS Resume Scorer** | GitHub — Personal Project
+
 - Built a browser-based ATS scoring tool that parses job descriptions and scores resumes against extracted keywords in real time using pure JavaScript
 - Achieved 91% keyword extraction accuracy validated against 20 real job postings from LinkedIn and Indeed
 
 **Mobile Test Framework — Internal Tool**
+
 - Designed a reusable Appium framework for cross-platform mobile testing with automatic device selection, retry logic, and Allure reporting integration
 - Adopted by 4 teams, reducing new test setup time from 2 days to 2 hours
 
