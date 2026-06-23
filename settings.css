@@ -752,33 +752,39 @@
 .status-zoom {
     display: flex !important;
     align-items: center;
-    gap: 2px;
-    padding: 0 4px;
+    gap: 1px;
+    padding: 0 2px;
 }
 
 .zoom-btn {
     background: transparent;
     border: none;
-    color: var(--text-secondary);
+    color: var(--text-on-header-muted);
     cursor: pointer;
-    padding: 2px 4px;
+    padding: 1px 3px;
     border-radius: 3px;
     line-height: 1;
     display: inline-flex;
     align-items: center;
-    font-size: 13px;
+    font-size: 11px;
+    height: 18px;
     transition: color var(--duration-fast), background var(--duration-fast);
 }
 
 .zoom-btn:hover {
-    color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.zoom-btn .iconify {
+    font-size: 11px;
 }
 
 #zoom-level-resume {
     font-size: 10px;
     font-weight: 600;
-    min-width: 30px;
+    min-width: 28px;
     text-align: center;
-    color: var(--text-secondary);
+    color: var(--text-on-header-muted);
+    padding: 0 2px;
 }

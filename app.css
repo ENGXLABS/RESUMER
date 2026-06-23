@@ -1474,41 +1474,56 @@ body {
     justify-content: space-between;
     gap: 8px;
     padding: 6px 12px;
-    border-bottom: 1px solid var(--color-border, #e2e8f0);
-    background: var(--surface-card, #fff);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background: var(--surface-header);
     flex-shrink: 0;
 }
-.cl-style-group { display: flex; gap: 2px; }
-.cl-style-btn {
-    padding: 4px 10px;
-    border: 1px solid var(--color-border, #e2e8f0);
-    border-radius: 5px;
-    background: var(--surface-card, #fff);
-    color: var(--color-text, #1e293b);
-    font-size: 0.78rem;
-    cursor: pointer;
-    transition: background .12s, border-color .12s;
+.cl-style-group {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 3px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.06);
 }
-.cl-style-btn:hover  { background: var(--surface-hover, #f1f5f9); border-color: var(--color-primary, #6366f1); }
-.cl-style-btn.active { background: var(--color-primary, #6366f1); border-color: var(--color-primary, #6366f1); color: #fff; }
+.cl-style-btn {
+    padding: 5px 12px;
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--text-on-header-muted);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    font-family: var(--font-sans);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-default);
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    letter-spacing: 0.3px;
+}
+.cl-style-btn:hover  { background: rgba(255, 255, 255, 0.08); color: #ffffff; }
+.cl-style-btn.active { background: var(--brand-gradient); color: white; box-shadow: 0 2px 8px rgba(79, 109, 245, 0.4); }
 
 /* ── Word count badge ────────────────────────────────────── */
 .cl-word-count-badge {
     display: flex;
     align-items: center;
     gap: 4px;
-    font-size: 0.78rem;
-    color: var(--color-text-muted, #64748b);
-    background: var(--surface-hover, #f1f5f9);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--text-on-header-muted);
     padding: 3px 10px;
     border-radius: 99px;
-    border: 1px solid var(--color-border, #e2e8f0);
-    transition: background .2s, color .2s, border-color .2s;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.06);
+    transition: color .2s, background .2s, border-color .2s;
 }
-.cl-word-count-badge.good   { color: #16a34a; background: #f0fdf4; border-color: #bbf7d0; }
-.cl-word-count-badge.amber  { color: #b45309; background: #fffbeb; border-color: #fde68a; }
-.cl-word-count-badge.red    { color: #dc2626; background: #fef2f2; border-color: #fecaca; }
-.cl-word-count-badge.low    { color: #7c3aed; background: #faf5ff; border-color: #e9d5ff; }
+.cl-word-count-badge.good   { color: #4ade80; border-color: rgba(74, 222, 128, 0.3); background: rgba(74, 222, 128, 0.08); }
+.cl-word-count-badge.amber  { color: #fbbf24; border-color: rgba(251, 191, 36, 0.3); background: rgba(251, 191, 36, 0.08); }
+.cl-word-count-badge.red    { color: #f87171; border-color: rgba(248, 113, 113, 0.3); background: rgba(248, 113, 113, 0.08); }
+.cl-word-count-badge.low    { color: #a78bfa; border-color: rgba(167, 139, 250, 0.3); background: rgba(167, 139, 250, 0.08); }
 
 /* ── Sidebar sections ────────────────────────────────────── */
 .cl-sidebar-section {
@@ -1643,8 +1658,6 @@ body {
 
 /* ── Dark mode ───────────────────────────────────────────── */
 [data-theme="dark"] .cl-sidebar { background: var(--surface-raised, #0f172a); border-color: var(--color-border, #334155); }
-[data-theme="dark"] .cl-toolbar { background: var(--surface-card, #1e293b); border-color: var(--color-border, #334155); }
-[data-theme="dark"] .cl-style-btn { background: var(--surface-raised, #0f172a); border-color: var(--color-border, #334155); color: var(--color-text, #e2e8f0); }
 [data-theme="dark"] .cl-forbidden-item { background: rgba(239,68,68,.1); border-color: rgba(239,68,68,.3); }
 [data-theme="dark"] .cl-ats-score-ring { border-color: var(--color-border, #334155); }
 [data-theme="dark"] .cl-role-input { background: var(--surface-raised, #0f172a); border-color: var(--color-border, #334155); color: var(--color-text, #e2e8f0); }
