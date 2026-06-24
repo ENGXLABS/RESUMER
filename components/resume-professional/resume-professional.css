@@ -1,7 +1,8 @@
 /* You can poke around this CSS if you want to customize your formatting / styling further */
 /* You can even import custom fonts! */
 
-@import url('https://www.resume.lol/fonts/cm/fonts.css');
+/* Computer Modern font via local fallback — third-party font removed */
+/* @import url('https://www.resume.lol/fonts/cm/fonts.css'); */
 
 /* Page settings for print */
 @page {
