@@ -33,10 +33,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Dependencies (if you add Node.js later)
+# Dependencies
 node_modules/
-package-lock.json
-yarn.lock
+# package-lock.json is committed so CI can use npm ci with caching
 
 # Build outputs
 dist/
