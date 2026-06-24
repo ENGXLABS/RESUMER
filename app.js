@@ -1916,7 +1916,10 @@
 
         loadResume();
         loadCoverLetter();
-        initFileWatcher();
+        // File watcher uses HEAD requests that only work on local dev servers
+        if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+            initFileWatcher();
+        }
 
         // Restore persisted company name
         const savedCompany = localStorage.getItem('resumer-company-name');

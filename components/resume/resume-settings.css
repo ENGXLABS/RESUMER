@@ -47,3 +47,13 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 }
+
+/* Mobile: fit the resume into the viewport width */
+@media screen and (max-width: 640px) {
+    .resume-page {
+        max-width: calc(100vw - 16px) !important;
+        padding: 0.3in 0.25in !important;
+        margin: 8px auto !important;
+        font-size: 0.82em;
+    }
+}

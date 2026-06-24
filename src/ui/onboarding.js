@@ -105,6 +105,7 @@ function renderStep(overlay, stepNum) {
 
   overlay.innerHTML = `
     <div class="onboarding-modal">
+      <button class="onboarding-close" aria-label="Close" title="Skip onboarding">&times;</button>
       <div class="onboarding-progress">
         ${[1, 2, 3].map(n => `<div class="onboarding-dot ${n === stepNum ? 'active' : n < stepNum ? 'done' : ''}"></div>`).join('')}
       </div>
@@ -123,6 +124,9 @@ function renderStep(overlay, stepNum) {
       </div>
     </div>
   `;
+
+  // Wire close (×) button
+  overlay.querySelector('.onboarding-close')?.addEventListener('click', () => dismiss(overlay));
 
   // Wire step 2 option buttons
   if (stepNum === 2) {
