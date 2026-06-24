@@ -1,6 +1,13 @@
 {
   "version": 2,
   "name": "resumer",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "." }
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
