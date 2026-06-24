@@ -295,8 +295,24 @@ body {
 }
 
 @media print {
-    #status-bar { display: none !important; }
-    #toast-container { display: none !important; }
+    #status-bar,
+    #toast-container,
+    #compact-header,
+    #left-toolbar,
+    #ai-panel,
+    #jd-sidebar,
+    #customize-panel,
+    #customize-btn,
+    #shortcut-modal,
+    #ats-checker-tab,
+    #cover-letter-tab,
+    .tab-content:not(#resume-tab) { display: none !important; }
+
+    #resume-tab,
+    #resume-workspace,
+    #preview-container { display: block !important; }
+
+    body { margin: 0; padding: 0; background: #fff; }
 }
 
 /* ---------- Keyboard Shortcut Modal ---------- */
