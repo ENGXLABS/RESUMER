@@ -1033,7 +1033,11 @@
         $$('.nav-tab-btn').forEach(btn => {
             const onclick = btn.getAttribute('onclick') || '';
             btn.classList.toggle('active', onclick.includes(`'${tabName}'`));
-            btn.setAttribute('aria-current', onclick.includes(`'${tabName}'`) ? 'page' : 'false');
+            if (onclick.includes(`'${tabName}'`)) {
+                btn.setAttribute('aria-current', 'page');
+            } else {
+                btn.removeAttribute('aria-current');
+            }
         });
 
         const typeSelector = $('#resume-type-selector');
@@ -1645,7 +1649,6 @@
         displayResults(results);
 
         $('#download-json-btn').style.display = 'inline-flex';
-        $('#ai-enhance-btn').style.display = 'inline-flex';
         toast(`ATS Score: ${results.score}/100`, results.score >= 80 ? 'success' : results.score >= 60 ? 'warning' : 'error');
     };
 

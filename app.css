@@ -528,7 +528,7 @@ body {
 .score-ring .ring-label {
     font-size: 14px;
     font-weight: 500;
-    color: rgba(255,255,255,0.7);
+    color: var(--color-text-muted);
     margin-top: 2px;
 }
 

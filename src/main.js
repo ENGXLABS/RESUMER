@@ -52,11 +52,6 @@ async function loadLegacyApp() {
  * Register app-wide keyboard shortcuts.
  */
 function registerShortcuts() {
-  registerShortcut({ key: 's', meta: true }, () => {
-    emit(EVENTS.EDITOR_SAVED);
-    showToast('Saved', 'success');
-  }, '⌘S — Save');
-
   registerShortcut({ key: '?', shift: false }, () => {
     emit(EVENTS.MODAL_OPEN, { type: 'shortcuts' });
   }, '? — Show shortcuts');
