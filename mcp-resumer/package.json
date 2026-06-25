@@ -12,7 +12,8 @@
     "dev": "node --watch src/index.js"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.0.0"
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.23.0"
   },
   "keywords": ["mcp", "resume", "ats", "ai"],
   "license": "MIT"

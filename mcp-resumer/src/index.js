@@ -25,7 +25,7 @@ const ROOT = path.resolve(__dirname, '..');
 
 async function readResumeFile(type = 'classic') {
     const map = { classic: 'components/resume/resume.md', professional: 'components/resume-professional/resume-professional.md', modern: 'components/resume-modern/resume-modern.md' };
-    const file = path.join(ROOT, map[type] || map.qe);
+    const file = path.join(ROOT, map[type] || map['classic']);
     return fs.readFile(file, 'utf8');
 }
 
